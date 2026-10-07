@@ -23,7 +23,7 @@ G.canYazi = function (a, b) {
 G.kartHtml = function (c, i) {
   var hedef = G.hedefI === i;
   var yuzde = Math.max(0, c.hp / c.hpMax * 100), p = G.hucreKonum(c.kol, c.sat);
-  return '<button class="kart saha-kart' + (c.boss ? ' boss' : '') + (c.olu ? ' olu' : '') + (hedef ? ' hedef' : '') + (c.aktif ? ' aktif' : '') + '" id="kart' + i + '"' +
+  return '<button class="kart saha-kart' + (c.boss ? ' boss' : '') + (c.elit ? ' elit' : '') + (c.olu ? ' olu' : '') + (hedef ? ' hedef' : '') + (c.aktif ? ' aktif' : '') + '" id="kart' + i + '"' +
     ' style="left:' + p.x + '%;top:' + p.y + '%"' +
     ' data-eylem="saldir" data-i="' + i + '"' + (c.olu ? ' disabled' : '') + ' aria-label="' + c.ad + '">' +
     '<span class="kseviye">' + c.lv + '</span>' +

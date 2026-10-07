@@ -1010,6 +1010,19 @@ G.ZORLUK.hpCarpan = 1.55;         // savaşlar uzamasın (önce 1.8)
 G.ZORLUK.mpTur = 0.008;           // savaşta her tur en yüksek mananın bu kadarı dolar
 G.IKSIR = { hpYuzde: 0.12, mpYuzde: 0.10 };  // iksirler sabit değere ek olarak en yüksek can/mananın bu kadarını doldurur
 G.DUSME.esya = 6;                 // normal canavardan eşya düşme şansı (%), önce 28
+
+// ============================================================
+// v0.29 — ELİT CANAVARLAR (Warriors and Adventure'daki mavi kenarlı canavarlar)
+// Normal canavar sahaya gelirken "sans" ihtimalle elit olur. Boss ve kule bekçileri elit olmaz.
+// Can katı referans oyundan (35.600 → 356.000 = 10x); diğerleri Hasan'ın seçtiği "dengeli" ayar.
+// ============================================================
+G.ELIT = {
+  sans: 3,          // % — her sahaya gelen normal canavar için
+  hpCarpan: 10,     // can katı
+  atkCarpan: 1.5,   // saldırı katı
+  odulCarpan: 8,    // tecrübe ve altın katı
+  nadirBonus: 2.5   // garanti eşyanın nadirlik şansı katı (normal 1, boss 4)
+};
 G.NADIRLIK[1].sans = 20;          // İyi (önce 25)
 G.NADIRLIK[2].sans = 6;           // Nadir (önce 10)
 G.NADIRLIK[3].sans = 1.2;         // Destansı (önce 3)

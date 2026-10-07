@@ -36,6 +36,17 @@ G.rastgeleCanavar = function () {
   if (!h) return null;
   var c = G.canavarOlustur(b.canavarlar[Math.floor(Math.random() * b.canavarlar.length)]);
   c.kol = h.kol; c.sat = h.sat;
+  if (Math.random() * 100 < G.ELIT.sans) G.elitYap(c);
+  return c;
+};
+
+// v0.29: elit canavar — daha çok can ve saldırı, çok daha iyi ganimet (veri.js → G.ELIT)
+G.elitYap = function (c) {
+  var E = G.ELIT;
+  c.elit = true;
+  c.hp = c.hpMax = Math.round(c.hpMax * E.hpCarpan);
+  c.atk = [Math.round(c.atk[0] * E.atkCarpan), Math.round(c.atk[1] * E.atkCarpan)];
+  G.log('Elit ' + c.ad + ' belirdi!', 'tehlike');
   return c;
 };
 
@@ -268,12 +279,15 @@ G.canavarOldu = function (i) {
   var r = G.hesapla(o), b = G.bolgeBul(o.bolge);
   var para = Math.round(G.rastgele(cs.para[0], cs.para[1]) * (1 + r.altin / 100) * G.ZORLUK.altinCarpan);
   var exp = Math.round(cs.exp * (1 + r.tecrube / 100));
+  if (c.elit) { para *= G.ELIT.odulCarpan; exp *= G.ELIT.odulCarpan; }
   o.para += para;
-  G.log(c.ad + ' öldürüldü. +' + exp + ' tecrübe, +' + para + ' altın', 'kazanc');
+  G.log((c.elit ? 'Elit ' : '') + c.ad + ' öldürüldü. +' + exp + ' tecrübe, +' + para + ' altın', 'kazanc');
 
-  var adet = c.boss ? 2 : 1, sans = c.boss ? 100 : G.DUSME.esya;
+  // Eşya: boss 2 tane garanti, elit 1 tane garanti (daha yüksek nadirlik), normal şansla
+  var adet = c.boss ? 2 : 1, sans = c.boss || c.elit ? 100 : G.DUSME.esya;
+  var bonus = c.boss ? 4 : c.elit ? G.ELIT.nadirBonus : 1;
   for (var k = 0; k < adet; k++) {
-    if (Math.random() * 100 < sans) G.cantayaEkle(G.esyaUret(o, c.lv, c.boss ? 4 : 1));
+    if (Math.random() * 100 < sans) G.cantayaEkle(G.esyaUret(o, c.lv, bonus));
   }
   if (b.set && Math.random() * 100 < (c.boss ? G.SET_DUSME_BOSS : G.SET_DUSME_NORMAL)) {
     var sp = G.setParcaUret(o, b.set, c.boss ? 3 : 1);
