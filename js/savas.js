@@ -162,7 +162,7 @@ G.savasTik = function () {
     if (Math.random() * 100 < kacinma) { G.oyuncuHasar('Kaçındın'); return; }
     var md = G.rastgele(c.atk[0], c.atk[1]);
     if (c.boss && c.hp < c.hpMax * G.ZORLUK.ofkeEsik) {
-      if (!c.ofke) { c.ofke = true; G.log(c.ad + ' öfkelendi!', 'tehlike'); }
+      if (!c.ofke) { c.ofke = true; G.log(c.ad + ' öfkelendi!', 'tehlike'); G.bossReplik(c, 'ofke'); }
       md *= G.ZORLUK.ofkeCarpan;
     }
     md -= r.def * 0.6;
@@ -292,6 +292,7 @@ G.canavarOldu = function (i) {
   G.expEkle(exp);
   G.kartYenile(i);
   G.olumEfekti(i);
+  if (c.boss) G.bossReplik(c, 'olum');
 
   if (!c.boss) {
     var bolge = o.bolge, eski = c;
@@ -347,6 +348,7 @@ G.bossBaslat = function () {
   G.log(c.ad + ' ortaya çıktı!', 'tehlike');
   G.sesCal('boss');
   if (G.sekme === 'savas') G.cizSavas();
+  G.bossReplik(c, 'giris');   // çizimden sonra, yoksa sahadaki söz silinir
 };
 
 // Savaş ekranındaki beceri düğmesine dokununca bir sonraki turda kullanılır

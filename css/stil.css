@@ -1144,3 +1144,15 @@ body,#uygulama{min-height:100vh;min-height:100dvh}
 .hikaye b{font-family:var(--serif);font-weight:normal;font-size:16px;color:var(--bronz-acik)}
 .hikaye small{display:block;font-size:11px;color:var(--soluk);margin-bottom:4px}
 .hikaye p{font-family:var(--serif);font-style:italic;font-size:14px;line-height:1.5;color:var(--kemik)}
+
+/* v0.26 — Boss replikleri: günlükte italik, sahada plakanın altında beliren söz */
+#log .replik{color:#d8b8a8}
+#log .replik i{font-family:var(--serif)}
+.boss-soz{position:absolute;left:8px;right:8px;top:46px;z-index:8;pointer-events:none;display:flex;gap:8px;align-items:flex-start;
+  padding:7px 10px;border:1px solid rgba(224,122,58,.55);border-radius:4px;background:rgba(18,10,8,.88);
+  font-family:var(--serif);font-style:italic;font-size:13.5px;line-height:1.4;color:#f0dcc8;
+  animation:bossSoz 5.2s ease forwards}
+.boss-soz .bs-ikon{flex:none;width:22px;height:22px;color:#e8884a}
+.boss-soz .bs-ikon .ikon{width:22px;height:22px;color:#e8884a}
+@keyframes bossSoz{0%{opacity:0;transform:translateY(-6px)}8%{opacity:1;transform:none}85%{opacity:1}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.boss-soz{animation:none}}

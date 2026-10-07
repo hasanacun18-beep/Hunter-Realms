@@ -278,6 +278,23 @@ G.darbeEfekti = function (oran) {
   if (oran >= 0.12) { G.sahaSars('sert'); G.sinifTekrar(G.$('saha'), 'tehlike-flas'); }
 };
 
+// ---- v0.26: boss replikleri (veri.js → G.BOSS_REPLIK) ----
+// Günlüğe yazar ve boss plakasının altında birkaç saniye gösterir. Kule bekçilerinde çıkmaz.
+G.bossReplik = function (c, an) {
+  var r = !c.kuleBekci && G.BOSS_REPLIK[c.id], metin = r && r[an];
+  if (!metin) return;
+  G.log('<i>' + metin + '</i>', 'replik');
+  var saha = G.$('saha');
+  if (!saha) return;
+  var eski = saha.querySelector('.boss-soz');
+  if (eski) eski.remove();
+  var el = document.createElement('div');
+  el.className = 'boss-soz';
+  el.innerHTML = '<span class="bs-ikon">' + c.ikon + '</span><span>' + metin + '</span>';
+  saha.appendChild(el);
+  setTimeout(function () { el.remove(); }, 5200);
+};
+
 // ---- v0.22: vuruş hissi ----
 // Bir CSS animasyon sınıfını baştan oynatır
 G.sinifTekrar = function (el, sinif) {

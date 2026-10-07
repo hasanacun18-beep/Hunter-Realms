@@ -742,6 +742,54 @@ G.ANA_HIKAYE = [
 ];
 // Bütün ana görevler bittiğinde görev penceresinde görünen son söz
 G.ANA_HIKAYE_SON = ['tulek', 'Haber Taşlıca\'ya kadar geldi, avcı. Bu sabah sis kalktı; yıllardır ilk kez. Köpekler ormana havlamıyor artık. Adını çocuklara anlatacağız.'];
+
+// ============================================================
+// v0.26 — BOSS REPLİKLERİ (günlüğe düşer + boss plakasının altında birkaç saniye görünür)
+// giris: ortaya çıkınca · ofke: öfkelenince (can eşiğin altına inince) · olum: yenilince
+// «...» içindekiler bossun kendi sözü, diğerleri anlatı. Kule bekçilerinde çıkmaz.
+// ============================================================
+G.BOSS_REPLIK = {
+  kurt_kral: {
+    giris: 'Kurt Kralı uluyor. Sesinde bir kurdun değil, uçurumun soğuğu var.',
+    ofke:  'Kurt Kralı\'nın gözlerindeki karanlık bir an titriyor... sonra daha da derinleşiyor.',
+    olum:  'Kurt Kralı son kez başını köye doğru çeviriyor. Gözleri, bir an için, eski rengine dönüyor.'
+  },
+  dev_bocek: {
+    giris: 'Kara Kınkanatlı\'nın kabuğu kemik tıkırtısıyla açılıyor. Sikke istemiyor artık; senin kemiklerini istiyor.',
+    ofke:  'Kabuğundaki çatlaklardan kara bir ışık sızıyor.',
+    olum:  'Kınkanatlı çöküyor. Kabuğunun altından, yolcuların bir zamanlar bıraktığı sikkeler dökülüyor.'
+  },
+  zincirli_iblis: {
+    giris: '«Zincirlerimi bir şehir dövdü, ufaklık. Kırmak için tek bir fısıltı yetti.»',
+    ofke:  '«Bu acıyı hatırlıyorum... zindanın taşlarını da böyle kanattım!»',
+    olum:  '«Hiçlik... bana özgürlük... sözü vermişti...» Zincirlerin şakırtısı küllerin arasında susuyor.'
+  },
+  kara_ejder: {
+    giris: '«Büyücüler beni karanlıkla besledi. Şimdi açlığım onlardan büyük.»',
+    ofke:  'Kara Ejder kanatlarını açıyor; kalenin duvarlarından kan yağmur gibi dökülüyor.',
+    olum:  '«Uçurumun sesi... susuyor...» Ejderin gölgesi Demirkapı\'ya ulaşamadan dağılıyor.'
+  },
+  bataklik_timsahi: {
+    giris: 'Sular kabarıyor. Bataklık Anası, balıkçıların korktuğu o eski göz, sana bakıyor.',
+    ofke:  'Bataklık kaynamaya başlıyor; çürük suların dibinden bir yankı yükseliyor.',
+    olum:  'Bataklık Anası suya gömülüyor. Az sonra yüzeyde, yıllardır görülmemiş temiz bir halka beliriyor.'
+  },
+  ayaz_devi: {
+    giris: '«Duvarı ben ördüm, avcı. Onu yıkmak da benim hakkım.»',
+    ofke:  '«Soğuk... hiç bu kadar boş olmamıştı...»',
+    olum:  '«Seti... yeniden... çek...» Dev diz çöküyor; buzul derinden inliyor.'
+  },
+  kor_titani: {
+    giris: '«Son bekçi benim. Ya da son kapı. Hangisi olduğumu Hiçlik bile bilmiyor.»',
+    ofke:  'Titanın kaya kalbi çatlıyor; içinden kor yerine karanlık akıyor.',
+    olum:  '«Kalbim... yeniden ısınıyor...» Kor Titanı taşa dönüşüyor. Yol artık açık.'
+  },
+  hiclik_efendisi: {
+    giris: '«Sen de mi geldin? Hepsi gelir. Hepsi bakar. Ve hepsi korkar.»',
+    ofke:  '«Korkunu duyuyorum, avcı. Beni büyüten o.»',
+    olum:  '«Ben... hiçim. Beni yenemezsin... sadece... unutursun...» Uçurumdan ilk kez ılık bir rüzgar esiyor.'
+  }
+};
 G.DUSME.hap = 1.2;   // v0.16 denge: hap çok birikiyordu
 
 // ============================================================

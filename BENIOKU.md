@@ -1,4 +1,4 @@
-# Hunter Realms — v0.25 (ana görev hikâyesi)
+# Hunter Realms — v0.26 (boss replikleri)
 
 > Not: Oyun eskiden "Kara Diyar" adıyla geliştirildi, bu sürümde "Hunter Realms" olarak
 > yeniden adlandırıldı. Kayıt dosyalarının iç anahtar isimleri değişmedi (bkz. CLAUDE.md).
@@ -331,3 +331,10 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - Sadece görev şeridindeki sandık düğmesiyle açılan görev penceresinde görünür; oyunu kesmez
 - 12 bölgenin açıklaması hikâyeye göre yeniden yazıldı (kasaba ekranı ve bölge bilgisi)
 - Ayarlar: veri.js → G.ANLATICILAR, G.ANA_HIKAYE (sırası G.ANA_GOREV ile aynı), G.ANA_HIKAYE_SON
+
+## v0.26 değişiklikleri (boss replikleri)
+- 8 bölge bossunun 3 anı var: ortaya çıkınca, öfkelenince (can %30 altı) ve yenilince
+- Hayvan bosslar için anlatı cümlesi; Zincirli İblis, Kara Ejder, Ayaz Devi, Kor Titanı ve Hiçlik Efendisi kendi sözleriyle konuşur
+- Replik günlüğe italik düşer ve boss plakasının altında 5 saniye görünür (dokunmaları engellemez)
+- Kule bekçilerinde replik çıkmaz
+- Ayarlar: veri.js → G.BOSS_REPLIK (giris, ofke, olum). Yeni bossa replik: aynı biçimde bir satır ekle
