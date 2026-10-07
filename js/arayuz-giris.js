@@ -21,7 +21,7 @@ G.cizBaslik = function () {
       '</svg>' +
       '<div class="sis s1"></div><div class="sis s2"></div>' +
       '<div class="korlar">' + korlar + '</div>' +
-      '<button class="duyuru-dugme" data-eylem="duyurular"><span>📜</span>Duyurular</button>' +
+      '<button class="duyuru-dugme" data-eylem="duyurular"><span>' + G.ikon('parsomen') + '</span>Duyurular</button>' +
       '<div class="baslik-yazi"><h1>HUNTER REALMS</h1><p>Karanlık topraklarda bir efsane</p></div>' +
       '<div class="baslik-alt">' +
         '<button class="sus-dugme" data-eylem="baslikBasla"><span>Oyuna Başla</span></button>' +
@@ -32,7 +32,7 @@ G.cizBaslik = function () {
 };
 
 G.duyuruModal = function () {
-  G.$('modalIc').innerHTML = '<h3>📜 Duyurular</h3>' +
+  G.$('modalIc').innerHTML = '<h3>' + G.ikon('parsomen') + ' Duyurular</h3>' +
     G.DUYURULAR.map(function (d) { return '<div class="duyuru"><b>' + d[0] + '</b><span>' + d[1] + '</span></div>'; }).join('') +
     '<div class="modal-dugmeler"><button data-eylem="modalKapat">Anladım</button></div>';
   G.$('modal').classList.remove('gizli');
@@ -60,9 +60,9 @@ G.cizSecim = function () {
         '<div><span>Sınıf</span><b>' + G.SINIFLAR[sec.sinif].ad + '</b></div></div>' +
       '<div class="secim-dugmeler"><button class="sus-dugme" data-eylem="oyunaGir"><span>Oyuna Gir</span></button>' +
       '<button class="sil-dugme" data-eylem="karakterSil" data-i="' + G.secimSlot + '">Sil</button></div>' +
-      '<button class="geri-dugme yedek-ortali" data-eylem="disaAktar" data-i="' + G.secimSlot + '">📤 Dışa Aktar (Yedekle)</button>'
+      '<button class="geri-dugme yedek-ortali" data-eylem="disaAktar" data-i="' + G.secimSlot + '">' + G.ikon('kaydet') + ' Dışa Aktar (Yedekle)</button>'
     : '<p class="secim-bos">Henüz karakterin yok. Bir kapıya dokunarak oluştur.</p>' +
-      '<button class="geri-dugme yedek-ortali" data-eylem="iceAktarModal" data-i="' + G.secimSlot + '">📥 İçe Aktar (Yedekten yükle)</button>';
+      '<button class="geri-dugme yedek-ortali" data-eylem="iceAktarModal" data-i="' + G.secimSlot + '">' + G.ikon('yukle') + ' İçe Aktar (Yedekten yükle)</button>';
   G.$('secim').innerHTML =
     '<div class="giris-sahne">' +
       '<h2 class="suslu-baslik">Karakter Seç</h2>' +
@@ -104,10 +104,10 @@ G.cizOlustur = function () {
       '<div class="sinif-hikaye"><b>' + s.ad + '</b> · Menzil ' + s.menzil + ' kare<br>' + s.hikaye + '</div>' +
       '<div class="sinif-yuvarlaklar">' + siniflar + '</div>' +
       '<div class="ad-satir"><input id="olusturAd" class="girdi" maxlength="14" placeholder="Karakter adı" autocomplete="off" value="' + G.kacis(eskiAd) + '">' +
-        '<button class="zar" data-eylem="zar" aria-label="Rastgele ad">🎲</button></div>' +
+        '<button class="zar" data-eylem="zar" aria-label="Rastgele ad">' + G.ikon('zar') + '</button></div>' +
       '<div class="secim-dugmeler"><button class="geri-dugme" data-eylem="secimDon">← Geri</button>' +
         '<button class="sus-dugme" data-eylem="olusturOnay"><span>Oyuna Gir</span></button></div>' +
-      '<button class="geri-dugme yedek-ortali" data-eylem="iceAktarModal" data-i="' + G.olusturSlot + '">📥 Zaten bir yedeğin mi var? İçe Aktar</button>' +
+      '<button class="geri-dugme yedek-ortali" data-eylem="iceAktarModal" data-i="' + G.olusturSlot + '">' + G.ikon('yukle') + ' Zaten bir yedeğin mi var? İçe Aktar</button>' +
     '</div>';
   G.ekranGoster('olustur');
 };

@@ -79,7 +79,7 @@ G.aritHtml = function (e) {
   var mevcut = e.ek.map(function (x) {
     var kl = kilitli.indexOf(x.k) >= 0;
     return '<div class="dm-stat"><button class="dm-kilit' + (kl ? ' kilitli' : '') + '" data-eylem="zarKilit" data-id="' + e.id + '" data-k="' + x.k + '"' +
-      (e.ek.length > 1 ? '' : ' disabled') + '>' + (kl ? '🔒' : '🔓') + '</button>' + G.bonusYazi(x.k, x.v) + '</div>';
+      (e.ek.length > 1 ? '' : ' disabled') + '>' + G.ikon(kl ? 'kilit' : 'kilit_acik') + '</button>' + G.bonusYazi(x.k, x.v) + '</div>';
   }).join('');
   var a = G.aritma && G.aritma.id === e.id ? G.aritma : null, onizleme = '', gpSag = '';
   if (a) {
@@ -98,7 +98,7 @@ G.aritHtml = function (e) {
       '<span class="' + (o.sarf.toz >= m.toz ? 'fark-arti' : 'fark-eksi') + '">' + G.SARF.toz.ikon + ' ' + o.sarf.toz + '/' + m.toz + '</span></div>' +
     '<div class="dm-dugmeler"><button class="sus-dugme" data-eylem="arit" data-id="' + e.id + '"><span>Arıt</span></button>' +
       '<button class="sus-dugme" data-eylem="aritKaydet"' + (a ? '' : ' disabled') + '><span>Kaydet</span></button></div>' +
-    '<p class="soluk kucuk-not">Arıt yeni statları önizler, eşyan değişmez. Beğenirsen Kaydet. 🔒 kilitli statlar değişmez, her kilit bedeli artırır.</p>';
+    '<p class="soluk kucuk-not">Arıt yeni statları önizler, eşyan değişmez. Beğenirsen Kaydet. ' + G.ikon('kilit') + ' kilitli statlar değişmez, her kilit bedeli artırır.</p>';
 };
 
 // ---- Güçlendirme ----

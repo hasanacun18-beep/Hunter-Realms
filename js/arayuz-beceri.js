@@ -22,7 +22,7 @@ G.beceriKartHtml = function (id) {
     var kitap = o.kitaplar[id] || 0, kg = G.kitapGerek(lv), sg = G.sayfaGerek(lv), ag = G.altinGerek(lv), ug = G.ustalikGerek(lv);
     var eksik = G.gelistirEksik(id).length > 0;
     sag = '<div class="gereksinim">' +
-        '<span class="' + (kitap >= kg ? 'fark-arti' : 'fark-eksi') + '">📕 ' + kitap + '/' + kg + '</span>' +
+        '<span class="' + (kitap >= kg ? 'fark-arti' : 'fark-eksi') + '">' + G.ikon('beceri_kitabi') + ' ' + kitap + '/' + kg + '</span>' +
         '<span class="' + (o.sarf.sayfa >= sg ? 'fark-arti' : 'fark-eksi') + '">' + G.SARF.sayfa.ikon + ' ' + o.sarf.sayfa + '/' + sg + '</span>' +
         '<span class="' + (o.para >= ag ? 'fark-arti' : 'fark-eksi') + '">' + ag + ' altın</span>' +
         '<span class="' + ((o.ustalik[id] || 0) >= ug ? 'fark-arti' : 'fark-eksi') + '">Ustalık</span>' +

@@ -113,7 +113,7 @@ G.kitapOgren = function (id) {
     G.log(G.ikon('kitap') + ' ' + b.ad + ' kitabı (en üst seviyede): +' + G.KITAP_FAZLA_TOZ + ' Ruh Tozu');
   } else {
     o.kitaplar[id] = (o.kitaplar[id] || 0) + 1;
-    G.log('📕 ' + b.ad + ' kitabı bulundu (' + o.kitaplar[id] + ')');
+    G.log(G.ikon('beceri_kitabi') + ' ' + b.ad + ' kitabı bulundu (' + o.kitaplar[id] + ')');
   }
   G.kaydet();
   if (G.sekme === 'karakter' || G.sekme === 'savas') G.panelYenile();

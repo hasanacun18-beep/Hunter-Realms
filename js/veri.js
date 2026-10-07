@@ -12,19 +12,19 @@ G.MAKS_ARTI = 15;      // En yüksek güçlendirme seviyesi
 // taban: 1. seviyedeki değerler, artis: her seviyede eklenen
 G.SINIFLAR = {
   savasci: {
-    ad: 'Savaşçı', ikon: '⚔️', simge: 'kiliclar', aciklama: 'Yüksek can ve savunma. Yakın dövüşün ustası.',
+    ad: 'Savaşçı', simge: 'kiliclar', aciklama: 'Yüksek can ve savunma. Yakın dövüşün ustası.',
     taban: { hp: 130, mp: 30, atkMin: 7, atkMax: 12, def: 6, hiz: 8, krit: 5 },
     artis: { hp: 20, mp: 3, atk: 3, def: 2 },
     beceri: { ad: 'Yarma Darbesi', mp: 10, carpan: 1.9, vurus: 1 }
   },
   buyucu: {
-    ad: 'Büyücü', ikon: '🔮', simge: 'asa', aciklama: 'Düşük can, çok yüksek büyü hasarı.',
+    ad: 'Büyücü', simge: 'asa', aciklama: 'Düşük can, çok yüksek büyü hasarı.',
     taban: { hp: 85, mp: 90, atkMin: 9, atkMax: 16, def: 3, hiz: 9, krit: 5 },
     artis: { hp: 12, mp: 9, atk: 4, def: 1 },
     beceri: { ad: 'Ateş Topu', mp: 16, carpan: 2.6, vurus: 1 }
   },
   okcu: {
-    ad: 'Okçu', ikon: '🏹', simge: 'yay', aciklama: 'Hızlı ve sık kritik vurur. Dengeli sınıf.',
+    ad: 'Okçu', simge: 'yay', aciklama: 'Hızlı ve sık kritik vurur. Dengeli sınıf.',
     taban: { hp: 100, mp: 50, atkMin: 8, atkMax: 14, def: 4, hiz: 14, krit: 12 },
     artis: { hp: 15, mp: 5, atk: 3, def: 1 },
     beceri: { ad: 'Çift Atış', mp: 12, carpan: 1.35, vurus: 2 }
@@ -219,35 +219,35 @@ G.SINIFLAR.okcu.baslangic = 'cift_atis';
 // PASİF: bonus x beceri seviyesi kadar stat verir
 G.BECERILER = {
   // ---- Savaşçı ----
-  yarma:          { ad: 'Yarma Darbesi',  sinif: 'savasci', tur: 'aktif', ikon: '🪓', minLv: 1,  mp: 10, bekleme: 1, etki: { tip: 'hasar', carpan: 1.9, vurus: 1 }, artis: { carpan: 0.15 } },
-  kalkan_darbesi: { ad: 'Kalkan Darbesi', sinif: 'savasci', tur: 'aktif', ikon: '🛡️', minLv: 3,  mp: 12, bekleme: 5, etki: { tip: 'hasar', carpan: 1.2, vurus: 1, sersem: 1 }, artis: { carpan: 0.1 } },
-  savas_cigligi:  { ad: 'Savaş Çığlığı',  sinif: 'savasci', tur: 'aktif', ikon: '📯', minLv: 6,  mp: 15, bekleme: 8, etki: { tip: 'guc', oran: 25, sure: 4 }, artis: { oran: 5 } },
-  demir_irade:    { ad: 'Demir İrade',    sinif: 'savasci', tur: 'aktif', ikon: '🧱', minLv: 10, mp: 14, bekleme: 7, etki: { tip: 'kalkan', oran: 40, sure: 3 }, artis: { oran: 5 } },
-  demir_deri:     { ad: 'Demir Deri',     sinif: 'savasci', tur: 'pasif', ikon: '🪨', minLv: 4,  bonus: { defYuzde: 6 } },
-  ofke:           { ad: 'Öfke',           sinif: 'savasci', tur: 'pasif', ikon: '💢', minLv: 8,  bonus: { atkYuzde: 3, krit: 1 } },
+  yarma:          { ad: 'Yarma Darbesi',  sinif: 'savasci', tur: 'aktif', simge: 'b_yarma', minLv: 1,  mp: 10, bekleme: 1, etki: { tip: 'hasar', carpan: 1.9, vurus: 1 }, artis: { carpan: 0.15 } },
+  kalkan_darbesi: { ad: 'Kalkan Darbesi', sinif: 'savasci', tur: 'aktif', simge: 'b_kalkan_darbesi', minLv: 3,  mp: 12, bekleme: 5, etki: { tip: 'hasar', carpan: 1.2, vurus: 1, sersem: 1 }, artis: { carpan: 0.1 } },
+  savas_cigligi:  { ad: 'Savaş Çığlığı',  sinif: 'savasci', tur: 'aktif', simge: 'b_savas_cigligi', minLv: 6,  mp: 15, bekleme: 8, etki: { tip: 'guc', oran: 25, sure: 4 }, artis: { oran: 5 } },
+  demir_irade:    { ad: 'Demir İrade',    sinif: 'savasci', tur: 'aktif', simge: 'b_demir_irade', minLv: 10, mp: 14, bekleme: 7, etki: { tip: 'kalkan', oran: 40, sure: 3 }, artis: { oran: 5 } },
+  demir_deri:     { ad: 'Demir Deri',     sinif: 'savasci', tur: 'pasif', simge: 'b_demir_deri', minLv: 4,  bonus: { defYuzde: 6 } },
+  ofke:           { ad: 'Öfke',           sinif: 'savasci', tur: 'pasif', simge: 'b_ofke', minLv: 8,  bonus: { atkYuzde: 3, krit: 1 } },
 
   // ---- Büyücü ----
-  ates_topu:      { ad: 'Ateş Topu',      sinif: 'buyucu', tur: 'aktif', ikon: '🔥', minLv: 1,  mp: 16, bekleme: 1, etki: { tip: 'hasar', carpan: 2.6, vurus: 1 }, artis: { carpan: 0.2 } },
-  buz_mizragi:    { ad: 'Buz Mızrağı',    sinif: 'buyucu', tur: 'aktif', ikon: '🧊', minLv: 3,  mp: 18, bekleme: 5, etki: { tip: 'hasar', carpan: 1.6, vurus: 1, sersem: 1 }, artis: { carpan: 0.15 } },
-  alev_dalgasi:   { ad: 'Alev Dalgası',   sinif: 'buyucu', tur: 'aktif', ikon: '🌋', minLv: 6,  mp: 20, bekleme: 6, etki: { tip: 'hasar', carpan: 0.8, vurus: 1, dot: 0.6, sure: 4 }, artis: { dot: 0.1 } },
-  mana_kalkani:   { ad: 'Mana Kalkanı',   sinif: 'buyucu', tur: 'aktif', ikon: '🔮', minLv: 10, mp: 22, bekleme: 7, etki: { tip: 'kalkan', oran: 45, sure: 3 }, artis: { oran: 5 } },
-  bilgelik:       { ad: 'Bilgelik',       sinif: 'buyucu', tur: 'pasif', ikon: '📘', minLv: 4,  bonus: { mp: 25, beceri: 3 } },
-  buyu_ustaligi:  { ad: 'Büyü Ustalığı',  sinif: 'buyucu', tur: 'pasif', ikon: '✴️', minLv: 8,  bonus: { beceri: 8 } },
+  ates_topu:      { ad: 'Ateş Topu',      sinif: 'buyucu', tur: 'aktif', simge: 'b_ates_topu', minLv: 1,  mp: 16, bekleme: 1, etki: { tip: 'hasar', carpan: 2.6, vurus: 1 }, artis: { carpan: 0.2 } },
+  buz_mizragi:    { ad: 'Buz Mızrağı',    sinif: 'buyucu', tur: 'aktif', simge: 'b_buz_mizragi', minLv: 3,  mp: 18, bekleme: 5, etki: { tip: 'hasar', carpan: 1.6, vurus: 1, sersem: 1 }, artis: { carpan: 0.15 } },
+  alev_dalgasi:   { ad: 'Alev Dalgası',   sinif: 'buyucu', tur: 'aktif', simge: 'b_alev_dalgasi', minLv: 6,  mp: 20, bekleme: 6, etki: { tip: 'hasar', carpan: 0.8, vurus: 1, dot: 0.6, sure: 4 }, artis: { dot: 0.1 } },
+  mana_kalkani:   { ad: 'Mana Kalkanı',   sinif: 'buyucu', tur: 'aktif', simge: 'b_mana_kalkani', minLv: 10, mp: 22, bekleme: 7, etki: { tip: 'kalkan', oran: 45, sure: 3 }, artis: { oran: 5 } },
+  bilgelik:       { ad: 'Bilgelik',       sinif: 'buyucu', tur: 'pasif', simge: 'b_bilgelik', minLv: 4,  bonus: { mp: 25, beceri: 3 } },
+  buyu_ustaligi:  { ad: 'Büyü Ustalığı',  sinif: 'buyucu', tur: 'pasif', simge: 'b_buyu_ustaligi', minLv: 8,  bonus: { beceri: 8 } },
 
   // ---- Okçu ----
-  cift_atis:      { ad: 'Çift Atış',      sinif: 'okcu', tur: 'aktif', ikon: '🏹', minLv: 1,  mp: 12, bekleme: 1, etki: { tip: 'hasar', carpan: 1.35, vurus: 2 }, artis: { carpan: 0.1 } },
-  zehirli_ok:     { ad: 'Zehirli Ok',     sinif: 'okcu', tur: 'aktif', ikon: '🐍', minLv: 3,  mp: 14, bekleme: 5, etki: { tip: 'hasar', carpan: 1.0, vurus: 1, dot: 0.5, sure: 5 }, artis: { dot: 0.08 } },
-  ok_yagmuru:     { ad: 'Ok Yağmuru',     sinif: 'okcu', tur: 'aktif', ikon: '🌧️', minLv: 6,  mp: 22, bekleme: 6, etki: { tip: 'hasar', carpan: 0.75, vurus: 4 }, artis: { carpan: 0.08 } },
-  golge_adim:     { ad: 'Gölge Adım',     sinif: 'okcu', tur: 'aktif', ikon: '💨', minLv: 10, mp: 15, bekleme: 7, etki: { tip: 'kalkan', oran: 55, sure: 2 }, artis: { oran: 5 } },
-  keskin_goz:     { ad: 'Keskin Göz',     sinif: 'okcu', tur: 'pasif', ikon: '🎯', minLv: 4,  bonus: { krit: 2 } },
-  avci_icgudusu:  { ad: 'Avcı İçgüdüsü',  sinif: 'okcu', tur: 'pasif', ikon: '🐾', minLv: 8,  bonus: { kritHasar: 10 } },
+  cift_atis:      { ad: 'Çift Atış',      sinif: 'okcu', tur: 'aktif', simge: 'b_cift_atis', minLv: 1,  mp: 12, bekleme: 1, etki: { tip: 'hasar', carpan: 1.35, vurus: 2 }, artis: { carpan: 0.1 } },
+  zehirli_ok:     { ad: 'Zehirli Ok',     sinif: 'okcu', tur: 'aktif', simge: 'b_zehirli_ok', minLv: 3,  mp: 14, bekleme: 5, etki: { tip: 'hasar', carpan: 1.0, vurus: 1, dot: 0.5, sure: 5 }, artis: { dot: 0.08 } },
+  ok_yagmuru:     { ad: 'Ok Yağmuru',     sinif: 'okcu', tur: 'aktif', simge: 'b_ok_yagmuru', minLv: 6,  mp: 22, bekleme: 6, etki: { tip: 'hasar', carpan: 0.75, vurus: 4 }, artis: { carpan: 0.08 } },
+  golge_adim:     { ad: 'Gölge Adım',     sinif: 'okcu', tur: 'aktif', simge: 'b_golge_adim', minLv: 10, mp: 15, bekleme: 7, etki: { tip: 'kalkan', oran: 55, sure: 2 }, artis: { oran: 5 } },
+  keskin_goz:     { ad: 'Keskin Göz',     sinif: 'okcu', tur: 'pasif', simge: 'b_keskin_goz', minLv: 4,  bonus: { krit: 2 } },
+  avci_icgudusu:  { ad: 'Avcı İçgüdüsü',  sinif: 'okcu', tur: 'pasif', simge: 'b_avci_icgudusu', minLv: 8,  bonus: { kritHasar: 10 } },
 
   // ---- Genel (her sınıf) ----
-  ilk_yardim:     { ad: 'İlk Yardım',     sinif: null, tur: 'aktif', ikon: '💚', minLv: 2,  mp: 12, bekleme: 8, etki: { tip: 'iyilesme', oran: 25 }, artis: { oran: 5 } },
-  hazine_avcisi:  { ad: 'Hazine Avcısı',  sinif: null, tur: 'pasif', ikon: '💰', minLv: 3,  bonus: { altin: 6 } },
-  bilge:          { ad: 'Bilge',          sinif: null, tur: 'pasif', ikon: '📜', minLv: 3,  bonus: { tecrube: 5 } },
-  kan_emici:      { ad: 'Kan Emici',      sinif: null, tur: 'pasif', ikon: '🩸', minLv: 5,  bonus: { canCal: 1 } },
-  cevik:          { ad: 'Çevik',          sinif: null, tur: 'pasif', ikon: '🍃', minLv: 6,  bonus: { hiz: 2 } }
+  ilk_yardim:     { ad: 'İlk Yardım',     sinif: null, tur: 'aktif', simge: 'b_ilk_yardim', minLv: 2,  mp: 12, bekleme: 8, etki: { tip: 'iyilesme', oran: 25 }, artis: { oran: 5 } },
+  hazine_avcisi:  { ad: 'Hazine Avcısı',  sinif: null, tur: 'pasif', simge: 'b_hazine_avcisi', minLv: 3,  bonus: { altin: 6 } },
+  bilge:          { ad: 'Bilge',          sinif: null, tur: 'pasif', simge: 'b_bilge', minLv: 3,  bonus: { tecrube: 5 } },
+  kan_emici:      { ad: 'Kan Emici',      sinif: null, tur: 'pasif', simge: 'b_kan_emici', minLv: 5,  bonus: { canCal: 1 } },
+  cevik:          { ad: 'Çevik',          sinif: null, tur: 'pasif', simge: 'b_cevik', minLv: 6,  bonus: { hiz: 2 } }
 };
 
 G.BONUS_ADLARI.beceri = 'Beceri hasarı';
@@ -401,16 +401,16 @@ G.BECERILER.ok_yagmuru.etki = { tip: 'hasar', sekil: 'alan', carpan: 0.9, vurus:
 G.BECERILER.ok_yagmuru.artis = { carpan: 0.08 };
 
 Object.assign(G.BECERILER, {
-  hilal_kesik:  { ad: 'Hilal Kesiği', sinif: 'savasci', tur: 'aktif', ikon: '🌙', minLv: 2, mp: 0, bekleme: 3,
+  hilal_kesik:  { ad: 'Hilal Kesiği', sinif: 'savasci', tur: 'aktif', simge: 'b_hilal_kesik', minLv: 2, mp: 0, bekleme: 3,
                   etki: { tip: 'hasar', sekil: 'yarimay', carpan: 1.1, vurus: 1 }, artis: { carpan: 0.1 } },
-  kasirga:      { ad: 'Kasırga', sinif: 'savasci', tur: 'aktif', ikon: '🌀', minLv: 8, mp: 18, bekleme: 6,
+  kasirga:      { ad: 'Kasırga', sinif: 'savasci', tur: 'aktif', simge: 'b_kasirga', minLv: 8, mp: 18, bekleme: 6,
                   etki: { tip: 'hasar', sekil: 'kasirga', carpan: 1.4, vurus: 1 }, artis: { carpan: 0.12 } },
-  gokatasi:     { ad: 'Göktaşı', sinif: 'buyucu', tur: 'aktif', ikon: '☄️', minLv: 12, mp: 35, bekleme: 8,
+  gokatasi:     { ad: 'Göktaşı', sinif: 'buyucu', tur: 'aktif', simge: 'b_gokatasi', minLv: 12, mp: 35, bekleme: 8,
                   etki: { tip: 'hasar', sekil: 'alan', carpan: 1.8, vurus: 1 }, artis: { carpan: 0.15 } },
-  delici_ok:    { ad: 'Delici Ok', sinif: 'okcu', tur: 'aktif', ikon: '➶', minLv: 2, mp: 8, bekleme: 3,
+  delici_ok:    { ad: 'Delici Ok', sinif: 'okcu', tur: 'aktif', simge: 'b_delici_ok', minLv: 2, mp: 8, bekleme: 3,
                   etki: { tip: 'hasar', sekil: 'cizgi', carpan: 1.4, vurus: 1 }, artis: { carpan: 0.1 } },
   // Tetiklenen: normal saldırıda şansla ek vuruş (%60 hasar)
-  cifte_darbe:  { ad: 'Çifte Darbe', sinif: null, tur: 'pasif', ikon: '⚡', minLv: 7, bonus: { ekVurus: 4 } }
+  cifte_darbe:  { ad: 'Çifte Darbe', sinif: null, tur: 'pasif', simge: 'b_cifte_darbe', minLv: 7, bonus: { ekVurus: 4 } }
 });
 G.BONUS_ADLARI.ekVurus = 'Ek vuruş şansı';
 G.YUZDE_STATLAR.ekVurus = 1;
@@ -473,11 +473,11 @@ G.SINIF_GORUNUM = {
 // v0.8 — MADENCİLİK
 // ============================================================
 G.CEVHERLER = {
-  bakir:  { ad: 'Bakır',        ikon: '🟤' },
-  gumus:  { ad: 'Gümüş',        ikon: '⚪' },
-  altin:  { ad: 'Altın Cevher', ikon: '🟡' },
-  demir:  { ad: 'Kara Demir',   ikon: '⚫' },
-  kristal:{ ad: 'İlahi Kristal', ikon: '💠' }
+  bakir:  { ad: 'Bakır',        simge: 'cevher', renk: '#c07a48' },
+  gumus:  { ad: 'Gümüş',        simge: 'cevher', renk: '#c8ccd4' },
+  altin:  { ad: 'Altın Cevher', simge: 'cevher', renk: '#e3b34a' },
+  demir:  { ad: 'Kara Demir',   simge: 'cevher', renk: '#8a8c96' },
+  kristal:{ ad: 'İlahi Kristal', simge: 'kristal', renk: '#6ec8f0' }
 };
 
 // ============================================================
@@ -493,9 +493,9 @@ G.ILAHI = {
   // Özel beceri: bu seviyelerde açılır ve güçlenir (tetiklenme şansı %)
   beceriSeviye: [5, 15, 25], beceriSans: [8, 12, 16],
   sinif: {
-    savasci: { ad: 'Gök Gürültüsü Kılıcı', ikon: '⚡', beceri: 'Yıldırım', aciklama: 'hedefin çevresindeki 9 kareye %100 hasar', sekil: 'alan', carpan: 1.0 },
-    buyucu:  { ad: 'Yıldız Asası',         ikon: '🌟', beceri: 'Yıldız Düşüşü', aciklama: 'hedefe %220 hasar', sekil: 'tek', carpan: 2.2 },
-    okcu:    { ad: 'Rüzgar Yayı',          ikon: '🌪️', beceri: 'Rüzgar Oku', aciklama: 'bir yönde 4 kareyi delerek %130 hasar', sekil: 'cizgi', carpan: 1.3 }
+    savasci: { ad: 'Gök Gürültüsü Kılıcı', simge: 'i_savasci', beceri: 'Yıldırım', aciklama: 'hedefin çevresindeki 9 kareye %100 hasar', sekil: 'alan', carpan: 1.0 },
+    buyucu:  { ad: 'Yıldız Asası',         simge: 'i_buyucu', beceri: 'Yıldız Düşüşü', aciklama: 'hedefe %220 hasar', sekil: 'tek', carpan: 2.2 },
+    okcu:    { ad: 'Rüzgar Yayı',          simge: 'i_okcu', beceri: 'Rüzgar Oku', aciklama: 'bir yönde 4 kareyi delerek %130 hasar', sekil: 'cizgi', carpan: 1.3 }
   }
 };
 G.BONUS_ADLARI.ilahi = 'İlahi silah';
@@ -823,12 +823,12 @@ G.SARF.oz = { ad: 'Rün Özü', simge: 'run', renk: '#e8902a', aciklama: 'Rünle
 
 // Rün tipleri: hangi statı verir, taban değer (Yeşil, Sv.1)
 G.RUN_TUR = {
-  saldiri:    { ad: 'Saldırı',    ikon: '🗡️', stat: 'atkYuzde',  taban: 2 },
-  koruma:     { ad: 'Koruma',     ikon: '🛡️', stat: 'defYuzde',  taban: 3 },
-  patlama:    { ad: 'Patlama',    ikon: '💥', stat: 'kritHasar', taban: 6 },
-  siginak:    { ad: 'Sığınak',    ikon: '🏰', stat: 'hpYuzde',   taban: 3 },
-  katliam:    { ad: 'Katliam',    ikon: '☠️', stat: 'krit',      taban: 1.2 },
-  bagisiklik: { ad: 'Bağışıklık', ikon: '🩸', stat: 'canCal',    taban: 0.8 }
+  saldiri:    { ad: 'Saldırı',    simge: 'r_saldiri', stat: 'atkYuzde',  taban: 2 },
+  koruma:     { ad: 'Koruma',     simge: 'r_koruma', stat: 'defYuzde',  taban: 3 },
+  patlama:    { ad: 'Patlama',    simge: 'r_patlama', stat: 'kritHasar', taban: 6 },
+  siginak:    { ad: 'Sığınak',    simge: 'r_siginak', stat: 'hpYuzde',   taban: 3 },
+  katliam:    { ad: 'Katliam',    simge: 'iskelet', stat: 'krit',      taban: 1.2 },
+  bagisiklik: { ad: 'Bağışıklık', simge: 'r_bagisiklik', stat: 'canCal',    taban: 0.8 }
 };
 G.RUN_NADIR = { 1: 1, 2: 1.6, 3: 2.4, 4: 3.5 };   // İyi, Nadir, Destansı, Efsanevi
 G.RUN_MAKS = 10;

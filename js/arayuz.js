@@ -109,7 +109,7 @@ G.esyaKutuHtml = function (e, eylem, bosSlot, yukseltme) {
   var s = G.ESYALAR[e.sablon], n = G.NADIRLIK[e.nadir];
   return '<button class="esya-kutu" style="border-color:' + n.renk + '" data-eylem="' + eylem + '" data-id="' + e.id + '">' +
     (e.arti ? '<span class="arti">+' + e.arti + '</span>' : '') +
-    (e.kilit ? '<span class="kilit-rozet">🔒</span>' : '') +
+    (e.kilit ? '<span class="kilit-rozet">' + G.ikon('kilit') + '</span>' : '') +
     (s.set ? '<span class="set-rozet">SET</span>' : '') +
     (yukseltme ? '<span class="yukselt-rozet">▲</span>' : '') +
     '<span class="ik">' + G.gorunum(e.sablon).ikon + '</span><span style="color:' + n.renk + '">' + G.gorunum(e.sablon).ad + '</span></button>';

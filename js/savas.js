@@ -283,7 +283,7 @@ G.canavarOldu = function (i) {
   var sayfa = c.boss ? G.rastgele(G.DUSME.sayfaBoss[0], G.DUSME.sayfaBoss[1]) : (Math.random() * 100 < G.DUSME.sayfa ? G.rastgele(1, 2) : 0);
   if (sayfa) { o.sarf.sayfa += sayfa; if (c.boss) G.log('+' + sayfa + ' ' + G.SARF.sayfa.ikon + ' Kitap Sayfası'); }
   var hap = c.boss ? G.rastgele(G.DUSME.hapBoss[0], G.DUSME.hapBoss[1]) : (Math.random() * 100 < G.DUSME.hap ? 1 : 0);
-  if (hap) { o.sarf.hap += hap; G.log('+' + hap + ' 🔮 Meridyen Hapı'); }
+  if (hap) { o.sarf.hap += hap; G.log('+' + hap + ' ' + G.SARF.hap.ikon + ' Meridyen Hapı'); }
   G.ogrenilenler('pasif').forEach(function (pid) { G.ustalikEkle(pid, 1); });
   if (c.boss || Math.random() * 100 < G.DUSME.hpIksir) { var n = c.boss ? 5 : 1; o.sarf.hp += n; G.log('+' + n + ' Can İksiri'); }
   if (c.boss || Math.random() * 100 < G.DUSME.mpIksir) { var m = c.boss ? 5 : 1; o.sarf.mp += m; G.log('+' + m + ' Mana İksiri'); }

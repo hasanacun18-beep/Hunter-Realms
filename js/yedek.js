@@ -24,12 +24,12 @@ G.disaAktar = function (i) {
     indirildi = true;
   } catch (e) { console.warn('Dosya indirme başarısız:', e); }
 
-  G.$('modalIc').innerHTML = '<h3>📤 Dışa Aktar</h3>' +
+  G.$('modalIc').innerHTML = '<h3>' + G.ikon('kaydet') + ' Dışa Aktar</h3>' +
     '<p class="kucuk-not">' + (indirildi
       ? 'Dosya indirildi (İndirilenler klasörüne bak). WhatsApp, Drive veya e-posta ile kendine göndererek yedekleyebilirsin.'
       : 'Otomatik indirme çalışmadı. Aşağıdaki metni kopyalayıp bir yere (ör. kendine mesaj olarak) kaydet.') + '</p>' +
     '<textarea id="yedekMetin" class="girdi" readonly rows="6">' + veri + '</textarea>' +
-    '<div class="modal-dugmeler"><button data-eylem="yedekKopyala">📋 Metni Kopyala</button><button data-eylem="modalKapat">Kapat</button></div>';
+    '<div class="modal-dugmeler"><button data-eylem="yedekKopyala">' + G.ikon('liste') + ' Metni Kopyala</button><button data-eylem="modalKapat">Kapat</button></div>';
   G.$('modal').classList.remove('gizli');
 };
 
@@ -48,7 +48,7 @@ G.yedekKopyala = function () {
 // Seçili (boş) yuvaya bir yedek dosyası ya da yapıştırılan metni yükler.
 G.iceAktarModal = function (i) {
   G.iceAktarHedef = i;
-  G.$('modalIc').innerHTML = '<h3>📥 İçe Aktar</h3>' +
+  G.$('modalIc').innerHTML = '<h3>' + G.ikon('yukle') + ' İçe Aktar</h3>' +
     '<p class="kucuk-not">Daha önce dışa aktardığın .json dosyasını seç, ya da içeriğini aşağıya yapıştır.</p>' +
     '<input type="file" id="yedekDosya" accept="application/json,.json,text/plain" style="width:100%;margin-bottom:8px;color:var(--kemik)">' +
     '<textarea id="yedekGirdi" class="girdi" rows="6" placeholder="...veya JSON metnini buraya yapıştır"></textarea>' +

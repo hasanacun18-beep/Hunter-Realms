@@ -87,7 +87,7 @@ G.meridyenHtml = function () {
   if (n >= toplam) alt = '<p class="mer-bitti">Bütün meridyenler açık.</p>';
   else {
     var m = G.meridyenMaliyet(n), lvTamam = o.lv >= m.lv, yeter = lvTamam && o.sarf.hap >= m.hap && o.para >= m.altin;
-    alt = '<div class="mer-maliyet">Bedel: <span class="' + (o.sarf.hap >= m.hap ? 'fark-arti' : 'fark-eksi') + '">🔮 ' + o.sarf.hap + '/' + m.hap + '</span>' +
+    alt = '<div class="mer-maliyet">Bedel: <span class="' + (o.sarf.hap >= m.hap ? 'fark-arti' : 'fark-eksi') + '">' + G.SARF.hap.ikon + ' ' + o.sarf.hap + '/' + m.hap + '</span>' +
       ' <span class="' + (o.para >= m.altin ? 'fark-arti' : 'fark-eksi') + '">' + G.IK_PARA + ' ' + m.altin + '</span>' +
       (lvTamam ? '' : ' <span class="fark-eksi">Seviye ' + m.lv + '</span>') + '</div>' +
       '<button class="sus-dugme mer-dugme" data-eylem="meridyenYukselt"' + (yeter ? '' : ' disabled') + '><span>Yükselt</span></button>';

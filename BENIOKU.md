@@ -1,4 +1,4 @@
-# Hunter Realms — v0.21 (dışa/içe aktar)
+# Hunter Realms — v0.22 (karanlık tema: SVG ikonlar)
 
 > Not: Oyun eskiden "Kara Diyar" adıyla geliştirildi, bu sürümde "Hunter Realms" olarak
 > yeniden adlandırıldı. Kayıt dosyalarının iç anahtar isimleri değişmedi (bkz. CLAUDE.md).
@@ -296,3 +296,11 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
   Yeni eşyaya tablodaki bir emojiyi verirsen ikonu otomatik gelir; tabloda olmayan emoji olduğu gibi görünür
 - 2. adımda atlanan 16 canavar (Bataklık, Buz Diyarı, Kor Dağı, Hiçlik Uçurumu) da ikonlu: kurbağa, timsah, trol, buz golemi,
   semender, kaya golemi, kara şövalye, dokunaç...
+
+### v0.22 — 3c: beceriler, rünler, cevherler, ilahi silahlar
+- 28 becerinin ikonu (beceri listesi, savaş düğmeleri, günlük): balta savuruşu, ateş topu, buz mızrağı, ok yağmuru, şifa...
+- 6 rün tipi, 5 cevher (her biri kendi renginde: bakır, gümüş, altın, kara demir, mavi kristal), 3 ilahi silah
+- Küçük arayüz ikonları: eşya ve stat kilitleri (kapalı/açık asma kilit), toplu sat/erit, çanta genişletme, Duyurular,
+  Ayarlar, Dışa/İçe Aktar (kaydet/yükle), rastgele ad zarı, beceri kitabı, Meridyen Hapı bedeli
+- veri.js → G.BECERILER, G.RUN_TUR, G.CEVHERLER, G.ILAHI.sinif'ta `ikon` yerine `simge` (cevherlerde ayrıca `renk`)
+- Oyunda artık sadece ✓ ➤ ✦ gibi tipografik işaretler kaldı (bilerek)

@@ -80,7 +80,7 @@ G.cizSavas = function () {
   var o = G.o, b = G.bolgeBul(o.bolge);
   if (b.tur === 'kasaba') { G.cizKasaba(); return; }
   var kuleMi = b.tur === 'kule';
-  var boss = G.CANAVARLAR[b.boss] || { ikon: '👹' };
+  var boss = G.CANAVARLAR[b.boss] || { ikon: G.ikon('iskelet') };
   var z = G.ZEMIN[b.id] || (kuleMi ? ['#2a2033', '#0e0b12'] : ['#24201a', '#12100c']);
   var bossVar = G.alan.some(function (c) { return c && c.boss && !c.olu; });
   G.$('icerik').classList.add('tek-ekran');   // her şey tek ekrana sığar, kaydırma yok
@@ -132,11 +132,11 @@ G.bossPlakaGuncelle = function () {
 // Ayarlar penceresi (referanstaki gibi otomatik seçenekler burada)
 G.ayarlarModal = function () {
   var o = G.o;
-  G.$('modalIc').innerHTML = '<h3>⚙️ Ayarlar</h3>' +
+  G.$('modalIc').innerHTML = '<h3>' + G.ikon('carh') + ' Ayarlar</h3>' +
     '<label class="ayar-satir"><input type="checkbox" id="otoSavas"' + (o.ayar.otoSavas ? ' checked' : '') + '><span>Otomatik savaş<small>En yakın canavara kendin yürür, saldırır</small></span></label>' +
     '<label class="ayar-satir"><input type="checkbox" id="otoIksir"' + (o.ayar.otoIksir ? ' checked' : '') + '><span>Otomatik iksir<small>Can %40 altına inince, mana yetmeyince içer</small></span></label>' +
     '<label class="ayar-satir"><input type="checkbox" id="otoBeceri"' + (o.ayar.otoBeceri ? ' checked' : '') + '><span>Otomatik beceri<small>"Otomatik" işaretli becerileri sırayla kullanır</small></span></label>' +
-    '<div class="modal-dugmeler"><button data-eylem="duyurular">📜 Duyurular</button><button data-eylem="secimeDon">↩ Karakter seçimi</button><button data-eylem="modalKapat">Kapat</button></div>';
+    '<div class="modal-dugmeler"><button data-eylem="duyurular">' + G.ikon('parsomen') + ' Duyurular</button><button data-eylem="secimeDon">↩ Karakter seçimi</button><button data-eylem="modalKapat">Kapat</button></div>';
   G.$('modal').classList.remove('gizli');
 };
 
