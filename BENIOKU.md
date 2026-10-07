@@ -1,4 +1,4 @@
-# Hunter Realms — v0.26 (boss replikleri)
+# Hunter Realms — v0.27 (canavar ve eşya açıklamaları)
 
 > Not: Oyun eskiden "Kara Diyar" adıyla geliştirildi, bu sürümde "Hunter Realms" olarak
 > yeniden adlandırıldı. Kayıt dosyalarının iç anahtar isimleri değişmedi (bkz. CLAUDE.md).
@@ -338,3 +338,10 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - Replik günlüğe italik düşer ve boss plakasının altında 5 saniye görünür (dokunmaları engellemez)
 - Kule bekçilerinde replik çıkmaz
 - Ayarlar: veri.js → G.BOSS_REPLIK (giris, ofke, olum). Yeni bossa replik: aynı biçimde bir satır ekle
+
+## v0.27 değişiklikleri (canavar, eşya kökeni ve set açıklamaları)
+- 32 canavarın her birine bir satırlık açıklama; bölge bilgi penceresinde canavar listesinin altında görünür
+- Eşya penceresinde köken satırı: eşyanın seviyesine denk gelen bölgeden ("Kül Harabeleri'nin küllerinden çıkarılmış.").
+  Eşya başına değil bölge başına yazıldı, böylece sınıfa özel görünümlerle (asa, yay...) çelişmez
+- 4 setin hikâyesi eşya penceresindeki set kutusunda
+- Ayarlar: veri.js → v0.27 bloğu (canavar açıklamaları, bölge esyaKoken, set aciklama). Statlar ve kayıt değişmedi

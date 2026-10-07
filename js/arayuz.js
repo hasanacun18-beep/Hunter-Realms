@@ -129,7 +129,15 @@ G.setDetayHtml = function (setId) {
     var yazi = Object.keys(set.bonus[esik]).map(function (bk) { return G.bonusYazi(bk, set.bonus[esik][bk]); }).join(', ');
     basamak += '<div class="' + (sayi >= +esik ? 'aktif-bonus' : 'pasif') + '">' + esik + ' parça: ' + yazi + '</div>';
   }
-  return '<div class="set-kutu"><div class="set-baslik">' + set.ad + ' (' + sayi + ' kuşanılı)</div>' + parcalar + '<div class="set-ayrac"></div>' + basamak + '</div>';
+  return '<div class="set-kutu"><div class="set-baslik">' + set.ad + ' (' + sayi + ' kuşanılı)</div>' +
+    (set.aciklama ? '<div class="set-hikaye">' + set.aciklama + '</div>' : '') + parcalar + '<div class="set-ayrac"></div>' + basamak + '</div>';
+};
+
+// v0.27: eşyanın geldiği yer — seviyesine denk gelen en yüksek av bölgesinin köken cümlesi (veri.js → esyaKoken)
+G.esyaKoken = function (s) {
+  var koken = '';
+  G.BOLGELER.forEach(function (b) { if (b.esyaKoken && b.minLv <= s.lv) koken = b.esyaKoken; });
+  return koken;
 };
 
 G.modalKapat = function () { G.$('modal').classList.add('gizli'); };

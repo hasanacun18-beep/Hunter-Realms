@@ -170,6 +170,7 @@ G.esyaModal = function (id) {
     '<h3 style="color:' + n.renk + '">' + G.gorunum(e.sablon).ikon + ' ' + G.esyaAd(e) + (e.kilit ? ' ' + G.ikon('kilit') : '') + '</h3>' +
     '<div class="alt-baslik">' + n.ad + ' ' + slotAd.toLowerCase() + ', seviye ' + s.lv + ' gerekir' +
       (o.lv < s.lv ? ' <span class="fark-eksi">(seviyen yetmiyor)</span>' : '') + '</div>' +
+    (G.esyaKoken(s) ? '<p class="esya-koken">' + G.esyaKoken(s) + '</p>' : '') +
     satirlar + ekHtml + gpHtml + setHtml +
     '<div class="bilgi">' + bilgi.join('<br>') + '</div>' +
     '<div class="modal-dugmeler">' + d + '</div>';

@@ -32,12 +32,15 @@ G.bolgeModal = function (id) {
   } else {
     icerik = '<p class="bilgi">' + b.aciklama + '</p>';
     if (b.canavarlar) {
-      icerik += '<div class="bolge-canavarlar">' + b.canavarlar.map(function (cid) {
+      // v0.27: her canavarın altında kısa açıklaması
+      icerik += '<div class="bolge-canavar-liste">' + b.canavarlar.map(function (cid) {
         var c = G.CANAVARLAR[cid];
-        return '<span>' + c.ikon + ' ' + c.ad + ' <small class="soluk">' + c.lv + '</small></span>';
+        return '<div class="bc-satir"><span class="bc-ikon">' + c.ikon + '</span><div><b>' + c.ad + ' <small class="soluk">seviye ' + c.lv + '</small></b>' +
+          (c.aciklama ? '<i>' + c.aciklama + '</i>' : '') + '</div></div>';
       }).join('') + '</div>';
       var bs = G.CANAVARLAR[b.boss];
       icerik += '<p class="bilgi">Boss: ' + bs.ikon + ' ' + bs.ad + ' (seviye ' + bs.lv + ')' +
+        (bs.aciklama ? '<br><i class="soluk">' + bs.aciklama + '</i>' : '') +
         (b.set ? '<br>Set: ' + G.SETLER[b.set].ad : '') + '</p>';
     }
   }

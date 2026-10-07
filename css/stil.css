@@ -1156,3 +1156,12 @@ body,#uygulama{min-height:100vh;min-height:100dvh}
 .boss-soz .bs-ikon .ikon{width:22px;height:22px;color:#e8884a}
 @keyframes bossSoz{0%{opacity:0;transform:translateY(-6px)}8%{opacity:1;transform:none}85%{opacity:1}100%{opacity:0}}
 @media (prefers-reduced-motion:reduce){.boss-soz{animation:none}}
+
+/* v0.27 — canavar, eşya kökeni ve set açıklamaları */
+.bolge-canavar-liste{display:flex;flex-direction:column;gap:8px;margin:10px 0}
+.bc-satir{display:flex;gap:10px;align-items:flex-start}
+.bc-ikon{flex:none;width:30px;height:30px;font-size:24px;line-height:1;color:var(--bronz-acik)}
+.bc-satir b{display:block;font-weight:normal;color:var(--kemik);font-size:14px}
+.bc-satir i{display:block;font-family:var(--serif);font-size:13px;line-height:1.4;color:var(--soluk)}
+.esya-koken{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--soluk);margin:4px 0 8px}
+.set-hikaye{font-family:var(--serif);font-style:italic;font-size:12.5px;line-height:1.4;color:#a8c8a8;margin:2px 0 6px}

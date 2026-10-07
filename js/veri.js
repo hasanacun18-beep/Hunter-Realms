@@ -790,6 +790,70 @@ G.BOSS_REPLIK = {
     olum:  '«Ben... hiçim. Beni yenemezsin... sadece... unutursun...» Uçurumdan ilk kez ılık bir rüzgar esiyor.'
   }
 };
+
+// ============================================================
+// v0.27 — CANAVAR, EŞYA KÖKENİ ve SET AÇIKLAMALARI (sadece metin; statlar aynı)
+// Canavar: bölge bilgi penceresinde · Eşya kökeni: eşya penceresinde (eşyanın seviyesine göre bölge)
+// Set: eşya penceresindeki set kutusunda
+// ============================================================
+(function () {
+  var c = {
+    kurt: 'Sisin içinde sürüyle avlanır; gözleri artık geceleri de parlıyor.',
+    domuz: 'Köyün tarlalarını söken yaban domuzu. Eskiden ürkekti, şimdi saldırmadan durmuyor.',
+    orumcek: 'Ağlarını ağaçların arasına değil, yolların üstüne kuruyor.',
+    kurt_kral: 'Bir zamanlar köyü kışın açlıktan koruyan ormanın bekçisi.',
+    engerek: 'Vadinin taşları arasında saklanır; zehri eskisinden koyu.',
+    sahin: 'Kayalıkların üstünde döner. Yolcular eskiden kervan yolunu ona bakarak bulurdu.',
+    kaplan_yilan: 'Pulları kaplan gibi çizgili, boyu bir kayık kadar uzun.',
+    dev_bocek: 'Yolcuların bıraktığı sikkelerle geçişe izin veren yaşlı kınkanatlı.',
+    iskelet: 'Başkentin muhafızlarından kalanlar. Nöbetlerini ölümden sonra da bırakmadılar.',
+    yarasa: 'Yanan şehrin kulelerinden inip kan arar.',
+    zombi: 'Kül Harabeleri\'nin eski halkı. Hâlâ evlerinin yolunu arıyorlar.',
+    zincirli_iblis: 'Başkentin zindanında yüzyıllarca zincirli yattı; zincirlerini bir fısıltı kopardı.',
+    kan_buyucusu: 'Uçurumun sesine kapılarını açan tarikatın büyücüleri.',
+    gargoyl: 'Kalenin surlarındaki taş bekçiler. Büyücüler onlara can verdi.',
+    cehennem_tazisi: 'Büyücülerin kalenin bodrumlarında karanlıkla beslediği tazılar.',
+    kara_ejder: 'Kalenin altında Hiçlik\'le beslenen ejder.',
+    kurbaga: 'Derisinden sızan zehir bataklığın suyunu bile yakar.',
+    suluk: 'Bataklığa düşen her şeyi saran, kanla şişmiş sülük yığını.',
+    curuk_ent: 'Bataklığın eski ağaçları. Kökleri çürüdükçe yürümeye başladılar.',
+    bataklik_timsahi: 'Balıkçıların Bataklık Anası dediği, suların en eski sakini.',
+    buz_kurdu: 'Buzulun ak kurtları; nefeslerinin değdiği yer donar.',
+    kar_trolu: 'Geçidin mağaralarında kış uykusundan erken uyandırılmış bir trol.',
+    buz_ruhu: 'Geçitte donarak ölen yolcuların, rüzgarda dolaşan ruhları.',
+    ayaz_devi: 'Uçurumun ağzına set çeken buz duvarını yüzyıllarca ayakta tutan dev.',
+    magma_bocegi: 'Kabuğu soğumuş lavdan; içi hâlâ kor.',
+    kor_semender: 'Lav nehirlerinde yüzen semender; ateşe dokunduğu yerden doğar.',
+    ates_elementali: 'Kor Dağı\'nın karanlık yanan alevlerinden doğmuş bir ruh.',
+    kor_titani: 'Uçurumun ağzını tutan son bekçi. Kayadan bir kalbi vardı.',
+    hiclik_gozcusu: 'Uçurumun kenarında asılı duran göz. Ne gördüğünü kimse bilmiyor.',
+    golge_sovalye: 'Uçuruma inip geri dönemeyen şövalyelerin gölgeleri.',
+    bosluk_canavari: 'Biçimi yok; dokunaçları ışığı bile yutuyor.',
+    hiclik_efendisi: 'Ne doğdu ne öldü; sadece bekledi.'
+  };
+  for (var k in c) if (G.CANAVARLAR[k]) G.CANAVARLAR[k].aciklama = c[k];
+
+  // Eşyanın seviyesi hangi av bölgesine denk geliyorsa o bölgenin köken cümlesi gösterilir
+  var b = {
+    orman: 'Sisli Orman\'da düşmüş avcılardan kalma.',
+    vadi: 'Engerek Vadisi\'nin taşları arasında, kervan kalıntılarından.',
+    harabe: 'Kül Harabeleri\'nin küllerinden çıkarılmış.',
+    kale: 'Kan Kalesi\'nin cephaneliğinden; demirinde hâlâ kan kokusu var.',
+    bataklik: 'Zehir Bataklığı\'nın çamurundan çekilmiş.',
+    buzul: 'Buzul Geçidi\'nde donmuş bir yolcunun üstünden.',
+    volkan: 'Kor Dağı\'nın lavlarında dövülmüş.',
+    ucurum: 'Hiçlik Uçurumu\'nun kıyısından; dokununca soğuk.'
+  };
+  G.BOLGELER.forEach(function (x) { if (b[x.id]) x.esyaKoken = b[x.id]; });
+
+  var st = {
+    kurt: 'Taşlıca\'nın avcıları bu postları kışın giyerdi; Kurt Kralı\'nın sürüsünden.',
+    engerek: 'Vadinin yılan pullarından örülmüş; kervan muhafızlarının gözdesi.',
+    iblis: 'Zindanın zincirlerinden dövülmüş. İblisin öfkesi demirde hâlâ yaşıyor.',
+    ejder: 'Kara Ejder\'in pullarından ve kemiklerinden. Giyen, ejderin açlığını hisseder.'
+  };
+  for (var sk in st) if (G.SETLER[sk]) G.SETLER[sk].aciklama = st[sk];
+})();
 G.DUSME.hap = 1.2;   // v0.16 denge: hap çok birikiyordu
 
 // ============================================================
