@@ -273,7 +273,7 @@ G.darbeEfekti = function () {
 // ---- v0.20: Kuledeyken alt panel ----
 G.kuleAltHtml = function () {
   var k = G.kuleKonum(G.kule ? G.kule.kat : 1);
-  return '<div class="kule-alt"><div><b>🗼 Kule</b><span>Kademe ' + k.kademe + ' · Kat ' + k.kat + '</span>' +
+  return '<div class="kule-alt"><div><b>' + G.ikon('kule') + ' Kule</b><span>Kademe ' + k.kademe + ' · Kat ' + k.kat + '</span>' +
     '<small>Bekçiyi süre bitmeden yen. Kulede ölmek tecrübe kaybettirmez.</small></div>' +
-    '<button class="genis-dugme" data-eylem="parsomen">🏳️ Pes et</button></div>';
+    '<button class="genis-dugme" data-eylem="parsomen">' + G.ikon('kapi') + ' Pes et</button></div>';
 };

@@ -34,7 +34,7 @@ G.gorevAl = function () {
     if (k === 'para') o.para += d.g.odul[k];
     else o.sarf[k] = (o.sarf[k] || 0) + d.g.odul[k];
   }
-  G.log('📜 Ana görev tamamlandı: ' + G.odulYazi(d.g.odul), 'kazanc');
+  G.log(G.ikon('parsomen') + ' Ana görev tamamlandı: ' + G.odulYazi(d.g.odul), 'kazanc');
   G.bildir('Görev tamamlandı!');
   o.gorev.i++;
   o.gorev.taban = o.istatistik.oldurme;
@@ -64,7 +64,7 @@ G.gorevGuncelle = function () {
 
 G.gorevBilgiModal = function () {
   var d = G.gorevDurum();
-  G.$('modalIc').innerHTML = '<h3>📜 Ana Görev</h3>' +
+  G.$('modalIc').innerHTML = '<h3>' + G.ikon('parsomen') + ' Ana Görev</h3>' +
     (d ? '<p class="bilgi">' + d.yazi + ' (' + d.sayi + '/' + d.hedef + ')</p><p class="bilgi">Ödül: ' + G.odulYazi(d.g.odul) + '</p>' +
          '<p class="bilgi soluk">Görev ' + (G.o.gorev.i + 1) + ' / ' + G.ANA_GOREV.length + '</p>'
        : '<p class="bilgi">Bütün ana görevleri tamamladın.</p>') +

@@ -62,7 +62,7 @@ G.sandikAc = function (tur, esik) {
   var odul = G.sandikOdul(s.odul);
   if (d.sandik[esik] || d.aktiflik < esik) {
     // Açılamıyorsa sadece içeriğini göster
-    G.$('modalIc').innerHTML = '<h3>🎁 ' + esik + ' aktiflik sandığı</h3><p class="bilgi">' + G.odulYazi(odul) + '</p>' +
+    G.$('modalIc').innerHTML = '<h3>' + G.ikon('sandik') + ' ' + esik + ' aktiflik sandığı</h3><p class="bilgi">' + G.odulYazi(odul) + '</p>' +
       '<p class="bilgi soluk">' + (d.sandik[esik] ? 'Bu sandığı zaten açtın.' : 'Açmak için ' + esik + ' aktiflik gerekiyor.') + '</p>' +
       '<div class="modal-dugmeler"><button data-eylem="modalKapat">Kapat</button></div>';
     G.$('modal').classList.remove('gizli');
@@ -70,7 +70,7 @@ G.sandikAc = function (tur, esik) {
   }
   d.sandik[esik] = true;
   for (var k in odul) { if (k === 'para') o.para += odul[k]; else o.sarf[k] = (o.sarf[k] || 0) + odul[k]; }
-  G.log('🎁 Aktiflik sandığı: ' + G.odulYazi(odul), 'kazanc');
+  G.log(G.ikon('sandik') + ' Aktiflik sandığı: ' + G.odulYazi(odul), 'kazanc');
   G.bildir('Sandık açıldı!');
   G.kaydet(); G.panelYenile(); G.ustGuncelle();
 };

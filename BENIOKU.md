@@ -278,3 +278,13 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
   Dev Bokböceği → Kara Kınkanatlı, Kurt Kral → Kurt Kralı, Şahin → Kara Şahin
 - Yeni canavara ikon vermek: veri.js'te `ikon: '🐺'` yerine `simge: 'ad'` yaz ve ikon.js → G.IKONLAR'a aynı adla ikonu ekle
   (simge yazılmazsa emoji eskisi gibi çalışır)
+
+### v0.22 — 3a: kaynak, menü ve etkinlik ikonları
+- Sarf malzemeleri ikonlu ve kendi renginde: Can/Mana İksiri, Dönüş Parşömeni, Arıtma Taşı (elmas), Ruh Tozu,
+  Kitap Sayfası, Meridyen Hapı, Rün Özü (rün taşı). Çantada, dükkanda, demircide, ödüllerde aynı ikon
+- Altın her yerde iki sikke ikonu (üst bar, bedeller, ödüller)
+- Etkinlik listesi: Maden (kazma), Bölümler (cilt), Günlük Görevler (liste), Kule (taş kule), Arena (kılıçlar);
+  aktiflik ve kule sandıkları, kilitli bölüm, Madenci Çayı, kasaba (köy), İksirci / Hurdacı başlıkları
+- Karakter alt menüsü (Beceri, Meridyen, İlahi, Rünler, Statlar) ve Demirci alt menüsü (Arıtma, Güçlendirme, Eritme)
+- Savaş günlüğündeki bölüm, beceri, kule, maden, görev ve sandık satırları da ikonlu
+- veri.js → G.SARF'ta `ikon` yerine `simge` (renk alanı ikonu boyar); dükkan ürünleri ikonu G.SARF'tan alır

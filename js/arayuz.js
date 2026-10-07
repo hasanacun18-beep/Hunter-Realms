@@ -87,7 +87,7 @@ G.ustGuncelle = function () {
   G.$('uAd').textContent = o.ad;
   G.$('uCp').textContent = 'GP ' + r.cp;
   G.$('uSinif').textContent = 'Sv. ' + o.lv;
-  G.$('uPara').textContent = '💰 ' + G.kisaSayi(o.para);
+  G.$('uPara').innerHTML = G.IK_PARA + ' ' + G.kisaSayi(o.para);
   G.$('uExp').style.width = (o.exp / gerek * 100) + '%';
   G.$('uExpY').textContent = o.exp + ' / ' + gerek;
   // Alt menüdeki küre: sol yarı can, sağ yarı mana

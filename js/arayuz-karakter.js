@@ -40,13 +40,13 @@ G.bebekHtml = function () {
 };
 
 // ---- Karakter bölümü (referans düzeni): alt menü Dön · Beceri · Meridyen · İlahi Silah · Statlar ----
-G.KARAKTER_ALT = [['beceri', '📖', 'Beceri'], ['meridyen', '✴️', 'Meridyen'], ['ilahi', '⚡', 'İlahi'], ['runler', '🔷', 'Rünler'], ['statlar', '📊', 'Statlar']];
+G.KARAKTER_ALT = [['beceri', G.ikon('kitap'), 'Beceri'], ['meridyen', G.ikon('meditasyon'), 'Meridyen'], ['ilahi', G.ikon('simsek'), 'İlahi'], ['runler', G.ikon('run'), 'Rünler'], ['statlar', G.ikon('grafik'), 'Statlar']];
 
 G.karakterNavCiz = function () {
   var o = G.o;
   G.$('karakterNav').innerHTML = '<button data-eylem="sekme" data-s="savas" class="kn-don"><span>↩</span>Dön</button>' +
     G.KARAKTER_ALT.map(function (x) {
-      var ikon = x[0] === 'ilahi' ? G.ILAHI.sinif[o.sinif].ikon : x[1];
+      var ikon = x[1];
       var rozet = x[0] === 'statlar' && o.puan > 0 ? '<i class="nokta">' + o.puan + '</i>' : '';
       return '<button data-eylem="karakterAlt" data-s="' + x[0] + '"' + (G.karakterAlt === x[0] ? ' class="aktif"' : '') + '><span>' + ikon + '</span>' + x[2] + rozet + '</button>';
     }).join('');
@@ -88,7 +88,7 @@ G.meridyenHtml = function () {
   else {
     var m = G.meridyenMaliyet(n), lvTamam = o.lv >= m.lv, yeter = lvTamam && o.sarf.hap >= m.hap && o.para >= m.altin;
     alt = '<div class="mer-maliyet">Bedel: <span class="' + (o.sarf.hap >= m.hap ? 'fark-arti' : 'fark-eksi') + '">🔮 ' + o.sarf.hap + '/' + m.hap + '</span>' +
-      ' <span class="' + (o.para >= m.altin ? 'fark-arti' : 'fark-eksi') + '">💰 ' + m.altin + '</span>' +
+      ' <span class="' + (o.para >= m.altin ? 'fark-arti' : 'fark-eksi') + '">' + G.IK_PARA + ' ' + m.altin + '</span>' +
       (lvTamam ? '' : ' <span class="fark-eksi">Seviye ' + m.lv + '</span>') + '</div>' +
       '<button class="sus-dugme mer-dugme" data-eylem="meridyenYukselt"' + (yeter ? '' : ' disabled') + '><span>Yükselt</span></button>';
   }
@@ -224,9 +224,9 @@ G.runSayfaHtml = function () {
   }).join('');
   var canta = o.runler.slice().sort(function (a, b) { return (b.nadir - a.nadir) || (b.lv - a.lv); })
     .map(function (r) { return G.runKutuHtml(r, 'runAc'); }).join('') || '<p class="soluk kucuk-not">Henüz rünün yok. Kuleden kazanırsın.</p>';
-  return '<div class="kutu"><h2>🔷 Rünler</h2><div class="run-yuvalar">' + yuvalar + '</div>' +
+  return '<div class="kutu"><h2>' + G.ikon('run') + ' Rünler</h2><div class="run-yuvalar">' + yuvalar + '</div>' +
       '<p class="soluk kucuk-not">Her tipten bir rün takılır. Yuvaya dokun, çantandaki o tipten rünleri gör.</p></div>' +
-    '<div class="kutu"><h2>Rün çantası <small class="soluk">🔶 ' + o.sarf.oz + ' Rün Özü</small></h2><div class="run-canta">' + canta + '</div></div>';
+    '<div class="kutu"><h2>Rün çantası <small class="soluk">' + G.SARF.oz.ikon + ' ' + o.sarf.oz + ' Rün Özü</small></h2><div class="run-canta">' + canta + '</div></div>';
 };
 
 G.runModal = function (id) {
@@ -237,8 +237,8 @@ G.runModal = function (id) {
   G.$('modalIc').innerHTML = '<h3 style="color:' + G.NADIRLIK[r.nadir].renk + '">' + t.ikon + ' ' + G.runAd(r) + '</h3>' +
     '<div class="alt-baslik">Seviye ' + r.lv + '/' + G.RUN_MAKS + (takili ? ' · takılı' : '') + '</div>' +
     '<div class="satir"><span>Etkisi</span><span>' + G.bonusYazi(t.stat, G.runDeger(r)) + (sonraki != null ? ' <span class="fark-arti">→ ' + sonraki + '</span>' : '') + '</span></div>' +
-    (r.lv < G.RUN_MAKS ? '<p class="bilgi">Yükseltme: 🔶 ' + m + ' Rün Özü (sende ' + o.sarf.oz + ')</p>' : '<p class="bilgi">En yüksek seviyede.</p>') +
-    '<p class="bilgi">Eritirsen: 🔶 ' + G.runEritGetiri(r) + ' Rün Özü</p>' +
+    (r.lv < G.RUN_MAKS ? '<p class="bilgi">Yükseltme: ' + G.SARF.oz.ikon + ' ' + m + ' Rün Özü (sende ' + o.sarf.oz + ')</p>' : '<p class="bilgi">En yüksek seviyede.</p>') +
+    '<p class="bilgi">Eritirsen: ' + G.SARF.oz.ikon + ' ' + G.runEritGetiri(r) + ' Rün Özü</p>' +
     '<div class="modal-dugmeler">' +
       (takili ? '<button data-eylem="runCikar" data-id="' + r.id + '">Çıkar</button>' : '<button data-eylem="runTak" data-id="' + r.id + '">Tak</button>') +
       '<button data-eylem="runYukselt" data-id="' + r.id + '"' + (r.lv < G.RUN_MAKS && o.sarf.oz >= m ? '' : ' disabled') + '>Yükselt</button>' +

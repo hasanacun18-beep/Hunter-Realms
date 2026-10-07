@@ -281,7 +281,7 @@ G.canavarOldu = function (i) {
   }
   if (Math.random() * 100 < (c.boss ? G.KITAP_DUSME_BOSS : G.KITAP_DUSME_NORMAL)) G.kitapDus(c.lv);
   var sayfa = c.boss ? G.rastgele(G.DUSME.sayfaBoss[0], G.DUSME.sayfaBoss[1]) : (Math.random() * 100 < G.DUSME.sayfa ? G.rastgele(1, 2) : 0);
-  if (sayfa) { o.sarf.sayfa += sayfa; if (c.boss) G.log('+' + sayfa + ' 📃 Kitap Sayfası'); }
+  if (sayfa) { o.sarf.sayfa += sayfa; if (c.boss) G.log('+' + sayfa + ' ' + G.SARF.sayfa.ikon + ' Kitap Sayfası'); }
   var hap = c.boss ? G.rastgele(G.DUSME.hapBoss[0], G.DUSME.hapBoss[1]) : (Math.random() * 100 < G.DUSME.hap ? 1 : 0);
   if (hap) { o.sarf.hap += hap; G.log('+' + hap + ' 🔮 Meridyen Hapı'); }
   G.ogrenilenler('pasif').forEach(function (pid) { G.ustalikEkle(pid, 1); });

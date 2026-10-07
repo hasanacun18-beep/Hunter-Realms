@@ -17,9 +17,9 @@ G.cizKasaba = function () {
     '<div class="panel">' +
     '<div class="kasaba-sahne"><div class="kasaba-kemer"><h2>' + b.ad + '</h2></div>' +
       '<p>' + b.aciklama + '</p></div>' +
-    '<div class="kutu"><h2>🧪 İksirci</h2><div class="dukkan-liste">' + G.dukkanHtml() + '</div>' +
+    '<div class="kutu"><h2>' + G.ikon('iksir') + ' İksirci</h2><div class="dukkan-liste">' + G.dukkanHtml() + '</div>' +
       '<p class="soluk kucuk-not">Altının: ' + o.para + '</p></div>' +
-    '<div class="kutu"><h2>⚒️ Hurdacı</h2>' +
+    '<div class="kutu"><h2>' + G.ikon('cekic') + ' Hurdacı</h2>' +
       '<p class="soluk kucuk-not">Çantandaki gereksiz eşyaları burada toplu olarak satabilir ya da eritebilirsin. Kilitli, güçlendirilmiş ve set eşyalarına dokunulmaz.</p>' +
       '<div class="ikili"><button class="genis-dugme" data-eylem="topluSat">Sıradan ve iyileri sat</button>' +
       '<button class="genis-dugme" data-eylem="topluErit">Nadirleri erit</button></div></div>' +

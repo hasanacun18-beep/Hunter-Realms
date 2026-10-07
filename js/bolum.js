@@ -55,7 +55,7 @@ G.bolumAl = function (kid) {
   for (var k in g.odul) { if (k === 'para') o.para += g.odul[k]; else o.sarf[k] = (o.sarf[k] || 0) + g.odul[k]; }
   G.bildir('Ödül: ' + G.odulYazi(g.odul));
   var tamam = G.BOLUMLER[bi].gorevler.every(function (x) { return o.bolum.alinan[x.kid]; });
-  if (tamam && G.BOLUMLER[bi + 1]) { G.log('📖 ' + G.BOLUMLER[bi].ad + ' tamamlandı! Yeni bölüm açıldı: ' + G.BOLUMLER[bi + 1].ad, 'sistem'); G.bildir('Yeni bölüm açıldı!'); }
+  if (tamam && G.BOLUMLER[bi + 1]) { G.log(G.ikon('cilt') + ' ' + G.BOLUMLER[bi].ad + ' tamamlandı! Yeni bölüm açıldı: ' + G.BOLUMLER[bi + 1].ad, 'sistem'); G.bildir('Yeni bölüm açıldı!'); }
   G.kaydet(); G.panelYenile(); G.ustGuncelle();
 };
 

@@ -135,7 +135,7 @@ G.madenBitir = function (sebep) {
   m.kazi = null;
   var mesaj = (sebep ? sebep + '. ' : '') + z.dakika + ' dakikalık kazı bitti' + (yazi.length ? ': ' + yazi.join(', ') : ', cevher çıkmadı.');
   G.madenLog(mesaj, 'kazanc');
-  G.log('⛏️ ' + mesaj, 'kazanc');
+  G.log(G.ikon('kazma') + ' ' + mesaj, 'kazanc');
   G.bildir('Kazı bitti');
   G.kaydet();
   if (G.sekme === 'etkinlik' || G.sekme === 'karakter' || G.sekme === 'canta') G.panelYenile();

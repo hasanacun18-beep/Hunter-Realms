@@ -1072,3 +1072,11 @@ body,#uygulama{min-height:100vh;min-height:100dvh}
 .sinif-rozet .ikon{width:26px;height:26px}
 .sinif-yuvarlak .ik .ikon{width:34px;height:34px}
 .kule-bekci .ikon{color:#d86a48}
+
+/* v0.22 — 3a: kaynak, menü ve etkinlik ikonları */
+.para-ikon{color:#e3b34a}
+#karakterNav button .ikon,#demirciNav button .ikon{color:var(--soluk)}
+#karakterNav button.aktif .ikon,#demirciNav button.aktif .ikon{color:#f0c070;filter:drop-shadow(0 1px 0 #000) drop-shadow(0 0 5px rgba(240,190,100,.45))}
+.sandik.hazir .ikon{filter:drop-shadow(0 0 6px rgba(255,200,80,.9))}
+.bl-zincir .ikon{color:var(--soluk)}
+.etkinlik-kart b .ikon{margin-right:2px}

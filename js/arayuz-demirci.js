@@ -6,7 +6,7 @@
 G.demirciAlt = 'arit';
 G.demirciKaynak = 'kusanili';
 G.demirciSecili = null;
-G.DEMIRCI_ALT = [['arit', '✨', 'Arıtma'], ['guclendir', '🔨', 'Güçlendirme'], ['erit', '🔥', 'Eritme']];
+G.DEMIRCI_ALT = [['arit', G.ikon('pirilti'), 'Arıtma'], ['guclendir', G.ikon('cekic'), 'Güçlendirme'], ['erit', G.ikon('alev'), 'Eritme']];
 
 // Eşya penceresinden "Arıt" ile gel
 G.demirciAc = function (id) {
@@ -94,8 +94,8 @@ G.aritHtml = function (e) {
       '<div class="dm-kolon"><h4>Arıtılmış statlar</h4>' + (onizleme || '<p class="soluk kucuk-not">Arıt\'a bas, yeni statlar burada görünür.</p>') + '</div>' +
     '</div>' +
     '<div class="dm-gpler"><span>Mevcut GP: ' + G.esyaGP(e) + '</span><span>' + gpSag + '</span></div>' +
-    '<div class="dm-maliyet">Bedel: <span class="' + (o.para >= m.altin ? 'fark-arti' : 'fark-eksi') + '">💰 ' + m.altin + '</span> ' +
-      '<span class="' + (o.sarf.toz >= m.toz ? 'fark-arti' : 'fark-eksi') + '">✴️ ' + o.sarf.toz + '/' + m.toz + '</span></div>' +
+    '<div class="dm-maliyet">Bedel: <span class="' + (o.para >= m.altin ? 'fark-arti' : 'fark-eksi') + '">' + G.IK_PARA + ' ' + m.altin + '</span> ' +
+      '<span class="' + (o.sarf.toz >= m.toz ? 'fark-arti' : 'fark-eksi') + '">' + G.SARF.toz.ikon + ' ' + o.sarf.toz + '/' + m.toz + '</span></div>' +
     '<div class="dm-dugmeler"><button class="sus-dugme" data-eylem="arit" data-id="' + e.id + '"><span>Arıt</span></button>' +
       '<button class="sus-dugme" data-eylem="aritKaydet"' + (a ? '' : ' disabled') + '><span>Kaydet</span></button></div>' +
     '<p class="soluk kucuk-not">Arıt yeni statları önizler, eşyan değişmez. Beğenirsen Kaydet. 🔒 kilitli statlar değişmez, her kilit bedeli artırır.</p>';
@@ -112,8 +112,8 @@ G.guclendirHtml = function (e) {
   else {
     var ml = G.guclendirMaliyet(e);
     alt = '<div class="dm-maliyet">Başarı: <b>%' + G.guclendirSans(e.arti) + '</b>' + (e.arti >= G.ZORLUK.guclendirDusmeArti ? ' <span class="fark-eksi">(başarısızlıkta seviye düşer)</span>' : '') + '</div>' +
-      '<div class="dm-maliyet">Bedel: <span class="' + (o.para >= ml ? 'fark-arti' : 'fark-eksi') + '">💰 ' + ml + '</span> ' +
-      '<span class="' + (o.sarf.tas >= 1 ? 'fark-arti' : 'fark-eksi') + '">💎 ' + o.sarf.tas + '/1</span></div>' +
+      '<div class="dm-maliyet">Bedel: <span class="' + (o.para >= ml ? 'fark-arti' : 'fark-eksi') + '">' + G.IK_PARA + ' ' + ml + '</span> ' +
+      '<span class="' + (o.sarf.tas >= 1 ? 'fark-arti' : 'fark-eksi') + '">' + G.SARF.tas.ikon + ' ' + o.sarf.tas + '/1</span></div>' +
       '<div class="dm-dugmeler"><button class="sus-dugme" data-eylem="guclendir" data-id="' + e.id + '"><span>Güçlendir +' + (e.arti + 1) + '</span></button></div>';
   }
   return G.dmBaslikHtml(e) + '<div class="dm-kolon tek"><h4>Temel statlar +' + e.arti + '</h4>' + satir + '</div>' + alt;
@@ -123,7 +123,7 @@ G.guclendirHtml = function (e) {
 G.eritHtml = function (e) {
   var g = G.eritmeGetiri(e);
   return G.dmBaslikHtml(e) +
-    '<div class="dm-kolon tek"><h4>Eritirsen</h4><div class="dm-stat">✴️ ' + g.toz + ' Ruh Tozu</div>' + (g.tas ? '<div class="dm-stat">💎 ' + g.tas + ' Arıtma Taşı</div>' : '') + '</div>' +
+    '<div class="dm-kolon tek"><h4>Eritirsen</h4><div class="dm-stat">' + G.SARF.toz.ikon + ' ' + g.toz + ' Ruh Tozu</div>' + (g.tas ? '<div class="dm-stat">' + G.SARF.tas.ikon + ' ' + g.tas + ' Arıtma Taşı</div>' : '') + '</div>' +
     '<div class="dm-dugmeler"><button class="sus-dugme" data-eylem="erit" data-id="' + e.id + '"' + (e.kilit ? ' disabled' : '') + '><span>Erit</span></button>' +
       '<button class="sus-dugme" data-eylem="topluErit"><span>Nadirleri erit</span></button></div>' +
     (e.kilit ? '<p class="fark-eksi kucuk-not">Kilitli eşya eritilmez.</p>' : '') +

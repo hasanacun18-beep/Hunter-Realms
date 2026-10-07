@@ -579,11 +579,11 @@ G.CANTA = { baslangic: 40, adim: 5, maks: 80, fiyat: 2000, carpan: 1.5 };
 
 // Sarf malzemeleri (çantada yığın olarak görünür)
 G.SARF = {
-  hp:       { ad: 'Can İksiri',      ikon: '🧪', renk: '#c0503a', aciklama: 'Canını seviyene göre yeniler. Savaşta iki iksir arası bekleme var.' },
-  mp:       { ad: 'Mana İksiri',     ikon: '💧', renk: '#3d6fb4', aciklama: 'Manani seviyene göre yeniler.' },
-  parsomen: { ad: 'Dönüş Parşömeni', ikon: '📜', renk: '#8a7a3a', aciklama: 'Seni son uğradığın kasabaya götürür. Saldırı altındayken de okunur.' },
-  tas:      { ad: 'Arıtma Taşı',     ikon: '💎', renk: '#4f8fe0', aciklama: 'Eşya güçlendirmede kullanılır.' },
-  toz:      { ad: 'Ruh Tozu',        ikon: '✴️', renk: '#b060e0', aciklama: 'Eşya eritince çıkar. Ek statları yeniden zarlamada kullanılır.' }
+  hp:       { ad: 'Can İksiri',      simge: 'iksir', renk: '#c0503a', aciklama: 'Canını seviyene göre yeniler. Savaşta iki iksir arası bekleme var.' },
+  mp:       { ad: 'Mana İksiri',     simge: 'iksir', renk: '#3d6fb4', aciklama: 'Manani seviyene göre yeniler.' },
+  parsomen: { ad: 'Dönüş Parşömeni', simge: 'parsomen', renk: '#8a7a3a', aciklama: 'Seni son uğradığın kasabaya götürür. Saldırı altındayken de okunur.' },
+  tas:      { ad: 'Arıtma Taşı',     simge: 'tas', renk: '#4f8fe0', aciklama: 'Eşya güçlendirmede kullanılır.' },
+  toz:      { ad: 'Ruh Tozu',        simge: 'toz', renk: '#b060e0', aciklama: 'Eşya eritince çıkar. Ek statları yeniden zarlamada kullanılır.' }
 };
 
 // ============================================================
@@ -632,7 +632,7 @@ G.BECERI_MAKS = 8;
 // Seviye lv'den lv+1'e geçmek için gereken ustalık. Aktif beceri her kullanımda +10,
 // pasif beceri her öldürmede +1 ustalık kazanır.
 G.USTALIK_GEREK = [0, 50, 120, 240, 400, 620, 900, 1250];
-G.SARF.sayfa = { ad: 'Kitap Sayfası', ikon: '📃', renk: '#c9a86a', aciklama: 'Becerileri geliştirmede kullanılır. Canavarlardan sık düşer.' };
+G.SARF.sayfa = { ad: 'Kitap Sayfası', simge: 'sayfa', renk: '#c9a86a', aciklama: 'Becerileri geliştirmede kullanılır. Canavarlardan sık düşer.' };
 G.DUSME.sayfa = 18;          // normal canavardan kitap sayfası düşme şansı (%), 1-2 adet
 G.DUSME.sayfaBoss = [8, 15]; // bosstan
 G.KITAP_DUSME_NORMAL = 1.5;
@@ -699,7 +699,7 @@ G.MERIDYEN = {
   // Noktaların silüet üstündeki yerleri (yüzde): başın tepesinden ayaklara zikzak
   noktalar: [[50, 9], [40, 19], [60, 21], [53, 31], [38, 38], [58, 45], [44, 54], [62, 63], [41, 73], [58, 84]]
 };
-G.SARF.hap = { ad: 'Meridyen Hapı', ikon: '🔮', renk: '#8a7ac0', aciklama: 'Meridyen noktalarını açmakta kullanılır. Canavarlardan, bosslardan ve ana görevlerden gelir.' };
+G.SARF.hap = { ad: 'Meridyen Hapı', simge: 'hap', renk: '#8a7ac0', aciklama: 'Meridyen noktalarını açmakta kullanılır. Canavarlardan, bosslardan ve ana görevlerden gelir.' };
 G.DUSME.hap = 3;            // normal canavardan (%)
 G.DUSME.hapBoss = [2, 4];   // bosstan
 // Ana görevlerin 7.'sinden itibaren ödüllere hap ekle
@@ -819,7 +819,7 @@ G.KULE = {
 };
 G.KULE.katToplam = G.KULE.bekciler.length * G.KULE.katSayi;
 
-G.SARF.oz = { ad: 'Rün Özü', ikon: '🔶', renk: '#e8902a', aciklama: 'Rünleri yükseltmekte kullanılır. Kuleden ve rün eritmekten gelir.' };
+G.SARF.oz = { ad: 'Rün Özü', simge: 'run', renk: '#e8902a', aciklama: 'Rünleri yükseltmekte kullanılır. Kuleden ve rün eritmekten gelir.' };
 
 // Rün tipleri: hangi statı verir, taban değer (Yeşil, Sv.1)
 G.RUN_TUR = {

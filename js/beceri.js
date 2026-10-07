@@ -88,7 +88,7 @@ G.beceriGelistir = function (id) {
   o.para -= G.altinGerek(lv);
   o.ustalik[id] = 0;
   o.beceriler[id] = lv + 1;
-  G.log('📖 ' + b.ad + ' seviye ' + (lv + 1) + '!', 'sistem');
+  G.log(G.ikon('kitap') + ' ' + b.ad + ' seviye ' + (lv + 1) + '!', 'sistem');
   G.bildir(b.ad + ' seviye ' + (lv + 1));
   G.kaydet(); G.panelYenile(); G.ustGuncelle();
   return true;
@@ -106,11 +106,11 @@ G.kitapOgren = function (id) {
   var o = G.o, b = G.BECERILER[id], mevcut = o.beceriler[id] || 0;
   if (!mevcut) {
     o.beceriler[id] = 1;
-    G.log('📖 Yeni beceri: ' + b.ad + '!', 'sistem');
+    G.log(G.ikon('kitap') + ' Yeni beceri: ' + b.ad + '!', 'sistem');
     G.bildir('Yeni beceri: ' + b.ad);
   } else if (mevcut >= G.BECERI_MAKS) {
     o.sarf.toz += G.KITAP_FAZLA_TOZ;
-    G.log('📖 ' + b.ad + ' kitabı (en üst seviyede): +' + G.KITAP_FAZLA_TOZ + ' Ruh Tozu');
+    G.log(G.ikon('kitap') + ' ' + b.ad + ' kitabı (en üst seviyede): +' + G.KITAP_FAZLA_TOZ + ' Ruh Tozu');
   } else {
     o.kitaplar[id] = (o.kitaplar[id] || 0) + 1;
     G.log('📕 ' + b.ad + ' kitabı bulundu (' + o.kitaplar[id] + ')');

@@ -10,7 +10,7 @@ G.cizHarita = function () {
     if (kilit) sis += '<div class="sis" style="left:' + sol + ';top:' + ust + '"></div>';
     dugumler += '<button class="harita-dugum ' + b.tur + (kilit ? ' sisli' : '') + (b.id === o.bolge ? ' burada' : '') + '"' +
       ' style="left:' + sol + ';top:' + ust + '" data-eylem="bolgeBilgi" data-b="' + b.id + '">' +
-      '<span class="hd-ad">' + (b.tur === 'kasaba' ? '🏘️ ' : '') + (kilit ? '???' : b.ad) + '</span>' +
+      '<span class="hd-ad">' + (b.tur === 'kasaba' ? G.ikon('koy') + ' ' : '') + (kilit ? '???' : b.ad) + '</span>' +
       '<span class="hd-lv">' + (b.tur === 'kasaba' ? 'Kasaba' : 'Seviye ' + b.minLv + '+') + '</span></button>';
   });
   G.$('icerik').innerHTML =

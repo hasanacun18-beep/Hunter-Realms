@@ -19,26 +19,26 @@ G.cizEtkinlik = function () {
   G.$('icerik').innerHTML =
     '<div class="panel">' +
     '<button class="etkinlik-kart" data-eylem="etkinlikAc" data-e="maden">' +
-      '<b>⛏️ Eski Maden</b><span>Ocak kap, arka planda cevher kaz. İlahi silahın buradan güçlenir.</span>' +
+      '<b>' + G.ikon('kazma') + ' Eski Maden</b><span>Ocak kap, arka planda cevher kaz. İlahi silahın buradan güçlenir.</span>' +
       '<small class="' + (m.kazi ? 'fark-arti' : 'soluk') + '">' + durum + '</small></button>' +
     (function () {
       var bi = 0; while (G.BOLUMLER[bi + 1] && G.bolumAcikMi(bi + 1)) bi++;
       var bek = G.bolumBekleyen();
-      return '<button class="etkinlik-kart" data-eylem="etkinlikAc" data-e="bolumler"><b>📖 Bölümler</b>' +
+      return '<button class="etkinlik-kart" data-eylem="etkinlikAc" data-e="bolumler"><b>' + G.ikon('cilt') + ' Bölümler</b>' +
         '<span>Bölüm bölüm açılan hedefler. Her görevin kendi ödülü var.</span>' +
         '<small class="' + (bek ? 'fark-arti' : 'soluk') + '">' + (bek ? bek + ' ödül seni bekliyor' : 'Bölüm ' + (bi + 1) + ': ' + G.BOLUMLER[bi].ad) + '</small></button>';
     })() +
-    '<button class="etkinlik-kart" data-eylem="etkinlikAc" data-e="gorevler"><b>📋 Günlük Görevler</b>' +
+    '<button class="etkinlik-kart" data-eylem="etkinlikAc" data-e="gorevler"><b>' + G.ikon('liste') + ' Günlük Görevler</b>' +
       '<span>Her gün ve her hafta yenilenen görevler. Aktiflik topla, sandıkları aç.</span>' +
       '<small class="' + (G.gunlukBekleyen() ? 'fark-arti' : 'soluk') + '">' +
       (G.gunlukBekleyen() ? G.gunlukBekleyen() + ' ödül seni bekliyor' : 'Günlük aktiflik ' + o.gunluk.aktiflik + '/100') + '</small></button>' +
     (function () {
       var e = o.kule.enYuksek, k = G.kuleKonum(Math.max(1, e));
-      return '<button class="etkinlik-kart" data-eylem="etkinlikAc" data-e="kule"><b>🗼 Kule</b>' +
+      return '<button class="etkinlik-kart" data-eylem="etkinlikAc" data-e="kule"><b>' + G.ikon('kule') + ' Kule</b>' +
         '<span>Kat kat tırman, bekçileri süre dolmadan yen. Rün ve Rün Özü kazan.</span>' +
         '<small class="soluk">' + (e ? 'En yüksek: Kademe ' + k.kademe + ' · Kat ' + k.kat : 'Henüz tırmanmadın') + '</small></button>';
     })() +
-    '<div class="etkinlik-kart kapali"><b>⚔️ Arena</b><span>Diğer oyuncuların karakterleriyle dövüş.</span><small class="soluk">Yakında</small></div>' +
+    '<div class="etkinlik-kart kapali"><b>' + G.ikon('kiliclar') + ' Arena</b><span>Diğer oyuncuların karakterleriyle dövüş.</span><small class="soluk">Yakında</small></div>' +
     '</div>';
 };
 
@@ -86,14 +86,14 @@ G.cizMaden = function () {
   G.$('icerik').innerHTML =
     '<div class="panel">' +
     '<button class="geri-dugme" data-eylem="etkinlikGeri">← Etkinlikler</button>' +
-    '<div class="kasaba-sahne maden-sahne"><div class="kasaba-kemer"><h2>⛏️ Eski Maden</h2></div>' +
+    '<div class="kasaba-sahne maden-sahne"><div class="kasaba-kemer"><h2>' + G.ikon('kazma') + ' Eski Maden</h2></div>' +
       '<p>Yüzyıllardır kazılan bu dağın içinde gece yarısı bile kazma sesleri yankılanır. Ocağını kap, derinlere in, ama sırtını kollamayı unutma.</p></div>' +
     '<div class="kutu">' +
       '<div class="enerji-satir"><span>Madenci enerjisi</span><span id="enerjiYazi">' + m.enerji + '/' + M.enerjiMaks + '</span></div>' +
       '<div class="cubuk enerji"><i id="enerjiCubuk" style="width:' + (m.enerji / M.enerjiMaks * 100) + '%"></i></div>' +
       '<div class="cubuk-yazi"><span>Günde ' + Math.round(86400 / M.enerjiSure) + ' enerji dolar</span><span id="enerjiSure"></span></div>' +
       G.cevherSatirHtml(m.cevher) +
-      '<button class="genis-dugme cay-dugme" data-eylem="cay">🍵 Madenci Çayı: +' + M.cayEnerji + ' enerji (' + (M.cayFiyat * o.lv) + ' altın)</button>' +
+      '<button class="genis-dugme cay-dugme" data-eylem="cay">' + G.ikon('cay') + ' Madenci Çayı: +' + M.cayEnerji + ' enerji (' + (M.cayFiyat * o.lv) + ' altın)</button>' +
     '</div>' +
     kazi +
     '<div class="kutu"><h2>Katlar</h2><div class="maden-katlar">' + katlar + '</div>' +
@@ -144,7 +144,7 @@ G.cizGunluk = function () {
   var sandiklar = (tur === 'haftalik' ? G.SANDIK_HAFTALIK : G.SANDIK_GUNLUK).map(function (s) {
     var acik = d.sandik[s.esik], hazir = !acik && d.aktiflik >= s.esik;
     return '<button class="sandik' + (acik ? ' acik' : '') + (hazir ? ' hazir' : '') + '" style="left:' + s.esik + '%" data-eylem="sandikAc" data-tur="' + tur + '" data-esik="' + s.esik + '">' +
-      '<span>' + (acik ? '📭' : '🎁') + '</span><small>' + s.esik + '</small></button>';
+      '<span>' + G.ikon(acik ? 'acik_sandik' : 'sandik') + '</span><small>' + s.esik + '</small></button>';
   }).join('');
   G.$('icerik').innerHTML =
     '<div class="panel">' +
@@ -164,7 +164,7 @@ G.cizGunluk = function () {
 G.bolumAcik = null;
 G.odulIkon = function (odul) {
   var k = Object.keys(odul)[0], v = odul[k];
-  var ikon = k === 'para' ? '💰' : (G.SARF[k] ? G.SARF[k].ikon : '🎁');
+  var ikon = k === 'para' ? G.IK_PARA : (G.SARF[k] ? G.SARF[k].ikon : G.ikon('sandik'));
   return '<span class="bl-odul"><i>' + ikon + '</i><b>' + G.kisaSayi(v) + '</b></span>';
 };
 
@@ -177,7 +177,7 @@ G.cizBolumler = function () {
     var afis = '<button class="bl-afis' + (acik ? '' : ' kilitli') + (G.bolumAcik === i ? ' secili' : '') + '" style="--b1:' + b.renk[0] + ';--b2:' + b.renk[1] + '"' +
       (acik ? ' data-eylem="bolumAc" data-i="' + i + '"' : ' disabled') + '>' +
       '<span class="bl-dag"></span><b>Bölüm ' + (i + 1) + '</b><em>' + (acik ? b.ad : '') + '</em>' +
-      (acik ? '<small>' + alinan + '/' + b.gorevler.length + '</small>' : '<span class="bl-zincir">⛓️🔒⛓️</span>') + '</button>';
+      (acik ? '<small>' + alinan + '/' + b.gorevler.length + '</small>' : '<span class="bl-zincir">' + G.ikon('kilit') + '</span>') + '</button>';
     if (!acik || G.bolumAcik !== i) return afis;
     var gorevler = b.gorevler.map(function (g) {
       var sayi = Math.min(g.n, G.bolumSayi(g)), bitti = sayi >= g.n, alindi = o.bolum.alinan[g.kid];
@@ -191,7 +191,7 @@ G.cizBolumler = function () {
   }).join('');
   G.$('icerik').innerHTML = '<div class="panel">' +
     '<button class="geri-dugme" data-eylem="etkinlikGeri">← Etkinlikler</button>' +
-    '<h2 class="bolum-baslik" style="text-align:center">📖 Bölümler</h2>' + html +
+    '<h2 class="bolum-baslik" style="text-align:center">' + G.ikon('cilt') + ' Bölümler</h2>' + html +
     '<p class="soluk kucuk-not">Bir bölümün bütün ödüllerini alınca sonraki bölümün zinciri kırılır.</p></div>';
 };
 
@@ -216,9 +216,9 @@ G.cizKule = function () {
           '<div class="kule-bekci"><span>' + bek.ikon + '</span><div><b>' + bek.ad + '</b><small>Seviye ' + bek.lv + ' · Can ' + G.kisaSayi(bek.hpMax) + '</small></div></div>' +
           '<p class="soluk kucuk-not">Süre: ' + Math.floor(K.sure / 60) + ' dakika</p>') + '</div>' +
         '<div class="kutu kule-bilgi"><h4>Bu kattaki ödüller</h4>' +
-          '<div class="kule-odul">💰 ' + G.kisaSayi(odul.para) + ' · 📃 ' + odul.sayfa + ' · 🔶 ' + odul.oz + '</div>' +
+          '<div class="kule-odul">' + G.IK_PARA + ' ' + G.kisaSayi(odul.para) + ' · ' + G.SARF.sayfa.ikon + ' ' + odul.sayfa + ' · ' + G.SARF.oz.ikon + ' ' + odul.oz + '</div>' +
           '<div class="kule-odul">Rün şansı: ' + (f % 3 === 0 ? 'kesin' : '%35') + ' <span class="kule-runler">' + runOnizle + '</span></div></div>' +
-        '<button class="kule-gunluk" data-eylem="kuleGunluk"' + (gun && !gunAlindi ? '' : ' disabled') + '><span>🎁</span>' +
+        '<button class="kule-gunluk" data-eylem="kuleGunluk"' + (gun && !gunAlindi ? '' : ' disabled') + '><span>' + G.ikon('sandik') + '</span>' +
           (gun ? (gunAlindi ? 'Günlük ödül alındı<br><small>Yarın tekrar gel</small>' : 'Günlük ödül<br><small>' + G.odulYazi(gun) + '</small>') : 'Günlük ödül<br><small>En az bir kat geç</small>') + '</button>' +
       '</div>' +
       '<div class="kule-sag"><div class="kule-kademe">' + k.kademe + '. Kademe</div>' + katlar +
