@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hunter Realms</title>
+<link rel="stylesheet" href="css/stil.css">
+</head>
+<body>
+<div id="uygulama">
+
+  <!-- GIRIS EKRANLARI (icerik arayuz-giris.js ile cizilir) -->
+  <section id="baslik" class="gizli"></section>
+  <section id="secim" class="gizli"></section>
+  <section id="olustur" class="gizli"></section>
+
+  <!-- OYUN EKRANI -->
+  <section id="oyun" class="gizli">
+    <header id="ust">
+      <span class="sinif-rozet" id="uRozet"></span>
+      <div class="ust-orta">
+        <div class="ust-satir1">
+          <span class="ust-para" id="uPara"></span>
+          <span class="ust-ad" id="uAd"></span>
+          <span class="ust-lv" id="uSinif"></span>
+          <span class="ust-cp" id="uCp"></span>
+        </div>
+        <div class="cubuk exp ust-exp"><i id="uExp"></i><span id="uExpY"></span></div>
+      </div>
+    </header>
+
+    <main id="icerik"></main>
+
+    <nav id="altnav">
+      <button data-eylem="sekme" data-s="karakter"><span>&#128737;&#65039;</span>Karakter</button>
+      <button data-eylem="sekme" data-s="canta"><span>&#127890;</span>&#199;anta</button>
+      <button data-eylem="sekme" data-s="demirci"><span>&#9874;&#65039;</span>Demirci</button>
+      <button data-eylem="sekme" data-s="savas" class="kure-dugme aktif" aria-label="Sava&#351;">
+        <span class="kure"><i class="kure-hp" id="kureHp"></i><i class="kure-mp" id="kureMp"></i><b class="kure-parilti"></b></span>
+      </button>
+      <button data-eylem="sekme" data-s="etkinlik"><span>&#9935;&#65039;</span>Etkinlik</button>
+      <button data-eylem="sekme" data-s="harita"><span>&#128506;&#65039;</span>Harita</button>
+    </nav>
+    <nav id="karakterNav" class="gizli"></nav>
+    <nav id="demirciNav" class="gizli"></nav>
+  </section>
+
+  <div id="modal" class="gizli"><div class="modal-ic" id="modalIc"></div></div>
+  <div id="bildirim" class="gizli"></div>
+</div>
+
+<!-- S&#305;ra &#246;nemli: &#246;nce veri, en son ana.js -->
+<script src="js/veri.js"></script>
+<script src="js/durum.js"></script>
+<script src="js/yedek.js"></script>
+<script src="js/esya.js"></script>
+<script src="js/savas.js"></script>
+<script src="js/demirci.js"></script>
+<script src="js/saha.js"></script>
+<script src="js/maden.js"></script>
+<script src="js/meridyen.js"></script>
+<script src="js/beceri.js"></script>
+<script src="js/gorev.js"></script>
+<script src="js/gunluk.js"></script>
+<script src="js/bolum.js"></script>
+<script src="js/kule.js"></script>
+<script src="js/arayuz.js"></script>
+<script src="js/arayuz-savas.js"></script>
+<script src="js/efekt.js"></script>
+<script src="js/arayuz-karakter.js"></script>
+<script src="js/arayuz-canta.js"></script>
+<script src="js/arayuz-kasaba.js"></script>
+<script src="js/arayuz-harita.js"></script>
+<script src="js/arayuz-beceri.js"></script>
+<script src="js/arayuz-etkinlik.js"></script>
+<script src="js/arayuz-demirci.js"></script>
+<script src="js/arayuz-giris.js"></script>
+<script src="js/ana.js"></script>
+</body>
+</html>
