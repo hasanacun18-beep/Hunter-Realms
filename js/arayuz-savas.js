@@ -150,6 +150,7 @@ G.sahaGuncelle = function () {
   G.$('okMp').style.width = Math.max(0, o.mp / r.mpMax * 100) + '%';
   G.$('okHpY').textContent = G.canYazi(o.hp, r.hpMax);
   G.$('okMpY').textContent = G.canYazi(o.mp, r.mpMax);
+  G.$('saha').classList.toggle('kritik-can', o.hp > 0 && o.hp < r.hpMax * 0.3);  // v0.22: düşük can uyarısı
   G.alan.forEach(function (c, i) {
     var el = G.$('kart' + i);
     if (!el || !c) return;
@@ -247,8 +248,10 @@ G.hasarGoster = function (i, h, krit, tur) {
   var sp = document.createElement('span');
   sp.className = 'hasar' + (krit ? ' krit' : '') + (tur ? ' ' + tur : '');
   sp.style.marginLeft = Math.round(G.fx.rnd(-14, 14)) + 'px';
-  sp.textContent = '-' + h;
+  sp.innerHTML = (krit ? '<small>KRİTİK</small>' : '') + '-' + h;
   el.appendChild(sp);
+  // v0.22: kritikte kart parlar, saha hafifçe sarsılır
+  if (krit) { G.sinifTekrar(el, 'krit-flas'); G.sahaSars('hafif'); }
   setTimeout(function () { sp.remove(); }, 1000);
 };
 
@@ -264,10 +267,32 @@ G.oyuncuHasar = function (yazi) {
 };
 
 // Sana vurulunca kartın kırmızı yanıp söner
-G.darbeEfekti = function () {
+G.darbeEfekti = function (oran) {
   var el = G.$('oyuncuKart');
   if (!el) return;
-  el.classList.remove('darbe'); void el.offsetWidth; el.classList.add('darbe');
+  G.sinifTekrar(el, 'darbe');
+  // v0.22: canının %12'sinden fazlasını götüren darbe: sert sarsıntı + kırmızı kenar
+  if (oran >= 0.12) { G.sahaSars('sert'); G.sinifTekrar(G.$('saha'), 'tehlike-flas'); }
+};
+
+// ---- v0.22: vuruş hissi ----
+// Bir CSS animasyon sınıfını baştan oynatır
+G.sinifTekrar = function (el, sinif) {
+  if (!el) return;
+  el.classList.remove(sinif); void el.offsetWidth; el.classList.add(sinif);
+};
+G.sahaSars = function (guc) {
+  var saha = G.$('saha');
+  if (!saha) return;
+  // Sert sarsıntı sürerken hafif olanı başlatma (sert olan yarıda kesilmesin)
+  if (guc === 'hafif' && Date.now() - (G.sertSarsZaman || 0) < 320) return;
+  if (guc === 'sert') G.sertSarsZaman = Date.now();
+  saha.classList.remove('sars-hafif', 'sars-sert'); void saha.offsetWidth; saha.classList.add('sars-' + guc);
+};
+// Canavar ölünce kart kızıl parlayıp küçülerek solar (sadece o anda; sonradan çizilen ölü kartlar oynatmaz)
+G.olumEfekti = function (i) {
+  var el = G.$('kart' + i);
+  if (el) el.classList.add('oluyor');
 };
 
 // ---- v0.20: Kuledeyken alt panel ----

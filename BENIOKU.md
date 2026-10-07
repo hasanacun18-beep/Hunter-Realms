@@ -1,4 +1,4 @@
-# Hunter Realms — v0.22 (karanlık tema: SVG ikonlar)
+# Hunter Realms — v0.23 (vuruş hissi)
 
 > Not: Oyun eskiden "Kara Diyar" adıyla geliştirildi, bu sürümde "Hunter Realms" olarak
 > yeniden adlandırıldı. Kayıt dosyalarının iç anahtar isimleri değişmedi (bkz. CLAUDE.md).
@@ -304,3 +304,12 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
   Ayarlar, Dışa/İçe Aktar (kaydet/yükle), rastgele ad zarı, beceri kitabı, Meridyen Hapı bedeli
 - veri.js → G.BECERILER, G.RUN_TUR, G.CEVHERLER, G.ILAHI.sinif'ta `ikon` yerine `simge` (cevherlerde ayrıca `renk`)
 - Oyunda artık sadece ✓ ➤ ✦ gibi tipografik işaretler kaldı (bilerek)
+
+## v0.23 değişiklikleri (vuruş hissi — sadece görsel, denge değişmedi)
+- Beceri hasarı normal vuruştan ayrı görünür: buz beyazı, mavi parıltılı, daha büyük sayılar (ilahi silah vuruşu da)
+- Kritik vuruş: sayının üstünde "KRİTİK" yazısı, kart bir an beyaz parlar, saha hafifçe sarsılır
+- Canavar ölünce kart kızıl parlayıp küçülerek solar
+- Canının %12'sinden fazlasını götüren darbe: saha sert sarsılır, kenarlarda kırmızı parlama
+- Canın %30'un altındayken saha kenarları kırmızı nabız gibi atar
+- Telefonda "hareketi azalt" (reduced motion) açıksa sarsıntılar kapalı
+- Kod: arayuz-savas.js → G.sinifTekrar, G.sahaSars, G.olumEfekti; savas.js → G.vur'a "tur" parametresi

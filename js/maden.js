@@ -203,7 +203,7 @@ G.ilahiTetik = function (t, r) {
   G.hucredekiler(hucreler).forEach(function (i) {
     var c = G.alan[i];
     c.aktif = true;
-    toplam += G.vur(i, c, r, 1, bil.carpan);
+    toplam += G.vur(i, c, r, 1, bil.carpan, 'beceri');
   });
   return toplam;
 };

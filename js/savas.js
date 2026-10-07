@@ -170,7 +170,7 @@ G.savasTik = function () {
     md = Math.max(1, Math.round(md));
     o.hp -= md;
     G.oyuncuHasar('-' + md);
-    G.darbeEfekti();
+    G.darbeEfekti(md / r.hpMax);
   });
   if (o.hp <= 0) { G.yenilgi(); return; }
   if (s.kalkan && vuranSayi && --s.kalkan.tur <= 0) s.kalkan = null;
@@ -196,7 +196,7 @@ G.oyuncuSaldir = function (t, r) {
     hedefler.forEach(function (i) {
       var c = G.alan[i];
       c.aktif = true;
-      for (var v = 0; v < (e.vurus || 1) && c.hp > 0; v++) toplam += G.vur(i, c, r, gucCarpan, b ? e.carpan * beceriCarpan : 1);
+      for (var v = 0; v < (e.vurus || 1) && c.hp > 0; v++) toplam += G.vur(i, c, r, gucCarpan, b ? e.carpan * beceriCarpan : 1, b ? 'beceri' : '');
       if (e.sersem && c.hp > 0 && !c.boss) c.sersem = e.sersem;
       if (e.dot && c.hp > 0) c.dot = { h: Math.round((r.atkMin + r.atkMax) / 2 * e.dot * beceriCarpan), tur: e.sure };
     });
@@ -219,13 +219,13 @@ G.oyuncuSaldir = function (t, r) {
   if (s.guc && e.tip !== 'guc' && --s.guc.tur <= 0) s.guc = null;
 };
 
-G.vur = function (i, c, r, gucCarpan, carpan) {
+G.vur = function (i, c, r, gucCarpan, carpan, tur) {
   var h = G.rastgele(r.atkMin, r.atkMax) * gucCarpan;
   var krit = Math.random() * 100 < r.krit;
   if (krit) h *= 1.6 + r.kritHasar / 100;
   h = Math.max(1, Math.round(h * carpan - c.def));
   c.hp -= h;
-  G.hasarGoster(i, h, krit);
+  G.hasarGoster(i, h, krit, tur);
   return h;
 };
 
@@ -291,6 +291,7 @@ G.canavarOldu = function (i) {
 
   G.expEkle(exp);
   G.kartYenile(i);
+  G.olumEfekti(i);
 
   if (!c.boss) {
     var bolge = o.bolge, eski = c;
