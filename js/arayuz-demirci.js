@@ -129,3 +129,75 @@ G.eritHtml = function (e) {
     (e.kilit ? '<p class="fark-eksi kucuk-not">Kilitli eşya eritilmez.</p>' : '') +
     '<p class="soluk kucuk-not">Ruh Tozu arıtmada kullanılır. Toplu erit: kilitsiz, güçlendirilmemiş, set olmayan Nadir eşyalar.</p>';
 };
+
+// ============================================================
+// v0.28 — GÜÇLENDİRME RİTÜELİ (sadece gösterim; sonuç esya.js → G.guclendir'de zaten hesaplandı ve kaydedildi)
+// Çekiç 3 kez iner, kısa bekleyiş, sonra sonuç. +7 ve üstünde bekleyiş uzar, aura kızarır.
+// Her an dokununca sonuca atlar; sonuç görünürken dokununca kapanır.
+// ============================================================
+G.RITUEL = { vurus: 3, aralik: 380, bekle: 450, bekleYuksek: 1100, yuksekArti: 7 };
+
+G.guclendirSahne = function (s, bitince) {
+  var R = G.RITUEL, hedef = s.eski + 1, yuksek = hedef >= R.yuksekArti;
+  var eski = G.$('rituel');
+  if (eski) eski.remove();
+  var el = document.createElement('div');
+  el.id = 'rituel';
+  el.className = 'rituel' + (yuksek ? ' yuksek' : '');
+  el.setAttribute('data-eylem', 'rituelDokun');
+  el.innerHTML =
+    '<div class="rt-sahne">' +
+      // Başlık eski seviyeyle: sonuç (zaten kaydedildi) sahne bitmeden belli olmasın
+      '<div class="rt-baslik" style="color:' + G.NADIRLIK[s.e.nadir].renk + '">' + G.gorunum(s.e.sablon).ad + (s.eski ? ' +' + s.eski : '') + '</div>' +
+      '<div class="rt-ors"><span class="rt-esya">' + G.gorunum(s.e.sablon).ikon + '</span>' +
+        '<span class="rt-cekic">' + G.ikon('cekic') + '</span>' + G.ikon('ors_duz', 'rt-ors-ikon') + '<span class="rt-kivilcim" id="rtKivilcim"></span></div>' +
+      '<div class="rt-arti"><b>+' + s.eski + '</b> → <b>+' + hedef + '</b></div>' +
+      '<div class="rt-sans">Başarı şansı %' + s.sans + '</div>' +
+      '<div class="rt-sonuc" id="rtSonuc"></div>' +
+      '<div class="rt-ipucu" id="rtIpucu">Atlamak için dokun</div>' +
+    '</div>';
+  G.$('uygulama').appendChild(el);
+  G.rituel = { s: s, el: el, bitince: bitince, zaman: [], bitti: false };
+  for (var i = 0; i < R.vurus; i++) G.rituel.zaman.push(setTimeout(G.rituelVur, i * R.aralik));
+  G.rituel.zaman.push(setTimeout(G.rituelSonuc, (R.vurus - 1) * R.aralik + (yuksek ? R.bekleYuksek : R.bekle)));
+};
+
+// Çekiç iner: sarsıntı, kıvılcım, metal sesi
+G.rituelVur = function () {
+  var r = G.rituel;
+  if (!r || r.bitti) return;
+  G.sinifTekrar(r.el.querySelector('.rt-ors'), 'vur');
+  var k = G.$('rtKivilcim'), h = '';
+  for (var i = 0; i < 9; i++) {
+    var a = -Math.PI * (0.1 + Math.random() * 0.8), d = 30 + Math.random() * 45;
+    h += '<i class="fx-kivilcim" style="left:50%;top:0;--dx:' + Math.round(Math.cos(a) * d) + 'px;--dy:' + Math.round(Math.sin(a) * d) + 'px;background:#ffc860"></i>';
+  }
+  if (k) k.innerHTML = h;
+  G.sesCal('cekic');
+};
+
+G.rituelSonuc = function () {
+  var r = G.rituel;
+  if (!r || r.bitti) return;
+  r.bitti = true;
+  r.zaman.forEach(clearTimeout);
+  var s = r.s, yazi = { basari: 'BAŞARILI', bos: 'BAŞARISIZ', dusus: 'KIRILDI' }[s.tur];
+  var alt = s.tur === 'basari' ? G.esyaAd(s.e) + ' oldu!'
+    : s.tur === 'dusus' ? 'Eşya +' + s.yeni + ' seviyesine düştü.' : 'Taş ve altın gitti, eşya aynı kaldı.';
+  r.el.classList.add('sonuc', s.tur);
+  G.$('rtSonuc').innerHTML = '<b>' + yazi + '</b><span>' + alt + '</span>';
+  G.$('rtIpucu').textContent = 'Devam etmek için dokun';
+  G.sesCal(s.tur === 'basari' ? 'basari' : s.tur === 'dusus' ? 'kirilma' : 'bos');
+  // +7 ve üstü başarılar günlüğe düşer (KO'daki "+8 bastı" anı)
+  if (s.tur === 'basari' && s.yeni >= G.RITUEL.yuksekArti) G.log(G.ikon('cekic') + ' ' + G.esyaAd(s.e) + ' oldu!', 'kazanc');
+};
+
+// Dokunuş: animasyon sürüyorsa sonuca atlar, sonuç görünüyorsa kapatır
+G.rituelDokun = function () {
+  var r = G.rituel;
+  if (!r) return;
+  if (!r.bitti) { G.rituelSonuc(); return; }
+  r.el.remove();
+  G.rituel = null;
+  if (r.bitince) r.bitince();
+};

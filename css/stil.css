@@ -1165,3 +1165,46 @@ body,#uygulama{min-height:100vh;min-height:100dvh}
 .bc-satir i{display:block;font-family:var(--serif);font-size:13px;line-height:1.4;color:var(--soluk)}
 .esya-koken{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--soluk);margin:4px 0 8px}
 .set-hikaye{font-family:var(--serif);font-style:italic;font-size:12.5px;line-height:1.4;color:#a8c8a8;margin:2px 0 6px}
+
+/* ============================================================
+   v0.28 — GÜÇLENDİRME RİTÜELİ
+   ============================================================ */
+.rituel{position:fixed;inset:0;z-index:25;display:flex;align-items:center;justify-content:center;padding:16px;
+  background:radial-gradient(ellipse at 50% 45%,rgb(52,32,15),rgb(6,4,3) 70%);cursor:pointer}
+.rt-sahne{width:100%;max-width:340px;text-align:center;pointer-events:none}
+.rt-baslik{font-family:var(--serif);font-size:19px;margin-bottom:14px}
+.rt-ors{position:relative;width:180px;height:150px;margin:0 auto}
+.rt-ors-ikon{position:absolute;left:10px;right:10px;bottom:0;width:160px;height:110px;color:#5a4a36;filter:drop-shadow(0 6px 10px #000)}
+.rt-esya{position:absolute;left:50%;top:22px;transform:translateX(-50%);font-size:44px;line-height:1;z-index:2}
+.rt-esya .ikon{color:#e8d6b0;filter:drop-shadow(0 0 6px rgba(255,200,120,.5))}
+.rt-cekic{position:absolute;right:-6px;top:-34px;font-size:56px;line-height:1;z-index:3;transform-origin:80% 80%;transform:rotate(28deg)}
+.rt-cekic .ikon{color:#b8b0a4}
+.rt-kivilcim{position:absolute;left:50%;top:58px;width:0;height:0;z-index:4}
+.rt-kivilcim i{position:absolute}
+.rt-ors.vur .rt-cekic{animation:rtCekic .3s ease-in}
+.rt-ors.vur .rt-esya{animation:rtTitre .3s}
+@keyframes rtCekic{0%{transform:rotate(28deg)}45%{transform:rotate(-18deg)}60%{transform:rotate(-14deg)}100%{transform:rotate(28deg)}}
+@keyframes rtTitre{45%{transform:translateX(-50%) translateY(2px)}60%{transform:translateX(-52%) translateY(0)}75%{transform:translateX(-48%)}}
+.rt-arti{font-family:var(--serif);font-size:30px;color:var(--kemik);margin-top:12px}
+.rt-arti b{font-weight:normal;color:var(--bronz-acik)}
+.rt-sans{font-size:13px;color:var(--soluk);margin-top:2px}
+.rt-sonuc{min-height:62px;margin-top:14px}
+.rt-sonuc b{display:block;font-family:var(--serif);font-size:32px;letter-spacing:.12em;font-weight:normal}
+.rt-sonuc span{display:block;font-size:14px;color:var(--kemik);margin-top:2px}
+.rt-ipucu{font-size:12px;color:var(--soluk);margin-top:10px;opacity:.8}
+/* +7 ve üstü: kızıl-altın aura, nabız */
+.rituel.yuksek{background:radial-gradient(ellipse at 50% 45%,rgb(92,26,12),rgb(6,4,3) 70%)}
+.rituel.yuksek:not(.sonuc) .rt-esya .ikon{animation:rtAura .7s ease-in-out infinite}
+@keyframes rtAura{50%{filter:drop-shadow(0 0 14px rgba(255,90,40,.95)) drop-shadow(0 0 4px rgba(255,210,120,.9))}}
+/* Sonuçlar */
+.rituel.basari .rt-sonuc b{color:#ffd45a;text-shadow:0 0 16px rgba(255,190,60,.9)}
+.rituel.basari .rt-esya .ikon{color:#fff0c0;filter:drop-shadow(0 0 18px rgba(255,200,80,1));animation:rtBasari .6s ease-out}
+@keyframes rtBasari{0%{transform:scale(1)}40%{transform:scale(1.3)}100%{transform:scale(1)}}
+.rituel.basari .rt-arti b:last-child{color:#ffd45a}
+.rituel.bos .rt-sonuc b{color:#9a9488}
+.rituel.bos .rt-esya .ikon{color:#8a8478;filter:none}
+.rituel.dusus .rt-sonuc b{color:#e0402a;text-shadow:0 0 12px rgba(220,40,20,.8)}
+.rituel.dusus .rt-esya .ikon{color:#c04030;filter:drop-shadow(0 0 10px rgba(200,30,20,.9));animation:rtKirik .4s}
+@keyframes rtKirik{20%{transform:translateX(-4px) rotate(-6deg)}40%{transform:translateX(4px) rotate(5deg)}60%{transform:translateX(-3px)}}
+.rituel.dusus .rt-arti b:last-child{text-decoration:line-through;color:#8a4030}
+@media (prefers-reduced-motion:reduce){.rt-ors.vur .rt-cekic,.rt-ors.vur .rt-esya,.rituel .rt-esya .ikon{animation:none!important}}

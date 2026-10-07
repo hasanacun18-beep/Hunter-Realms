@@ -1,4 +1,4 @@
-# Hunter Realms — v0.27 (canavar ve eşya açıklamaları)
+# Hunter Realms — v0.28 (güçlendirme ritüeli)
 
 > Not: Oyun eskiden "Kara Diyar" adıyla geliştirildi, bu sürümde "Hunter Realms" olarak
 > yeniden adlandırıldı. Kayıt dosyalarının iç anahtar isimleri değişmedi (bkz. CLAUDE.md).
@@ -345,3 +345,12 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
   Eşya başına değil bölge başına yazıldı, böylece sınıfa özel görünümlerle (asa, yay...) çelişmez
 - 4 setin hikâyesi eşya penceresindeki set kutusunda
 - Ayarlar: veri.js → v0.27 bloğu (canavar açıklamaları, bölge esyaKoken, set aciklama). Statlar ve kayıt değişmedi
+
+## v0.28 değişiklikleri (güçlendirme ritüeli — Knight Online'daki "+ basma" anı)
+- Güçlendir'e basınca ritüel sahnesi: eşya örsün üstünde, çekiç 3 kez iner (kıvılcım + metal sesi), kısa bekleyiş, sonra sonuç
+  - Başarılı: altın parlama, çan sesi · Başarısız: donuk gri · Kırıldı (seviye düştü): kırmızı çatlama, kırılma sesi
+- +7 ve üstüne basarken bekleyiş uzar, arka plan kızarır, eşya nabız gibi parlar; başarı savaş günlüğüne düşer
+- Her an dokununca sonuca atlar; sonuç ekranında dokununca kapanır (demirci ya da eşya penceresi geri gelir)
+- KURALLAR DEĞİŞMEDİ: şans, bedel, +5 sonrası düşme aynı. Sonuç düğmeye basıldığı an hesaplanıp kaydedilir,
+  sahne sadece gösterir (uygulamayı yarıda kapatmak sonucu değiştirmez)
+- Ayarlar: arayuz-demirci.js → G.RITUEL (vuruş sayısı, aralık, bekleyiş, "yüksek" eşiği); sesler ses.js → cekic, basari, bos, kirilma

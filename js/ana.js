@@ -40,6 +40,7 @@ G.eylem = function (ad, d) {
     case 'kusan':     G.kusan(+d.id); break;
     case 'cikar':     G.cikar(d.slot); break;
     case 'guclendir': G.guclendir(+d.id); break;
+    case 'rituelDokun': G.rituelDokun(); break;
     case 'sat':       G.sat(+d.id); break;
     case 'topluSat':  G.topluSat(); break;
     // demirci (v0.3)

@@ -7,7 +7,8 @@
 G.SES = {
   ses: 0.55,   // ana ses seviyesi (0-1)
   // Aynı sesin en sık çalınabileceği aralık (sn) — alan becerisinde 6 vuruş üst üste binmesin
-  aralik: { vurus: 0.06, beceri: 0.08, krit: 0.08, olum: 0.1, darbe: 0.1, iksir: 0.15, seviye: 0.5, boss: 1 }
+  aralik: { vurus: 0.06, beceri: 0.08, krit: 0.08, olum: 0.1, darbe: 0.1, iksir: 0.15, seviye: 0.5, boss: 1,
+           cekic: 0.1, basari: 0.3, bos: 0.3, kirilma: 0.3 }
 };
 
 G.ses = { ctx: null, ana: null, gurultu: null, son: {} };
@@ -113,6 +114,32 @@ G.SESLER = {
     [392, 523.3, 659.3, 784].forEach(function (f, i) {
       G.sesTon(x, t + i * 0.09, { tip: 'triangle', f1: f, sure: 0.6, ses: 0.28, atak: 0.01 });
     });
+  },
+  // v0.28 — güçlendirme ritüeli
+  // Çekiç örse iner: metal çınlaması + darbe
+  cekic: function (x, t) {
+    G.sesTon(x, t, { tip: 'square', f1: 1480, f2: 1400, sure: 0.22, ses: 0.06, filtre: 4200 });
+    G.sesTon(x, t, { tip: 'square', f1: 2220, f2: 2150, sure: 0.16, ses: 0.04, filtre: 5000 });
+    G.sesHisir(x, t, { filtreTip: 'highpass', f1: 3000, sure: 0.04, ses: 0.3 });
+    G.sesTon(x, t, { f1: 140, f2: 60, sure: 0.09, ses: 0.45 });
+  },
+  // Başarı: parlak, yükselen çınlama
+  basari: function (x, t) {
+    [523.3, 784, 1046.5, 1568].forEach(function (f, i) {
+      G.sesTon(x, t + i * 0.07, { tip: 'triangle', f1: f, sure: 0.7, ses: 0.4, atak: 0.008 });
+    });
+    G.sesHisir(x, t, { filtreTip: 'highpass', f1: 5000, sure: 0.5, ses: 0.08, atak: 0.05 });
+  },
+  // Boşa giden deneme: donuk, alçalan darbe
+  bos: function (x, t) {
+    G.sesTon(x, t, { tip: 'triangle', f1: 220, f2: 110, sure: 0.35, ses: 0.5 });
+    G.sesHisir(x, t, { f1: 600, f2: 200, sure: 0.2, ses: 0.15 });
+  },
+  // Seviye düştü: çatırdayan kırılma
+  kirilma: function (x, t) {
+    G.sesHisir(x, t, { filtreTip: 'highpass', f1: 1800, sure: 0.09, ses: 0.5 });
+    G.sesHisir(x, t + 0.07, { filtreTip: 'bandpass', q: 2, f1: 2400, f2: 500, sure: 0.3, ses: 0.35 });
+    G.sesTon(x, t, { tip: 'sawtooth', f1: 300, f2: 70, sure: 0.5, ses: 0.18, filtre: 1500 });
   },
   // Boss ortaya çıktı: derin boru sesi
   boss: function (x, t) {
