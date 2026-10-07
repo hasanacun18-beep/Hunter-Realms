@@ -1,4 +1,4 @@
-# Hunter Realms — v0.21 (dışa/içe aktar)
+# Hunter Realms — v0.28 (güçlendirme ritüeli)
 
 > Not: Oyun eskiden "Kara Diyar" adıyla geliştirildi, bu sürümde "Hunter Realms" olarak
 > yeniden adlandırıldı. Kayıt dosyalarının iç anahtar isimleri değişmedi (bkz. CLAUDE.md).
@@ -17,6 +17,8 @@ Kayıt tarayıcının localStorage'ına otomatik yapılır (10 saniyede bir ve h
 | Dosya | Ne işe yarar |
 |---|---|
 | js/veri.js             | Tüm sayılar: sınıflar, canavarlar, bölgeler, eşyalar, ek statlar, setler |
+| js/ikon.js             | SVG ikonlar (emoji yerine). Kaynak: game-icons.net, CC BY 3.0 |
+| js/ses.js              | Ses efektleri (dosya yok, Web Audio ile üretilir) |
 | js/durum.js            | Oyuncu verisi, stat hesabı, seviye, kayıt ve eski kayıt göçü (gocEt) |
 | js/esya.js             | Eşya üretme, kuşanma, satma, güçlendirme |
 | js/savas.js            | Canavar alanı, otomatik savaş, boss, iksir |
@@ -256,3 +258,99 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - Dosya indirme çalışmazsa (bazı mobil tarayıcılar) metin kutusundan elle kopyalanabiliyor
 - İçe aktarırken geçersiz/bozuk dosya reddediliyor; eski kayıt sürümleri de G.gocEt ile otomatik güncelleniyor
 - Yeni dosya: js/yedek.js
+
+## v0.22 değişiklikleri (görsel ciddiyet — 1. adım)
+- Telefonda (Chrome) oyun ekranı aşağı yukarı kayıyordu: `100vh` adres çubuğu gizliykenki yüksekliği
+  verdiği için sayfa ekrandan uzun kalıyordu. Artık `100dvh` (o an görünen yükseklik) kullanılıyor
+- Emoji yerine tek renkli, bronz tonlu SVG ikonlar (ilk grup):
+  - Alt menü: Karakter (miğfer), Çanta, Demirci (örs), Etkinlik (defne tacı), Harita
+  - Savaş çubuğu: Can / Mana iksiri (kırmızı / mavi şişe), Dönüş parşömeni, Kaç (kapı), Otomatik / Elle
+  - Görev şeridi (maden, ödül sandığı, ayarlar) ve bölge kutusundaki Ayarlar / Bilgi
+- Yeni dosya: js/ikon.js (veri.js'ten hemen sonra yüklenir). Yeni ikon eklemek: G.IKONLAR'a satır ekle,
+  arayüzde G.ikon('ad') kullan
+- İkonlar: game-icons.net (Lorc, Delapouite ve diğerleri), lisans CC BY 3.0 —
+  https://game-icons.net · https://creativecommons.org/licenses/by/3.0/
+
+### v0.22 — 2. adım: canavar ve sınıf ikonları
+- 16 canavarın emojisi yerine karanlık siluet ikonlar (kurt, yaban domuzu, örümcek, engerek, gargoyl, ejder...).
+  Savaş kartında, boss plakasında, BOSS düğmesinde, kule bekçisinde ve bölge bilgisinde görünür
+- Sınıf ikonları: Savaşçı (çapraz kılıçlar), Büyücü (asa), Okçu (gerilmiş yay) — karakter oluşturma, üst bar, oyuncu kartı
+- İsim düzeltmeleri (sadece görünen ad, iç id'ler aynı, kayıtlar etkilenmez):
+  Dev Bokböceği → Kara Kınkanatlı, Kurt Kral → Kurt Kralı, Şahin → Kara Şahin
+- Yeni canavara ikon vermek: veri.js'te `ikon: '🐺'` yerine `simge: 'ad'` yaz ve ikon.js → G.IKONLAR'a aynı adla ikonu ekle
+  (simge yazılmazsa emoji eskisi gibi çalışır)
+
+### v0.22 — 3a: kaynak, menü ve etkinlik ikonları
+- Sarf malzemeleri ikonlu ve kendi renginde: Can/Mana İksiri, Dönüş Parşömeni, Arıtma Taşı (elmas), Ruh Tozu,
+  Kitap Sayfası, Meridyen Hapı, Rün Özü (rün taşı). Çantada, dükkanda, demircide, ödüllerde aynı ikon
+- Altın her yerde iki sikke ikonu (üst bar, bedeller, ödüller)
+- Etkinlik listesi: Maden (kazma), Bölümler (cilt), Günlük Görevler (liste), Kule (taş kule), Arena (kılıçlar);
+  aktiflik ve kule sandıkları, kilitli bölüm, Madenci Çayı, kasaba (köy), İksirci / Hurdacı başlıkları
+- Karakter alt menüsü (Beceri, Meridyen, İlahi, Rünler, Statlar) ve Demirci alt menüsü (Arıtma, Güçlendirme, Eritme)
+- Savaş günlüğündeki bölüm, beceri, kule, maden, görev ve sandık satırları da ikonlu
+- veri.js → G.SARF'ta `ikon` yerine `simge` (renk alanı ikonu boyar); dükkan ürünleri ikonu G.SARF'tan alır
+
+### v0.22 — 3b: eşya ikonları ve kalan canavarlar
+- 70 eşyanın, 8 kuşanma yuvasının ve sınıfa özel görünümlerin (asa, yay, cübbe, taç, kukuleta...) emojisi yerine SVG ikon.
+  Çantada, karakter bebeğinde, demircide ve eşya penceresinde görünür
+- veri.js'teki eşya listesine DOKUNULMADI (sıra önemli). Bunun yerine ikon.js → G.EMOJI_IKON tablosu emojiyi ikona çevirir.
+  Yeni eşyaya tablodaki bir emojiyi verirsen ikonu otomatik gelir; tabloda olmayan emoji olduğu gibi görünür
+- 2. adımda atlanan 16 canavar (Bataklık, Buz Diyarı, Kor Dağı, Hiçlik Uçurumu) da ikonlu: kurbağa, timsah, trol, buz golemi,
+  semender, kaya golemi, kara şövalye, dokunaç...
+
+### v0.22 — 3c: beceriler, rünler, cevherler, ilahi silahlar
+- 28 becerinin ikonu (beceri listesi, savaş düğmeleri, günlük): balta savuruşu, ateş topu, buz mızrağı, ok yağmuru, şifa...
+- 6 rün tipi, 5 cevher (her biri kendi renginde: bakır, gümüş, altın, kara demir, mavi kristal), 3 ilahi silah
+- Küçük arayüz ikonları: eşya ve stat kilitleri (kapalı/açık asma kilit), toplu sat/erit, çanta genişletme, Duyurular,
+  Ayarlar, Dışa/İçe Aktar (kaydet/yükle), rastgele ad zarı, beceri kitabı, Meridyen Hapı bedeli
+- veri.js → G.BECERILER, G.RUN_TUR, G.CEVHERLER, G.ILAHI.sinif'ta `ikon` yerine `simge` (cevherlerde ayrıca `renk`)
+- Oyunda artık sadece ✓ ➤ ✦ gibi tipografik işaretler kaldı (bilerek)
+
+## v0.23 değişiklikleri (vuruş hissi — sadece görsel, denge değişmedi)
+- Beceri hasarı normal vuruştan ayrı görünür: buz beyazı, mavi parıltılı, daha büyük sayılar (ilahi silah vuruşu da)
+- Kritik vuruş: sayının üstünde "KRİTİK" yazısı, kart bir an beyaz parlar, saha hafifçe sarsılır
+- Canavar ölünce kart kızıl parlayıp küçülerek solar
+- Canının %12'sinden fazlasını götüren darbe: saha sert sarsılır, kenarlarda kırmızı parlama
+- Canın %30'un altındayken saha kenarları kırmızı nabız gibi atar
+- Telefonda "hareketi azalt" (reduced motion) açıksa sarsıntılar kapalı
+- Kod: arayuz-savas.js → G.sinifTekrar, G.sahaSars, G.olumEfekti; savas.js → G.vur'a "tur" parametresi
+
+## v0.24 değişiklikleri (ses efektleri)
+- Sesler: normal vuruş, beceri, kritik (metal çınlaması), canavar ölümü, sana gelen darbe (şiddetine göre),
+  iksir, seviye atlama, boss ortaya çıkışı
+- Ses dosyası YOK: hepsi tarayıcıda Web Audio ile üretiliyor (internetsiz ve lisanssız çalışır)
+- Ayarlar → "Ses" ile kapatılabilir. Kayıtta yeni alan: o.ayar.ses (eski kayıtlar G.gocEt ile otomatik açık gelir)
+- Tarayıcılar sesi ilk dokunuştan sonra açar; ana.js'teki tıklama dinleyicisi G.sesAc'ı çağırır
+- Ayarlar: ses.js → G.SES (ana ses seviyesi, aynı sesin tekrar aralığı), sesler G.SESLER içinde
+
+## v0.25 değişiklikleri (ana görev hikâyesi)
+- Hikâye: kuzeydeki Hiçlik Uçurumu'ndan bir karanlık güneye yayılıyor; bölge bossları ona teslim olmuş eski bekçiler
+- Dört kasabada dört anlatıcı görev verir: Tülek (Taşlıca Köyü yaşlısı), Sarıca (Kervansaray tüccarı),
+  Bozdoğan (Demirkapı komutanı), Ayaz (Son Karakol nöbetçisi) — her birinin portresi var
+- 22 ana görevin her birinin anlatıcı konuşması + bütün görevler bitince son söz
+- Sadece görev şeridindeki sandık düğmesiyle açılan görev penceresinde görünür; oyunu kesmez
+- 12 bölgenin açıklaması hikâyeye göre yeniden yazıldı (kasaba ekranı ve bölge bilgisi)
+- Ayarlar: veri.js → G.ANLATICILAR, G.ANA_HIKAYE (sırası G.ANA_GOREV ile aynı), G.ANA_HIKAYE_SON
+
+## v0.26 değişiklikleri (boss replikleri)
+- 8 bölge bossunun 3 anı var: ortaya çıkınca, öfkelenince (can %30 altı) ve yenilince
+- Hayvan bosslar için anlatı cümlesi; Zincirli İblis, Kara Ejder, Ayaz Devi, Kor Titanı ve Hiçlik Efendisi kendi sözleriyle konuşur
+- Replik günlüğe italik düşer ve boss plakasının altında 5 saniye görünür (dokunmaları engellemez)
+- Kule bekçilerinde replik çıkmaz
+- Ayarlar: veri.js → G.BOSS_REPLIK (giris, ofke, olum). Yeni bossa replik: aynı biçimde bir satır ekle
+
+## v0.27 değişiklikleri (canavar, eşya kökeni ve set açıklamaları)
+- 32 canavarın her birine bir satırlık açıklama; bölge bilgi penceresinde canavar listesinin altında görünür
+- Eşya penceresinde köken satırı: eşyanın seviyesine denk gelen bölgeden ("Kül Harabeleri'nin küllerinden çıkarılmış.").
+  Eşya başına değil bölge başına yazıldı, böylece sınıfa özel görünümlerle (asa, yay...) çelişmez
+- 4 setin hikâyesi eşya penceresindeki set kutusunda
+- Ayarlar: veri.js → v0.27 bloğu (canavar açıklamaları, bölge esyaKoken, set aciklama). Statlar ve kayıt değişmedi
+
+## v0.28 değişiklikleri (güçlendirme ritüeli — Knight Online'daki "+ basma" anı)
+- Güçlendir'e basınca ritüel sahnesi: eşya örsün üstünde, çekiç 3 kez iner (kıvılcım + metal sesi), kısa bekleyiş, sonra sonuç
+  - Başarılı: altın parlama, çan sesi · Başarısız: donuk gri · Kırıldı (seviye düştü): kırmızı çatlama, kırılma sesi
+- +7 ve üstüne basarken bekleyiş uzar, arka plan kızarır, eşya nabız gibi parlar; başarı savaş günlüğüne düşer
+- Her an dokununca sonuca atlar; sonuç ekranında dokununca kapanır (demirci ya da eşya penceresi geri gelir)
+- KURALLAR DEĞİŞMEDİ: şans, bedel, +5 sonrası düşme aynı. Sonuç düğmeye basıldığı an hesaplanıp kaydedilir,
+  sahne sadece gösterir (uygulamayı yarıda kapatmak sonucu değiştirmez)
+- Ayarlar: arayuz-demirci.js → G.RITUEL (vuruş sayısı, aralık, bekleyiş, "yüksek" eşiği); sesler ses.js → cekic, basari, bos, kirilma

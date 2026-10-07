@@ -201,20 +201,23 @@ G.guclendir = function (id) {
   if (o.sarf.tas < 1) { G.bildir('Arıtma Taşı yok. Dükkandan alabilirsin.'); return; }
   if (o.para < maliyet) { G.bildir(maliyet + ' altın gerekiyor.'); return; }
   o.sarf.tas--; o.para -= maliyet;
-  if (Math.random() * 100 < G.guclendirSans(e.arti)) {
-    e.arti++;
+  // v0.28: sonuç burada hesaplanır ve hemen kaydedilir; ritüel sahnesi sadece gösterir
+  var sonuc = { e: e, eski: e.arti, sans: G.guclendirSans(e.arti) };
+  if (Math.random() * 100 < sonuc.sans) {
+    e.arti++; sonuc.tur = 'basari';
     G.gorevSay('guclendir');
-    G.bildir('Başarılı! ' + G.esyaAd(e));
   } else if (e.arti >= G.ZORLUK.guclendirDusmeArti) {
-    e.arti--;
-    G.bildir('Başarısız. Eşya +' + e.arti + ' seviyesine düştü.');
+    e.arti--; sonuc.tur = 'dusus';
   } else {
-    G.bildir('Başarısız. Taş ve altın gitti.');
+    sonuc.tur = 'bos';
   }
+  sonuc.yeni = e.arti;
   G.statSinirla(); G.kaydet(); G.ustGuncelle();
-  if (G.sekme === 'demirci') { G.cizDemirci(); return; }
-  G.esyaModal(id);
-  G.panelYenile();
+  G.guclendirSahne(sonuc, function () {
+    if (G.sekme === 'demirci') { G.cizDemirci(); return; }
+    G.esyaModal(id);
+    G.panelYenile();
+  });
 };
 
 G.satinAl = function (t, adet) {

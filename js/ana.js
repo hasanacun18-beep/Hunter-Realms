@@ -40,6 +40,7 @@ G.eylem = function (ad, d) {
     case 'kusan':     G.kusan(+d.id); break;
     case 'cikar':     G.cikar(d.slot); break;
     case 'guclendir': G.guclendir(+d.id); break;
+    case 'rituelDokun': G.rituelDokun(); break;
     case 'sat':       G.sat(+d.id); break;
     case 'topluSat':  G.topluSat(); break;
     // demirci (v0.3)
@@ -101,6 +102,7 @@ G.eylem = function (ad, d) {
 
 G.olayBagla = function () {
   document.addEventListener('click', function (e) {
+    G.sesAc();   // v0.24: tarayıcı sesi ancak bir dokunuştan sonra açar
     if (e.target.id === 'modal') { G.modalKapat(); return; }
     var t = e.target.closest('[data-eylem]');
     if (!t) { if (e.target.closest('#saha')) G.sahaDokun(e); return; }
@@ -111,6 +113,7 @@ G.olayBagla = function () {
     var id = e.target.id, v = e.target.value;
     if (id === 'otoIksir') { G.o.ayar.otoIksir = e.target.checked; G.kaydet(); }
     else if (id === 'otoBeceri') { G.o.ayar.otoBeceri = e.target.checked; G.kaydet(); }
+    else if (id === 'ses') { G.o.ayar.ses = e.target.checked; G.kaydet(); G.sesCal('vurus'); }
     else if (id === 'otoSavas') { G.o.ayar.otoSavas = e.target.checked; G.kaydet(); if (G.sekme === 'savas') G.cizSavas(); }
     else if (id === 'cantaSira') { G.o.ayar.canta.sira = v; G.kaydet(); G.cizCanta(); }
     else if (id === 'cantaFiltre') { G.o.ayar.canta.filtre = v; G.kaydet(); G.cizCanta(); }

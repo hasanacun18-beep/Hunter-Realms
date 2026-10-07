@@ -69,7 +69,7 @@ G.bolgeAltHtml = function () {
       '<b>' + b.ad + '</b>' +
       '<span class="mh-arazi"></span>' +
       '<span class="mh-oneri">' + (gp ? 'Önerilen GP: <em class="' + (cp >= gp ? 'fark-arti' : 'fark-eksi') + '">' + gp + '+</em>' : 'Güvenli bölge') + '</span>' +
-      '<span class="mh-dugmeler"><button data-eylem="ayarlar">⚙️ Ayarlar</button><button data-eylem="bolgeBilgi" data-b="' + b.id + '">📋 Bilgi</button></span>' +
+      '<span class="mh-dugmeler"><button data-eylem="ayarlar">' + G.ikon('carh') + ' Ayarlar</button><button data-eylem="bolgeBilgi" data-b="' + b.id + '">' + G.ikon('kitap') + ' Bilgi</button></span>' +
     '</div>' + G.zincirDugumHtml() + '</div>';
 };
 
@@ -80,7 +80,7 @@ G.cizSavas = function () {
   var o = G.o, b = G.bolgeBul(o.bolge);
   if (b.tur === 'kasaba') { G.cizKasaba(); return; }
   var kuleMi = b.tur === 'kule';
-  var boss = G.CANAVARLAR[b.boss] || { ikon: '👹' };
+  var boss = G.CANAVARLAR[b.boss] || { ikon: G.ikon('iskelet') };
   var z = G.ZEMIN[b.id] || (kuleMi ? ['#2a2033', '#0e0b12'] : ['#24201a', '#12100c']);
   var bossVar = G.alan.some(function (c) { return c && c.boss && !c.olu; });
   G.$('icerik').classList.add('tek-ekran');   // her şey tek ekrana sığar, kaydırma yok
@@ -97,14 +97,14 @@ G.cizSavas = function () {
     '<div class="sarf-cubugu">' +
       '<i class="susleme sol"></i>' +
       '<div class="sarf-yuvalar">' +
-        '<button class="sarf-yuva" id="dHp" data-eylem="iksir" data-t="hp"><span class="say" id="sHp"></span><span class="ik">🧪</span><small>Can</small><span class="bekleme" id="bkHp"></span></button>' +
-        '<button class="sarf-yuva" id="dMp" data-eylem="iksir" data-t="mp"><span class="say" id="sMp"></span><span class="ik">💧</span><small>Mana</small><span class="bekleme" id="bkMp"></span></button>' +
-        '<button class="sarf-yuva" id="dParsomen" data-eylem="parsomen"><span class="say">' + o.sarf.parsomen + '</span><span class="ik">📜</span><small>Dönüş</small></button>' +
-        '<button class="sarf-yuva" id="dKac" data-eylem="kac"><span class="ik">🏃</span><small>Kaç</small></button>' +
+        '<button class="sarf-yuva" id="dHp" data-eylem="iksir" data-t="hp"><span class="say" id="sHp"></span><span class="ik can">' + G.ikon('iksir') + '</span><small>Can</small><span class="bekleme" id="bkHp"></span></button>' +
+        '<button class="sarf-yuva" id="dMp" data-eylem="iksir" data-t="mp"><span class="say" id="sMp"></span><span class="ik mana">' + G.ikon('iksir') + '</span><small>Mana</small><span class="bekleme" id="bkMp"></span></button>' +
+        '<button class="sarf-yuva" id="dParsomen" data-eylem="parsomen"><span class="say">' + o.sarf.parsomen + '</span><span class="ik">' + G.ikon('parsomen') + '</span><small>Dönüş</small></button>' +
+        '<button class="sarf-yuva" id="dKac" data-eylem="kac"><span class="ik">' + G.ikon('kapi') + '</span><small>Kaç</small></button>' +
       '</div>' +
       '<i class="susleme sag"></i>' +
       '<div class="yuvarlaklar">' +
-        '<button class="yuvarlak oto' + (o.ayar.otoSavas ? ' acik' : '') + '" data-eylem="otoSavasDegis"><span>' + (o.ayar.otoSavas ? '⚔️' : '✋') + '</span><small>' + (o.ayar.otoSavas ? 'Otomatik' : 'Elle') + '</small></button>' +
+        '<button class="yuvarlak oto' + (o.ayar.otoSavas ? ' acik' : '') + '" data-eylem="otoSavasDegis"><span>' + G.ikon(o.ayar.otoSavas ? 'kiliclar' : 'eldiven') + '</span><small>' + (o.ayar.otoSavas ? 'Otomatik' : 'Elle') + '</small></button>' +
         '<button class="yuvarlak" id="dBoss" data-eylem="boss"' + (bossVar || kuleMi ? ' disabled' : '') + '><span>' + boss.ikon + '</span><small>BOSS</small></button>' +
       '</div>' +
     '</div>' +
@@ -132,11 +132,12 @@ G.bossPlakaGuncelle = function () {
 // Ayarlar penceresi (referanstaki gibi otomatik seçenekler burada)
 G.ayarlarModal = function () {
   var o = G.o;
-  G.$('modalIc').innerHTML = '<h3>⚙️ Ayarlar</h3>' +
+  G.$('modalIc').innerHTML = '<h3>' + G.ikon('carh') + ' Ayarlar</h3>' +
     '<label class="ayar-satir"><input type="checkbox" id="otoSavas"' + (o.ayar.otoSavas ? ' checked' : '') + '><span>Otomatik savaş<small>En yakın canavara kendin yürür, saldırır</small></span></label>' +
     '<label class="ayar-satir"><input type="checkbox" id="otoIksir"' + (o.ayar.otoIksir ? ' checked' : '') + '><span>Otomatik iksir<small>Can %40 altına inince, mana yetmeyince içer</small></span></label>' +
     '<label class="ayar-satir"><input type="checkbox" id="otoBeceri"' + (o.ayar.otoBeceri ? ' checked' : '') + '><span>Otomatik beceri<small>"Otomatik" işaretli becerileri sırayla kullanır</small></span></label>' +
-    '<div class="modal-dugmeler"><button data-eylem="duyurular">📜 Duyurular</button><button data-eylem="secimeDon">↩ Karakter seçimi</button><button data-eylem="modalKapat">Kapat</button></div>';
+    '<label class="ayar-satir"><input type="checkbox" id="ses"' + (o.ayar.ses !== false ? ' checked' : '') + '><span>Ses<small>Vuruş, kritik, ölüm, iksir ve seviye sesleri</small></span></label>' +
+    '<div class="modal-dugmeler"><button data-eylem="duyurular">' + G.ikon('parsomen') + ' Duyurular</button><button data-eylem="secimeDon">↩ Karakter seçimi</button><button data-eylem="modalKapat">Kapat</button></div>';
   G.$('modal').classList.remove('gizli');
 };
 
@@ -150,6 +151,7 @@ G.sahaGuncelle = function () {
   G.$('okMp').style.width = Math.max(0, o.mp / r.mpMax * 100) + '%';
   G.$('okHpY').textContent = G.canYazi(o.hp, r.hpMax);
   G.$('okMpY').textContent = G.canYazi(o.mp, r.mpMax);
+  G.$('saha').classList.toggle('kritik-can', o.hp > 0 && o.hp < r.hpMax * 0.3);  // v0.22: düşük can uyarısı
   G.alan.forEach(function (c, i) {
     var el = G.$('kart' + i);
     if (!el || !c) return;
@@ -247,8 +249,11 @@ G.hasarGoster = function (i, h, krit, tur) {
   var sp = document.createElement('span');
   sp.className = 'hasar' + (krit ? ' krit' : '') + (tur ? ' ' + tur : '');
   sp.style.marginLeft = Math.round(G.fx.rnd(-14, 14)) + 'px';
-  sp.textContent = '-' + h;
+  sp.innerHTML = (krit ? '<small>KRİTİK</small>' : '') + '-' + h;
   el.appendChild(sp);
+  // v0.22: kritikte kart parlar, saha hafifçe sarsılır
+  if (krit) { G.sinifTekrar(el, 'krit-flas'); G.sahaSars('hafif'); }
+  if (tur !== 'dot') G.sesCal(krit ? 'krit' : tur === 'beceri' ? 'beceri' : 'vurus');
   setTimeout(function () { sp.remove(); }, 1000);
 };
 
@@ -264,16 +269,57 @@ G.oyuncuHasar = function (yazi) {
 };
 
 // Sana vurulunca kartın kırmızı yanıp söner
-G.darbeEfekti = function () {
+G.darbeEfekti = function (oran) {
   var el = G.$('oyuncuKart');
   if (!el) return;
-  el.classList.remove('darbe'); void el.offsetWidth; el.classList.add('darbe');
+  G.sinifTekrar(el, 'darbe');
+  G.sesCal('darbe', oran);
+  // v0.22: canının %12'sinden fazlasını götüren darbe: sert sarsıntı + kırmızı kenar
+  if (oran >= 0.12) { G.sahaSars('sert'); G.sinifTekrar(G.$('saha'), 'tehlike-flas'); }
+};
+
+// ---- v0.26: boss replikleri (veri.js → G.BOSS_REPLIK) ----
+// Günlüğe yazar ve boss plakasının altında birkaç saniye gösterir. Kule bekçilerinde çıkmaz.
+G.bossReplik = function (c, an) {
+  var r = !c.kuleBekci && G.BOSS_REPLIK[c.id], metin = r && r[an];
+  if (!metin) return;
+  G.log('<i>' + metin + '</i>', 'replik');
+  var saha = G.$('saha');
+  if (!saha) return;
+  var eski = saha.querySelector('.boss-soz');
+  if (eski) eski.remove();
+  var el = document.createElement('div');
+  el.className = 'boss-soz';
+  el.innerHTML = '<span class="bs-ikon">' + c.ikon + '</span><span>' + metin + '</span>';
+  saha.appendChild(el);
+  setTimeout(function () { el.remove(); }, 5200);
+};
+
+// ---- v0.22: vuruş hissi ----
+// Bir CSS animasyon sınıfını baştan oynatır
+G.sinifTekrar = function (el, sinif) {
+  if (!el) return;
+  el.classList.remove(sinif); void el.offsetWidth; el.classList.add(sinif);
+};
+G.sahaSars = function (guc) {
+  var saha = G.$('saha');
+  if (!saha) return;
+  // Sert sarsıntı sürerken hafif olanı başlatma (sert olan yarıda kesilmesin)
+  if (guc === 'hafif' && Date.now() - (G.sertSarsZaman || 0) < 320) return;
+  if (guc === 'sert') G.sertSarsZaman = Date.now();
+  saha.classList.remove('sars-hafif', 'sars-sert'); void saha.offsetWidth; saha.classList.add('sars-' + guc);
+};
+// Canavar ölünce kart kızıl parlayıp küçülerek solar (sadece o anda; sonradan çizilen ölü kartlar oynatmaz)
+G.olumEfekti = function (i) {
+  var el = G.$('kart' + i);
+  if (el) el.classList.add('oluyor');
+  G.sesCal('olum');
 };
 
 // ---- v0.20: Kuledeyken alt panel ----
 G.kuleAltHtml = function () {
   var k = G.kuleKonum(G.kule ? G.kule.kat : 1);
-  return '<div class="kule-alt"><div><b>🗼 Kule</b><span>Kademe ' + k.kademe + ' · Kat ' + k.kat + '</span>' +
+  return '<div class="kule-alt"><div><b>' + G.ikon('kule') + ' Kule</b><span>Kademe ' + k.kademe + ' · Kat ' + k.kat + '</span>' +
     '<small>Bekçiyi süre bitmeden yen. Kulede ölmek tecrübe kaybettirmez.</small></div>' +
-    '<button class="genis-dugme" data-eylem="parsomen">🏳️ Pes et</button></div>';
+    '<button class="genis-dugme" data-eylem="parsomen">' + G.ikon('kapi') + ' Pes et</button></div>';
 };

@@ -22,8 +22,8 @@ G.beceriKartHtml = function (id) {
     var kitap = o.kitaplar[id] || 0, kg = G.kitapGerek(lv), sg = G.sayfaGerek(lv), ag = G.altinGerek(lv), ug = G.ustalikGerek(lv);
     var eksik = G.gelistirEksik(id).length > 0;
     sag = '<div class="gereksinim">' +
-        '<span class="' + (kitap >= kg ? 'fark-arti' : 'fark-eksi') + '">📕 ' + kitap + '/' + kg + '</span>' +
-        '<span class="' + (o.sarf.sayfa >= sg ? 'fark-arti' : 'fark-eksi') + '">📃 ' + o.sarf.sayfa + '/' + sg + '</span>' +
+        '<span class="' + (kitap >= kg ? 'fark-arti' : 'fark-eksi') + '">' + G.ikon('beceri_kitabi') + ' ' + kitap + '/' + kg + '</span>' +
+        '<span class="' + (o.sarf.sayfa >= sg ? 'fark-arti' : 'fark-eksi') + '">' + G.SARF.sayfa.ikon + ' ' + o.sarf.sayfa + '/' + sg + '</span>' +
         '<span class="' + (o.para >= ag ? 'fark-arti' : 'fark-eksi') + '">' + ag + ' altın</span>' +
         '<span class="' + ((o.ustalik[id] || 0) >= ug ? 'fark-arti' : 'fark-eksi') + '">Ustalık</span>' +
       '</div>' +
@@ -66,7 +66,7 @@ G.cizBeceri = function () {
   var pasifler = tum.filter(function (id) { return G.BECERILER[id].tur === 'pasif'; }).sort(sira);
   G.$('icerik').innerHTML =
     '<div class="panel">' +
-    '<div class="kutu beceri-ozet"><span>📃 Kitap Sayfası: <b>' + o.sarf.sayfa + '</b></span><span>Altın: <b>' + o.para + '</b></span></div>' +
+    '<div class="kutu beceri-ozet"><span>' + G.SARF.sayfa.ikon + ' Kitap Sayfası: <b>' + o.sarf.sayfa + '</b></span><span>Altın: <b>' + o.para + '</b></span></div>' +
     '<p class="soluk kucuk-not">Öğrendiğin her beceri etkindir. Aktif beceriler kullandıkça, pasifler canavar öldürdükçe ustalık kazanır. ' +
       'Ustalık dolunca o becerinin kitabı, kitap sayfası ve altınla geliştirirsin (en fazla seviye ' + G.BECERI_MAKS + ').</p>' +
     '<h2 class="bolum-baslik">Aktif beceriler</h2>' + aktifler.map(G.beceriKartHtml).join('') +

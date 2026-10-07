@@ -34,7 +34,7 @@ G.gorevAl = function () {
     if (k === 'para') o.para += d.g.odul[k];
     else o.sarf[k] = (o.sarf[k] || 0) + d.g.odul[k];
   }
-  G.log('📜 Ana görev tamamlandı: ' + G.odulYazi(d.g.odul), 'kazanc');
+  G.log(G.ikon('parsomen') + ' Ana görev tamamlandı: ' + G.odulYazi(d.g.odul), 'kazanc');
   G.bildir('Görev tamamlandı!');
   o.gorev.i++;
   o.gorev.taban = o.istatistik.oldurme;
@@ -51,9 +51,9 @@ G.gorevSeritHtml = function () {
       (d.bitti ? '<button class="gorev-al" data-eylem="gorevAl">Al</button>' : '');
   return '<div class="gorev-serit" id="gorevSerit">' +
     '<div class="kisayollar">' +
-      '<button data-eylem="madenKisayol" aria-label="Maden">⛏️</button>' +
-      '<button data-eylem="gorevBilgi" aria-label="Görev ödülü">🎁</button>' +
-      '<button data-eylem="ayarlar" aria-label="Ayarlar">⚙️</button>' +
+      '<button data-eylem="madenKisayol" aria-label="Maden">' + G.ikon('kazma') + '</button>' +
+      '<button data-eylem="gorevBilgi" aria-label="Görev ödülü">' + G.ikon('sandik') + '</button>' +
+      '<button data-eylem="ayarlar" aria-label="Ayarlar">' + G.ikon('carh') + '</button>' +
     '</div>' + metin + '</div>';
 };
 
@@ -62,9 +62,18 @@ G.gorevGuncelle = function () {
   if (el) el.outerHTML = G.gorevSeritHtml();
 };
 
+// v0.25: anlatıcının konuşması (veri.js → G.ANA_HIKAYE, G.ANLATICILAR)
+G.hikayeHtml = function (h) {
+  var a = h && G.ANLATICILAR[h[0]];
+  if (!a) return '';
+  return '<div class="hikaye"><span class="hikaye-portre">' + G.ikon(a.simge) + '</span>' +
+    '<div><b>' + a.ad + '</b><small>' + a.unvan + '</small><p>' + h[1] + '</p></div></div>';
+};
+
 G.gorevBilgiModal = function () {
   var d = G.gorevDurum();
-  G.$('modalIc').innerHTML = '<h3>📜 Ana Görev</h3>' +
+  G.$('modalIc').innerHTML = '<h3>' + G.ikon('parsomen') + ' Ana Görev</h3>' +
+    G.hikayeHtml(d ? G.ANA_HIKAYE[G.o.gorev.i] : G.ANA_HIKAYE_SON) +
     (d ? '<p class="bilgi">' + d.yazi + ' (' + d.sayi + '/' + d.hedef + ')</p><p class="bilgi">Ödül: ' + G.odulYazi(d.g.odul) + '</p>' +
          '<p class="bilgi soluk">Görev ' + (G.o.gorev.i + 1) + ' / ' + G.ANA_GOREV.length + '</p>'
        : '<p class="bilgi">Bütün ana görevleri tamamladın.</p>') +

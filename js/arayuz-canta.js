@@ -68,8 +68,8 @@ G.cantaHtml = function () {
     (G.cantaSekme !== 'esya' ? '<div class="canta-kontrol">' + secim('cantaSira', G.SIRALAMALAR, ay.sira) + secim('cantaFiltre', G.FILTRELER, ay.filtre) + '</div>' : '') +
     '<div class="canta-izgara">' + sarflar + esyalar + bosluk + '</div>' +
     '<div class="canta-eylemler">' +
-      '<button data-eylem="topluSat">♻️ Toplu sat</button>' +
-      '<button data-eylem="topluErit">🔥 Toplu erit</button>' +
+      '<button data-eylem="topluSat">' + G.IK_PARA + ' Toplu sat</button>' +
+      '<button data-eylem="topluErit">' + G.ikon('alev') + ' Toplu erit</button>' +
     '</div>' +
     '<p class="soluk kucuk-not">Toplu sat: sıradan ve iyi eşyalar. Toplu erit: nadir eşyalar. Kilitli, güçlendirilmiş ve set eşyalarına dokunulmaz. ▲ kuşanınca GP\'ni artırır.</p>';
 };
@@ -90,7 +90,7 @@ G.sarfModal = function (t) {
 G.cantaArtiModal = function () {
   var fiyat = G.cantaGenisletFiyat();
   G.$('modalIc').innerHTML =
-    '<h3>🎒 Çantayı genişlet</h3>' +
+    '<h3>' + G.ikon('canta') + ' Çantayı genişlet</h3>' +
     '<p class="bilgi">' + G.cantaLimit() + ' yuvadan ' + (G.cantaLimit() + G.CANTA.adim) + ' yuvaya çıkar. En fazla ' + G.CANTA.maks + '.</p>' +
     '<p class="bilgi">Bedeli: <b>' + fiyat + ' altın</b> (altının: ' + G.o.para + ')</p>' +
     '<div class="modal-dugmeler"><button data-eylem="cantaGenislet"' + (G.o.para >= fiyat ? '' : ' disabled') + '>Genişlet</button>' +
@@ -123,7 +123,7 @@ G.esyaModal = function (id) {
     ekHtml = '<div class="ek-liste">' + ek.map(function (x) {
       var kl = kilitli.indexOf(x.k) >= 0;
       var dugme = ek.length > 1
-        ? '<button class="zar-kilit' + (kl ? ' acik' : '') + '" data-eylem="zarKilit" data-id="' + e.id + '" data-k="' + x.k + '" aria-label="Zarlamada koru">' + (kl ? '🔒' : '🔓') + '</button>'
+        ? '<button class="zar-kilit' + (kl ? ' acik' : '') + '" data-eylem="zarKilit" data-id="' + e.id + '" data-k="' + x.k + '" aria-label="Zarlamada koru">' + G.ikon(kl ? 'kilit' : 'kilit_acik') + '</button>'
         : '';
       return '<div class="ek-satir"><span class="ek-stat">' + G.bonusYazi(x.k, x.v) + '</span>' + dugme + '</div>';
     }).join('') + '</div>';
@@ -146,7 +146,7 @@ G.esyaModal = function (id) {
     : 'En yüksek güçlendirme seviyesinde.');
   if (ek.length) {
     var zm = G.zarMaliyet(e);
-    bilgi.push('Zarla: ' + zm.toz + ' Ruh Tozu, ' + zm.altin + ' altın.' + (ek.length > 1 ? ' 🔒 ile koruduğun statlar değişmez, her kilit maliyeti artırır.' : ''));
+    bilgi.push('Zarla: ' + zm.toz + ' Ruh Tozu, ' + zm.altin + ' altın.' + (ek.length > 1 ? ' ' + G.ikon('kilit') + ' ile koruduğun statlar değişmez, her kilit maliyeti artırır.' : ''));
   }
   if (cantada && e.nadir >= 2) {
     var g = G.eritmeGetiri(e);
@@ -160,16 +160,17 @@ G.esyaModal = function (id) {
     ? '<button data-eylem="kusan" data-id="' + e.id + '"' + (o.lv < s.lv ? ' disabled' : '') + '>Kuşan</button>'
     : '<button data-eylem="cikar" data-slot="' + f.slot + '">Çıkar</button>';
   d += '<button data-eylem="guclendir" data-id="' + e.id + '"' + (e.arti >= G.MAKS_ARTI ? ' disabled' : '') + '>Güçlendir</button>';
-  if (ek.length) d += '<button data-eylem="demirciAc" data-id="' + e.id + '">⚒️ Arıt</button>';
+  if (ek.length) d += '<button data-eylem="demirciAc" data-id="' + e.id + '">' + G.ikon('pirilti') + ' Arıt</button>';
   if (cantada) d += '<button data-eylem="sat" data-id="' + e.id + '"' + (e.kilit ? ' disabled' : '') + '>Sat (' + G.satisDegeri(e) + ')</button>';
   if (cantada && e.nadir >= 2) d += '<button data-eylem="erit" data-id="' + e.id + '"' + (e.kilit ? ' disabled' : '') + '>Erit</button>';
   d += '<button data-eylem="kilit" data-id="' + e.id + '">' + (e.kilit ? 'Kilidi aç' : 'Kilitle') + '</button>';
   d += '<button data-eylem="modalKapat">Kapat</button>';
 
   G.$('modalIc').innerHTML =
-    '<h3 style="color:' + n.renk + '">' + G.gorunum(e.sablon).ikon + ' ' + G.esyaAd(e) + (e.kilit ? ' 🔒' : '') + '</h3>' +
+    '<h3 style="color:' + n.renk + '">' + G.gorunum(e.sablon).ikon + ' ' + G.esyaAd(e) + (e.kilit ? ' ' + G.ikon('kilit') : '') + '</h3>' +
     '<div class="alt-baslik">' + n.ad + ' ' + slotAd.toLowerCase() + ', seviye ' + s.lv + ' gerekir' +
       (o.lv < s.lv ? ' <span class="fark-eksi">(seviyen yetmiyor)</span>' : '') + '</div>' +
+    (G.esyaKoken(s) ? '<p class="esya-koken">' + G.esyaKoken(s) + '</p>' : '') +
     satirlar + ekHtml + gpHtml + setHtml +
     '<div class="bilgi">' + bilgi.join('<br>') + '</div>' +
     '<div class="modal-dugmeler">' + d + '</div>';

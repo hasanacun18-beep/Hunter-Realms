@@ -52,7 +52,7 @@ G.kuleBitir = function (basari, mesaj, odul, run) {
   var r = G.hesapla(o);
   o.hp = Math.max(o.hp, r.hpMax * 0.5);   // kuleden çıkınca biraz toparlan
   G.bolgeGit(o.kuleDonus || o.sonKasaba, true);
-  G.$('modalIc').innerHTML = '<h3>🗼 Kademe ' + k.kademe + ' · Kat ' + k.kat + '</h3>' +
+  G.$('modalIc').innerHTML = '<h3>' + G.ikon('kule') + ' Kademe ' + k.kademe + ' · Kat ' + k.kat + '</h3>' +
     '<p class="bilgi ' + (basari ? 'fark-arti' : 'fark-eksi') + '">' + mesaj + '</p>' +
     (odul ? '<p class="bilgi">Ödül: ' + G.odulYazi(odul) + '</p>' : '') +
     (run ? '<p class="bilgi">Rün: <b style="color:' + G.NADIRLIK[run.nadir].renk + '">' + G.runAd(run) + '</b></p>' : '') +
@@ -67,7 +67,7 @@ G.kuleZafer = function () {
   o.kule.enYuksek = Math.max(o.kule.enYuksek, f);
   for (var k in odul) { if (k === 'para') o.para += odul[k]; else o.sarf[k] = (o.sarf[k] || 0) + odul[k]; }
   if (f % 3 === 0 || Math.random() < 0.35) run = G.runUret(f);
-  G.log('🗼 Kule katı geçildi: ' + G.odulYazi(odul), 'kazanc');
+  G.log(G.ikon('kule') + ' Kule katı geçildi: ' + G.odulYazi(odul), 'kazanc');
   G.kaydet();
   G.kuleBitir(true, 'Bekçiyi yendin! Kat geçildi.', odul, run);
 };

@@ -753,6 +753,9 @@ h2{font-size:19px;margin-bottom:6px}
    v0.15.1 — TEK EKRAN DÜZENİ (kaydırma yok) ve alt menü
    ============================================================ */
 html,body{height:100%}
+/* v0.22: mobil Chrome'da 100vh adres çubuğu gizliykenki yükseklik → sayfa taşıp kayıyordu.
+   dvh = o an görünen yükseklik (desteklemeyen tarayıcı 100vh'de kalır) */
+body,#uygulama{min-height:100vh;min-height:100dvh}
 #oyun{height:100vh;height:100dvh;overflow:hidden}
 #icerik{flex:1;min-height:0;overflow-y:auto;padding:10px 10px 18px}
 
@@ -1040,3 +1043,168 @@ html,body{height:100%}
 .run-kutu small{font-size:8.5px}
 .run-kutu .arti{position:absolute;top:0;right:4px;font-size:10px;color:#f0d27a;font-weight:bold}
 .run-kutu .takili{position:absolute;bottom:0;right:6px;font-size:11px;color:#6ae06a}
+
+/* ============================================================
+   v0.22 — SVG İKONLAR (emoji yerine, bkz. js/ikon.js)
+   Renk "color" ile verilir; varsayılan bronz, hafif oyma gölgesi
+   ============================================================ */
+.ikon{display:inline-block;width:1em;height:1em;vertical-align:-.15em;fill:currentColor;color:var(--bronz-acik);
+  filter:drop-shadow(0 1px 0 rgba(0,0,0,.85)) drop-shadow(0 0 2px rgba(0,0,0,.6))}
+#altnav button span{display:block;line-height:1}
+#altnav button .ikon{width:24px;height:24px;color:var(--soluk);transition:color .15s}
+#altnav button.aktif .ikon{color:var(--bronz-acik);filter:drop-shadow(0 1px 0 #000) drop-shadow(0 0 5px rgba(240,190,100,.45))}
+.sarf-yuva .ik .ikon{width:24px;height:24px}
+.sarf-yuva .ik.can .ikon{color:#c9483c}
+.sarf-yuva .ik.mana .ikon{color:#4f8bd6}
+.yuvarlak .ikon{width:22px;height:22px}
+.yuvarlak.oto.acik .ikon{color:#9fe08a}
+.kisayollar button .ikon{width:18px;height:18px}
+.mh-dugmeler button .ikon{width:13px;height:13px;vertical-align:-2px}
+
+/* v0.22 — 2. adım: canavar ve sınıf ikonları (veri.js → simge)
+   Parşömen kartlarda koyu mürekkep baskı gibi, boss'larda koyu kan kırmızısı */
+.kart .kikon .ikon{width:1.2em;height:1.2em;color:#2a1c10;opacity:.6;filter:none}
+.kart.boss .kikon .ikon{color:#6e1610;opacity:.7}
+.oyuncu-kart .kikon .ikon{color:#1c2a44}
+.saha-kart.olu .kikon .ikon{color:#6a6258}
+.bp-ikon .ikon{width:72%;height:72%;color:#e8884a}
+.yuvarlak#dBoss .ikon{color:#d86a48}
+.sinif-rozet .ikon{width:26px;height:26px}
+.sinif-yuvarlak .ik .ikon{width:34px;height:34px}
+.kule-bekci .ikon{color:#d86a48}
+
+/* v0.22 — 3a: kaynak, menü ve etkinlik ikonları */
+.para-ikon{color:#e3b34a}
+#karakterNav button .ikon,#demirciNav button .ikon{color:var(--soluk)}
+#karakterNav button.aktif .ikon,#demirciNav button.aktif .ikon{color:#f0c070;filter:drop-shadow(0 1px 0 #000) drop-shadow(0 0 5px rgba(240,190,100,.45))}
+.sandik.hazir .ikon{filter:drop-shadow(0 0 6px rgba(255,200,80,.9))}
+.bl-zincir .ikon{color:var(--soluk)}
+.etkinlik-kart b .ikon{margin-right:2px}
+
+/* v0.22 — 3b: eşya ikonları (ikon.js → G.EMOJI_IKON) */
+.esya-ikon{color:#e2d4b6}
+.esya-kutu.bos .esya-ikon{color:#6a5d48;filter:none}
+.modal-ic h3 .esya-ikon{color:inherit}
+.esya-kutu .ik .esya-ikon{width:1.2em;height:1.2em}
+
+/* v0.22 — 3c: beceri, rün, cevher, ilahi silah ve küçük arayüz ikonları */
+.ilahi-ikon{color:#b8c8ff}
+.ilahi-amblem .ilahi-ikon{filter:none}
+.kilit-rozet .ikon{color:#e3b34a}
+.zar-kilit .ikon{width:15px;height:15px}
+.zar-kilit.acik .ikon{color:#e3b34a}
+.zar .ikon{width:26px;height:26px}
+
+/* ============================================================
+   v0.22 — VURUŞ HİSSİ (sadece görsel; denge değişmedi)
+   ============================================================ */
+/* Beceri hasarı: buz beyazı, mavi parıltı, biraz daha büyük */
+.hasar.beceri{font-size:27px;color:#eef3ff;
+  text-shadow:1px 1px 0 #102040,-1px -1px 0 #102040,1px -1px 0 #102040,-1px 1px 0 #102040,0 0 12px rgba(120,170,255,.95)}
+.hasar.beceri.krit{color:#fff2c0}
+/* Kritik: üstte küçük "KRİTİK" yazısı */
+.hasar small{display:block;font-family:var(--sans);font-style:normal;font-size:10px;font-weight:800;letter-spacing:.18em;
+  line-height:1;margin-bottom:1px;color:#ffe9a8;text-shadow:0 0 4px #000,0 0 6px rgba(255,170,40,.9)}
+.hasar.krit{font-size:33px}
+/* Kritikte kart bir an beyaz parlar */
+.saha-kart.krit-flas{animation:kritFlas .22s ease-out}
+@keyframes kritFlas{0%{filter:brightness(2.4) saturate(.4)}100%{filter:none}}
+/* Saha sarsıntısı */
+.saha.sars-hafif{animation:sahaSarsH .16s linear}
+.saha.sars-sert{animation:sahaSarsS .32s linear}
+@keyframes sahaSarsH{25%{transform:translate(-2px,1px)}50%{transform:translate(2px,-1px)}75%{transform:translate(-1px,0)}}
+@keyframes sahaSarsS{15%{transform:translate(-5px,2px)}30%{transform:translate(5px,-3px)}45%{transform:translate(-4px,-1px)}
+  60%{transform:translate(3px,2px)}80%{transform:translate(-2px,-1px)}}
+/* Sert darbe: kenarlarda kırmızı parlama; düşük can: kenarlar nabız gibi atar */
+.saha::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:9;opacity:0;
+  box-shadow:inset 0 0 38px 8px rgba(190,20,10,.75)}
+.saha.kritik-can::after{animation:canNabiz 1.1s ease-in-out infinite}
+.saha.tehlike-flas::after{animation:tehlikeFlas .45s ease-out}
+.saha.kritik-can.tehlike-flas::after{animation:tehlikeFlas .45s ease-out,canNabiz 1.1s ease-in-out .45s infinite}
+@keyframes canNabiz{0%,100%{opacity:.25}50%{opacity:.75}}
+@keyframes tehlikeFlas{0%{opacity:1}100%{opacity:0}}
+/* Ölüm: kızıl parlama, sonra küçülüp solma (sonunda .olu halinde kalır) */
+.saha-kart.olu.oluyor{animation:olum .6s ease-in forwards}
+@keyframes olum{
+  0%{opacity:1;filter:brightness(1.8) sepia(1) saturate(4) hue-rotate(-25deg);transform:translate(5.5%,1.6%) scale(1.06)}
+  35%{opacity:.85;filter:brightness(1.2) sepia(.6) saturate(2) hue-rotate(-25deg);transform:translate(5.5%,1.6%) scale(1)}
+  100%{opacity:.22;filter:grayscale(1);transform:translate(5.5%,1.6%) scale(.9)}}
+@media (prefers-reduced-motion:reduce){
+  .saha.sars-hafif,.saha.sars-sert{animation:none}
+  .saha.kritik-can::after{animation:none;opacity:.5}
+  .saha-kart.olu.oluyor{animation-duration:.01s}
+}
+
+/* v0.25 — Ana görev hikâyesi: anlatıcı portresi ve konuşma */
+.hikaye{display:flex;gap:10px;align-items:flex-start;margin:10px 0 4px;padding:10px;border:1px solid #4a3d2b;border-radius:4px;
+  background:linear-gradient(#1f1912,#16120d)}
+.hikaye-portre{flex:none;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 40% 35%,#3a2e20,#120e0a 75%);border:2px solid #8a7040}
+.hikaye-portre .ikon{width:28px;height:28px}
+.hikaye b{font-family:var(--serif);font-weight:normal;font-size:16px;color:var(--bronz-acik)}
+.hikaye small{display:block;font-size:11px;color:var(--soluk);margin-bottom:4px}
+.hikaye p{font-family:var(--serif);font-style:italic;font-size:14px;line-height:1.5;color:var(--kemik)}
+
+/* v0.26 — Boss replikleri: günlükte italik, sahada plakanın altında beliren söz */
+#log .replik{color:#d8b8a8}
+#log .replik i{font-family:var(--serif)}
+.boss-soz{position:absolute;left:8px;right:8px;top:46px;z-index:8;pointer-events:none;display:flex;gap:8px;align-items:flex-start;
+  padding:7px 10px;border:1px solid rgba(224,122,58,.55);border-radius:4px;background:rgba(18,10,8,.88);
+  font-family:var(--serif);font-style:italic;font-size:13.5px;line-height:1.4;color:#f0dcc8;
+  animation:bossSoz 5.2s ease forwards}
+.boss-soz .bs-ikon{flex:none;width:22px;height:22px;color:#e8884a}
+.boss-soz .bs-ikon .ikon{width:22px;height:22px;color:#e8884a}
+@keyframes bossSoz{0%{opacity:0;transform:translateY(-6px)}8%{opacity:1;transform:none}85%{opacity:1}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.boss-soz{animation:none}}
+
+/* v0.27 — canavar, eşya kökeni ve set açıklamaları */
+.bolge-canavar-liste{display:flex;flex-direction:column;gap:8px;margin:10px 0}
+.bc-satir{display:flex;gap:10px;align-items:flex-start}
+.bc-ikon{flex:none;width:30px;height:30px;font-size:24px;line-height:1;color:var(--bronz-acik)}
+.bc-satir b{display:block;font-weight:normal;color:var(--kemik);font-size:14px}
+.bc-satir i{display:block;font-family:var(--serif);font-size:13px;line-height:1.4;color:var(--soluk)}
+.esya-koken{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--soluk);margin:4px 0 8px}
+.set-hikaye{font-family:var(--serif);font-style:italic;font-size:12.5px;line-height:1.4;color:#a8c8a8;margin:2px 0 6px}
+
+/* ============================================================
+   v0.28 — GÜÇLENDİRME RİTÜELİ
+   ============================================================ */
+.rituel{position:fixed;inset:0;z-index:25;display:flex;align-items:center;justify-content:center;padding:16px;
+  background:radial-gradient(ellipse at 50% 45%,rgb(52,32,15),rgb(6,4,3) 70%);cursor:pointer}
+.rt-sahne{width:100%;max-width:340px;text-align:center;pointer-events:none}
+.rt-baslik{font-family:var(--serif);font-size:19px;margin-bottom:14px}
+.rt-ors{position:relative;width:180px;height:150px;margin:0 auto}
+.rt-ors-ikon{position:absolute;left:10px;right:10px;bottom:0;width:160px;height:110px;color:#5a4a36;filter:drop-shadow(0 6px 10px #000)}
+.rt-esya{position:absolute;left:50%;top:22px;transform:translateX(-50%);font-size:44px;line-height:1;z-index:2}
+.rt-esya .ikon{color:#e8d6b0;filter:drop-shadow(0 0 6px rgba(255,200,120,.5))}
+.rt-cekic{position:absolute;right:-6px;top:-34px;font-size:56px;line-height:1;z-index:3;transform-origin:80% 80%;transform:rotate(28deg)}
+.rt-cekic .ikon{color:#b8b0a4}
+.rt-kivilcim{position:absolute;left:50%;top:58px;width:0;height:0;z-index:4}
+.rt-kivilcim i{position:absolute}
+.rt-ors.vur .rt-cekic{animation:rtCekic .3s ease-in}
+.rt-ors.vur .rt-esya{animation:rtTitre .3s}
+@keyframes rtCekic{0%{transform:rotate(28deg)}45%{transform:rotate(-18deg)}60%{transform:rotate(-14deg)}100%{transform:rotate(28deg)}}
+@keyframes rtTitre{45%{transform:translateX(-50%) translateY(2px)}60%{transform:translateX(-52%) translateY(0)}75%{transform:translateX(-48%)}}
+.rt-arti{font-family:var(--serif);font-size:30px;color:var(--kemik);margin-top:12px}
+.rt-arti b{font-weight:normal;color:var(--bronz-acik)}
+.rt-sans{font-size:13px;color:var(--soluk);margin-top:2px}
+.rt-sonuc{min-height:62px;margin-top:14px}
+.rt-sonuc b{display:block;font-family:var(--serif);font-size:32px;letter-spacing:.12em;font-weight:normal}
+.rt-sonuc span{display:block;font-size:14px;color:var(--kemik);margin-top:2px}
+.rt-ipucu{font-size:12px;color:var(--soluk);margin-top:10px;opacity:.8}
+/* +7 ve üstü: kızıl-altın aura, nabız */
+.rituel.yuksek{background:radial-gradient(ellipse at 50% 45%,rgb(92,26,12),rgb(6,4,3) 70%)}
+.rituel.yuksek:not(.sonuc) .rt-esya .ikon{animation:rtAura .7s ease-in-out infinite}
+@keyframes rtAura{50%{filter:drop-shadow(0 0 14px rgba(255,90,40,.95)) drop-shadow(0 0 4px rgba(255,210,120,.9))}}
+/* Sonuçlar */
+.rituel.basari .rt-sonuc b{color:#ffd45a;text-shadow:0 0 16px rgba(255,190,60,.9)}
+.rituel.basari .rt-esya .ikon{color:#fff0c0;filter:drop-shadow(0 0 18px rgba(255,200,80,1));animation:rtBasari .6s ease-out}
+@keyframes rtBasari{0%{transform:scale(1)}40%{transform:scale(1.3)}100%{transform:scale(1)}}
+.rituel.basari .rt-arti b:last-child{color:#ffd45a}
+.rituel.bos .rt-sonuc b{color:#9a9488}
+.rituel.bos .rt-esya .ikon{color:#8a8478;filter:none}
+.rituel.dusus .rt-sonuc b{color:#e0402a;text-shadow:0 0 12px rgba(220,40,20,.8)}
+.rituel.dusus .rt-esya .ikon{color:#c04030;filter:drop-shadow(0 0 10px rgba(200,30,20,.9));animation:rtKirik .4s}
+@keyframes rtKirik{20%{transform:translateX(-4px) rotate(-6deg)}40%{transform:translateX(4px) rotate(5deg)}60%{transform:translateX(-3px)}}
+.rituel.dusus .rt-arti b:last-child{text-decoration:line-through;color:#8a4030}
+@media (prefers-reduced-motion:reduce){.rt-ors.vur .rt-cekic,.rt-ors.vur .rt-esya,.rituel .rt-esya .ikon{animation:none!important}}

@@ -10,7 +10,7 @@ G.cizHarita = function () {
     if (kilit) sis += '<div class="sis" style="left:' + sol + ';top:' + ust + '"></div>';
     dugumler += '<button class="harita-dugum ' + b.tur + (kilit ? ' sisli' : '') + (b.id === o.bolge ? ' burada' : '') + '"' +
       ' style="left:' + sol + ';top:' + ust + '" data-eylem="bolgeBilgi" data-b="' + b.id + '">' +
-      '<span class="hd-ad">' + (b.tur === 'kasaba' ? '🏘️ ' : '') + (kilit ? '???' : b.ad) + '</span>' +
+      '<span class="hd-ad">' + (b.tur === 'kasaba' ? G.ikon('koy') + ' ' : '') + (kilit ? '???' : b.ad) + '</span>' +
       '<span class="hd-lv">' + (b.tur === 'kasaba' ? 'Kasaba' : 'Seviye ' + b.minLv + '+') + '</span></button>';
   });
   G.$('icerik').innerHTML =
@@ -32,12 +32,15 @@ G.bolgeModal = function (id) {
   } else {
     icerik = '<p class="bilgi">' + b.aciklama + '</p>';
     if (b.canavarlar) {
-      icerik += '<div class="bolge-canavarlar">' + b.canavarlar.map(function (cid) {
+      // v0.27: her canavarın altında kısa açıklaması
+      icerik += '<div class="bolge-canavar-liste">' + b.canavarlar.map(function (cid) {
         var c = G.CANAVARLAR[cid];
-        return '<span>' + c.ikon + ' ' + c.ad + ' <small class="soluk">' + c.lv + '</small></span>';
+        return '<div class="bc-satir"><span class="bc-ikon">' + c.ikon + '</span><div><b>' + c.ad + ' <small class="soluk">seviye ' + c.lv + '</small></b>' +
+          (c.aciklama ? '<i>' + c.aciklama + '</i>' : '') + '</div></div>';
       }).join('') + '</div>';
       var bs = G.CANAVARLAR[b.boss];
       icerik += '<p class="bilgi">Boss: ' + bs.ikon + ' ' + bs.ad + ' (seviye ' + bs.lv + ')' +
+        (bs.aciklama ? '<br><i class="soluk">' + bs.aciklama + '</i>' : '') +
         (b.set ? '<br>Set: ' + G.SETLER[b.set].ad : '') + '</p>';
     }
   }

@@ -83,11 +83,11 @@ G.ustGuncelle = function () {
   var o = G.o;
   if (!o) return;
   var r = G.hesapla(o), s = G.SINIFLAR[o.sinif], gerek = G.expGerekli(o.lv);
-  G.$('uRozet').textContent = s.ikon;
+  G.$('uRozet').innerHTML = s.ikon;
   G.$('uAd').textContent = o.ad;
   G.$('uCp').textContent = 'GP ' + r.cp;
   G.$('uSinif').textContent = 'Sv. ' + o.lv;
-  G.$('uPara').textContent = '💰 ' + G.kisaSayi(o.para);
+  G.$('uPara').innerHTML = G.IK_PARA + ' ' + G.kisaSayi(o.para);
   G.$('uExp').style.width = (o.exp / gerek * 100) + '%';
   G.$('uExpY').textContent = o.exp + ' / ' + gerek;
   // Alt menüdeki küre: sol yarı can, sağ yarı mana
@@ -109,7 +109,7 @@ G.esyaKutuHtml = function (e, eylem, bosSlot, yukseltme) {
   var s = G.ESYALAR[e.sablon], n = G.NADIRLIK[e.nadir];
   return '<button class="esya-kutu" style="border-color:' + n.renk + '" data-eylem="' + eylem + '" data-id="' + e.id + '">' +
     (e.arti ? '<span class="arti">+' + e.arti + '</span>' : '') +
-    (e.kilit ? '<span class="kilit-rozet">🔒</span>' : '') +
+    (e.kilit ? '<span class="kilit-rozet">' + G.ikon('kilit') + '</span>' : '') +
     (s.set ? '<span class="set-rozet">SET</span>' : '') +
     (yukseltme ? '<span class="yukselt-rozet">▲</span>' : '') +
     '<span class="ik">' + G.gorunum(e.sablon).ikon + '</span><span style="color:' + n.renk + '">' + G.gorunum(e.sablon).ad + '</span></button>';
@@ -129,7 +129,15 @@ G.setDetayHtml = function (setId) {
     var yazi = Object.keys(set.bonus[esik]).map(function (bk) { return G.bonusYazi(bk, set.bonus[esik][bk]); }).join(', ');
     basamak += '<div class="' + (sayi >= +esik ? 'aktif-bonus' : 'pasif') + '">' + esik + ' parça: ' + yazi + '</div>';
   }
-  return '<div class="set-kutu"><div class="set-baslik">' + set.ad + ' (' + sayi + ' kuşanılı)</div>' + parcalar + '<div class="set-ayrac"></div>' + basamak + '</div>';
+  return '<div class="set-kutu"><div class="set-baslik">' + set.ad + ' (' + sayi + ' kuşanılı)</div>' +
+    (set.aciklama ? '<div class="set-hikaye">' + set.aciklama + '</div>' : '') + parcalar + '<div class="set-ayrac"></div>' + basamak + '</div>';
+};
+
+// v0.27: eşyanın geldiği yer — seviyesine denk gelen en yüksek av bölgesinin köken cümlesi (veri.js → esyaKoken)
+G.esyaKoken = function (s) {
+  var koken = '';
+  G.BOLGELER.forEach(function (b) { if (b.esyaKoken && b.minLv <= s.lv) koken = b.esyaKoken; });
+  return koken;
 };
 
 G.modalKapat = function () { G.$('modal').classList.add('gizli'); };

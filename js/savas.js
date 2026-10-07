@@ -162,7 +162,7 @@ G.savasTik = function () {
     if (Math.random() * 100 < kacinma) { G.oyuncuHasar('Kaçındın'); return; }
     var md = G.rastgele(c.atk[0], c.atk[1]);
     if (c.boss && c.hp < c.hpMax * G.ZORLUK.ofkeEsik) {
-      if (!c.ofke) { c.ofke = true; G.log(c.ad + ' öfkelendi!', 'tehlike'); }
+      if (!c.ofke) { c.ofke = true; G.log(c.ad + ' öfkelendi!', 'tehlike'); G.bossReplik(c, 'ofke'); }
       md *= G.ZORLUK.ofkeCarpan;
     }
     md -= r.def * 0.6;
@@ -170,7 +170,7 @@ G.savasTik = function () {
     md = Math.max(1, Math.round(md));
     o.hp -= md;
     G.oyuncuHasar('-' + md);
-    G.darbeEfekti();
+    G.darbeEfekti(md / r.hpMax);
   });
   if (o.hp <= 0) { G.yenilgi(); return; }
   if (s.kalkan && vuranSayi && --s.kalkan.tur <= 0) s.kalkan = null;
@@ -196,7 +196,7 @@ G.oyuncuSaldir = function (t, r) {
     hedefler.forEach(function (i) {
       var c = G.alan[i];
       c.aktif = true;
-      for (var v = 0; v < (e.vurus || 1) && c.hp > 0; v++) toplam += G.vur(i, c, r, gucCarpan, b ? e.carpan * beceriCarpan : 1);
+      for (var v = 0; v < (e.vurus || 1) && c.hp > 0; v++) toplam += G.vur(i, c, r, gucCarpan, b ? e.carpan * beceriCarpan : 1, b ? 'beceri' : '');
       if (e.sersem && c.hp > 0 && !c.boss) c.sersem = e.sersem;
       if (e.dot && c.hp > 0) c.dot = { h: Math.round((r.atkMin + r.atkMax) / 2 * e.dot * beceriCarpan), tur: e.sure };
     });
@@ -219,13 +219,13 @@ G.oyuncuSaldir = function (t, r) {
   if (s.guc && e.tip !== 'guc' && --s.guc.tur <= 0) s.guc = null;
 };
 
-G.vur = function (i, c, r, gucCarpan, carpan) {
+G.vur = function (i, c, r, gucCarpan, carpan, tur) {
   var h = G.rastgele(r.atkMin, r.atkMax) * gucCarpan;
   var krit = Math.random() * 100 < r.krit;
   if (krit) h *= 1.6 + r.kritHasar / 100;
   h = Math.max(1, Math.round(h * carpan - c.def));
   c.hp -= h;
-  G.hasarGoster(i, h, krit);
+  G.hasarGoster(i, h, krit, tur);
   return h;
 };
 
@@ -281,9 +281,9 @@ G.canavarOldu = function (i) {
   }
   if (Math.random() * 100 < (c.boss ? G.KITAP_DUSME_BOSS : G.KITAP_DUSME_NORMAL)) G.kitapDus(c.lv);
   var sayfa = c.boss ? G.rastgele(G.DUSME.sayfaBoss[0], G.DUSME.sayfaBoss[1]) : (Math.random() * 100 < G.DUSME.sayfa ? G.rastgele(1, 2) : 0);
-  if (sayfa) { o.sarf.sayfa += sayfa; if (c.boss) G.log('+' + sayfa + ' 📃 Kitap Sayfası'); }
+  if (sayfa) { o.sarf.sayfa += sayfa; if (c.boss) G.log('+' + sayfa + ' ' + G.SARF.sayfa.ikon + ' Kitap Sayfası'); }
   var hap = c.boss ? G.rastgele(G.DUSME.hapBoss[0], G.DUSME.hapBoss[1]) : (Math.random() * 100 < G.DUSME.hap ? 1 : 0);
-  if (hap) { o.sarf.hap += hap; G.log('+' + hap + ' 🔮 Meridyen Hapı'); }
+  if (hap) { o.sarf.hap += hap; G.log('+' + hap + ' ' + G.SARF.hap.ikon + ' Meridyen Hapı'); }
   G.ogrenilenler('pasif').forEach(function (pid) { G.ustalikEkle(pid, 1); });
   if (c.boss || Math.random() * 100 < G.DUSME.hpIksir) { var n = c.boss ? 5 : 1; o.sarf.hp += n; G.log('+' + n + ' Can İksiri'); }
   if (c.boss || Math.random() * 100 < G.DUSME.mpIksir) { var m = c.boss ? 5 : 1; o.sarf.mp += m; G.log('+' + m + ' Mana İksiri'); }
@@ -291,6 +291,8 @@ G.canavarOldu = function (i) {
 
   G.expEkle(exp);
   G.kartYenile(i);
+  G.olumEfekti(i);
+  if (c.boss) G.bossReplik(c, 'olum');
 
   if (!c.boss) {
     var bolge = o.bolge, eski = c;
@@ -344,7 +346,9 @@ G.bossBaslat = function () {
   G.alan.push(c);
   G.hedefI = G.alan.length - 1; G.hedefHucre = null;
   G.log(c.ad + ' ortaya çıktı!', 'tehlike');
+  G.sesCal('boss');
   if (G.sekme === 'savas') G.cizSavas();
+  G.bossReplik(c, 'giris');   // çizimden sonra, yoksa sahadaki söz silinir
 };
 
 // Savaş ekranındaki beceri düğmesine dokununca bir sonraki turda kullanılır
@@ -378,6 +382,7 @@ G.iksir = function (t, oto) {
     o.mp = Math.min(r.mpMax, o.mp + 40 + o.lv * 5 + Math.round(r.mpMax * G.IKSIR.mpYuzde));
   }
   o.sarf[t]--;
+  G.sesCal('iksir');
   G.gorevSay('iksir');
   if (G.tehlikede()) G.iksirBek[t] = G.ZORLUK.iksirBekleme;
   G.arayuzGuncelle();

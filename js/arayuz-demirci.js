@@ -6,7 +6,7 @@
 G.demirciAlt = 'arit';
 G.demirciKaynak = 'kusanili';
 G.demirciSecili = null;
-G.DEMIRCI_ALT = [['arit', '✨', 'Arıtma'], ['guclendir', '🔨', 'Güçlendirme'], ['erit', '🔥', 'Eritme']];
+G.DEMIRCI_ALT = [['arit', G.ikon('pirilti'), 'Arıtma'], ['guclendir', G.ikon('cekic'), 'Güçlendirme'], ['erit', G.ikon('alev'), 'Eritme']];
 
 // Eşya penceresinden "Arıt" ile gel
 G.demirciAc = function (id) {
@@ -79,7 +79,7 @@ G.aritHtml = function (e) {
   var mevcut = e.ek.map(function (x) {
     var kl = kilitli.indexOf(x.k) >= 0;
     return '<div class="dm-stat"><button class="dm-kilit' + (kl ? ' kilitli' : '') + '" data-eylem="zarKilit" data-id="' + e.id + '" data-k="' + x.k + '"' +
-      (e.ek.length > 1 ? '' : ' disabled') + '>' + (kl ? '🔒' : '🔓') + '</button>' + G.bonusYazi(x.k, x.v) + '</div>';
+      (e.ek.length > 1 ? '' : ' disabled') + '>' + G.ikon(kl ? 'kilit' : 'kilit_acik') + '</button>' + G.bonusYazi(x.k, x.v) + '</div>';
   }).join('');
   var a = G.aritma && G.aritma.id === e.id ? G.aritma : null, onizleme = '', gpSag = '';
   if (a) {
@@ -94,11 +94,11 @@ G.aritHtml = function (e) {
       '<div class="dm-kolon"><h4>Arıtılmış statlar</h4>' + (onizleme || '<p class="soluk kucuk-not">Arıt\'a bas, yeni statlar burada görünür.</p>') + '</div>' +
     '</div>' +
     '<div class="dm-gpler"><span>Mevcut GP: ' + G.esyaGP(e) + '</span><span>' + gpSag + '</span></div>' +
-    '<div class="dm-maliyet">Bedel: <span class="' + (o.para >= m.altin ? 'fark-arti' : 'fark-eksi') + '">💰 ' + m.altin + '</span> ' +
-      '<span class="' + (o.sarf.toz >= m.toz ? 'fark-arti' : 'fark-eksi') + '">✴️ ' + o.sarf.toz + '/' + m.toz + '</span></div>' +
+    '<div class="dm-maliyet">Bedel: <span class="' + (o.para >= m.altin ? 'fark-arti' : 'fark-eksi') + '">' + G.IK_PARA + ' ' + m.altin + '</span> ' +
+      '<span class="' + (o.sarf.toz >= m.toz ? 'fark-arti' : 'fark-eksi') + '">' + G.SARF.toz.ikon + ' ' + o.sarf.toz + '/' + m.toz + '</span></div>' +
     '<div class="dm-dugmeler"><button class="sus-dugme" data-eylem="arit" data-id="' + e.id + '"><span>Arıt</span></button>' +
       '<button class="sus-dugme" data-eylem="aritKaydet"' + (a ? '' : ' disabled') + '><span>Kaydet</span></button></div>' +
-    '<p class="soluk kucuk-not">Arıt yeni statları önizler, eşyan değişmez. Beğenirsen Kaydet. 🔒 kilitli statlar değişmez, her kilit bedeli artırır.</p>';
+    '<p class="soluk kucuk-not">Arıt yeni statları önizler, eşyan değişmez. Beğenirsen Kaydet. ' + G.ikon('kilit') + ' kilitli statlar değişmez, her kilit bedeli artırır.</p>';
 };
 
 // ---- Güçlendirme ----
@@ -112,8 +112,8 @@ G.guclendirHtml = function (e) {
   else {
     var ml = G.guclendirMaliyet(e);
     alt = '<div class="dm-maliyet">Başarı: <b>%' + G.guclendirSans(e.arti) + '</b>' + (e.arti >= G.ZORLUK.guclendirDusmeArti ? ' <span class="fark-eksi">(başarısızlıkta seviye düşer)</span>' : '') + '</div>' +
-      '<div class="dm-maliyet">Bedel: <span class="' + (o.para >= ml ? 'fark-arti' : 'fark-eksi') + '">💰 ' + ml + '</span> ' +
-      '<span class="' + (o.sarf.tas >= 1 ? 'fark-arti' : 'fark-eksi') + '">💎 ' + o.sarf.tas + '/1</span></div>' +
+      '<div class="dm-maliyet">Bedel: <span class="' + (o.para >= ml ? 'fark-arti' : 'fark-eksi') + '">' + G.IK_PARA + ' ' + ml + '</span> ' +
+      '<span class="' + (o.sarf.tas >= 1 ? 'fark-arti' : 'fark-eksi') + '">' + G.SARF.tas.ikon + ' ' + o.sarf.tas + '/1</span></div>' +
       '<div class="dm-dugmeler"><button class="sus-dugme" data-eylem="guclendir" data-id="' + e.id + '"><span>Güçlendir +' + (e.arti + 1) + '</span></button></div>';
   }
   return G.dmBaslikHtml(e) + '<div class="dm-kolon tek"><h4>Temel statlar +' + e.arti + '</h4>' + satir + '</div>' + alt;
@@ -123,9 +123,81 @@ G.guclendirHtml = function (e) {
 G.eritHtml = function (e) {
   var g = G.eritmeGetiri(e);
   return G.dmBaslikHtml(e) +
-    '<div class="dm-kolon tek"><h4>Eritirsen</h4><div class="dm-stat">✴️ ' + g.toz + ' Ruh Tozu</div>' + (g.tas ? '<div class="dm-stat">💎 ' + g.tas + ' Arıtma Taşı</div>' : '') + '</div>' +
+    '<div class="dm-kolon tek"><h4>Eritirsen</h4><div class="dm-stat">' + G.SARF.toz.ikon + ' ' + g.toz + ' Ruh Tozu</div>' + (g.tas ? '<div class="dm-stat">' + G.SARF.tas.ikon + ' ' + g.tas + ' Arıtma Taşı</div>' : '') + '</div>' +
     '<div class="dm-dugmeler"><button class="sus-dugme" data-eylem="erit" data-id="' + e.id + '"' + (e.kilit ? ' disabled' : '') + '><span>Erit</span></button>' +
       '<button class="sus-dugme" data-eylem="topluErit"><span>Nadirleri erit</span></button></div>' +
     (e.kilit ? '<p class="fark-eksi kucuk-not">Kilitli eşya eritilmez.</p>' : '') +
     '<p class="soluk kucuk-not">Ruh Tozu arıtmada kullanılır. Toplu erit: kilitsiz, güçlendirilmemiş, set olmayan Nadir eşyalar.</p>';
+};
+
+// ============================================================
+// v0.28 — GÜÇLENDİRME RİTÜELİ (sadece gösterim; sonuç esya.js → G.guclendir'de zaten hesaplandı ve kaydedildi)
+// Çekiç 3 kez iner, kısa bekleyiş, sonra sonuç. +7 ve üstünde bekleyiş uzar, aura kızarır.
+// Her an dokununca sonuca atlar; sonuç görünürken dokununca kapanır.
+// ============================================================
+G.RITUEL = { vurus: 3, aralik: 380, bekle: 450, bekleYuksek: 1100, yuksekArti: 7 };
+
+G.guclendirSahne = function (s, bitince) {
+  var R = G.RITUEL, hedef = s.eski + 1, yuksek = hedef >= R.yuksekArti;
+  var eski = G.$('rituel');
+  if (eski) eski.remove();
+  var el = document.createElement('div');
+  el.id = 'rituel';
+  el.className = 'rituel' + (yuksek ? ' yuksek' : '');
+  el.setAttribute('data-eylem', 'rituelDokun');
+  el.innerHTML =
+    '<div class="rt-sahne">' +
+      // Başlık eski seviyeyle: sonuç (zaten kaydedildi) sahne bitmeden belli olmasın
+      '<div class="rt-baslik" style="color:' + G.NADIRLIK[s.e.nadir].renk + '">' + G.gorunum(s.e.sablon).ad + (s.eski ? ' +' + s.eski : '') + '</div>' +
+      '<div class="rt-ors"><span class="rt-esya">' + G.gorunum(s.e.sablon).ikon + '</span>' +
+        '<span class="rt-cekic">' + G.ikon('cekic') + '</span>' + G.ikon('ors_duz', 'rt-ors-ikon') + '<span class="rt-kivilcim" id="rtKivilcim"></span></div>' +
+      '<div class="rt-arti"><b>+' + s.eski + '</b> → <b>+' + hedef + '</b></div>' +
+      '<div class="rt-sans">Başarı şansı %' + s.sans + '</div>' +
+      '<div class="rt-sonuc" id="rtSonuc"></div>' +
+      '<div class="rt-ipucu" id="rtIpucu">Atlamak için dokun</div>' +
+    '</div>';
+  G.$('uygulama').appendChild(el);
+  G.rituel = { s: s, el: el, bitince: bitince, zaman: [], bitti: false };
+  for (var i = 0; i < R.vurus; i++) G.rituel.zaman.push(setTimeout(G.rituelVur, i * R.aralik));
+  G.rituel.zaman.push(setTimeout(G.rituelSonuc, (R.vurus - 1) * R.aralik + (yuksek ? R.bekleYuksek : R.bekle)));
+};
+
+// Çekiç iner: sarsıntı, kıvılcım, metal sesi
+G.rituelVur = function () {
+  var r = G.rituel;
+  if (!r || r.bitti) return;
+  G.sinifTekrar(r.el.querySelector('.rt-ors'), 'vur');
+  var k = G.$('rtKivilcim'), h = '';
+  for (var i = 0; i < 9; i++) {
+    var a = -Math.PI * (0.1 + Math.random() * 0.8), d = 30 + Math.random() * 45;
+    h += '<i class="fx-kivilcim" style="left:50%;top:0;--dx:' + Math.round(Math.cos(a) * d) + 'px;--dy:' + Math.round(Math.sin(a) * d) + 'px;background:#ffc860"></i>';
+  }
+  if (k) k.innerHTML = h;
+  G.sesCal('cekic');
+};
+
+G.rituelSonuc = function () {
+  var r = G.rituel;
+  if (!r || r.bitti) return;
+  r.bitti = true;
+  r.zaman.forEach(clearTimeout);
+  var s = r.s, yazi = { basari: 'BAŞARILI', bos: 'BAŞARISIZ', dusus: 'KIRILDI' }[s.tur];
+  var alt = s.tur === 'basari' ? G.esyaAd(s.e) + ' oldu!'
+    : s.tur === 'dusus' ? 'Eşya +' + s.yeni + ' seviyesine düştü.' : 'Taş ve altın gitti, eşya aynı kaldı.';
+  r.el.classList.add('sonuc', s.tur);
+  G.$('rtSonuc').innerHTML = '<b>' + yazi + '</b><span>' + alt + '</span>';
+  G.$('rtIpucu').textContent = 'Devam etmek için dokun';
+  G.sesCal(s.tur === 'basari' ? 'basari' : s.tur === 'dusus' ? 'kirilma' : 'bos');
+  // +7 ve üstü başarılar günlüğe düşer (KO'daki "+8 bastı" anı)
+  if (s.tur === 'basari' && s.yeni >= G.RITUEL.yuksekArti) G.log(G.ikon('cekic') + ' ' + G.esyaAd(s.e) + ' oldu!', 'kazanc');
+};
+
+// Dokunuş: animasyon sürüyorsa sonuca atlar, sonuç görünüyorsa kapatır
+G.rituelDokun = function () {
+  var r = G.rituel;
+  if (!r) return;
+  if (!r.bitti) { G.rituelSonuc(); return; }
+  r.el.remove();
+  G.rituel = null;
+  if (r.bitince) r.bitince();
 };

@@ -12,19 +12,19 @@ G.MAKS_ARTI = 15;      // En yüksek güçlendirme seviyesi
 // taban: 1. seviyedeki değerler, artis: her seviyede eklenen
 G.SINIFLAR = {
   savasci: {
-    ad: 'Savaşçı', ikon: '⚔️', aciklama: 'Yüksek can ve savunma. Yakın dövüşün ustası.',
+    ad: 'Savaşçı', simge: 'kiliclar', aciklama: 'Yüksek can ve savunma. Yakın dövüşün ustası.',
     taban: { hp: 130, mp: 30, atkMin: 7, atkMax: 12, def: 6, hiz: 8, krit: 5 },
     artis: { hp: 20, mp: 3, atk: 3, def: 2 },
     beceri: { ad: 'Yarma Darbesi', mp: 10, carpan: 1.9, vurus: 1 }
   },
   buyucu: {
-    ad: 'Büyücü', ikon: '🔮', aciklama: 'Düşük can, çok yüksek büyü hasarı.',
+    ad: 'Büyücü', simge: 'asa', aciklama: 'Düşük can, çok yüksek büyü hasarı.',
     taban: { hp: 85, mp: 90, atkMin: 9, atkMax: 16, def: 3, hiz: 9, krit: 5 },
     artis: { hp: 12, mp: 9, atk: 4, def: 1 },
     beceri: { ad: 'Ateş Topu', mp: 16, carpan: 2.6, vurus: 1 }
   },
   okcu: {
-    ad: 'Okçu', ikon: '🏹', aciklama: 'Hızlı ve sık kritik vurur. Dengeli sınıf.',
+    ad: 'Okçu', simge: 'yay', aciklama: 'Hızlı ve sık kritik vurur. Dengeli sınıf.',
     taban: { hp: 100, mp: 50, atkMin: 8, atkMax: 14, def: 4, hiz: 14, krit: 12 },
     artis: { hp: 15, mp: 5, atk: 3, def: 1 },
     beceri: { ad: 'Çift Atış', mp: 12, carpan: 1.35, vurus: 2 }
@@ -42,25 +42,25 @@ G.STATLAR = {
 // ---- Canavarlar ----
 // atk: [min, maks], para: [min, maks]
 G.CANAVARLAR = {
-  kurt:        { ad: 'Kurt',          ikon: '🐺', lv: 1,  hp: 40,   atk: [4, 7],     def: 1,  exp: 12,   para: [2, 6] },
-  domuz:       { ad: 'Yaban Domuzu',  ikon: '🐗', lv: 2,  hp: 60,   atk: [5, 9],     def: 2,  exp: 18,   para: [3, 8] },
-  orumcek:     { ad: 'Dev Örümcek',   ikon: '🕷️', lv: 3,  hp: 55,   atk: [7, 11],    def: 1,  exp: 22,   para: [4, 9] },
-  kurt_kral:   { ad: 'Kurt Kral',     ikon: '🐺', lv: 5,  hp: 450,  atk: [14, 20],   def: 5,  exp: 160,  para: [60, 100], boss: true },
+  kurt:        { ad: 'Kurt',          simge: 'kurt', lv: 1,  hp: 40,   atk: [4, 7],     def: 1,  exp: 12,   para: [2, 6] },
+  domuz:       { ad: 'Yaban Domuzu',  simge: 'domuz', lv: 2,  hp: 60,   atk: [5, 9],     def: 2,  exp: 18,   para: [3, 8] },
+  orumcek:     { ad: 'Dev Örümcek',   simge: 'orumcek', lv: 3,  hp: 55,   atk: [7, 11],    def: 1,  exp: 22,   para: [4, 9] },
+  kurt_kral:   { ad: 'Kurt Kralı',    simge: 'kurt_kral', lv: 5,  hp: 450,  atk: [14, 20],   def: 5,  exp: 160,  para: [60, 100], boss: true },
 
-  engerek:     { ad: 'Engerek',       ikon: '🐍', lv: 5,  hp: 120,  atk: [12, 18],   def: 4,  exp: 40,   para: [8, 15] },
-  sahin:       { ad: 'Şahin',         ikon: '🦅', lv: 6,  hp: 110,  atk: [14, 20],   def: 3,  exp: 48,   para: [9, 16] },
-  kaplan_yilan:{ ad: 'Kaplan Yılan',  ikon: '🐉', lv: 8,  hp: 200,  atk: [18, 26],   def: 7,  exp: 70,   para: [12, 22] },
-  dev_bocek:   { ad: 'Dev Bokböceği', ikon: '🪲', lv: 10, hp: 1600, atk: [34, 46],   def: 12, exp: 650,  para: [200, 320], boss: true },
+  engerek:     { ad: 'Engerek',       simge: 'engerek', lv: 5,  hp: 120,  atk: [12, 18],   def: 4,  exp: 40,   para: [8, 15] },
+  sahin:       { ad: 'Kara Şahin',    simge: 'sahin', lv: 6,  hp: 110,  atk: [14, 20],   def: 3,  exp: 48,   para: [9, 16] },
+  kaplan_yilan:{ ad: 'Kaplan Yılan',  simge: 'kaplan_yilan', lv: 8,  hp: 200,  atk: [18, 26],   def: 7,  exp: 70,   para: [12, 22] },
+  dev_bocek:   { ad: 'Kara Kınkanatlı', simge: 'dev_bocek', lv: 10, hp: 1600, atk: [34, 46],   def: 12, exp: 650,  para: [200, 320], boss: true },
 
-  iskelet:     { ad: 'İskelet',       ikon: '💀', lv: 10, hp: 300,  atk: [28, 38],   def: 10, exp: 110,  para: [18, 30] },
-  yarasa:      { ad: 'Vampir Yarasa', ikon: '🦇', lv: 11, hp: 260,  atk: [30, 40],   def: 8,  exp: 120,  para: [20, 32] },
-  zombi:       { ad: 'Zombi',         ikon: '🧟', lv: 12, hp: 420,  atk: [32, 44],   def: 12, exp: 145,  para: [22, 36] },
-  zincirli_iblis:{ ad: 'Zincirli İblis', ikon: '👹', lv: 16, hp: 4200, atk: [70, 90], def: 25, exp: 1900, para: [600, 900], boss: true },
+  iskelet:     { ad: 'İskelet',       simge: 'iskelet', lv: 10, hp: 300,  atk: [28, 38],   def: 10, exp: 110,  para: [18, 30] },
+  yarasa:      { ad: 'Vampir Yarasa', simge: 'yarasa', lv: 11, hp: 260,  atk: [30, 40],   def: 8,  exp: 120,  para: [20, 32] },
+  zombi:       { ad: 'Zombi',         simge: 'zombi', lv: 12, hp: 420,  atk: [32, 44],   def: 12, exp: 145,  para: [22, 36] },
+  zincirli_iblis:{ ad: 'Zincirli İblis', simge: 'zincirli_iblis', lv: 16, hp: 4200, atk: [70, 90], def: 25, exp: 1900, para: [600, 900], boss: true },
 
-  kan_buyucusu:{ ad: 'Kan Büyücüsü',  ikon: '🧙', lv: 16, hp: 700,  atk: [55, 70],   def: 18, exp: 280,  para: [35, 55] },
-  gargoyl:     { ad: 'Gargoyl',       ikon: '🗿', lv: 18, hp: 900,  atk: [60, 80],   def: 24, exp: 340,  para: [40, 62] },
-  cehennem_tazisi:{ ad: 'Cehennem Tazısı', ikon: '🔥', lv: 20, hp: 1100, atk: [70, 95], def: 22, exp: 420, para: [48, 75] },
-  kara_ejder:  { ad: 'Kara Ejder',    ikon: '🐲', lv: 22, hp: 12000, atk: [115, 145], def: 40, exp: 6000, para: [2000, 3000], boss: true }
+  kan_buyucusu:{ ad: 'Kan Büyücüsü',  simge: 'kan_buyucusu', lv: 16, hp: 700,  atk: [55, 70],   def: 18, exp: 280,  para: [35, 55] },
+  gargoyl:     { ad: 'Gargoyl',       simge: 'gargoyl', lv: 18, hp: 900,  atk: [60, 80],   def: 24, exp: 340,  para: [40, 62] },
+  cehennem_tazisi:{ ad: 'Cehennem Tazısı', simge: 'cehennem_tazisi', lv: 20, hp: 1100, atk: [70, 95], def: 22, exp: 420, para: [48, 75] },
+  kara_ejder:  { ad: 'Kara Ejder',    simge: 'kara_ejder', lv: 22, hp: 12000, atk: [115, 145], def: 40, exp: 6000, para: [2000, 3000], boss: true }
 };
 
 // ---- Bölgeler ----
@@ -219,35 +219,35 @@ G.SINIFLAR.okcu.baslangic = 'cift_atis';
 // PASİF: bonus x beceri seviyesi kadar stat verir
 G.BECERILER = {
   // ---- Savaşçı ----
-  yarma:          { ad: 'Yarma Darbesi',  sinif: 'savasci', tur: 'aktif', ikon: '🪓', minLv: 1,  mp: 10, bekleme: 1, etki: { tip: 'hasar', carpan: 1.9, vurus: 1 }, artis: { carpan: 0.15 } },
-  kalkan_darbesi: { ad: 'Kalkan Darbesi', sinif: 'savasci', tur: 'aktif', ikon: '🛡️', minLv: 3,  mp: 12, bekleme: 5, etki: { tip: 'hasar', carpan: 1.2, vurus: 1, sersem: 1 }, artis: { carpan: 0.1 } },
-  savas_cigligi:  { ad: 'Savaş Çığlığı',  sinif: 'savasci', tur: 'aktif', ikon: '📯', minLv: 6,  mp: 15, bekleme: 8, etki: { tip: 'guc', oran: 25, sure: 4 }, artis: { oran: 5 } },
-  demir_irade:    { ad: 'Demir İrade',    sinif: 'savasci', tur: 'aktif', ikon: '🧱', minLv: 10, mp: 14, bekleme: 7, etki: { tip: 'kalkan', oran: 40, sure: 3 }, artis: { oran: 5 } },
-  demir_deri:     { ad: 'Demir Deri',     sinif: 'savasci', tur: 'pasif', ikon: '🪨', minLv: 4,  bonus: { defYuzde: 6 } },
-  ofke:           { ad: 'Öfke',           sinif: 'savasci', tur: 'pasif', ikon: '💢', minLv: 8,  bonus: { atkYuzde: 3, krit: 1 } },
+  yarma:          { ad: 'Yarma Darbesi',  sinif: 'savasci', tur: 'aktif', simge: 'b_yarma', minLv: 1,  mp: 10, bekleme: 1, etki: { tip: 'hasar', carpan: 1.9, vurus: 1 }, artis: { carpan: 0.15 } },
+  kalkan_darbesi: { ad: 'Kalkan Darbesi', sinif: 'savasci', tur: 'aktif', simge: 'b_kalkan_darbesi', minLv: 3,  mp: 12, bekleme: 5, etki: { tip: 'hasar', carpan: 1.2, vurus: 1, sersem: 1 }, artis: { carpan: 0.1 } },
+  savas_cigligi:  { ad: 'Savaş Çığlığı',  sinif: 'savasci', tur: 'aktif', simge: 'b_savas_cigligi', minLv: 6,  mp: 15, bekleme: 8, etki: { tip: 'guc', oran: 25, sure: 4 }, artis: { oran: 5 } },
+  demir_irade:    { ad: 'Demir İrade',    sinif: 'savasci', tur: 'aktif', simge: 'b_demir_irade', minLv: 10, mp: 14, bekleme: 7, etki: { tip: 'kalkan', oran: 40, sure: 3 }, artis: { oran: 5 } },
+  demir_deri:     { ad: 'Demir Deri',     sinif: 'savasci', tur: 'pasif', simge: 'b_demir_deri', minLv: 4,  bonus: { defYuzde: 6 } },
+  ofke:           { ad: 'Öfke',           sinif: 'savasci', tur: 'pasif', simge: 'b_ofke', minLv: 8,  bonus: { atkYuzde: 3, krit: 1 } },
 
   // ---- Büyücü ----
-  ates_topu:      { ad: 'Ateş Topu',      sinif: 'buyucu', tur: 'aktif', ikon: '🔥', minLv: 1,  mp: 16, bekleme: 1, etki: { tip: 'hasar', carpan: 2.6, vurus: 1 }, artis: { carpan: 0.2 } },
-  buz_mizragi:    { ad: 'Buz Mızrağı',    sinif: 'buyucu', tur: 'aktif', ikon: '🧊', minLv: 3,  mp: 18, bekleme: 5, etki: { tip: 'hasar', carpan: 1.6, vurus: 1, sersem: 1 }, artis: { carpan: 0.15 } },
-  alev_dalgasi:   { ad: 'Alev Dalgası',   sinif: 'buyucu', tur: 'aktif', ikon: '🌋', minLv: 6,  mp: 20, bekleme: 6, etki: { tip: 'hasar', carpan: 0.8, vurus: 1, dot: 0.6, sure: 4 }, artis: { dot: 0.1 } },
-  mana_kalkani:   { ad: 'Mana Kalkanı',   sinif: 'buyucu', tur: 'aktif', ikon: '🔮', minLv: 10, mp: 22, bekleme: 7, etki: { tip: 'kalkan', oran: 45, sure: 3 }, artis: { oran: 5 } },
-  bilgelik:       { ad: 'Bilgelik',       sinif: 'buyucu', tur: 'pasif', ikon: '📘', minLv: 4,  bonus: { mp: 25, beceri: 3 } },
-  buyu_ustaligi:  { ad: 'Büyü Ustalığı',  sinif: 'buyucu', tur: 'pasif', ikon: '✴️', minLv: 8,  bonus: { beceri: 8 } },
+  ates_topu:      { ad: 'Ateş Topu',      sinif: 'buyucu', tur: 'aktif', simge: 'b_ates_topu', minLv: 1,  mp: 16, bekleme: 1, etki: { tip: 'hasar', carpan: 2.6, vurus: 1 }, artis: { carpan: 0.2 } },
+  buz_mizragi:    { ad: 'Buz Mızrağı',    sinif: 'buyucu', tur: 'aktif', simge: 'b_buz_mizragi', minLv: 3,  mp: 18, bekleme: 5, etki: { tip: 'hasar', carpan: 1.6, vurus: 1, sersem: 1 }, artis: { carpan: 0.15 } },
+  alev_dalgasi:   { ad: 'Alev Dalgası',   sinif: 'buyucu', tur: 'aktif', simge: 'b_alev_dalgasi', minLv: 6,  mp: 20, bekleme: 6, etki: { tip: 'hasar', carpan: 0.8, vurus: 1, dot: 0.6, sure: 4 }, artis: { dot: 0.1 } },
+  mana_kalkani:   { ad: 'Mana Kalkanı',   sinif: 'buyucu', tur: 'aktif', simge: 'b_mana_kalkani', minLv: 10, mp: 22, bekleme: 7, etki: { tip: 'kalkan', oran: 45, sure: 3 }, artis: { oran: 5 } },
+  bilgelik:       { ad: 'Bilgelik',       sinif: 'buyucu', tur: 'pasif', simge: 'b_bilgelik', minLv: 4,  bonus: { mp: 25, beceri: 3 } },
+  buyu_ustaligi:  { ad: 'Büyü Ustalığı',  sinif: 'buyucu', tur: 'pasif', simge: 'b_buyu_ustaligi', minLv: 8,  bonus: { beceri: 8 } },
 
   // ---- Okçu ----
-  cift_atis:      { ad: 'Çift Atış',      sinif: 'okcu', tur: 'aktif', ikon: '🏹', minLv: 1,  mp: 12, bekleme: 1, etki: { tip: 'hasar', carpan: 1.35, vurus: 2 }, artis: { carpan: 0.1 } },
-  zehirli_ok:     { ad: 'Zehirli Ok',     sinif: 'okcu', tur: 'aktif', ikon: '🐍', minLv: 3,  mp: 14, bekleme: 5, etki: { tip: 'hasar', carpan: 1.0, vurus: 1, dot: 0.5, sure: 5 }, artis: { dot: 0.08 } },
-  ok_yagmuru:     { ad: 'Ok Yağmuru',     sinif: 'okcu', tur: 'aktif', ikon: '🌧️', minLv: 6,  mp: 22, bekleme: 6, etki: { tip: 'hasar', carpan: 0.75, vurus: 4 }, artis: { carpan: 0.08 } },
-  golge_adim:     { ad: 'Gölge Adım',     sinif: 'okcu', tur: 'aktif', ikon: '💨', minLv: 10, mp: 15, bekleme: 7, etki: { tip: 'kalkan', oran: 55, sure: 2 }, artis: { oran: 5 } },
-  keskin_goz:     { ad: 'Keskin Göz',     sinif: 'okcu', tur: 'pasif', ikon: '🎯', minLv: 4,  bonus: { krit: 2 } },
-  avci_icgudusu:  { ad: 'Avcı İçgüdüsü',  sinif: 'okcu', tur: 'pasif', ikon: '🐾', minLv: 8,  bonus: { kritHasar: 10 } },
+  cift_atis:      { ad: 'Çift Atış',      sinif: 'okcu', tur: 'aktif', simge: 'b_cift_atis', minLv: 1,  mp: 12, bekleme: 1, etki: { tip: 'hasar', carpan: 1.35, vurus: 2 }, artis: { carpan: 0.1 } },
+  zehirli_ok:     { ad: 'Zehirli Ok',     sinif: 'okcu', tur: 'aktif', simge: 'b_zehirli_ok', minLv: 3,  mp: 14, bekleme: 5, etki: { tip: 'hasar', carpan: 1.0, vurus: 1, dot: 0.5, sure: 5 }, artis: { dot: 0.08 } },
+  ok_yagmuru:     { ad: 'Ok Yağmuru',     sinif: 'okcu', tur: 'aktif', simge: 'b_ok_yagmuru', minLv: 6,  mp: 22, bekleme: 6, etki: { tip: 'hasar', carpan: 0.75, vurus: 4 }, artis: { carpan: 0.08 } },
+  golge_adim:     { ad: 'Gölge Adım',     sinif: 'okcu', tur: 'aktif', simge: 'b_golge_adim', minLv: 10, mp: 15, bekleme: 7, etki: { tip: 'kalkan', oran: 55, sure: 2 }, artis: { oran: 5 } },
+  keskin_goz:     { ad: 'Keskin Göz',     sinif: 'okcu', tur: 'pasif', simge: 'b_keskin_goz', minLv: 4,  bonus: { krit: 2 } },
+  avci_icgudusu:  { ad: 'Avcı İçgüdüsü',  sinif: 'okcu', tur: 'pasif', simge: 'b_avci_icgudusu', minLv: 8,  bonus: { kritHasar: 10 } },
 
   // ---- Genel (her sınıf) ----
-  ilk_yardim:     { ad: 'İlk Yardım',     sinif: null, tur: 'aktif', ikon: '💚', minLv: 2,  mp: 12, bekleme: 8, etki: { tip: 'iyilesme', oran: 25 }, artis: { oran: 5 } },
-  hazine_avcisi:  { ad: 'Hazine Avcısı',  sinif: null, tur: 'pasif', ikon: '💰', minLv: 3,  bonus: { altin: 6 } },
-  bilge:          { ad: 'Bilge',          sinif: null, tur: 'pasif', ikon: '📜', minLv: 3,  bonus: { tecrube: 5 } },
-  kan_emici:      { ad: 'Kan Emici',      sinif: null, tur: 'pasif', ikon: '🩸', minLv: 5,  bonus: { canCal: 1 } },
-  cevik:          { ad: 'Çevik',          sinif: null, tur: 'pasif', ikon: '🍃', minLv: 6,  bonus: { hiz: 2 } }
+  ilk_yardim:     { ad: 'İlk Yardım',     sinif: null, tur: 'aktif', simge: 'b_ilk_yardim', minLv: 2,  mp: 12, bekleme: 8, etki: { tip: 'iyilesme', oran: 25 }, artis: { oran: 5 } },
+  hazine_avcisi:  { ad: 'Hazine Avcısı',  sinif: null, tur: 'pasif', simge: 'b_hazine_avcisi', minLv: 3,  bonus: { altin: 6 } },
+  bilge:          { ad: 'Bilge',          sinif: null, tur: 'pasif', simge: 'b_bilge', minLv: 3,  bonus: { tecrube: 5 } },
+  kan_emici:      { ad: 'Kan Emici',      sinif: null, tur: 'pasif', simge: 'b_kan_emici', minLv: 5,  bonus: { canCal: 1 } },
+  cevik:          { ad: 'Çevik',          sinif: null, tur: 'pasif', simge: 'b_cevik', minLv: 6,  bonus: { hiz: 2 } }
 };
 
 G.BONUS_ADLARI.beceri = 'Beceri hasarı';
@@ -288,52 +288,52 @@ G.BECERILER.yarma.etki.carpan = 2.1;
 // harita: büyük haritadaki konum (x: 0-100, y: 0-150, aşağıdan yukarı ilerler)
 G.BOLGELER = [
   { id: 'koy', ad: 'Taşlıca Köyü', tur: 'kasaba', minLv: 1, harita: { x: 50, y: 140 },
-    aciklama: 'Yolculuğun başladığı küçük köy. Taş duvarların ardında iksirci ve hurdacı seni bekler.' },
+    aciklama: 'Yolculuğun başladığı küçük köy. Taş duvarlar kuzeyden esen soğuğa bin yıldır dayanıyor; ama son kışlarda köpekler geceleri ormana doğru havlamayı bırakmıyor.' },
   { id: 'orman', ad: 'Sisli Orman', tur: 'av', minLv: 1, harita: { x: 28, y: 126 },
-    aciklama: 'Sabahları sisin hiç kalkmadığı sık orman.', canavarlar: ['kurt', 'domuz', 'orumcek'], boss: 'kurt_kral', set: 'kurt' },
+    aciklama: 'Sabahları sisin hiç kalkmadığı sık orman. Eskiden avcıdan kaçan hayvanların gözleri artık karanlık; sisin içinde bir şey onları kışkırtıyor.', canavarlar: ['kurt', 'domuz', 'orumcek'], boss: 'kurt_kral', set: 'kurt' },
   { id: 'vadi', ad: 'Engerek Vadisi', tur: 'av', minLv: 5, harita: { x: 64, y: 112 },
-    aciklama: 'Kayalıkların arasında yılanların yuva kurduğu dar vadi.', canavarlar: ['engerek', 'sahin', 'kaplan_yilan'], boss: 'dev_bocek', set: 'engerek' },
+    aciklama: 'Kayalıkların arasında yılanların yuva kurduğu dar vadi. Kervanlar buradan geçerdi; şimdi taşların arasında yolcuların bıraktığı sikkeler değil, kemikler parlıyor.', canavarlar: ['engerek', 'sahin', 'kaplan_yilan'], boss: 'dev_bocek', set: 'engerek' },
   { id: 'kervansaray', ad: 'Eski Kervansaray', tur: 'kasaba', minLv: 5, harita: { x: 80, y: 97 },
-    aciklama: 'Yol üstündeki yorgun tüccarların ve maceracıların durağı.' },
+    aciklama: 'Yol üstündeki yorgun tüccarların ve maceracıların durağı. Kuzeyden dönen her kervanın haberi önce buraya ulaşır, ve son zamanlarda haberlerin hiçbiri iyi değil.' },
   { id: 'harabe', ad: 'Kül Harabeleri', tur: 'av', minLv: 10, harita: { x: 52, y: 85 },
-    aciklama: 'Bir zamanlar parlak bir şehirdi. Şimdi ölüler dolaşıyor.', canavarlar: ['iskelet', 'yarasa', 'zombi'], boss: 'zincirli_iblis', set: 'iblis' },
+    aciklama: 'Bir zamanlar parlak bir başkentti. Zindanında zincire vurulmuş bir iblis yatıyordu; zincirler koptuğu gece şehir yandı. Şimdi küllerin arasında ölüler dolaşıyor.', canavarlar: ['iskelet', 'yarasa', 'zombi'], boss: 'zincirli_iblis', set: 'iblis' },
   { id: 'kale', ad: 'Kan Kalesi', tur: 'av', minLv: 16, harita: { x: 22, y: 73 },
-    aciklama: 'Kara büyücülerin kalesi. Duvarlarından kan sızar.', canavarlar: ['kan_buyucusu', 'gargoyl', 'cehennem_tazisi'], boss: 'kara_ejder', set: 'ejder' },
+    aciklama: 'Kara büyücülerin kalesi. Uçurumdan gelen fısıltıyı ilk duyanlar onlardı ve kapılarını ona açtılar. Duvarlarından hâlâ kan sızar.', canavarlar: ['kan_buyucusu', 'gargoyl', 'cehennem_tazisi'], boss: 'kara_ejder', set: 'ejder' },
   { id: 'demirkapi', ad: 'Demirkapı', tur: 'kasaba', minLv: 16, harita: { x: 38, y: 60 },
-    aciklama: 'Dağ geçidini tutan sur şehri. Kuzeye giden son güvenli yer.' },
+    aciklama: 'Dağ geçidini tutan sur şehri. Üç kuşaktır kuzeye karşı nöbet tutuyor; kuzeye giden son güvenli yer.' },
   { id: 'bataklik', ad: 'Zehir Bataklığı', tur: 'av', minLv: 22, harita: { x: 70, y: 51 },
-    aciklama: 'Nefes almanın bile acıttığı çürük sular.', canavarlar: ['kurbaga', 'suluk', 'curuk_ent'], boss: 'bataklik_timsahi' },
+    aciklama: 'Nefes almanın bile acıttığı çürük sular. Kan Kalesi\'nden kaçan büyücüler burada saklanıyor; sular çürüdükçe karanlık güneye sızıyor.', canavarlar: ['kurbaga', 'suluk', 'curuk_ent'], boss: 'bataklik_timsahi' },
   { id: 'buzul', ad: 'Buzul Geçidi', tur: 'av', minLv: 27, harita: { x: 84, y: 36 },
-    aciklama: 'Rüzgarın kemikleri dondurduğu karlı geçit.', canavarlar: ['buz_kurdu', 'kar_trolu', 'buz_ruhu'], boss: 'ayaz_devi' },
+    aciklama: 'Rüzgarın kemikleri dondurduğu karlı geçit. Burada bir dev, uçurumun ağzına set çeken buz duvarını yüzyıllarca ayakta tuttu.', canavarlar: ['buz_kurdu', 'kar_trolu', 'buz_ruhu'], boss: 'ayaz_devi' },
   { id: 'karakol', ad: 'Son Karakol', tur: 'kasaba', minLv: 27, harita: { x: 58, y: 27 },
-    aciklama: 'Dünyanın kenarındaki son nöbet yeri.' },
+    aciklama: 'Dünyanın kenarındaki son nöbet yeri. Haritalar burada biter; kulenin penceresinden bakınca kuzeyde ışığın yuttuğu bir karanlık görünür.' },
   { id: 'volkan', ad: 'Kor Dağı', tur: 'av', minLv: 32, harita: { x: 28, y: 19 },
-    aciklama: 'Lavın nehir gibi aktığı yanık dağ.', canavarlar: ['magma_bocegi', 'kor_semender', 'ates_elementali'], boss: 'kor_titani' },
+    aciklama: 'Lavın nehir gibi aktığı yanık dağ. Uçuruma giden son yol buradan geçer ve burada ateş bile karanlık yanar.', canavarlar: ['magma_bocegi', 'kor_semender', 'ates_elementali'], boss: 'kor_titani' },
   { id: 'ucurum', ad: 'Hiçlik Uçurumu', tur: 'av', minLv: 37, harita: { x: 52, y: 7 },
-    aciklama: 'Işığın bile geri dönmediği uçurum. Buradan ötesi yok.', canavarlar: ['hiclik_gozcusu', 'golge_sovalye', 'bosluk_canavari'], boss: 'hiclik_efendisi' }
+    aciklama: 'Işığın bile geri dönmediği uçurum. Bütün karanlık buradan doğdu; ona Hiçlik derler. Buradan ötesi yok.', canavarlar: ['hiclik_gozcusu', 'golge_sovalye', 'bosluk_canavari'], boss: 'hiclik_efendisi' }
 ];
 
 // Yeni canavarlar (statlar ayrıca G.ZORLUK ile seviyeye göre büyür)
 Object.assign(G.CANAVARLAR, {
-  kurbaga:          { ad: 'Zehir Kurbağası',  ikon: '🐸', lv: 22, hp: 1250, atk: [78, 98],   def: 28, exp: 520,  para: [55, 85] },
-  suluk:            { ad: 'Sülük Yığını',     ikon: '🪱', lv: 23, hp: 1400, atk: [76, 96],   def: 30, exp: 560,  para: [58, 90] },
-  curuk_ent:        { ad: 'Çürük Ağaç',       ikon: '🌳', lv: 25, hp: 1750, atk: [88, 112],  def: 36, exp: 650,  para: [65, 100] },
-  bataklik_timsahi: { ad: 'Bataklık Timsahı', ikon: '🐊', lv: 27, hp: 15000, atk: [150, 185], def: 50, exp: 9000, para: [3000, 4500], boss: true },
+  kurbaga:          { ad: 'Zehir Kurbağası',  simge: 'kurbaga', lv: 22, hp: 1250, atk: [78, 98],   def: 28, exp: 520,  para: [55, 85] },
+  suluk:            { ad: 'Sülük Yığını',     simge: 'suluk', lv: 23, hp: 1400, atk: [76, 96],   def: 30, exp: 560,  para: [58, 90] },
+  curuk_ent:        { ad: 'Çürük Ağaç',       simge: 'curuk_ent', lv: 25, hp: 1750, atk: [88, 112],  def: 36, exp: 650,  para: [65, 100] },
+  bataklik_timsahi: { ad: 'Bataklık Timsahı', simge: 'bataklik_timsahi', lv: 27, hp: 15000, atk: [150, 185], def: 50, exp: 9000, para: [3000, 4500], boss: true },
 
-  buz_kurdu:        { ad: 'Buz Kurdu',        ikon: '🐺', lv: 27, hp: 1950, atk: [98, 122],  def: 40, exp: 780,  para: [75, 110] },
-  kar_trolu:        { ad: 'Kar Trolü',        ikon: '🧌', lv: 28, hp: 2500, atk: [102, 130], def: 46, exp: 880,  para: [80, 120] },
-  buz_ruhu:         { ad: 'Buz Ruhu',         ikon: '👻', lv: 30, hp: 2050, atk: [120, 150], def: 38, exp: 950,  para: [85, 125] },
-  ayaz_devi:        { ad: 'Ayaz Devi',        ikon: '❄️', lv: 32, hp: 21000, atk: [185, 225], def: 62, exp: 14000, para: [4500, 6500], boss: true },
+  buz_kurdu:        { ad: 'Buz Kurdu',        simge: 'kurt', lv: 27, hp: 1950, atk: [98, 122],  def: 40, exp: 780,  para: [75, 110] },
+  kar_trolu:        { ad: 'Kar Trolü',        simge: 'kar_trolu', lv: 28, hp: 2500, atk: [102, 130], def: 46, exp: 880,  para: [80, 120] },
+  buz_ruhu:         { ad: 'Buz Ruhu',         simge: 'buz_ruhu', lv: 30, hp: 2050, atk: [120, 150], def: 38, exp: 950,  para: [85, 125] },
+  ayaz_devi:        { ad: 'Ayaz Devi',        simge: 'ayaz_devi', lv: 32, hp: 21000, atk: [185, 225], def: 62, exp: 14000, para: [4500, 6500], boss: true },
 
-  magma_bocegi:     { ad: 'Magma Böceği',     ikon: '🐞', lv: 32, hp: 2800, atk: [135, 165], def: 50, exp: 1150, para: [95, 140] },
-  kor_semender:     { ad: 'Kor Semenderi',    ikon: '🦎', lv: 33, hp: 3100, atk: [140, 175], def: 54, exp: 1250, para: [100, 150] },
-  ates_elementali:  { ad: 'Ateş Ruhu',        ikon: '🔥', lv: 35, hp: 3500, atk: [160, 195], def: 58, exp: 1400, para: [110, 160] },
-  kor_titani:       { ad: 'Kor Titanı',       ikon: '🌋', lv: 37, hp: 29000, atk: [230, 280], def: 75, exp: 20000, para: [6500, 9000], boss: true },
+  magma_bocegi:     { ad: 'Magma Böceği',     simge: 'magma_bocegi', lv: 32, hp: 2800, atk: [135, 165], def: 50, exp: 1150, para: [95, 140] },
+  kor_semender:     { ad: 'Kor Semenderi',    simge: 'kor_semender', lv: 33, hp: 3100, atk: [140, 175], def: 54, exp: 1250, para: [100, 150] },
+  ates_elementali:  { ad: 'Ateş Ruhu',        simge: 'ates_elementali', lv: 35, hp: 3500, atk: [160, 195], def: 58, exp: 1400, para: [110, 160] },
+  kor_titani:       { ad: 'Kor Titanı',       simge: 'kor_titani', lv: 37, hp: 29000, atk: [230, 280], def: 75, exp: 20000, para: [6500, 9000], boss: true },
 
-  hiclik_gozcusu:   { ad: 'Hiçlik Gözcüsü',   ikon: '👁️', lv: 37, hp: 3900, atk: [175, 210], def: 64, exp: 1650, para: [120, 175] },
-  golge_sovalye:    { ad: 'Gölge Şövalyesi',  ikon: '🗡️', lv: 38, hp: 4500, atk: [185, 225], def: 70, exp: 1800, para: [130, 185] },
-  bosluk_canavari:  { ad: 'Boşluk Canavarı',  ikon: '🕳️', lv: 40, hp: 5100, atk: [205, 250], def: 76, exp: 2050, para: [140, 200] },
-  hiclik_efendisi:  { ad: 'Hiçlik Efendisi',  ikon: '🌑', lv: 42, hp: 40000, atk: [280, 340], def: 90, exp: 30000, para: [9000, 13000], boss: true }
+  hiclik_gozcusu:   { ad: 'Hiçlik Gözcüsü',   simge: 'hiclik_gozcusu', lv: 37, hp: 3900, atk: [175, 210], def: 64, exp: 1650, para: [120, 175] },
+  golge_sovalye:    { ad: 'Gölge Şövalyesi',  simge: 'golge_sovalye', lv: 38, hp: 4500, atk: [185, 225], def: 70, exp: 1800, para: [130, 185] },
+  bosluk_canavari:  { ad: 'Boşluk Canavarı',  simge: 'bosluk_canavari', lv: 40, hp: 5100, atk: [205, 250], def: 76, exp: 2050, para: [140, 200] },
+  hiclik_efendisi:  { ad: 'Hiçlik Efendisi',  simge: 'hiclik_efendisi', lv: 42, hp: 40000, atk: [280, 340], def: 90, exp: 30000, para: [9000, 13000], boss: true }
 });
 
 // Yeni eşyalar (listenin SONUNA)
@@ -401,16 +401,16 @@ G.BECERILER.ok_yagmuru.etki = { tip: 'hasar', sekil: 'alan', carpan: 0.9, vurus:
 G.BECERILER.ok_yagmuru.artis = { carpan: 0.08 };
 
 Object.assign(G.BECERILER, {
-  hilal_kesik:  { ad: 'Hilal Kesiği', sinif: 'savasci', tur: 'aktif', ikon: '🌙', minLv: 2, mp: 0, bekleme: 3,
+  hilal_kesik:  { ad: 'Hilal Kesiği', sinif: 'savasci', tur: 'aktif', simge: 'b_hilal_kesik', minLv: 2, mp: 0, bekleme: 3,
                   etki: { tip: 'hasar', sekil: 'yarimay', carpan: 1.1, vurus: 1 }, artis: { carpan: 0.1 } },
-  kasirga:      { ad: 'Kasırga', sinif: 'savasci', tur: 'aktif', ikon: '🌀', minLv: 8, mp: 18, bekleme: 6,
+  kasirga:      { ad: 'Kasırga', sinif: 'savasci', tur: 'aktif', simge: 'b_kasirga', minLv: 8, mp: 18, bekleme: 6,
                   etki: { tip: 'hasar', sekil: 'kasirga', carpan: 1.4, vurus: 1 }, artis: { carpan: 0.12 } },
-  gokatasi:     { ad: 'Göktaşı', sinif: 'buyucu', tur: 'aktif', ikon: '☄️', minLv: 12, mp: 35, bekleme: 8,
+  gokatasi:     { ad: 'Göktaşı', sinif: 'buyucu', tur: 'aktif', simge: 'b_gokatasi', minLv: 12, mp: 35, bekleme: 8,
                   etki: { tip: 'hasar', sekil: 'alan', carpan: 1.8, vurus: 1 }, artis: { carpan: 0.15 } },
-  delici_ok:    { ad: 'Delici Ok', sinif: 'okcu', tur: 'aktif', ikon: '➶', minLv: 2, mp: 8, bekleme: 3,
+  delici_ok:    { ad: 'Delici Ok', sinif: 'okcu', tur: 'aktif', simge: 'b_delici_ok', minLv: 2, mp: 8, bekleme: 3,
                   etki: { tip: 'hasar', sekil: 'cizgi', carpan: 1.4, vurus: 1 }, artis: { carpan: 0.1 } },
   // Tetiklenen: normal saldırıda şansla ek vuruş (%60 hasar)
-  cifte_darbe:  { ad: 'Çifte Darbe', sinif: null, tur: 'pasif', ikon: '⚡', minLv: 7, bonus: { ekVurus: 4 } }
+  cifte_darbe:  { ad: 'Çifte Darbe', sinif: null, tur: 'pasif', simge: 'b_cifte_darbe', minLv: 7, bonus: { ekVurus: 4 } }
 });
 G.BONUS_ADLARI.ekVurus = 'Ek vuruş şansı';
 G.YUZDE_STATLAR.ekVurus = 1;
@@ -473,11 +473,11 @@ G.SINIF_GORUNUM = {
 // v0.8 — MADENCİLİK
 // ============================================================
 G.CEVHERLER = {
-  bakir:  { ad: 'Bakır',        ikon: '🟤' },
-  gumus:  { ad: 'Gümüş',        ikon: '⚪' },
-  altin:  { ad: 'Altın Cevher', ikon: '🟡' },
-  demir:  { ad: 'Kara Demir',   ikon: '⚫' },
-  kristal:{ ad: 'İlahi Kristal', ikon: '💠' }
+  bakir:  { ad: 'Bakır',        simge: 'cevher', renk: '#c07a48' },
+  gumus:  { ad: 'Gümüş',        simge: 'cevher', renk: '#c8ccd4' },
+  altin:  { ad: 'Altın Cevher', simge: 'cevher', renk: '#e3b34a' },
+  demir:  { ad: 'Kara Demir',   simge: 'cevher', renk: '#8a8c96' },
+  kristal:{ ad: 'İlahi Kristal', simge: 'kristal', renk: '#6ec8f0' }
 };
 
 // ============================================================
@@ -493,9 +493,9 @@ G.ILAHI = {
   // Özel beceri: bu seviyelerde açılır ve güçlenir (tetiklenme şansı %)
   beceriSeviye: [5, 15, 25], beceriSans: [8, 12, 16],
   sinif: {
-    savasci: { ad: 'Gök Gürültüsü Kılıcı', ikon: '⚡', beceri: 'Yıldırım', aciklama: 'hedefin çevresindeki 9 kareye %100 hasar', sekil: 'alan', carpan: 1.0 },
-    buyucu:  { ad: 'Yıldız Asası',         ikon: '🌟', beceri: 'Yıldız Düşüşü', aciklama: 'hedefe %220 hasar', sekil: 'tek', carpan: 2.2 },
-    okcu:    { ad: 'Rüzgar Yayı',          ikon: '🌪️', beceri: 'Rüzgar Oku', aciklama: 'bir yönde 4 kareyi delerek %130 hasar', sekil: 'cizgi', carpan: 1.3 }
+    savasci: { ad: 'Gök Gürültüsü Kılıcı', simge: 'i_savasci', beceri: 'Yıldırım', aciklama: 'hedefin çevresindeki 9 kareye %100 hasar', sekil: 'alan', carpan: 1.0 },
+    buyucu:  { ad: 'Yıldız Asası',         simge: 'i_buyucu', beceri: 'Yıldız Düşüşü', aciklama: 'hedefe %220 hasar', sekil: 'tek', carpan: 2.2 },
+    okcu:    { ad: 'Rüzgar Yayı',          simge: 'i_okcu', beceri: 'Rüzgar Oku', aciklama: 'bir yönde 4 kareyi delerek %130 hasar', sekil: 'cizgi', carpan: 1.3 }
   }
 };
 G.BONUS_ADLARI.ilahi = 'İlahi silah';
@@ -579,11 +579,11 @@ G.CANTA = { baslangic: 40, adim: 5, maks: 80, fiyat: 2000, carpan: 1.5 };
 
 // Sarf malzemeleri (çantada yığın olarak görünür)
 G.SARF = {
-  hp:       { ad: 'Can İksiri',      ikon: '🧪', renk: '#c0503a', aciklama: 'Canını seviyene göre yeniler. Savaşta iki iksir arası bekleme var.' },
-  mp:       { ad: 'Mana İksiri',     ikon: '💧', renk: '#3d6fb4', aciklama: 'Manani seviyene göre yeniler.' },
-  parsomen: { ad: 'Dönüş Parşömeni', ikon: '📜', renk: '#8a7a3a', aciklama: 'Seni son uğradığın kasabaya götürür. Saldırı altındayken de okunur.' },
-  tas:      { ad: 'Arıtma Taşı',     ikon: '💎', renk: '#4f8fe0', aciklama: 'Eşya güçlendirmede kullanılır.' },
-  toz:      { ad: 'Ruh Tozu',        ikon: '✴️', renk: '#b060e0', aciklama: 'Eşya eritince çıkar. Ek statları yeniden zarlamada kullanılır.' }
+  hp:       { ad: 'Can İksiri',      simge: 'iksir', renk: '#c0503a', aciklama: 'Canını seviyene göre yeniler. Savaşta iki iksir arası bekleme var.' },
+  mp:       { ad: 'Mana İksiri',     simge: 'iksir', renk: '#3d6fb4', aciklama: 'Manani seviyene göre yeniler.' },
+  parsomen: { ad: 'Dönüş Parşömeni', simge: 'parsomen', renk: '#8a7a3a', aciklama: 'Seni son uğradığın kasabaya götürür. Saldırı altındayken de okunur.' },
+  tas:      { ad: 'Arıtma Taşı',     simge: 'tas', renk: '#4f8fe0', aciklama: 'Eşya güçlendirmede kullanılır.' },
+  toz:      { ad: 'Ruh Tozu',        simge: 'toz', renk: '#b060e0', aciklama: 'Eşya eritince çıkar. Ek statları yeniden zarlamada kullanılır.' }
 };
 
 // ============================================================
@@ -632,7 +632,7 @@ G.BECERI_MAKS = 8;
 // Seviye lv'den lv+1'e geçmek için gereken ustalık. Aktif beceri her kullanımda +10,
 // pasif beceri her öldürmede +1 ustalık kazanır.
 G.USTALIK_GEREK = [0, 50, 120, 240, 400, 620, 900, 1250];
-G.SARF.sayfa = { ad: 'Kitap Sayfası', ikon: '📃', renk: '#c9a86a', aciklama: 'Becerileri geliştirmede kullanılır. Canavarlardan sık düşer.' };
+G.SARF.sayfa = { ad: 'Kitap Sayfası', simge: 'sayfa', renk: '#c9a86a', aciklama: 'Becerileri geliştirmede kullanılır. Canavarlardan sık düşer.' };
 G.DUSME.sayfa = 18;          // normal canavardan kitap sayfası düşme şansı (%), 1-2 adet
 G.DUSME.sayfaBoss = [8, 15]; // bosstan
 G.KITAP_DUSME_NORMAL = 1.5;
@@ -699,11 +699,161 @@ G.MERIDYEN = {
   // Noktaların silüet üstündeki yerleri (yüzde): başın tepesinden ayaklara zikzak
   noktalar: [[50, 9], [40, 19], [60, 21], [53, 31], [38, 38], [58, 45], [44, 54], [62, 63], [41, 73], [58, 84]]
 };
-G.SARF.hap = { ad: 'Meridyen Hapı', ikon: '🔮', renk: '#8a7ac0', aciklama: 'Meridyen noktalarını açmakta kullanılır. Canavarlardan, bosslardan ve ana görevlerden gelir.' };
+G.SARF.hap = { ad: 'Meridyen Hapı', simge: 'hap', renk: '#8a7ac0', aciklama: 'Meridyen noktalarını açmakta kullanılır. Canavarlardan, bosslardan ve ana görevlerden gelir.' };
 G.DUSME.hap = 3;            // normal canavardan (%)
 G.DUSME.hapBoss = [2, 4];   // bosstan
 // Ana görevlerin 7.'sinden itibaren ödüllere hap ekle
 G.ANA_GOREV.forEach(function (g, i) { if (i >= 6) g.odul.hap = 2 + Math.floor(i / 4); });
+
+// ============================================================
+// v0.25 — ANA GÖREV HİKÂYESİ (görev şeridindeki sandık düğmesi → görev penceresinde okunur)
+// Hikâye: kuzeydeki Hiçlik Uçurumu'ndan bir karanlık güneye yayılıyor; bosslar ona teslim olmuş eski bekçiler.
+// Her kasabada bir anlatıcı görev verir. G.ANA_HIKAYE sırası = G.ANA_GOREV sırası: [anlatıcı, metin]
+// ============================================================
+G.ANLATICILAR = {
+  tulek:    { ad: 'Tülek',     unvan: 'Taşlıca Köyü\'nün yaşlısı',  simge: 'a_tulek' },
+  sarica:   { ad: 'Sarıca',    unvan: 'Kervansaray tüccarı',       simge: 'a_sarica' },
+  bozdogan: { ad: 'Bozdoğan',  unvan: 'Demirkapı komutanı',        simge: 'a_bozdogan' },
+  ayaz:     { ad: 'Ayaz',      unvan: 'Son Karakol nöbetçisi',     simge: 'a_ayaz' }
+};
+G.ANA_HIKAYE = [
+  ['tulek', 'Gözlerin hâlâ yolun tozunu taşıyor, yabancı. Taşlıca\'ya hoş geldin. Kuzeyden kötü haberler geliyor; sisin içinde kurtlar artık uyumuyor. Önce kılıcını tanı, sonra konuşuruz.'],
+  ['tulek', 'Sisli Orman\'daki hayvanların gözleri kararmış. Eskiden avcıdan kaçarlardı, şimdi üstüne yürüyorlar. Köyün yolunu temizle; otuz leş, dedikoduyu susturur.'],
+  ['tulek', 'Sürünün başında bir kurt var. Bir zamanlar ormanın bekçisiydi, kışın köyümüzü açlıktan korurdu. Şimdi uluması bile soğuk. Onu durdur, ama nefret etme; o da bir kurban.'],
+  ['tulek', 'Kurt Kralı\'nın gözlerinde gördüğümüz o boşluk... Dedemin anlattığı bir isim var: Hiçlik. Kuzeyin dibindeki uçurum. Bekçiler onu yüzyıllarca mühürlü tuttu. Güçlen; yolun uzun olacak.'],
+  ['tulek', 'Benim bildiklerim burada biter. Doğudaki Eski Kervansaray\'da Sarıca adında bir tüccar var; kuzeyden gelen her kervanı dinler. Ona benden selam söyle.'],
+  ['sarica', 'Tülek mi gönderdi seni? Demek hâlâ yaşıyor, ihtiyar. Bak, kılıç tek başına yetmez; kuzeyden sağ dönen avcıların hepsi bir şeyler öğrenmişti. Üç teknik öğren, sonra konuşalım.'],
+  ['sarica', 'Kervanlarım vadide kayboluyor. Kayalıkların arasından gece boyu bir tıkırtı geliyor. Güçlenmeden oraya girme; vadideki yılanlar zehirlerini artık saklamıyor.'],
+  ['sarica', 'Vadinin dibinde yaşlı bir kınkanatlı uyurdu; yolcular ona sikke bırakır, geçişi öyle hak ederlerdi. Şimdi kabuğu kararmış, sikkeleri değil kemikleri topluyor. Yolu aç, kervanlarım geçsin.'],
+  ['sarica', 'Kınkanatlının kabuğunun altında bunu bulduk: Hiçlik\'ten önceki çağdan kalma bir silahın parçası. Madendeki cevherler ona hâlâ cevap veriyor. Uyandır onu.'],
+  ['sarica', 'Kervancılar Kül Harabeleri\'nden kaçarken hep aynı şeyi söylüyor: şehrin zindanındaki zincirler kopmuş. O şehirde bir zamanlar bir iblis bağlıydı. Hazırlan.'],
+  ['sarica', 'Harabelerin ötesinde, batıda Kan Kalesi var. Uçurumun fısıltısını ilk duyanlar oradaki büyücülerdi ve ona kapılarını açtılar. Git, kendi gözünle gör; ama içeride uzun kalma.'],
+  ['sarica', 'Kaleyi gördün. Şimdi anlıyorsun: harabelerdeki iblisin zincirlerini kesen onlardı. Zincirli İblis serbest kaldıkça ölüler yürümeye devam edecek. Onu yeniden toprağa göm.'],
+  ['bozdogan', 'Demirkapı\'ya hoş geldin, avcı. Adın geçitte duyuldu. Surlarım üç kuşaktır kuzeyi tutuyor, ama Kan Kalesi\'nin efendisi uyandığından beri nöbetçilerim uyuyamıyor. Güçlen; sana ihtiyacım var.'],
+  ['bozdogan', 'Büyücüler kalenin altında bir ejderi Hiçlik\'le besledi. Kanatlarını açarsa Demirkapı\'nın gölgesi bile kalmaz. Kara Ejder\'i öldür, kalenin kalbini sustur.'],
+  ['bozdogan', 'Ejder düştü, ama kalenin büyücüleri bataklığa kaçtı. Oradaki sular çürüdükçe karanlık yayılıyor. Nefesini koru, avcı; zehir orada havada.'],
+  ['bozdogan', 'Bataklığın en eski sakini bir timsah; balıkçılar ona Bataklık Anası derdi. Şimdi suyun altında Hiçlik\'in yankısını büyütüyor. Onu sustur ki sular arınsın.'],
+  ['ayaz', 'Son Karakol\'dasın. Benden ötesi haritalarda yazmaz. Kırk yıldır bu kulede nöbet tutuyorum ve ilk kez rüzgar ters esiyor: kuzeyden değil, uçurumdan. Güçlen.'],
+  ['ayaz', 'Buzul Geçidi\'nde bir dev yaşar. Uçurumun ağzına set çeken buz duvarını yüzyıllarca o dondurdu. Hiçlik onu da kandırdı; şimdi set çekmek yerine yolu açıyor. Devi devir.'],
+  ['ayaz', 'Dev düştü, buzul çatlıyor. Uçuruma giden son yol Kor Dağı\'ndan geçer. Orada ateş bile karanlık yanar. Hazır olmadan o lavlara adım atma.'],
+  ['ayaz', 'Kor Titanı, uçurumun ağzını tutan son bekçi. Kayadan bir kalbi vardı, şimdi içinde Hiçlik yanıyor. Onu da yenersen önünde sadece uçurum kalır.'],
+  ['ayaz', 'Bekçilerin hepsi düştü; ya da kurtuldu, hangisi olduğunu artık bilemiyorum. Uçurumun dibinde bir şey seni bekliyor. Kırk yılda öğrendiğim tek şey şu: Hiçlik, ona bakanın korkusuyla büyür.'],
+  ['ayaz', 'Hiçlik Efendisi. Ne doğdu ne öldü; sadece bekledi. Onu yenmek dünyayı kurtarmaz belki, ama bir sabah daha getirir. Git. Ben burada nöbetteyim.']
+];
+// Bütün ana görevler bittiğinde görev penceresinde görünen son söz
+G.ANA_HIKAYE_SON = ['tulek', 'Haber Taşlıca\'ya kadar geldi, avcı. Bu sabah sis kalktı; yıllardır ilk kez. Köpekler ormana havlamıyor artık. Adını çocuklara anlatacağız.'];
+
+// ============================================================
+// v0.26 — BOSS REPLİKLERİ (günlüğe düşer + boss plakasının altında birkaç saniye görünür)
+// giris: ortaya çıkınca · ofke: öfkelenince (can eşiğin altına inince) · olum: yenilince
+// «...» içindekiler bossun kendi sözü, diğerleri anlatı. Kule bekçilerinde çıkmaz.
+// ============================================================
+G.BOSS_REPLIK = {
+  kurt_kral: {
+    giris: 'Kurt Kralı uluyor. Sesinde bir kurdun değil, uçurumun soğuğu var.',
+    ofke:  'Kurt Kralı\'nın gözlerindeki karanlık bir an titriyor... sonra daha da derinleşiyor.',
+    olum:  'Kurt Kralı son kez başını köye doğru çeviriyor. Gözleri, bir an için, eski rengine dönüyor.'
+  },
+  dev_bocek: {
+    giris: 'Kara Kınkanatlı\'nın kabuğu kemik tıkırtısıyla açılıyor. Sikke istemiyor artık; senin kemiklerini istiyor.',
+    ofke:  'Kabuğundaki çatlaklardan kara bir ışık sızıyor.',
+    olum:  'Kınkanatlı çöküyor. Kabuğunun altından, yolcuların bir zamanlar bıraktığı sikkeler dökülüyor.'
+  },
+  zincirli_iblis: {
+    giris: '«Zincirlerimi bir şehir dövdü, ufaklık. Kırmak için tek bir fısıltı yetti.»',
+    ofke:  '«Bu acıyı hatırlıyorum... zindanın taşlarını da böyle kanattım!»',
+    olum:  '«Hiçlik... bana özgürlük... sözü vermişti...» Zincirlerin şakırtısı küllerin arasında susuyor.'
+  },
+  kara_ejder: {
+    giris: '«Büyücüler beni karanlıkla besledi. Şimdi açlığım onlardan büyük.»',
+    ofke:  'Kara Ejder kanatlarını açıyor; kalenin duvarlarından kan yağmur gibi dökülüyor.',
+    olum:  '«Uçurumun sesi... susuyor...» Ejderin gölgesi Demirkapı\'ya ulaşamadan dağılıyor.'
+  },
+  bataklik_timsahi: {
+    giris: 'Sular kabarıyor. Bataklık Anası, balıkçıların korktuğu o eski göz, sana bakıyor.',
+    ofke:  'Bataklık kaynamaya başlıyor; çürük suların dibinden bir yankı yükseliyor.',
+    olum:  'Bataklık Anası suya gömülüyor. Az sonra yüzeyde, yıllardır görülmemiş temiz bir halka beliriyor.'
+  },
+  ayaz_devi: {
+    giris: '«Duvarı ben ördüm, avcı. Onu yıkmak da benim hakkım.»',
+    ofke:  '«Soğuk... hiç bu kadar boş olmamıştı...»',
+    olum:  '«Seti... yeniden... çek...» Dev diz çöküyor; buzul derinden inliyor.'
+  },
+  kor_titani: {
+    giris: '«Son bekçi benim. Ya da son kapı. Hangisi olduğumu Hiçlik bile bilmiyor.»',
+    ofke:  'Titanın kaya kalbi çatlıyor; içinden kor yerine karanlık akıyor.',
+    olum:  '«Kalbim... yeniden ısınıyor...» Kor Titanı taşa dönüşüyor. Yol artık açık.'
+  },
+  hiclik_efendisi: {
+    giris: '«Sen de mi geldin? Hepsi gelir. Hepsi bakar. Ve hepsi korkar.»',
+    ofke:  '«Korkunu duyuyorum, avcı. Beni büyüten o.»',
+    olum:  '«Ben... hiçim. Beni yenemezsin... sadece... unutursun...» Uçurumdan ilk kez ılık bir rüzgar esiyor.'
+  }
+};
+
+// ============================================================
+// v0.27 — CANAVAR, EŞYA KÖKENİ ve SET AÇIKLAMALARI (sadece metin; statlar aynı)
+// Canavar: bölge bilgi penceresinde · Eşya kökeni: eşya penceresinde (eşyanın seviyesine göre bölge)
+// Set: eşya penceresindeki set kutusunda
+// ============================================================
+(function () {
+  var c = {
+    kurt: 'Sisin içinde sürüyle avlanır; gözleri artık geceleri de parlıyor.',
+    domuz: 'Köyün tarlalarını söken yaban domuzu. Eskiden ürkekti, şimdi saldırmadan durmuyor.',
+    orumcek: 'Ağlarını ağaçların arasına değil, yolların üstüne kuruyor.',
+    kurt_kral: 'Bir zamanlar köyü kışın açlıktan koruyan ormanın bekçisi.',
+    engerek: 'Vadinin taşları arasında saklanır; zehri eskisinden koyu.',
+    sahin: 'Kayalıkların üstünde döner. Yolcular eskiden kervan yolunu ona bakarak bulurdu.',
+    kaplan_yilan: 'Pulları kaplan gibi çizgili, boyu bir kayık kadar uzun.',
+    dev_bocek: 'Yolcuların bıraktığı sikkelerle geçişe izin veren yaşlı kınkanatlı.',
+    iskelet: 'Başkentin muhafızlarından kalanlar. Nöbetlerini ölümden sonra da bırakmadılar.',
+    yarasa: 'Yanan şehrin kulelerinden inip kan arar.',
+    zombi: 'Kül Harabeleri\'nin eski halkı. Hâlâ evlerinin yolunu arıyorlar.',
+    zincirli_iblis: 'Başkentin zindanında yüzyıllarca zincirli yattı; zincirlerini bir fısıltı kopardı.',
+    kan_buyucusu: 'Uçurumun sesine kapılarını açan tarikatın büyücüleri.',
+    gargoyl: 'Kalenin surlarındaki taş bekçiler. Büyücüler onlara can verdi.',
+    cehennem_tazisi: 'Büyücülerin kalenin bodrumlarında karanlıkla beslediği tazılar.',
+    kara_ejder: 'Kalenin altında Hiçlik\'le beslenen ejder.',
+    kurbaga: 'Derisinden sızan zehir bataklığın suyunu bile yakar.',
+    suluk: 'Bataklığa düşen her şeyi saran, kanla şişmiş sülük yığını.',
+    curuk_ent: 'Bataklığın eski ağaçları. Kökleri çürüdükçe yürümeye başladılar.',
+    bataklik_timsahi: 'Balıkçıların Bataklık Anası dediği, suların en eski sakini.',
+    buz_kurdu: 'Buzulun ak kurtları; nefeslerinin değdiği yer donar.',
+    kar_trolu: 'Geçidin mağaralarında kış uykusundan erken uyandırılmış bir trol.',
+    buz_ruhu: 'Geçitte donarak ölen yolcuların, rüzgarda dolaşan ruhları.',
+    ayaz_devi: 'Uçurumun ağzına set çeken buz duvarını yüzyıllarca ayakta tutan dev.',
+    magma_bocegi: 'Kabuğu soğumuş lavdan; içi hâlâ kor.',
+    kor_semender: 'Lav nehirlerinde yüzen semender; ateşe dokunduğu yerden doğar.',
+    ates_elementali: 'Kor Dağı\'nın karanlık yanan alevlerinden doğmuş bir ruh.',
+    kor_titani: 'Uçurumun ağzını tutan son bekçi. Kayadan bir kalbi vardı.',
+    hiclik_gozcusu: 'Uçurumun kenarında asılı duran göz. Ne gördüğünü kimse bilmiyor.',
+    golge_sovalye: 'Uçuruma inip geri dönemeyen şövalyelerin gölgeleri.',
+    bosluk_canavari: 'Biçimi yok; dokunaçları ışığı bile yutuyor.',
+    hiclik_efendisi: 'Ne doğdu ne öldü; sadece bekledi.'
+  };
+  for (var k in c) if (G.CANAVARLAR[k]) G.CANAVARLAR[k].aciklama = c[k];
+
+  // Eşyanın seviyesi hangi av bölgesine denk geliyorsa o bölgenin köken cümlesi gösterilir
+  var b = {
+    orman: 'Sisli Orman\'da düşmüş avcılardan kalma.',
+    vadi: 'Engerek Vadisi\'nin taşları arasında, kervan kalıntılarından.',
+    harabe: 'Kül Harabeleri\'nin küllerinden çıkarılmış.',
+    kale: 'Kan Kalesi\'nin cephaneliğinden; demirinde hâlâ kan kokusu var.',
+    bataklik: 'Zehir Bataklığı\'nın çamurundan çekilmiş.',
+    buzul: 'Buzul Geçidi\'nde donmuş bir yolcunun üstünden.',
+    volkan: 'Kor Dağı\'nın lavlarında dövülmüş.',
+    ucurum: 'Hiçlik Uçurumu\'nun kıyısından; dokununca soğuk.'
+  };
+  G.BOLGELER.forEach(function (x) { if (b[x.id]) x.esyaKoken = b[x.id]; });
+
+  var st = {
+    kurt: 'Taşlıca\'nın avcıları bu postları kışın giyerdi; Kurt Kralı\'nın sürüsünden.',
+    engerek: 'Vadinin yılan pullarından örülmüş; kervan muhafızlarının gözdesi.',
+    iblis: 'Zindanın zincirlerinden dövülmüş. İblisin öfkesi demirde hâlâ yaşıyor.',
+    ejder: 'Kara Ejder\'in pullarından ve kemiklerinden. Giyen, ejderin açlığını hisseder.'
+  };
+  for (var sk in st) if (G.SETLER[sk]) G.SETLER[sk].aciklama = st[sk];
+})();
 G.DUSME.hap = 1.2;   // v0.16 denge: hap çok birikiyordu
 
 // ============================================================
@@ -819,16 +969,16 @@ G.KULE = {
 };
 G.KULE.katToplam = G.KULE.bekciler.length * G.KULE.katSayi;
 
-G.SARF.oz = { ad: 'Rün Özü', ikon: '🔶', renk: '#e8902a', aciklama: 'Rünleri yükseltmekte kullanılır. Kuleden ve rün eritmekten gelir.' };
+G.SARF.oz = { ad: 'Rün Özü', simge: 'run', renk: '#e8902a', aciklama: 'Rünleri yükseltmekte kullanılır. Kuleden ve rün eritmekten gelir.' };
 
 // Rün tipleri: hangi statı verir, taban değer (Yeşil, Sv.1)
 G.RUN_TUR = {
-  saldiri:    { ad: 'Saldırı',    ikon: '🗡️', stat: 'atkYuzde',  taban: 2 },
-  koruma:     { ad: 'Koruma',     ikon: '🛡️', stat: 'defYuzde',  taban: 3 },
-  patlama:    { ad: 'Patlama',    ikon: '💥', stat: 'kritHasar', taban: 6 },
-  siginak:    { ad: 'Sığınak',    ikon: '🏰', stat: 'hpYuzde',   taban: 3 },
-  katliam:    { ad: 'Katliam',    ikon: '☠️', stat: 'krit',      taban: 1.2 },
-  bagisiklik: { ad: 'Bağışıklık', ikon: '🩸', stat: 'canCal',    taban: 0.8 }
+  saldiri:    { ad: 'Saldırı',    simge: 'r_saldiri', stat: 'atkYuzde',  taban: 2 },
+  koruma:     { ad: 'Koruma',     simge: 'r_koruma', stat: 'defYuzde',  taban: 3 },
+  patlama:    { ad: 'Patlama',    simge: 'r_patlama', stat: 'kritHasar', taban: 6 },
+  siginak:    { ad: 'Sığınak',    simge: 'r_siginak', stat: 'hpYuzde',   taban: 3 },
+  katliam:    { ad: 'Katliam',    simge: 'iskelet', stat: 'krit',      taban: 1.2 },
+  bagisiklik: { ad: 'Bağışıklık', simge: 'r_bagisiklik', stat: 'canCal',    taban: 0.8 }
 };
 G.RUN_NADIR = { 1: 1, 2: 1.6, 3: 2.4, 4: 3.5 };   // İyi, Nadir, Destansı, Efsanevi
 G.RUN_MAKS = 10;
