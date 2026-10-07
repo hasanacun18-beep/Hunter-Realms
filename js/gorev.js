@@ -62,9 +62,18 @@ G.gorevGuncelle = function () {
   if (el) el.outerHTML = G.gorevSeritHtml();
 };
 
+// v0.25: anlatıcının konuşması (veri.js → G.ANA_HIKAYE, G.ANLATICILAR)
+G.hikayeHtml = function (h) {
+  var a = h && G.ANLATICILAR[h[0]];
+  if (!a) return '';
+  return '<div class="hikaye"><span class="hikaye-portre">' + G.ikon(a.simge) + '</span>' +
+    '<div><b>' + a.ad + '</b><small>' + a.unvan + '</small><p>' + h[1] + '</p></div></div>';
+};
+
 G.gorevBilgiModal = function () {
   var d = G.gorevDurum();
   G.$('modalIc').innerHTML = '<h3>' + G.ikon('parsomen') + ' Ana Görev</h3>' +
+    G.hikayeHtml(d ? G.ANA_HIKAYE[G.o.gorev.i] : G.ANA_HIKAYE_SON) +
     (d ? '<p class="bilgi">' + d.yazi + ' (' + d.sayi + '/' + d.hedef + ')</p><p class="bilgi">Ödül: ' + G.odulYazi(d.g.odul) + '</p>' +
          '<p class="bilgi soluk">Görev ' + (G.o.gorev.i + 1) + ' / ' + G.ANA_GOREV.length + '</p>'
        : '<p class="bilgi">Bütün ana görevleri tamamladın.</p>') +

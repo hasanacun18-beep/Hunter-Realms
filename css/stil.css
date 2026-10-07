@@ -1134,3 +1134,13 @@ body,#uygulama{min-height:100vh;min-height:100dvh}
   .saha.kritik-can::after{animation:none;opacity:.5}
   .saha-kart.olu.oluyor{animation-duration:.01s}
 }
+
+/* v0.25 — Ana görev hikâyesi: anlatıcı portresi ve konuşma */
+.hikaye{display:flex;gap:10px;align-items:flex-start;margin:10px 0 4px;padding:10px;border:1px solid #4a3d2b;border-radius:4px;
+  background:linear-gradient(#1f1912,#16120d)}
+.hikaye-portre{flex:none;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 40% 35%,#3a2e20,#120e0a 75%);border:2px solid #8a7040}
+.hikaye-portre .ikon{width:28px;height:28px}
+.hikaye b{font-family:var(--serif);font-weight:normal;font-size:16px;color:var(--bronz-acik)}
+.hikaye small{display:block;font-size:11px;color:var(--soluk);margin-bottom:4px}
+.hikaye p{font-family:var(--serif);font-style:italic;font-size:14px;line-height:1.5;color:var(--kemik)}

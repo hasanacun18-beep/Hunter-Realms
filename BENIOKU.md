@@ -1,4 +1,4 @@
-# Hunter Realms — v0.24 (ses efektleri)
+# Hunter Realms — v0.25 (ana görev hikâyesi)
 
 > Not: Oyun eskiden "Kara Diyar" adıyla geliştirildi, bu sürümde "Hunter Realms" olarak
 > yeniden adlandırıldı. Kayıt dosyalarının iç anahtar isimleri değişmedi (bkz. CLAUDE.md).
@@ -322,3 +322,12 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - Ayarlar → "Ses" ile kapatılabilir. Kayıtta yeni alan: o.ayar.ses (eski kayıtlar G.gocEt ile otomatik açık gelir)
 - Tarayıcılar sesi ilk dokunuştan sonra açar; ana.js'teki tıklama dinleyicisi G.sesAc'ı çağırır
 - Ayarlar: ses.js → G.SES (ana ses seviyesi, aynı sesin tekrar aralığı), sesler G.SESLER içinde
+
+## v0.25 değişiklikleri (ana görev hikâyesi)
+- Hikâye: kuzeydeki Hiçlik Uçurumu'ndan bir karanlık güneye yayılıyor; bölge bossları ona teslim olmuş eski bekçiler
+- Dört kasabada dört anlatıcı görev verir: Tülek (Taşlıca Köyü yaşlısı), Sarıca (Kervansaray tüccarı),
+  Bozdoğan (Demirkapı komutanı), Ayaz (Son Karakol nöbetçisi) — her birinin portresi var
+- 22 ana görevin her birinin anlatıcı konuşması + bütün görevler bitince son söz
+- Sadece görev şeridindeki sandık düğmesiyle açılan görev penceresinde görünür; oyunu kesmez
+- 12 bölgenin açıklaması hikâyeye göre yeniden yazıldı (kasaba ekranı ve bölge bilgisi)
+- Ayarlar: veri.js → G.ANLATICILAR, G.ANA_HIKAYE (sırası G.ANA_GOREV ile aynı), G.ANA_HIKAYE_SON

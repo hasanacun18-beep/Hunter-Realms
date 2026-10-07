@@ -288,29 +288,29 @@ G.BECERILER.yarma.etki.carpan = 2.1;
 // harita: büyük haritadaki konum (x: 0-100, y: 0-150, aşağıdan yukarı ilerler)
 G.BOLGELER = [
   { id: 'koy', ad: 'Taşlıca Köyü', tur: 'kasaba', minLv: 1, harita: { x: 50, y: 140 },
-    aciklama: 'Yolculuğun başladığı küçük köy. Taş duvarların ardında iksirci ve hurdacı seni bekler.' },
+    aciklama: 'Yolculuğun başladığı küçük köy. Taş duvarlar kuzeyden esen soğuğa bin yıldır dayanıyor; ama son kışlarda köpekler geceleri ormana doğru havlamayı bırakmıyor.' },
   { id: 'orman', ad: 'Sisli Orman', tur: 'av', minLv: 1, harita: { x: 28, y: 126 },
-    aciklama: 'Sabahları sisin hiç kalkmadığı sık orman.', canavarlar: ['kurt', 'domuz', 'orumcek'], boss: 'kurt_kral', set: 'kurt' },
+    aciklama: 'Sabahları sisin hiç kalkmadığı sık orman. Eskiden avcıdan kaçan hayvanların gözleri artık karanlık; sisin içinde bir şey onları kışkırtıyor.', canavarlar: ['kurt', 'domuz', 'orumcek'], boss: 'kurt_kral', set: 'kurt' },
   { id: 'vadi', ad: 'Engerek Vadisi', tur: 'av', minLv: 5, harita: { x: 64, y: 112 },
-    aciklama: 'Kayalıkların arasında yılanların yuva kurduğu dar vadi.', canavarlar: ['engerek', 'sahin', 'kaplan_yilan'], boss: 'dev_bocek', set: 'engerek' },
+    aciklama: 'Kayalıkların arasında yılanların yuva kurduğu dar vadi. Kervanlar buradan geçerdi; şimdi taşların arasında yolcuların bıraktığı sikkeler değil, kemikler parlıyor.', canavarlar: ['engerek', 'sahin', 'kaplan_yilan'], boss: 'dev_bocek', set: 'engerek' },
   { id: 'kervansaray', ad: 'Eski Kervansaray', tur: 'kasaba', minLv: 5, harita: { x: 80, y: 97 },
-    aciklama: 'Yol üstündeki yorgun tüccarların ve maceracıların durağı.' },
+    aciklama: 'Yol üstündeki yorgun tüccarların ve maceracıların durağı. Kuzeyden dönen her kervanın haberi önce buraya ulaşır, ve son zamanlarda haberlerin hiçbiri iyi değil.' },
   { id: 'harabe', ad: 'Kül Harabeleri', tur: 'av', minLv: 10, harita: { x: 52, y: 85 },
-    aciklama: 'Bir zamanlar parlak bir şehirdi. Şimdi ölüler dolaşıyor.', canavarlar: ['iskelet', 'yarasa', 'zombi'], boss: 'zincirli_iblis', set: 'iblis' },
+    aciklama: 'Bir zamanlar parlak bir başkentti. Zindanında zincire vurulmuş bir iblis yatıyordu; zincirler koptuğu gece şehir yandı. Şimdi küllerin arasında ölüler dolaşıyor.', canavarlar: ['iskelet', 'yarasa', 'zombi'], boss: 'zincirli_iblis', set: 'iblis' },
   { id: 'kale', ad: 'Kan Kalesi', tur: 'av', minLv: 16, harita: { x: 22, y: 73 },
-    aciklama: 'Kara büyücülerin kalesi. Duvarlarından kan sızar.', canavarlar: ['kan_buyucusu', 'gargoyl', 'cehennem_tazisi'], boss: 'kara_ejder', set: 'ejder' },
+    aciklama: 'Kara büyücülerin kalesi. Uçurumdan gelen fısıltıyı ilk duyanlar onlardı ve kapılarını ona açtılar. Duvarlarından hâlâ kan sızar.', canavarlar: ['kan_buyucusu', 'gargoyl', 'cehennem_tazisi'], boss: 'kara_ejder', set: 'ejder' },
   { id: 'demirkapi', ad: 'Demirkapı', tur: 'kasaba', minLv: 16, harita: { x: 38, y: 60 },
-    aciklama: 'Dağ geçidini tutan sur şehri. Kuzeye giden son güvenli yer.' },
+    aciklama: 'Dağ geçidini tutan sur şehri. Üç kuşaktır kuzeye karşı nöbet tutuyor; kuzeye giden son güvenli yer.' },
   { id: 'bataklik', ad: 'Zehir Bataklığı', tur: 'av', minLv: 22, harita: { x: 70, y: 51 },
-    aciklama: 'Nefes almanın bile acıttığı çürük sular.', canavarlar: ['kurbaga', 'suluk', 'curuk_ent'], boss: 'bataklik_timsahi' },
+    aciklama: 'Nefes almanın bile acıttığı çürük sular. Kan Kalesi\'nden kaçan büyücüler burada saklanıyor; sular çürüdükçe karanlık güneye sızıyor.', canavarlar: ['kurbaga', 'suluk', 'curuk_ent'], boss: 'bataklik_timsahi' },
   { id: 'buzul', ad: 'Buzul Geçidi', tur: 'av', minLv: 27, harita: { x: 84, y: 36 },
-    aciklama: 'Rüzgarın kemikleri dondurduğu karlı geçit.', canavarlar: ['buz_kurdu', 'kar_trolu', 'buz_ruhu'], boss: 'ayaz_devi' },
+    aciklama: 'Rüzgarın kemikleri dondurduğu karlı geçit. Burada bir dev, uçurumun ağzına set çeken buz duvarını yüzyıllarca ayakta tuttu.', canavarlar: ['buz_kurdu', 'kar_trolu', 'buz_ruhu'], boss: 'ayaz_devi' },
   { id: 'karakol', ad: 'Son Karakol', tur: 'kasaba', minLv: 27, harita: { x: 58, y: 27 },
-    aciklama: 'Dünyanın kenarındaki son nöbet yeri.' },
+    aciklama: 'Dünyanın kenarındaki son nöbet yeri. Haritalar burada biter; kulenin penceresinden bakınca kuzeyde ışığın yuttuğu bir karanlık görünür.' },
   { id: 'volkan', ad: 'Kor Dağı', tur: 'av', minLv: 32, harita: { x: 28, y: 19 },
-    aciklama: 'Lavın nehir gibi aktığı yanık dağ.', canavarlar: ['magma_bocegi', 'kor_semender', 'ates_elementali'], boss: 'kor_titani' },
+    aciklama: 'Lavın nehir gibi aktığı yanık dağ. Uçuruma giden son yol buradan geçer ve burada ateş bile karanlık yanar.', canavarlar: ['magma_bocegi', 'kor_semender', 'ates_elementali'], boss: 'kor_titani' },
   { id: 'ucurum', ad: 'Hiçlik Uçurumu', tur: 'av', minLv: 37, harita: { x: 52, y: 7 },
-    aciklama: 'Işığın bile geri dönmediği uçurum. Buradan ötesi yok.', canavarlar: ['hiclik_gozcusu', 'golge_sovalye', 'bosluk_canavari'], boss: 'hiclik_efendisi' }
+    aciklama: 'Işığın bile geri dönmediği uçurum. Bütün karanlık buradan doğdu; ona Hiçlik derler. Buradan ötesi yok.', canavarlar: ['hiclik_gozcusu', 'golge_sovalye', 'bosluk_canavari'], boss: 'hiclik_efendisi' }
 ];
 
 // Yeni canavarlar (statlar ayrıca G.ZORLUK ile seviyeye göre büyür)
@@ -704,6 +704,44 @@ G.DUSME.hap = 3;            // normal canavardan (%)
 G.DUSME.hapBoss = [2, 4];   // bosstan
 // Ana görevlerin 7.'sinden itibaren ödüllere hap ekle
 G.ANA_GOREV.forEach(function (g, i) { if (i >= 6) g.odul.hap = 2 + Math.floor(i / 4); });
+
+// ============================================================
+// v0.25 — ANA GÖREV HİKÂYESİ (görev şeridindeki sandık düğmesi → görev penceresinde okunur)
+// Hikâye: kuzeydeki Hiçlik Uçurumu'ndan bir karanlık güneye yayılıyor; bosslar ona teslim olmuş eski bekçiler.
+// Her kasabada bir anlatıcı görev verir. G.ANA_HIKAYE sırası = G.ANA_GOREV sırası: [anlatıcı, metin]
+// ============================================================
+G.ANLATICILAR = {
+  tulek:    { ad: 'Tülek',     unvan: 'Taşlıca Köyü\'nün yaşlısı',  simge: 'a_tulek' },
+  sarica:   { ad: 'Sarıca',    unvan: 'Kervansaray tüccarı',       simge: 'a_sarica' },
+  bozdogan: { ad: 'Bozdoğan',  unvan: 'Demirkapı komutanı',        simge: 'a_bozdogan' },
+  ayaz:     { ad: 'Ayaz',      unvan: 'Son Karakol nöbetçisi',     simge: 'a_ayaz' }
+};
+G.ANA_HIKAYE = [
+  ['tulek', 'Gözlerin hâlâ yolun tozunu taşıyor, yabancı. Taşlıca\'ya hoş geldin. Kuzeyden kötü haberler geliyor; sisin içinde kurtlar artık uyumuyor. Önce kılıcını tanı, sonra konuşuruz.'],
+  ['tulek', 'Sisli Orman\'daki hayvanların gözleri kararmış. Eskiden avcıdan kaçarlardı, şimdi üstüne yürüyorlar. Köyün yolunu temizle; otuz leş, dedikoduyu susturur.'],
+  ['tulek', 'Sürünün başında bir kurt var. Bir zamanlar ormanın bekçisiydi, kışın köyümüzü açlıktan korurdu. Şimdi uluması bile soğuk. Onu durdur, ama nefret etme; o da bir kurban.'],
+  ['tulek', 'Kurt Kralı\'nın gözlerinde gördüğümüz o boşluk... Dedemin anlattığı bir isim var: Hiçlik. Kuzeyin dibindeki uçurum. Bekçiler onu yüzyıllarca mühürlü tuttu. Güçlen; yolun uzun olacak.'],
+  ['tulek', 'Benim bildiklerim burada biter. Doğudaki Eski Kervansaray\'da Sarıca adında bir tüccar var; kuzeyden gelen her kervanı dinler. Ona benden selam söyle.'],
+  ['sarica', 'Tülek mi gönderdi seni? Demek hâlâ yaşıyor, ihtiyar. Bak, kılıç tek başına yetmez; kuzeyden sağ dönen avcıların hepsi bir şeyler öğrenmişti. Üç teknik öğren, sonra konuşalım.'],
+  ['sarica', 'Kervanlarım vadide kayboluyor. Kayalıkların arasından gece boyu bir tıkırtı geliyor. Güçlenmeden oraya girme; vadideki yılanlar zehirlerini artık saklamıyor.'],
+  ['sarica', 'Vadinin dibinde yaşlı bir kınkanatlı uyurdu; yolcular ona sikke bırakır, geçişi öyle hak ederlerdi. Şimdi kabuğu kararmış, sikkeleri değil kemikleri topluyor. Yolu aç, kervanlarım geçsin.'],
+  ['sarica', 'Kınkanatlının kabuğunun altında bunu bulduk: Hiçlik\'ten önceki çağdan kalma bir silahın parçası. Madendeki cevherler ona hâlâ cevap veriyor. Uyandır onu.'],
+  ['sarica', 'Kervancılar Kül Harabeleri\'nden kaçarken hep aynı şeyi söylüyor: şehrin zindanındaki zincirler kopmuş. O şehirde bir zamanlar bir iblis bağlıydı. Hazırlan.'],
+  ['sarica', 'Harabelerin ötesinde, batıda Kan Kalesi var. Uçurumun fısıltısını ilk duyanlar oradaki büyücülerdi ve ona kapılarını açtılar. Git, kendi gözünle gör; ama içeride uzun kalma.'],
+  ['sarica', 'Kaleyi gördün. Şimdi anlıyorsun: harabelerdeki iblisin zincirlerini kesen onlardı. Zincirli İblis serbest kaldıkça ölüler yürümeye devam edecek. Onu yeniden toprağa göm.'],
+  ['bozdogan', 'Demirkapı\'ya hoş geldin, avcı. Adın geçitte duyuldu. Surlarım üç kuşaktır kuzeyi tutuyor, ama Kan Kalesi\'nin efendisi uyandığından beri nöbetçilerim uyuyamıyor. Güçlen; sana ihtiyacım var.'],
+  ['bozdogan', 'Büyücüler kalenin altında bir ejderi Hiçlik\'le besledi. Kanatlarını açarsa Demirkapı\'nın gölgesi bile kalmaz. Kara Ejder\'i öldür, kalenin kalbini sustur.'],
+  ['bozdogan', 'Ejder düştü, ama kalenin büyücüleri bataklığa kaçtı. Oradaki sular çürüdükçe karanlık yayılıyor. Nefesini koru, avcı; zehir orada havada.'],
+  ['bozdogan', 'Bataklığın en eski sakini bir timsah; balıkçılar ona Bataklık Anası derdi. Şimdi suyun altında Hiçlik\'in yankısını büyütüyor. Onu sustur ki sular arınsın.'],
+  ['ayaz', 'Son Karakol\'dasın. Benden ötesi haritalarda yazmaz. Kırk yıldır bu kulede nöbet tutuyorum ve ilk kez rüzgar ters esiyor: kuzeyden değil, uçurumdan. Güçlen.'],
+  ['ayaz', 'Buzul Geçidi\'nde bir dev yaşar. Uçurumun ağzına set çeken buz duvarını yüzyıllarca o dondurdu. Hiçlik onu da kandırdı; şimdi set çekmek yerine yolu açıyor. Devi devir.'],
+  ['ayaz', 'Dev düştü, buzul çatlıyor. Uçuruma giden son yol Kor Dağı\'ndan geçer. Orada ateş bile karanlık yanar. Hazır olmadan o lavlara adım atma.'],
+  ['ayaz', 'Kor Titanı, uçurumun ağzını tutan son bekçi. Kayadan bir kalbi vardı, şimdi içinde Hiçlik yanıyor. Onu da yenersen önünde sadece uçurum kalır.'],
+  ['ayaz', 'Bekçilerin hepsi düştü; ya da kurtuldu, hangisi olduğunu artık bilemiyorum. Uçurumun dibinde bir şey seni bekliyor. Kırk yılda öğrendiğim tek şey şu: Hiçlik, ona bakanın korkusuyla büyür.'],
+  ['ayaz', 'Hiçlik Efendisi. Ne doğdu ne öldü; sadece bekledi. Onu yenmek dünyayı kurtarmaz belki, ama bir sabah daha getirir. Git. Ben burada nöbetteyim.']
+];
+// Bütün ana görevler bittiğinde görev penceresinde görünen son söz
+G.ANA_HIKAYE_SON = ['tulek', 'Haber Taşlıca\'ya kadar geldi, avcı. Bu sabah sis kalktı; yıllardır ilk kez. Köpekler ormana havlamıyor artık. Adını çocuklara anlatacağız.'];
 G.DUSME.hap = 1.2;   // v0.16 denge: hap çok birikiyordu
 
 // ============================================================
