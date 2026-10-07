@@ -269,3 +269,12 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
   arayüzde G.ikon('ad') kullan
 - İkonlar: game-icons.net (Lorc, Delapouite ve diğerleri), lisans CC BY 3.0 —
   https://game-icons.net · https://creativecommons.org/licenses/by/3.0/
+
+### v0.22 — 2. adım: canavar ve sınıf ikonları
+- 16 canavarın emojisi yerine karanlık siluet ikonlar (kurt, yaban domuzu, örümcek, engerek, gargoyl, ejder...).
+  Savaş kartında, boss plakasında, BOSS düğmesinde, kule bekçisinde ve bölge bilgisinde görünür
+- Sınıf ikonları: Savaşçı (çapraz kılıçlar), Büyücü (asa), Okçu (gerilmiş yay) — karakter oluşturma, üst bar, oyuncu kartı
+- İsim düzeltmeleri (sadece görünen ad, iç id'ler aynı, kayıtlar etkilenmez):
+  Dev Bokböceği → Kara Kınkanatlı, Kurt Kral → Kurt Kralı, Şahin → Kara Şahin
+- Yeni canavara ikon vermek: veri.js'te `ikon: '🐺'` yerine `simge: 'ad'` yaz ve ikon.js → G.IKONLAR'a aynı adla ikonu ekle
+  (simge yazılmazsa emoji eskisi gibi çalışır)

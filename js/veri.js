@@ -12,19 +12,19 @@ G.MAKS_ARTI = 15;      // En yüksek güçlendirme seviyesi
 // taban: 1. seviyedeki değerler, artis: her seviyede eklenen
 G.SINIFLAR = {
   savasci: {
-    ad: 'Savaşçı', ikon: '⚔️', aciklama: 'Yüksek can ve savunma. Yakın dövüşün ustası.',
+    ad: 'Savaşçı', ikon: '⚔️', simge: 'kiliclar', aciklama: 'Yüksek can ve savunma. Yakın dövüşün ustası.',
     taban: { hp: 130, mp: 30, atkMin: 7, atkMax: 12, def: 6, hiz: 8, krit: 5 },
     artis: { hp: 20, mp: 3, atk: 3, def: 2 },
     beceri: { ad: 'Yarma Darbesi', mp: 10, carpan: 1.9, vurus: 1 }
   },
   buyucu: {
-    ad: 'Büyücü', ikon: '🔮', aciklama: 'Düşük can, çok yüksek büyü hasarı.',
+    ad: 'Büyücü', ikon: '🔮', simge: 'asa', aciklama: 'Düşük can, çok yüksek büyü hasarı.',
     taban: { hp: 85, mp: 90, atkMin: 9, atkMax: 16, def: 3, hiz: 9, krit: 5 },
     artis: { hp: 12, mp: 9, atk: 4, def: 1 },
     beceri: { ad: 'Ateş Topu', mp: 16, carpan: 2.6, vurus: 1 }
   },
   okcu: {
-    ad: 'Okçu', ikon: '🏹', aciklama: 'Hızlı ve sık kritik vurur. Dengeli sınıf.',
+    ad: 'Okçu', ikon: '🏹', simge: 'yay', aciklama: 'Hızlı ve sık kritik vurur. Dengeli sınıf.',
     taban: { hp: 100, mp: 50, atkMin: 8, atkMax: 14, def: 4, hiz: 14, krit: 12 },
     artis: { hp: 15, mp: 5, atk: 3, def: 1 },
     beceri: { ad: 'Çift Atış', mp: 12, carpan: 1.35, vurus: 2 }
@@ -42,25 +42,25 @@ G.STATLAR = {
 // ---- Canavarlar ----
 // atk: [min, maks], para: [min, maks]
 G.CANAVARLAR = {
-  kurt:        { ad: 'Kurt',          ikon: '🐺', lv: 1,  hp: 40,   atk: [4, 7],     def: 1,  exp: 12,   para: [2, 6] },
-  domuz:       { ad: 'Yaban Domuzu',  ikon: '🐗', lv: 2,  hp: 60,   atk: [5, 9],     def: 2,  exp: 18,   para: [3, 8] },
-  orumcek:     { ad: 'Dev Örümcek',   ikon: '🕷️', lv: 3,  hp: 55,   atk: [7, 11],    def: 1,  exp: 22,   para: [4, 9] },
-  kurt_kral:   { ad: 'Kurt Kral',     ikon: '🐺', lv: 5,  hp: 450,  atk: [14, 20],   def: 5,  exp: 160,  para: [60, 100], boss: true },
+  kurt:        { ad: 'Kurt',          simge: 'kurt', lv: 1,  hp: 40,   atk: [4, 7],     def: 1,  exp: 12,   para: [2, 6] },
+  domuz:       { ad: 'Yaban Domuzu',  simge: 'domuz', lv: 2,  hp: 60,   atk: [5, 9],     def: 2,  exp: 18,   para: [3, 8] },
+  orumcek:     { ad: 'Dev Örümcek',   simge: 'orumcek', lv: 3,  hp: 55,   atk: [7, 11],    def: 1,  exp: 22,   para: [4, 9] },
+  kurt_kral:   { ad: 'Kurt Kralı',    simge: 'kurt_kral', lv: 5,  hp: 450,  atk: [14, 20],   def: 5,  exp: 160,  para: [60, 100], boss: true },
 
-  engerek:     { ad: 'Engerek',       ikon: '🐍', lv: 5,  hp: 120,  atk: [12, 18],   def: 4,  exp: 40,   para: [8, 15] },
-  sahin:       { ad: 'Şahin',         ikon: '🦅', lv: 6,  hp: 110,  atk: [14, 20],   def: 3,  exp: 48,   para: [9, 16] },
-  kaplan_yilan:{ ad: 'Kaplan Yılan',  ikon: '🐉', lv: 8,  hp: 200,  atk: [18, 26],   def: 7,  exp: 70,   para: [12, 22] },
-  dev_bocek:   { ad: 'Dev Bokböceği', ikon: '🪲', lv: 10, hp: 1600, atk: [34, 46],   def: 12, exp: 650,  para: [200, 320], boss: true },
+  engerek:     { ad: 'Engerek',       simge: 'engerek', lv: 5,  hp: 120,  atk: [12, 18],   def: 4,  exp: 40,   para: [8, 15] },
+  sahin:       { ad: 'Kara Şahin',    simge: 'sahin', lv: 6,  hp: 110,  atk: [14, 20],   def: 3,  exp: 48,   para: [9, 16] },
+  kaplan_yilan:{ ad: 'Kaplan Yılan',  simge: 'kaplan_yilan', lv: 8,  hp: 200,  atk: [18, 26],   def: 7,  exp: 70,   para: [12, 22] },
+  dev_bocek:   { ad: 'Kara Kınkanatlı', simge: 'dev_bocek', lv: 10, hp: 1600, atk: [34, 46],   def: 12, exp: 650,  para: [200, 320], boss: true },
 
-  iskelet:     { ad: 'İskelet',       ikon: '💀', lv: 10, hp: 300,  atk: [28, 38],   def: 10, exp: 110,  para: [18, 30] },
-  yarasa:      { ad: 'Vampir Yarasa', ikon: '🦇', lv: 11, hp: 260,  atk: [30, 40],   def: 8,  exp: 120,  para: [20, 32] },
-  zombi:       { ad: 'Zombi',         ikon: '🧟', lv: 12, hp: 420,  atk: [32, 44],   def: 12, exp: 145,  para: [22, 36] },
-  zincirli_iblis:{ ad: 'Zincirli İblis', ikon: '👹', lv: 16, hp: 4200, atk: [70, 90], def: 25, exp: 1900, para: [600, 900], boss: true },
+  iskelet:     { ad: 'İskelet',       simge: 'iskelet', lv: 10, hp: 300,  atk: [28, 38],   def: 10, exp: 110,  para: [18, 30] },
+  yarasa:      { ad: 'Vampir Yarasa', simge: 'yarasa', lv: 11, hp: 260,  atk: [30, 40],   def: 8,  exp: 120,  para: [20, 32] },
+  zombi:       { ad: 'Zombi',         simge: 'zombi', lv: 12, hp: 420,  atk: [32, 44],   def: 12, exp: 145,  para: [22, 36] },
+  zincirli_iblis:{ ad: 'Zincirli İblis', simge: 'zincirli_iblis', lv: 16, hp: 4200, atk: [70, 90], def: 25, exp: 1900, para: [600, 900], boss: true },
 
-  kan_buyucusu:{ ad: 'Kan Büyücüsü',  ikon: '🧙', lv: 16, hp: 700,  atk: [55, 70],   def: 18, exp: 280,  para: [35, 55] },
-  gargoyl:     { ad: 'Gargoyl',       ikon: '🗿', lv: 18, hp: 900,  atk: [60, 80],   def: 24, exp: 340,  para: [40, 62] },
-  cehennem_tazisi:{ ad: 'Cehennem Tazısı', ikon: '🔥', lv: 20, hp: 1100, atk: [70, 95], def: 22, exp: 420, para: [48, 75] },
-  kara_ejder:  { ad: 'Kara Ejder',    ikon: '🐲', lv: 22, hp: 12000, atk: [115, 145], def: 40, exp: 6000, para: [2000, 3000], boss: true }
+  kan_buyucusu:{ ad: 'Kan Büyücüsü',  simge: 'kan_buyucusu', lv: 16, hp: 700,  atk: [55, 70],   def: 18, exp: 280,  para: [35, 55] },
+  gargoyl:     { ad: 'Gargoyl',       simge: 'gargoyl', lv: 18, hp: 900,  atk: [60, 80],   def: 24, exp: 340,  para: [40, 62] },
+  cehennem_tazisi:{ ad: 'Cehennem Tazısı', simge: 'cehennem_tazisi', lv: 20, hp: 1100, atk: [70, 95], def: 22, exp: 420, para: [48, 75] },
+  kara_ejder:  { ad: 'Kara Ejder',    simge: 'kara_ejder', lv: 22, hp: 12000, atk: [115, 145], def: 40, exp: 6000, para: [2000, 3000], boss: true }
 };
 
 // ---- Bölgeler ----

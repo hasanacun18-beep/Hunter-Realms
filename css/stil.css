@@ -1060,3 +1060,15 @@ body,#uygulama{min-height:100vh;min-height:100dvh}
 .yuvarlak.oto.acik .ikon{color:#9fe08a}
 .kisayollar button .ikon{width:18px;height:18px}
 .mh-dugmeler button .ikon{width:13px;height:13px;vertical-align:-2px}
+
+/* v0.22 — 2. adım: canavar ve sınıf ikonları (veri.js → simge)
+   Parşömen kartlarda koyu mürekkep baskı gibi, boss'larda koyu kan kırmızısı */
+.kart .kikon .ikon{width:1.2em;height:1.2em;color:#2a1c10;opacity:.6;filter:none}
+.kart.boss .kikon .ikon{color:#6e1610;opacity:.7}
+.oyuncu-kart .kikon .ikon{color:#1c2a44}
+.saha-kart.olu .kikon .ikon{color:#6a6258}
+.bp-ikon .ikon{width:72%;height:72%;color:#e8884a}
+.yuvarlak#dBoss .ikon{color:#d86a48}
+.sinif-rozet .ikon{width:26px;height:26px}
+.sinif-yuvarlak .ik .ikon{width:34px;height:34px}
+.kule-bekci .ikon{color:#d86a48}
