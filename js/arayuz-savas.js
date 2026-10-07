@@ -105,7 +105,7 @@ G.cizSavas = function () {
       '<i class="susleme sag"></i>' +
       '<div class="yuvarlaklar">' +
         '<button class="yuvarlak oto' + (o.ayar.otoSavas ? ' acik' : '') + '" data-eylem="otoSavasDegis"><span>' + G.ikon(o.ayar.otoSavas ? 'kiliclar' : 'eldiven') + '</span><small>' + (o.ayar.otoSavas ? 'Otomatik' : 'Elle') + '</small></button>' +
-        '<button class="yuvarlak" id="dBoss" data-eylem="boss"' + (bossVar || kuleMi ? ' disabled' : '') + '><span>' + boss.ikon + '</span><small>BOSS</small></button>' +
+        '<button class="yuvarlak" id="dBoss" data-eylem="boss"' + (kuleMi ? ' disabled' : '') + '><span>' + boss.ikon + '</span><small id="dBossYazi">BOSS</small></button>' +
       '</div>' +
     '</div>' +
     G.logHtml() +
@@ -239,7 +239,7 @@ G.aksiyonGuncelle = function () {
   });
   var tehlike = G.tehlikede();
   G.$('dKac').disabled = !tehlike;
-  if (G.$('dBoss')) G.$('dBoss').disabled = G.o.bolge === 'kule' || G.alan.some(function (c) { return c && c.boss && !c.olu; });
+  if (G.$('dBoss')) G.$('dBoss').disabled = G.o.bolge === 'kule';
 };
 
 G.hasarGoster = function (i, h, krit, tur) {
@@ -322,4 +322,50 @@ G.kuleAltHtml = function () {
   return '<div class="kule-alt"><div><b>' + G.ikon('kule') + ' Kule</b><span>Kademe ' + k.kademe + ' · Kat ' + k.kat + '</span>' +
     '<small>Bekçiyi süre bitmeden yen. Kulede ölmek tecrübe kaybettirmez.</small></div>' +
     '<button class="genis-dugme" data-eylem="parsomen">' + G.ikon('kapi') + ' Pes et</button></div>';
+};
+
+// ============================================================
+// v0.30 — BOSS PANELİ (BOSS düğmesi): bütün bosslar, durum / geri sayım, önerilen GP, Çağır / Işınlan
+// ============================================================
+G.bossListeModal = function () {
+  var o = G.o, cp = G.hesapla(o).cp;
+  var satirlar = G.BOLGELER.filter(function (b) { return b.boss; }).map(function (b) {
+    var c = G.CANAVARLAR[b.boss], kilit = o.lv < b.minLv, gp = G.onerilenGP(b), burada = o.bolge === b.id;
+    var dugme = kilit ? '<button disabled>Sv. ' + b.minLv + '</button>'
+      : '<button data-eylem="bossIsinlan" data-id="' + b.boss + '" class="bl-dugme" data-boss="' + b.boss + '">' + (burada ? 'Çağır' : 'Işınlan') + '</button>';
+    return '<div class="bl-satir' + (kilit ? ' kilitli' : '') + (burada ? ' burada' : '') + '">' +
+      '<span class="bl-ikon">' + c.ikon + '</span>' +
+      '<div class="bl-orta"><b>' + c.ad + ' <small>Sv. ' + c.lv + '</small></b><small>' + b.ad + '</small></div>' +
+      '<div class="bl-durum"><span class="bl-sure" data-boss="' + b.boss + '"></span>' +
+        '<small>GP <em class="' + (cp >= gp ? 'fark-arti' : 'fark-eksi') + '">' + gp + '</em></small></div>' +
+      dugme + '</div>';
+  }).join('');
+  G.$('modalIc').innerHTML = '<h3>' + G.ikon('kiliclar') + ' Bosslar</h3>' +
+    '<div class="boss-liste" id="bossListe">' + satirlar + '</div>' +
+    '<p class="bilgi soluk">Yenilen boss bir süre sonra yeniden doğar. Süre, oyun kapalıyken de işler.</p>' +
+    '<div class="modal-dugmeler"><button data-eylem="modalKapat">Kapat</button></div>';
+  G.$('modal').classList.remove('gizli');
+  G.bossSayac();
+};
+
+// Her saniye: paneldeki durumlar ve sahadaki BOSS düğmesinin geri sayımı
+G.bossSayac = function () {
+  if (!G.o) return;
+  var liste = G.$('bossListe');
+  if (liste && !G.$('modal').classList.contains('gizli')) {
+    liste.querySelectorAll('.bl-sure').forEach(function (el) {
+      var k = G.bossKalan(el.getAttribute('data-boss'));
+      el.textContent = k ? G.sureYazi(k) : 'Hazır';
+      el.className = 'bl-sure ' + (k ? 'bekliyor' : 'hazir');
+    });
+    liste.querySelectorAll('.bl-dugme').forEach(function (el) {
+      el.disabled = !!G.bossKalan(el.getAttribute('data-boss'));
+    });
+  }
+  var yazi = G.$('dBossYazi'), b = G.bolgeBul(G.o.bolge);
+  if (yazi && b && b.boss) {
+    var k = G.bossKalan(b.boss);
+    yazi.textContent = k ? G.sureYazi(k) : 'BOSS';
+    G.$('dBoss').classList.toggle('bekliyor', !!k);
+  }
 };

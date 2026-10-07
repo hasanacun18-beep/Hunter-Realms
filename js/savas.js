@@ -273,6 +273,8 @@ G.canavarOldu = function (i) {
   G.gorevSay('oldur');
   o.istatistik.oldurId[c.id] = (o.istatistik.oldurId[c.id] || 0) + 1;
   if (c.boss) G.gorevSay('boss');
+  // v0.30: boss öldü, yeniden doğma sayacı başlar (veri.js → G.BOSS_SURE)
+  if (c.boss && G.BOSS_SURE[c.id]) o.bossZaman[c.id] = Date.now() + G.BOSS_SURE[c.id] * 60000;
   if (c.boss) o.istatistik.bosslar[c.id] = (o.istatistik.bosslar[c.id] || 0) + 1;
   if (G.hedefI === i) G.hedefI = null;
 
@@ -345,10 +347,34 @@ G.kac = function () {
   if (G.sekme === 'savas') G.cizSavas();
 };
 
+// v0.30: bossun yeniden doğmasına kalan süre (ms); 0 = hazır
+G.bossKalan = function (id) {
+  return Math.max(0, (G.o.bossZaman[id] || 0) - Date.now());
+};
+G.sureYazi = function (ms) {
+  var sn = Math.ceil(ms / 1000), d = Math.floor(sn / 60);
+  return (d < 10 ? '0' : '') + d + ':' + (sn % 60 < 10 ? '0' : '') + (sn % 60);
+};
+// Bossun bulunduğu av bölgesi
+G.bossBolge = function (id) {
+  return G.BOLGELER.filter(function (b) { return b.boss === id; })[0];
+};
+// Boss panelinden: gerekirse bossun bölgesine git, sonra çağır
+G.bossIsinlan = function (id) {
+  var b = G.bossBolge(id);
+  if (!b) return;
+  if (G.o.lv < b.minLv) { G.bildir('Seviye ' + b.minLv + ' gerekiyor.'); return; }
+  if (G.bossKalan(id)) { G.bildir(G.CANAVARLAR[id].ad + ' ' + G.sureYazi(G.bossKalan(id)) + ' sonra doğacak.'); return; }
+  G.modalKapat();
+  if (G.o.bolge !== b.id) G.bolgeGit(b.id);
+  G.bossBaslat();
+};
+
 G.bossBaslat = function () {
   var b = G.bolgeBul(G.o.bolge);
   if (!b.boss) { G.bildir('Burada boss yok.'); return; }
   if (G.alan.some(function (c) { return c && c.boss && !c.olu; })) { G.bildir('Boss zaten sahada.'); return; }
+  if (G.bossKalan(b.boss)) { G.bildir(G.CANAVARLAR[b.boss].ad + ' ' + G.sureYazi(G.bossKalan(b.boss)) + ' sonra doğacak.'); return; }
   G.alan = G.alan.filter(function (c) { return c && !(c.boss && c.olu); });
   // Oyuncunun yanındaki boş kare (yoksa herhangi bir boş kare)
   var h = null, p = G.oyuncu;

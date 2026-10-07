@@ -42,6 +42,7 @@ G.gocEt = function (o) {
   }
   if (o.ayar.otoBeceri == null) o.ayar.otoBeceri = true;
   if (o.ayar.ses == null) o.ayar.ses = true;   // v0.24
+  if (!o.bossZaman) o.bossZaman = {};          // v0.30: { bossId: yeniden doğacağı zaman (ms) }
   if (!o.kitapSayfa) o.kitapSayfa = {};
   // v0.14 beceri geliştirme
   if (!o.kitaplar) o.kitaplar = JSON.parse(JSON.stringify(o.kitapSayfa));

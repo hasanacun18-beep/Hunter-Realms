@@ -1023,6 +1023,16 @@ G.ELIT = {
   odulCarpan: 8,    // tecrübe ve altın katı
   nadirBonus: 2.5   // garanti eşyanın nadirlik şansı katı (normal 1, boss 4)
 };
+
+// ============================================================
+// v0.30 — BOSS SÜRELERİ (Warriors and Adventure'daki boss listesi ve geri sayımlar)
+// Boss öldükten sonra kaç DAKİKA sonra yeniden çağrılabilir. Gerçek zamanlı: oyun kapalıyken de işler.
+// Kule bekçileri bu sürelerden etkilenmez.
+// ============================================================
+G.BOSS_SURE = {
+  kurt_kral: 10, dev_bocek: 15, zincirli_iblis: 20, kara_ejder: 25,
+  bataklik_timsahi: 30, ayaz_devi: 40, kor_titani: 50, hiclik_efendisi: 60
+};
 G.NADIRLIK[1].sans = 20;          // İyi (önce 25)
 G.NADIRLIK[2].sans = 6;           // Nadir (önce 10)
 G.NADIRLIK[3].sans = 1.2;         // Destansı (önce 3)
