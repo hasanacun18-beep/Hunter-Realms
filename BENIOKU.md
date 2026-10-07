@@ -1,4 +1,4 @@
-# Hunter Realms — v0.23 (vuruş hissi)
+# Hunter Realms — v0.24 (ses efektleri)
 
 > Not: Oyun eskiden "Kara Diyar" adıyla geliştirildi, bu sürümde "Hunter Realms" olarak
 > yeniden adlandırıldı. Kayıt dosyalarının iç anahtar isimleri değişmedi (bkz. CLAUDE.md).
@@ -18,6 +18,7 @@ Kayıt tarayıcının localStorage'ına otomatik yapılır (10 saniyede bir ve h
 |---|---|
 | js/veri.js             | Tüm sayılar: sınıflar, canavarlar, bölgeler, eşyalar, ek statlar, setler |
 | js/ikon.js             | SVG ikonlar (emoji yerine). Kaynak: game-icons.net, CC BY 3.0 |
+| js/ses.js              | Ses efektleri (dosya yok, Web Audio ile üretilir) |
 | js/durum.js            | Oyuncu verisi, stat hesabı, seviye, kayıt ve eski kayıt göçü (gocEt) |
 | js/esya.js             | Eşya üretme, kuşanma, satma, güçlendirme |
 | js/savas.js            | Canavar alanı, otomatik savaş, boss, iksir |
@@ -313,3 +314,11 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - Canın %30'un altındayken saha kenarları kırmızı nabız gibi atar
 - Telefonda "hareketi azalt" (reduced motion) açıksa sarsıntılar kapalı
 - Kod: arayuz-savas.js → G.sinifTekrar, G.sahaSars, G.olumEfekti; savas.js → G.vur'a "tur" parametresi
+
+## v0.24 değişiklikleri (ses efektleri)
+- Sesler: normal vuruş, beceri, kritik (metal çınlaması), canavar ölümü, sana gelen darbe (şiddetine göre),
+  iksir, seviye atlama, boss ortaya çıkışı
+- Ses dosyası YOK: hepsi tarayıcıda Web Audio ile üretiliyor (internetsiz ve lisanssız çalışır)
+- Ayarlar → "Ses" ile kapatılabilir. Kayıtta yeni alan: o.ayar.ses (eski kayıtlar G.gocEt ile otomatik açık gelir)
+- Tarayıcılar sesi ilk dokunuştan sonra açar; ana.js'teki tıklama dinleyicisi G.sesAc'ı çağırır
+- Ayarlar: ses.js → G.SES (ana ses seviyesi, aynı sesin tekrar aralığı), sesler G.SESLER içinde

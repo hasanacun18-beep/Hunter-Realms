@@ -136,6 +136,7 @@ G.ayarlarModal = function () {
     '<label class="ayar-satir"><input type="checkbox" id="otoSavas"' + (o.ayar.otoSavas ? ' checked' : '') + '><span>Otomatik savaş<small>En yakın canavara kendin yürür, saldırır</small></span></label>' +
     '<label class="ayar-satir"><input type="checkbox" id="otoIksir"' + (o.ayar.otoIksir ? ' checked' : '') + '><span>Otomatik iksir<small>Can %40 altına inince, mana yetmeyince içer</small></span></label>' +
     '<label class="ayar-satir"><input type="checkbox" id="otoBeceri"' + (o.ayar.otoBeceri ? ' checked' : '') + '><span>Otomatik beceri<small>"Otomatik" işaretli becerileri sırayla kullanır</small></span></label>' +
+    '<label class="ayar-satir"><input type="checkbox" id="ses"' + (o.ayar.ses !== false ? ' checked' : '') + '><span>Ses<small>Vuruş, kritik, ölüm, iksir ve seviye sesleri</small></span></label>' +
     '<div class="modal-dugmeler"><button data-eylem="duyurular">' + G.ikon('parsomen') + ' Duyurular</button><button data-eylem="secimeDon">↩ Karakter seçimi</button><button data-eylem="modalKapat">Kapat</button></div>';
   G.$('modal').classList.remove('gizli');
 };
@@ -252,6 +253,7 @@ G.hasarGoster = function (i, h, krit, tur) {
   el.appendChild(sp);
   // v0.22: kritikte kart parlar, saha hafifçe sarsılır
   if (krit) { G.sinifTekrar(el, 'krit-flas'); G.sahaSars('hafif'); }
+  if (tur !== 'dot') G.sesCal(krit ? 'krit' : tur === 'beceri' ? 'beceri' : 'vurus');
   setTimeout(function () { sp.remove(); }, 1000);
 };
 
@@ -271,6 +273,7 @@ G.darbeEfekti = function (oran) {
   var el = G.$('oyuncuKart');
   if (!el) return;
   G.sinifTekrar(el, 'darbe');
+  G.sesCal('darbe', oran);
   // v0.22: canının %12'sinden fazlasını götüren darbe: sert sarsıntı + kırmızı kenar
   if (oran >= 0.12) { G.sahaSars('sert'); G.sinifTekrar(G.$('saha'), 'tehlike-flas'); }
 };
@@ -293,6 +296,7 @@ G.sahaSars = function (guc) {
 G.olumEfekti = function (i) {
   var el = G.$('kart' + i);
   if (el) el.classList.add('oluyor');
+  G.sesCal('olum');
 };
 
 // ---- v0.20: Kuledeyken alt panel ----

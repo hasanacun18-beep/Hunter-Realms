@@ -20,7 +20,7 @@ G.yeniOyuncu = function (ad, sinif) {
     kusanilan: { silah: null, kask: null, zirh: null, kolye: null, yuzuk: null, kemer: null, cizme: null },
     canta: [], sarf: { hp: 5, mp: 3, tas: 2 },
     bolge: 'koy', sonrakiId: 1,
-    ayar: { otoIksir: true, otoSavas: false },
+    ayar: { otoIksir: true, otoSavas: false, ses: true },
     istatistik: { oldurme: 0, olum: 0 }
   };
   G.gocEt(o);
@@ -41,6 +41,7 @@ G.gocEt = function (o) {
     o.pasifYuva = [null, null];
   }
   if (o.ayar.otoBeceri == null) o.ayar.otoBeceri = true;
+  if (o.ayar.ses == null) o.ayar.ses = true;   // v0.24
   if (!o.kitapSayfa) o.kitapSayfa = {};
   // v0.14 beceri geliştirme
   if (!o.kitaplar) o.kitaplar = JSON.parse(JSON.stringify(o.kitapSayfa));
@@ -175,6 +176,7 @@ G.expEkle = function (miktar) {
     o.hp = r.hpMax; o.mp = r.mpMax;
     G.log('Seviye atladın! Artık seviye ' + o.lv + '. 5 stat puanın var.', 'sistem');
     G.bildir('Seviye ' + o.lv + '!');
+    G.sesCal('seviye');
     if (G.sekme === 'karakter') G.cizKarakter();
   }
 };

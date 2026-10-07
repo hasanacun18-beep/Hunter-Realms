@@ -345,6 +345,7 @@ G.bossBaslat = function () {
   G.alan.push(c);
   G.hedefI = G.alan.length - 1; G.hedefHucre = null;
   G.log(c.ad + ' ortaya çıktı!', 'tehlike');
+  G.sesCal('boss');
   if (G.sekme === 'savas') G.cizSavas();
 };
 
@@ -379,6 +380,7 @@ G.iksir = function (t, oto) {
     o.mp = Math.min(r.mpMax, o.mp + 40 + o.lv * 5 + Math.round(r.mpMax * G.IKSIR.mpYuzde));
   }
   o.sarf[t]--;
+  G.sesCal('iksir');
   G.gorevSay('iksir');
   if (G.tehlikede()) G.iksirBek[t] = G.ZORLUK.iksirBekleme;
   G.arayuzGuncelle();
