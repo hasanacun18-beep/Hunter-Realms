@@ -315,25 +315,25 @@ G.BOLGELER = [
 
 // Yeni canavarlar (statlar ayrıca G.ZORLUK ile seviyeye göre büyür)
 Object.assign(G.CANAVARLAR, {
-  kurbaga:          { ad: 'Zehir Kurbağası',  ikon: '🐸', lv: 22, hp: 1250, atk: [78, 98],   def: 28, exp: 520,  para: [55, 85] },
-  suluk:            { ad: 'Sülük Yığını',     ikon: '🪱', lv: 23, hp: 1400, atk: [76, 96],   def: 30, exp: 560,  para: [58, 90] },
-  curuk_ent:        { ad: 'Çürük Ağaç',       ikon: '🌳', lv: 25, hp: 1750, atk: [88, 112],  def: 36, exp: 650,  para: [65, 100] },
-  bataklik_timsahi: { ad: 'Bataklık Timsahı', ikon: '🐊', lv: 27, hp: 15000, atk: [150, 185], def: 50, exp: 9000, para: [3000, 4500], boss: true },
+  kurbaga:          { ad: 'Zehir Kurbağası',  simge: 'kurbaga', lv: 22, hp: 1250, atk: [78, 98],   def: 28, exp: 520,  para: [55, 85] },
+  suluk:            { ad: 'Sülük Yığını',     simge: 'suluk', lv: 23, hp: 1400, atk: [76, 96],   def: 30, exp: 560,  para: [58, 90] },
+  curuk_ent:        { ad: 'Çürük Ağaç',       simge: 'curuk_ent', lv: 25, hp: 1750, atk: [88, 112],  def: 36, exp: 650,  para: [65, 100] },
+  bataklik_timsahi: { ad: 'Bataklık Timsahı', simge: 'bataklik_timsahi', lv: 27, hp: 15000, atk: [150, 185], def: 50, exp: 9000, para: [3000, 4500], boss: true },
 
-  buz_kurdu:        { ad: 'Buz Kurdu',        ikon: '🐺', lv: 27, hp: 1950, atk: [98, 122],  def: 40, exp: 780,  para: [75, 110] },
-  kar_trolu:        { ad: 'Kar Trolü',        ikon: '🧌', lv: 28, hp: 2500, atk: [102, 130], def: 46, exp: 880,  para: [80, 120] },
-  buz_ruhu:         { ad: 'Buz Ruhu',         ikon: '👻', lv: 30, hp: 2050, atk: [120, 150], def: 38, exp: 950,  para: [85, 125] },
-  ayaz_devi:        { ad: 'Ayaz Devi',        ikon: '❄️', lv: 32, hp: 21000, atk: [185, 225], def: 62, exp: 14000, para: [4500, 6500], boss: true },
+  buz_kurdu:        { ad: 'Buz Kurdu',        simge: 'kurt', lv: 27, hp: 1950, atk: [98, 122],  def: 40, exp: 780,  para: [75, 110] },
+  kar_trolu:        { ad: 'Kar Trolü',        simge: 'kar_trolu', lv: 28, hp: 2500, atk: [102, 130], def: 46, exp: 880,  para: [80, 120] },
+  buz_ruhu:         { ad: 'Buz Ruhu',         simge: 'buz_ruhu', lv: 30, hp: 2050, atk: [120, 150], def: 38, exp: 950,  para: [85, 125] },
+  ayaz_devi:        { ad: 'Ayaz Devi',        simge: 'ayaz_devi', lv: 32, hp: 21000, atk: [185, 225], def: 62, exp: 14000, para: [4500, 6500], boss: true },
 
-  magma_bocegi:     { ad: 'Magma Böceği',     ikon: '🐞', lv: 32, hp: 2800, atk: [135, 165], def: 50, exp: 1150, para: [95, 140] },
-  kor_semender:     { ad: 'Kor Semenderi',    ikon: '🦎', lv: 33, hp: 3100, atk: [140, 175], def: 54, exp: 1250, para: [100, 150] },
-  ates_elementali:  { ad: 'Ateş Ruhu',        ikon: '🔥', lv: 35, hp: 3500, atk: [160, 195], def: 58, exp: 1400, para: [110, 160] },
-  kor_titani:       { ad: 'Kor Titanı',       ikon: '🌋', lv: 37, hp: 29000, atk: [230, 280], def: 75, exp: 20000, para: [6500, 9000], boss: true },
+  magma_bocegi:     { ad: 'Magma Böceği',     simge: 'magma_bocegi', lv: 32, hp: 2800, atk: [135, 165], def: 50, exp: 1150, para: [95, 140] },
+  kor_semender:     { ad: 'Kor Semenderi',    simge: 'kor_semender', lv: 33, hp: 3100, atk: [140, 175], def: 54, exp: 1250, para: [100, 150] },
+  ates_elementali:  { ad: 'Ateş Ruhu',        simge: 'ates_elementali', lv: 35, hp: 3500, atk: [160, 195], def: 58, exp: 1400, para: [110, 160] },
+  kor_titani:       { ad: 'Kor Titanı',       simge: 'kor_titani', lv: 37, hp: 29000, atk: [230, 280], def: 75, exp: 20000, para: [6500, 9000], boss: true },
 
-  hiclik_gozcusu:   { ad: 'Hiçlik Gözcüsü',   ikon: '👁️', lv: 37, hp: 3900, atk: [175, 210], def: 64, exp: 1650, para: [120, 175] },
-  golge_sovalye:    { ad: 'Gölge Şövalyesi',  ikon: '🗡️', lv: 38, hp: 4500, atk: [185, 225], def: 70, exp: 1800, para: [130, 185] },
-  bosluk_canavari:  { ad: 'Boşluk Canavarı',  ikon: '🕳️', lv: 40, hp: 5100, atk: [205, 250], def: 76, exp: 2050, para: [140, 200] },
-  hiclik_efendisi:  { ad: 'Hiçlik Efendisi',  ikon: '🌑', lv: 42, hp: 40000, atk: [280, 340], def: 90, exp: 30000, para: [9000, 13000], boss: true }
+  hiclik_gozcusu:   { ad: 'Hiçlik Gözcüsü',   simge: 'hiclik_gozcusu', lv: 37, hp: 3900, atk: [175, 210], def: 64, exp: 1650, para: [120, 175] },
+  golge_sovalye:    { ad: 'Gölge Şövalyesi',  simge: 'golge_sovalye', lv: 38, hp: 4500, atk: [185, 225], def: 70, exp: 1800, para: [130, 185] },
+  bosluk_canavari:  { ad: 'Boşluk Canavarı',  simge: 'bosluk_canavari', lv: 40, hp: 5100, atk: [205, 250], def: 76, exp: 2050, para: [140, 200] },
+  hiclik_efendisi:  { ad: 'Hiçlik Efendisi',  simge: 'hiclik_efendisi', lv: 42, hp: 40000, atk: [280, 340], def: 90, exp: 30000, para: [9000, 13000], boss: true }
 });
 
 // Yeni eşyalar (listenin SONUNA)

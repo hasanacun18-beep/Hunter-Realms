@@ -288,3 +288,11 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - Karakter alt menüsü (Beceri, Meridyen, İlahi, Rünler, Statlar) ve Demirci alt menüsü (Arıtma, Güçlendirme, Eritme)
 - Savaş günlüğündeki bölüm, beceri, kule, maden, görev ve sandık satırları da ikonlu
 - veri.js → G.SARF'ta `ikon` yerine `simge` (renk alanı ikonu boyar); dükkan ürünleri ikonu G.SARF'tan alır
+
+### v0.22 — 3b: eşya ikonları ve kalan canavarlar
+- 70 eşyanın, 8 kuşanma yuvasının ve sınıfa özel görünümlerin (asa, yay, cübbe, taç, kukuleta...) emojisi yerine SVG ikon.
+  Çantada, karakter bebeğinde, demircide ve eşya penceresinde görünür
+- veri.js'teki eşya listesine DOKUNULMADI (sıra önemli). Bunun yerine ikon.js → G.EMOJI_IKON tablosu emojiyi ikona çevirir.
+  Yeni eşyaya tablodaki bir emojiyi verirsen ikonu otomatik gelir; tabloda olmayan emoji olduğu gibi görünür
+- 2. adımda atlanan 16 canavar (Bataklık, Buz Diyarı, Kor Dağı, Hiçlik Uçurumu) da ikonlu: kurbağa, timsah, trol, buz golemi,
+  semender, kaya golemi, kara şövalye, dokunaç...

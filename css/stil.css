@@ -1080,3 +1080,9 @@ body,#uygulama{min-height:100vh;min-height:100dvh}
 .sandik.hazir .ikon{filter:drop-shadow(0 0 6px rgba(255,200,80,.9))}
 .bl-zincir .ikon{color:var(--soluk)}
 .etkinlik-kart b .ikon{margin-right:2px}
+
+/* v0.22 — 3b: eşya ikonları (ikon.js → G.EMOJI_IKON) */
+.esya-ikon{color:#e2d4b6}
+.esya-kutu.bos .esya-ikon{color:#6a5d48;filter:none}
+.modal-ic h3 .esya-ikon{color:inherit}
+.esya-kutu .ik .esya-ikon{width:1.2em;height:1.2em}
