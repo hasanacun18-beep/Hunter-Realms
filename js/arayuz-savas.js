@@ -69,7 +69,7 @@ G.bolgeAltHtml = function () {
       '<b>' + b.ad + '</b>' +
       '<span class="mh-arazi"></span>' +
       '<span class="mh-oneri">' + (gp ? 'Önerilen GP: <em class="' + (cp >= gp ? 'fark-arti' : 'fark-eksi') + '">' + gp + '+</em>' : 'Güvenli bölge') + '</span>' +
-      '<span class="mh-dugmeler"><button data-eylem="ayarlar">⚙️ Ayarlar</button><button data-eylem="bolgeBilgi" data-b="' + b.id + '">📋 Bilgi</button></span>' +
+      '<span class="mh-dugmeler"><button data-eylem="ayarlar">' + G.ikon('carh') + ' Ayarlar</button><button data-eylem="bolgeBilgi" data-b="' + b.id + '">' + G.ikon('kitap') + ' Bilgi</button></span>' +
     '</div>' + G.zincirDugumHtml() + '</div>';
 };
 
@@ -97,14 +97,14 @@ G.cizSavas = function () {
     '<div class="sarf-cubugu">' +
       '<i class="susleme sol"></i>' +
       '<div class="sarf-yuvalar">' +
-        '<button class="sarf-yuva" id="dHp" data-eylem="iksir" data-t="hp"><span class="say" id="sHp"></span><span class="ik">🧪</span><small>Can</small><span class="bekleme" id="bkHp"></span></button>' +
-        '<button class="sarf-yuva" id="dMp" data-eylem="iksir" data-t="mp"><span class="say" id="sMp"></span><span class="ik">💧</span><small>Mana</small><span class="bekleme" id="bkMp"></span></button>' +
-        '<button class="sarf-yuva" id="dParsomen" data-eylem="parsomen"><span class="say">' + o.sarf.parsomen + '</span><span class="ik">📜</span><small>Dönüş</small></button>' +
-        '<button class="sarf-yuva" id="dKac" data-eylem="kac"><span class="ik">🏃</span><small>Kaç</small></button>' +
+        '<button class="sarf-yuva" id="dHp" data-eylem="iksir" data-t="hp"><span class="say" id="sHp"></span><span class="ik can">' + G.ikon('iksir') + '</span><small>Can</small><span class="bekleme" id="bkHp"></span></button>' +
+        '<button class="sarf-yuva" id="dMp" data-eylem="iksir" data-t="mp"><span class="say" id="sMp"></span><span class="ik mana">' + G.ikon('iksir') + '</span><small>Mana</small><span class="bekleme" id="bkMp"></span></button>' +
+        '<button class="sarf-yuva" id="dParsomen" data-eylem="parsomen"><span class="say">' + o.sarf.parsomen + '</span><span class="ik">' + G.ikon('parsomen') + '</span><small>Dönüş</small></button>' +
+        '<button class="sarf-yuva" id="dKac" data-eylem="kac"><span class="ik">' + G.ikon('kapi') + '</span><small>Kaç</small></button>' +
       '</div>' +
       '<i class="susleme sag"></i>' +
       '<div class="yuvarlaklar">' +
-        '<button class="yuvarlak oto' + (o.ayar.otoSavas ? ' acik' : '') + '" data-eylem="otoSavasDegis"><span>' + (o.ayar.otoSavas ? '⚔️' : '✋') + '</span><small>' + (o.ayar.otoSavas ? 'Otomatik' : 'Elle') + '</small></button>' +
+        '<button class="yuvarlak oto' + (o.ayar.otoSavas ? ' acik' : '') + '" data-eylem="otoSavasDegis"><span>' + G.ikon(o.ayar.otoSavas ? 'kiliclar' : 'eldiven') + '</span><small>' + (o.ayar.otoSavas ? 'Otomatik' : 'Elle') + '</small></button>' +
         '<button class="yuvarlak" id="dBoss" data-eylem="boss"' + (bossVar || kuleMi ? ' disabled' : '') + '><span>' + boss.ikon + '</span><small>BOSS</small></button>' +
       '</div>' +
     '</div>' +

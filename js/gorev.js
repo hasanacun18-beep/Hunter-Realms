@@ -51,9 +51,9 @@ G.gorevSeritHtml = function () {
       (d.bitti ? '<button class="gorev-al" data-eylem="gorevAl">Al</button>' : '');
   return '<div class="gorev-serit" id="gorevSerit">' +
     '<div class="kisayollar">' +
-      '<button data-eylem="madenKisayol" aria-label="Maden">⛏️</button>' +
-      '<button data-eylem="gorevBilgi" aria-label="Görev ödülü">🎁</button>' +
-      '<button data-eylem="ayarlar" aria-label="Ayarlar">⚙️</button>' +
+      '<button data-eylem="madenKisayol" aria-label="Maden">' + G.ikon('kazma') + '</button>' +
+      '<button data-eylem="gorevBilgi" aria-label="Görev ödülü">' + G.ikon('sandik') + '</button>' +
+      '<button data-eylem="ayarlar" aria-label="Ayarlar">' + G.ikon('carh') + '</button>' +
     '</div>' + metin + '</div>';
 };
 

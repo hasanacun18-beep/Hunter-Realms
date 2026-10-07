@@ -17,6 +17,7 @@ Kayıt tarayıcının localStorage'ına otomatik yapılır (10 saniyede bir ve h
 | Dosya | Ne işe yarar |
 |---|---|
 | js/veri.js             | Tüm sayılar: sınıflar, canavarlar, bölgeler, eşyalar, ek statlar, setler |
+| js/ikon.js             | SVG ikonlar (emoji yerine). Kaynak: game-icons.net, CC BY 3.0 |
 | js/durum.js            | Oyuncu verisi, stat hesabı, seviye, kayıt ve eski kayıt göçü (gocEt) |
 | js/esya.js             | Eşya üretme, kuşanma, satma, güçlendirme |
 | js/savas.js            | Canavar alanı, otomatik savaş, boss, iksir |
@@ -256,3 +257,15 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - Dosya indirme çalışmazsa (bazı mobil tarayıcılar) metin kutusundan elle kopyalanabiliyor
 - İçe aktarırken geçersiz/bozuk dosya reddediliyor; eski kayıt sürümleri de G.gocEt ile otomatik güncelleniyor
 - Yeni dosya: js/yedek.js
+
+## v0.22 değişiklikleri (görsel ciddiyet — 1. adım)
+- Telefonda (Chrome) oyun ekranı aşağı yukarı kayıyordu: `100vh` adres çubuğu gizliykenki yüksekliği
+  verdiği için sayfa ekrandan uzun kalıyordu. Artık `100dvh` (o an görünen yükseklik) kullanılıyor
+- Emoji yerine tek renkli, bronz tonlu SVG ikonlar (ilk grup):
+  - Alt menü: Karakter (miğfer), Çanta, Demirci (örs), Etkinlik (defne tacı), Harita
+  - Savaş çubuğu: Can / Mana iksiri (kırmızı / mavi şişe), Dönüş parşömeni, Kaç (kapı), Otomatik / Elle
+  - Görev şeridi (maden, ödül sandığı, ayarlar) ve bölge kutusundaki Ayarlar / Bilgi
+- Yeni dosya: js/ikon.js (veri.js'ten hemen sonra yüklenir). Yeni ikon eklemek: G.IKONLAR'a satır ekle,
+  arayüzde G.ikon('ad') kullan
+- İkonlar: game-icons.net (Lorc, Delapouite ve diğerleri), lisans CC BY 3.0 —
+  https://game-icons.net · https://creativecommons.org/licenses/by/3.0/

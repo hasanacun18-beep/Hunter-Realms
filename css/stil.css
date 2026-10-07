@@ -1043,3 +1043,20 @@ body,#uygulama{min-height:100vh;min-height:100dvh}
 .run-kutu small{font-size:8.5px}
 .run-kutu .arti{position:absolute;top:0;right:4px;font-size:10px;color:#f0d27a;font-weight:bold}
 .run-kutu .takili{position:absolute;bottom:0;right:6px;font-size:11px;color:#6ae06a}
+
+/* ============================================================
+   v0.22 — SVG İKONLAR (emoji yerine, bkz. js/ikon.js)
+   Renk "color" ile verilir; varsayılan bronz, hafif oyma gölgesi
+   ============================================================ */
+.ikon{display:inline-block;width:1em;height:1em;vertical-align:-.15em;fill:currentColor;color:var(--bronz-acik);
+  filter:drop-shadow(0 1px 0 rgba(0,0,0,.85)) drop-shadow(0 0 2px rgba(0,0,0,.6))}
+#altnav button span{display:block;line-height:1}
+#altnav button .ikon{width:24px;height:24px;color:var(--soluk);transition:color .15s}
+#altnav button.aktif .ikon{color:var(--bronz-acik);filter:drop-shadow(0 1px 0 #000) drop-shadow(0 0 5px rgba(240,190,100,.45))}
+.sarf-yuva .ik .ikon{width:24px;height:24px}
+.sarf-yuva .ik.can .ikon{color:#c9483c}
+.sarf-yuva .ik.mana .ikon{color:#4f8bd6}
+.yuvarlak .ikon{width:22px;height:22px}
+.yuvarlak.oto.acik .ikon{color:#9fe08a}
+.kisayollar button .ikon{width:18px;height:18px}
+.mh-dugmeler button .ikon{width:13px;height:13px;vertical-align:-2px}
