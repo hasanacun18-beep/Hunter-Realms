@@ -1361,3 +1361,11 @@ body,#uygulama{min-height:100vh;min-height:100dvh}
 .dm-dugmeler.su-dugmeler .sus-dugme span{font-size:16px}
 .dm-dugmeler.su-dugmeler .sus-dugme::before,.dm-dugmeler.su-dugmeler .sus-dugme::after{display:none}
 .cila-yazi{color:#5ab8c8}
+
+/* v0.36 — Cila taşları */
+.su-cila .cila-taslar{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;padding:4px 0}
+.cila-tas{display:flex;flex-direction:column;align-items:center;gap:1px;min-width:48px;padding:5px 6px;background:#1d1711;border:1px solid;border-radius:5px}
+.cila-tas .ikon{width:22px;height:22px}
+.cila-tas b{font-size:13px;color:#f0d8a0}
+.cila-tas small{font-size:11px;color:var(--soluk)}
+.cila-tas:disabled{opacity:.35}

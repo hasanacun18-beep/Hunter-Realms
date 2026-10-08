@@ -10,28 +10,35 @@ G.esyaOlustur = function (o, sablon, nadir) {
   var s = G.ESYALAR[sablon];
   if (s.set) nadir = Math.max(nadir, 2);   // set parçaları en az Nadir
   var e = { id: o.sonrakiId++, sablon: sablon, nadir: nadir, arti: 0, ek: G.ekStatUret(s, G.EK_SAYISI[nadir]) };
-  e.su = G.suUret(e);   // v0.35: su verme bonusu, rastgele ilk cila
+  e.so = G.suUret(e);   // v0.35: su verme oranları, rastgele ilk cila
   return e;
 };
 
 // ---- v0.35: Su verme (veri.js → G.SUVERME) ----
+// Kayıtta e.so = { stat: yüzde 0-100 } — her temel statın en fazla su verme bonusuna oranı.
 // Eşyanın su verme ile alabileceği en fazla temel stat bonusları: { atk: 12, def: 9 }
 G.suMaks = function (e) {
   var s = G.ESYALAR[e.sablon], n = G.NADIRLIK[e.nadir], m = {};
   for (var k in G.STAT_ADLARI) if (s[k]) m[k] = Math.max(1, Math.round(s[k] * n.carpan * G.SUVERME.oran));
   return m;
 };
-// Yeni eşyanın ilk su verme bonusu: her stat için rastgele (çoğunlukla düşük)
+// Yeni eşyanın ilk oranları: her stat için rastgele (çoğunlukla düşük)
 G.suUret = function (e) {
-  var m = G.suMaks(e), su = {};
-  for (var k in m) su[k] = Math.round(m[k] * Math.pow(Math.random(), G.SUVERME.ilkUs));
-  return su;
+  var so = {};
+  for (var k in G.suMaks(e)) so[k] = Math.round(Math.pow(Math.random(), G.SUVERME.ilkUs) * 100);
+  return so;
 };
-// Cila değeri (%): statların en fazla değerine ortalama oranı
+// Statların şu anki su verme bonusu: { atk: 4, def: 2 }
+G.suDeger = function (e) {
+  var m = G.suMaks(e), d = {};
+  for (var k in m) d[k] = Math.round(m[k] * ((e.so && e.so[k]) || 0) / 100);
+  return d;
+};
+// Cila değeri (%): oranların ortalaması
 G.cila = function (e) {
   var m = G.suMaks(e), top = 0, n = 0;
-  for (var k in m) { top += Math.min(1, ((e.su && e.su[k]) || 0) / m[k]); n++; }
-  return n ? Math.round(top / n * 100) : 0;
+  for (var k in m) { top += (e.so && e.so[k]) || 0; n++; }
+  return n ? Math.round(top / n) : 0;
 };
 
 // Aynı stat iki kez gelmez. Silahta savunma, zırhta saldırı gibi tuhaflıklar serbest: sürpriz iyidir.
@@ -79,9 +86,9 @@ G.esyaUret = function (o, canLv, bonus) {
 };
 
 G.esyaStat = function (e) {
-  var s = G.ESYALAR[e.sablon], n = G.NADIRLIK[e.nadir], st = {};
+  var s = G.ESYALAR[e.sablon], n = G.NADIRLIK[e.nadir], st = {}, su = G.suDeger(e);
   for (var k in G.STAT_ADLARI) {
-    if (s[k]) st[k] = Math.max(1, Math.round((s[k] * n.carpan + ((e.su && e.su[k]) || 0)) * (1 + 0.12 * e.arti)));
+    if (s[k]) st[k] = Math.max(1, Math.round((s[k] * n.carpan + (su[k] || 0)) * (1 + 0.12 * e.arti)));
   }
   return st;
 };

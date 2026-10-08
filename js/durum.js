@@ -83,9 +83,17 @@ G.gocEt = function (o) {
   G.YUVALAR.forEach(function (y) { if (!(y.id in o.kusanilan)) o.kusanilan[y.id] = null; });
   if (!o.cantaLimit) o.cantaLimit = G.CANTA.baslangic;
   // v0.35: su verme — eski eşyalar da rastgele bir ilk cila alır
-  if (o.sarf.suTasi == null) o.sarf.suTasi = 0;
+  // v0.36: e.su (stat değeri) → e.so (yüzde oran); Su Verme Taşı → cila taşı
+  G.CILA_TASLARI.forEach(function (t) { if (o.sarf[t.id] == null) o.sarf[t.id] = 0; });
+  if (o.sarf.suTasi) o.sarf[G.SUVERME.eskiTas] += o.sarf.suTasi;
+  delete o.sarf.suTasi;
   o.canta.concat(Object.keys(o.kusanilan).map(function (k) { return o.kusanilan[k]; })).forEach(function (e) {
-    if (e && !e.su) e.su = G.suUret(e);
+    if (!e || e.so) return;
+    if (e.su) {
+      var m = G.suMaks(e); e.so = {};
+      for (var k in m) e.so[k] = Math.round(Math.min(1, (e.su[k] || 0) / m[k]) * 100);
+      delete e.su;
+    } else e.so = G.suUret(e);
   });
   return o;
 };

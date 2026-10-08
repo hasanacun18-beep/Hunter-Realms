@@ -1117,21 +1117,34 @@ G.UNVANLAR = [
 // ============================================================
 // v0.35 — SU VERME (Warriors and Adventure'daki "Quench") — demirci.js
 // Her eşyanın temel statlarına (şablondaki atk/def/hp/mp/hiz) "su verme" bonusu eklenir.
-// Cila değeri (%): bu bonusların en fazla değerlerine oranı (0 = hiç, 100 = tam).
+// Cila değeri (%): bu bonusların en fazla değerlerine oranı (0 = hiç, 100 = tam). Kayıtta e.so = { stat: oran 0-1 }.
 // Aynı ad + aynı nadirlikte, cilası DAHA YÜKSEK bir eşya kurban edilir; fark büyüdükçe artış büyür.
 // ============================================================
 G.SUVERME = {
   oran: 0.3,          // tam cilada temel stat bu oranda artar (nadirlik dahil, güçlendirme çarpanından önce)
   ilkUs: 2,           // yeni eşyanın ilk cilası: rastgele^ilkUs (2 = çoğu düşük, az yüksek)
   normalAlt: -0.3,    // normal su vermede her stat: eski oran + fark x rastgele(normalAlt .. 1) — bazı statlar düşebilir
-  altin: 0.5,         // normal su verme altın bedeli = (eşya lv x 5 + 20) x (nadirlik + 1) x bu
-  tasGelismis: 1,     // gelişmiş su verme: Su Verme Taşı bedeli (+ altın)
-  tasSifirla: 1,      // sıfırlama: Su Verme Taşı bedeli
-  dusmeElit: 25,      // elit canavardan taş düşme şansı (%)
-  dusmeBoss: [1, 2]   // bosstan düşen taş adedi
+  altin: 0.5,         // su verme altın bedeli = (eşya lv x 5 + 20) x (nadirlik + 1) x bu
+  gelismisCarpan: 3,  // gelişmiş su verme = normal bedel x bu
+  sifirlaCarpan: 1,   // cila sıfırlama = normal bedel x bu
+  dusmeElit: 25,      // elit canavardan cila taşı düşme şansı (%)
+  dusmeBoss: [1, 2],  // bosstan düşen cila taşı adedi
+  eskiTas: 'cila3'    // v0.35'teki Su Verme Taşı'nın her biri bu taşa çevrilir
 };
-G.SARF.suTasi = { ad: 'Su Verme Taşı', simge: 'su_tasi', renk: '#5ab8c8', aciklama: 'Gelişmiş su vermede ve cila sıfırlamada kullanılır. Elit canavarlardan ve bosslardan düşer.' };
-G.DUKKAN.push({ t: 'suTasi', ad: 'Su Verme Taşı', ikon: '💧', aciklama: 'Gelişmiş su verme ve cila sıfırlama', fiyat: 400 });
+// v0.36 — Cila taşları: eşyanın cilasını doğrudan yükseltir (Demirci → Su Verme → Cilala).
+// agirlikElit / agirlikBoss: taş düşerken hangi kademenin geleceği (göreli ağırlık)
+G.CILA_TASLARI = [
+  { id: 'cila1', ad: 'Ham Cila Taşı',      arti: 1,  renk: '#9aa0a8', agirlikElit: 50, agirlikBoss: 0 },
+  { id: 'cila2', ad: 'Cila Taşı',          arti: 2,  renk: '#5ab8c8', agirlikElit: 32, agirlikBoss: 40 },
+  { id: 'cila3', ad: 'Parlak Cila Taşı',   arti: 3,  renk: '#4f8fe0', agirlikElit: 18, agirlikBoss: 35 },
+  { id: 'cila4', ad: 'Usta Cila Taşı',     arti: 10, renk: '#b060e0', agirlikElit: 0,  agirlikBoss: 20 },
+  { id: 'cila5', ad: 'Kusursuz Cila Taşı', arti: 20, renk: '#e8a830', agirlikElit: 0,  agirlikBoss: 5 }
+];
+G.CILA_TASLARI.forEach(function (t) {
+  G.SARF[t.id] = { ad: t.ad, simge: 'su_tasi', renk: t.renk, aciklama: 'Bir eşyanın cilasını +' + t.arti + ' yükseltir (Demirci → Su Verme). Elit canavarlardan ve bosslardan düşer.' };
+});
+G.DUKKAN.push({ t: 'cila1', ad: 'Ham Cila Taşı', ikon: '💧', aciklama: 'Eşyanın cilasını +1 yükseltir', fiyat: 150 });
+G.DUKKAN.push({ t: 'cila2', ad: 'Cila Taşı', ikon: '💧', aciklama: 'Eşyanın cilasını +2 yükseltir', fiyat: 350 });
 G.NADIRLIK[1].sans = 20;          // İyi (önce 25)
 G.NADIRLIK[2].sans = 6;           // Nadir (önce 10)
 G.NADIRLIK[3].sans = 1.2;         // Destansı (önce 3)
