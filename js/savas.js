@@ -192,7 +192,7 @@ G.savasTik = function () {
     if (!c || c.olu || !c.aktif || G.cheb(p, c) > 1 || o.hp <= 0) return;
     if (c.sersem > 0) { c.sersem--; return; }
     vuranSayi++;
-    var kacinma = Math.min(30, r.hiz * 0.6);
+    var kacinma = Math.min(40, Math.min(30, r.hiz * 0.6) + (r.kacinma || 0));   // v0.42: ruh kaçınması
     if (Math.random() * 100 < kacinma) { G.oyuncuHasar('Kaçındın'); return; }
     if (s.kalkan && s.kalkan.oran >= 100) { G.oyuncuHasar('Bağışık'); return; }   // v0.37: Anka Kuşu Tüyü
     // v0.39: çağrılan yaratık vuruşu üstlenebilir
@@ -207,6 +207,8 @@ G.savasTik = function () {
       md *= G.ZORLUK.ofkeCarpan;
     }
     md -= r.def * 0.6;
+    if (r.hasarAzalt) md *= 1 - r.hasarAzalt / 100;   // v0.42
+    if (r.direnc && (c.boss || c.elit)) md *= 1 - r.direnc / 100;
     md *= G.mitikLanet(c);   // v0.33: Muhafız Laneti
     if (s.kalkan) md *= 1 - s.kalkan.oran / 100;
     md = Math.max(1, Math.round(md));
@@ -378,6 +380,10 @@ G.vur = function (i, c, r, gucCarpan, carpan, tur, deler) {
   var def = c.isaret ? c.def * (1 - c.isaret.oran / 100) : c.def;   // v0.38: işaretli canavarın savunması düşük
   if (deler) def *= 1 - deler / 100;   // v0.39: savunmayı deler
   h = Math.max(1, Math.round(h * carpan - def));
+  // v0.42: ruh dökümü — blitz (beceri x1.2), hasar artırma, savunmayı yok sayan sabit hasar
+  if (tur === 'beceri' && r.blitz && Math.random() * 100 < r.blitz) h *= 1.2;
+  if (r.hasarArtir) h *= 1 + r.hasarArtir / 100;
+  h = Math.round(h + (r.sabitHasar || 0));
   c.hp -= h;
   G.hasarGoster(i, h, krit, tur);
   G.mitikKanHirsi(h);   // v0.33
@@ -423,6 +429,7 @@ G.canavarOldu = function (i) {
   // v0.30: boss öldü, yeniden doğma sayacı başlar (veri.js → G.BOSS_SURE)
   if (c.boss && G.BOSS_SURE[c.id]) o.bossZaman[c.id] = Date.now() + G.BOSS_SURE[c.id] * 60000;
   if (c.boss) G.mitikDusur(c);   // v0.33: efsanevi parça şansı
+  if (c.boss && Math.random() * 100 < G.RUHDOKUM.dusmeBoss) { o.sarf.besRenk++; G.log('+1 ' + G.SARF.besRenk.ikon + ' Beş Renk Taşı'); }   // v0.42
   if (c.boss) o.istatistik.bosslar[c.id] = (o.istatistik.bosslar[c.id] || 0) + 1;
   if (G.hedefI === i) G.hedefI = null;
 

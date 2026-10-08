@@ -88,9 +88,11 @@ G.gocEt = function (o) {
   // v0.35: su verme — eski eşyalar da rastgele bir ilk cila alır
   // v0.36: e.su (stat değeri) → e.so (yüzde oran); Su Verme Taşı → cila taşı
   G.CILA_TASLARI.forEach(function (t) { if (o.sarf[t.id] == null) o.sarf[t.id] = 0; });
+  if (o.sarf.besRenk == null) o.sarf.besRenk = 0;   // v0.42
   if (o.sarf.suTasi) o.sarf[G.SUVERME.eskiTas] += o.sarf.suTasi;
   delete o.sarf.suTasi;
   o.canta.concat(Object.keys(o.kusanilan).map(function (k) { return o.kusanilan[k]; })).forEach(function (e) {
+    if (e && e.nadir >= G.RUHDOKUM.nadir && !e.ruh) e.ruh = G.ruhYeni();   // v0.42: eski Efsanevi eşyalara element
     if (!e || e.so) return;
     if (e.su) {
       var m = G.suMaks(e); e.so = {};
@@ -145,6 +147,8 @@ G.hesapla = function (o) {
   if (o.mitik) { var ms2 = G.mitikStat(o); for (var mk2 in ms2) ekle(mk2, ms2[mk2]); }   // v0.33
   var un = o.unvan && o.unvan.takili && G.unvanBul(o.unvan.takili);   // v0.34: takılı unvan
   if (un) for (var uk in un.stat) ekle(uk, un.stat[uk]);
+  var ruh = G.ruhStat(o);   // v0.42: ruh dökümü (sabit savunma doğrudan savunmaya)
+  for (var rk in ruh) ekle(rk === 'sabitDef' ? 'def' : rk, ruh[rk]);
   // Pasif beceriler (sadece açık yuvalardakiler)
   // Öğrenilen bütün pasif beceriler etkin
   Object.keys(o.beceriler || {}).forEach(function (id) {
@@ -170,7 +174,8 @@ G.hesapla = function (o) {
   r.krit = Math.min(75, r.krit);
   r.canCal = Math.min(20, r.canCal);
   r.cp = Math.round(r.atkMin + r.atkMax + r.def * 3 + r.hpMax / 5 + r.mpMax / 10 + r.hiz * 2 +
-    r.krit * 4 + r.kritHasar + r.canCal * 6 + r.beceri + (r.tekrar || 0) * 2 + (r.tumBeceri || 0) * 20);
+    r.krit * 4 + r.kritHasar + r.canCal * 6 + r.beceri + (r.tekrar || 0) * 2 + (r.tumBeceri || 0) * 20 +
+    (r.hasarAzalt || 0) * 8 + (r.hasarArtir || 0) * 8 + (r.kacinma || 0) * 4 + (r.blitz || 0) * 3 + (r.direnc || 0) * 3 + (r.sabitHasar || 0) * 2);
   r.krit = Math.round(r.krit * 10) / 10;
   return r;
 };

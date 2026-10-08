@@ -892,7 +892,7 @@ body,#uygulama{min-height:100vh;min-height:100dvh}
    v0.17 — DEMİRCİ (referanstaki "Cast")
    ============================================================ */
 #altnav{grid-template-columns:repeat(3,1fr) 76px repeat(2,1fr)}
-#demirciNav{flex:none;height:64px;display:grid;grid-template-columns:.8fr repeat(4,1fr);
+#demirciNav{flex:none;height:64px;display:grid;grid-template-columns:.8fr repeat(5,1fr);
   background:linear-gradient(#2a2219,#120e0a);border-top:2px solid #6a5638;box-shadow:0 -2px 8px rgba(0,0,0,.5)}
 #demirciNav.gizli{display:none}
 #demirciNav button{background:none;border:none;border-right:1px solid rgba(106,86,56,.35);display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -1386,3 +1386,17 @@ body,#uygulama{min-height:100vh;min-height:100dvh}
 #mayinKatman{position:absolute;inset:0;pointer-events:none}
 .mayin{position:absolute;display:flex;align-items:flex-end;justify-content:flex-start;padding:4px;color:#8fb0ff;opacity:.75}
 .mayin .ikon{width:16px;height:16px;filter:drop-shadow(0 0 4px rgba(120,160,255,.8))}
+
+/* v0.42 — Ruh Dökümü */
+.ruh-tablo > div{grid-column:1/-1;display:grid;grid-template-columns:1fr auto 3em;gap:6px}
+.ruh-tablo > div b{text-align:right}
+.ruh-tablo .ruh-baslik{color:#6ad06a;font-size:11.5px}
+.ruh-tablo .ruh-baslik span:not(:first-child){text-align:right}
+.ruh-element{font-family:var(--serif);font-size:14px;margin-bottom:2px}
+.dm-stat.soluk{color:#6f6656}
+.ruh-tablo .ruh-baslik span{white-space:nowrap}
+.ruh-tablo > div{grid-template-columns:1fr auto 3.5em}
+.dm-dugmeler.ruh-dugmeler{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dm-dugmeler.ruh-dugmeler .sus-dugme{padding:10px 4px}
+.dm-dugmeler.ruh-dugmeler .sus-dugme span{font-size:17px}
+.dm-dugmeler.ruh-dugmeler .sus-dugme::before,.dm-dugmeler.ruh-dugmeler .sus-dugme::after{display:none}

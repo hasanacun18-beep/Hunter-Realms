@@ -116,6 +116,12 @@ G.esyaModal = function (id) {
     if (cantada && fark) fh = ' <span class="' + (fark > 0 ? 'fark-arti' : 'fark-eksi') + '">(' + (fark > 0 ? '+' : '') + fark + ')</span>';
     satirlar += '<div class="satir"><span>' + G.STAT_ADLARI[k] + '</span><span>' + (st[k] || 0) + fh + '</span></div>';
   }
+  // v0.42: ruh dökümü elementi ve statları
+  if (e.ruh) {
+    var rel = G.ruhElement(e.ruh.el), retk = G.ruhEtkin(e);
+    satirlar += '<div class="satir"><span>Element</span><span style="color:' + rel.renk + '">' + rel.ad + '</span></div>';
+    e.ruh.st.forEach(function (x) { satirlar += '<div class="satir"><span class="' + (retk ? '' : 'soluk') + '">Ruh: ' + G.bonusYazi(x.k, x.v) + '</span><span class="' + (retk ? 'fark-arti' : 'soluk') + '">' + (retk ? 'etkin' : 'etkisiz') + '</span></div>'; });
+  }
   // v0.35: su verme cilası
   if (Object.keys(G.suMaks(e)).length) satirlar += '<div class="satir"><span>Cila (su verme)</span><span class="cila-yazi">%' + G.cila(e) + '</span></div>';
 

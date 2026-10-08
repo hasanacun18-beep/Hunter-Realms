@@ -64,9 +64,9 @@ G.eylem = function (ad, d) {
     case 'karakterAlt': G.karakterAlt = d.s; G.cizKarakter(); window.scrollTo(0, 0); G.$('icerik').scrollTop = 0; break;
     case 'meridyenYukselt': G.meridyenYukselt(); break;
     case 'demirciAc': G.demirciAc(+d.id); break;
-    case 'demirciAlt': G.demirciAlt = d.s; G.aritma = null; G.suSecimSifirla(); G.cizDemirci(); break;
-    case 'demirciSec': G.demirciSecili = +d.id; G.aritma = null; G.suSecimSifirla(); G.cizDemirci(); break;
-    case 'demirciKaynak': G.demirciKaynak = d.k; G.demirciSecili = null; G.aritma = null; G.suSecimSifirla(); G.cizDemirci(); break;
+    case 'demirciAlt': G.demirciAlt = d.s; G.aritma = null; G.suSecimSifirla(); G.ruhOnizleme = null; G.cizDemirci(); break;
+    case 'demirciSec': G.demirciSecili = +d.id; G.aritma = null; G.suSecimSifirla(); G.ruhOnizleme = null; G.cizDemirci(); break;
+    case 'demirciKaynak': G.demirciKaynak = d.k; G.demirciSecili = null; G.aritma = null; G.suSecimSifirla(); G.ruhOnizleme = null; G.cizDemirci(); break;
     case 'arit': G.aritOnizle(+d.id); break;
     case 'aritKaydet': G.aritKaydet(); break;
     // su verme (v0.35)
@@ -77,6 +77,9 @@ G.eylem = function (ad, d) {
     case 'suKaydet':  G.suKaydet(); break;
     case 'suSifirla': G.suSifirla(+d.id); break;
     case 'cilala':    G.cilala(+d.id, d.t); break;
+    // ruh dökümü (v0.42)
+    case 'ruhDok':    G.ruhDok(+d.id); break;
+    case 'ruhKaydet': G.ruhKaydet(); break;
     case 'statArti': G.statDegis(d.k, 1); break;
     case 'statEksi': G.statDegis(d.k, -1); break;
     case 'statKaydet': G.statKaydet(); break;
