@@ -141,6 +141,8 @@ G.savasTik = function () {
   }
   if (!G.savas) G.savas = { istek: null, kalkan: null, guc: null };
   var s = G.savas;
+  // v0.37: totem sıçraması — hedef menzil dışında ama yakınsa yanına atla
+  if (!menzilde && t && !t.olu && !G.hedefHucre && G.totemSicra(t)) menzilde = true;
 
   for (var bid in G.bekleme) if (G.bekleme[bid] > 0) G.bekleme[bid]--;
   if (G.iksirBek.hp > 0) G.iksirBek.hp--;
@@ -154,6 +156,7 @@ G.savasTik = function () {
 
   if (menzilde) G.oyuncuSaldir(t, r);
 
+  if (s.peri) G.periTik(r);   // v0.37: Alevli Ateş perileri
   // Süreli hasar (zehir/yanma) tüm canavarlarda işler
   G.alan.forEach(function (c, i) {
     if (!c || c.olu || !c.dot) return;
@@ -171,6 +174,7 @@ G.savasTik = function () {
     vuranSayi++;
     var kacinma = Math.min(30, r.hiz * 0.6);
     if (Math.random() * 100 < kacinma) { G.oyuncuHasar('Kaçındın'); return; }
+    if (s.kalkan && s.kalkan.oran >= 100) { G.oyuncuHasar('Bağışık'); return; }   // v0.37: Anka Kuşu Tüyü
     var md = G.rastgele(c.atk[0], c.atk[1]);
     if (c.boss && c.hp < c.hpMax * G.ZORLUK.ofkeEsik) {
       if (!c.ofke) { c.ofke = true; G.log(c.ad + ' öfkelendi!', 'tehlike'); G.bossReplik(c, 'ofke'); }
@@ -222,13 +226,60 @@ G.oyuncuSaldir = function (t, r) {
     o.hp = Math.min(r.hpMax, o.hp + iy);
     G.oyuncuHasar('+' + iy);
   } else if (e.tip === 'kalkan') {
-    G.fx.oynat(b.efekt || 'kalkan', t, null, true, b.ad);
+    var pHucre = e.patlama ? G.sekilHucreleri('kasirga', t) : null;
+    G.fx.oynat(b.efekt || 'kalkan', t, pHucre, true, b.ad);
     s.kalkan = { oran: e.oran, tur: e.sure };
+    // v0.37: etraftaki 8 kareye patlama
+    if (e.patlama) G.hucredekiler(pHucre).forEach(function (i) {
+      var c = G.alan[i]; c.aktif = true;
+      G.vur(i, c, r, gucCarpan, e.patlama * beceriCarpan, 'beceri');
+    });
+  } else if (e.tip === 'peri') {
+    G.fx.oynat(b.efekt || 'peri', t, null, true, b.ad);
+    s.peri = { tur: e.sure, adet: e.adet, carpan: e.carpan * beceriCarpan };
   } else if (e.tip === 'guc') {
     G.fx.oynat(b.efekt || 'guc', t, null, true, b.ad);
     s.guc = { oran: e.oran, tur: e.sure };
   }
   if (s.guc && e.tip !== 'guc' && --s.guc.tur <= 0) s.guc = null;
+};
+
+// ---- v0.37: Totem yardımcıları ----
+// Savaşçı: sıçrama becerisi hazırsa ve hedef yakınsa yanına atla; istek olarak sıraya koy
+G.totemSicra = function (t) {
+  var o = G.o, s = G.savas, p = G.oyuncu;
+  var id = G.ogrenilenler('aktif').filter(function (x) { return G.BECERILER[x].etki.sicrama; })[0];
+  if (!id) return false;
+  var b = G.BECERILER[id], e = G.beceriEtki(id, o.beceriler[id]);
+  if (o.mp < b.mp || (G.bekleme[id] || 0) > 0) return false;
+  if (s.istek !== id && !(o.ayar.otoBeceri && G.otoAcikMi(id))) return false;
+  if (G.cheb(p, t) > e.sicrama) return false;
+  // hedefin yanındaki boş karelerden bize en yakını
+  var en = null;
+  G.YONLER.forEach(function (d) {
+    var k = t.kol + d[0], st = t.sat + d[1];
+    if (!G.icinde(k, st) || G.doluMu(k, st)) return;
+    var h = { kol: k, sat: st };
+    if (!en || G.cheb(p, h) < G.cheb(p, en)) en = h;
+  });
+  if (!en) return false;
+  G.fx.halka(p, 'rgba(240,190,100,.8)', 60);
+  p.kol = en.kol; p.sat = en.sat;
+  s.istek = id;
+  return true;
+};
+
+// Büyücü: periler her tur rastgele canavarlara iner
+G.periTik = function (r) {
+  var s = G.savas, adaylar = [];
+  G.alan.forEach(function (c, i) { if (c && !c.olu && c.hp > 0) adaylar.push(i); });
+  for (var n = 0; n < s.peri.adet && adaylar.length; n++) {
+    var i = adaylar.splice(Math.floor(Math.random() * adaylar.length), 1)[0], c = G.alan[i];
+    c.aktif = true;
+    G.fx.halka(c, 'rgba(255,170,60,.9)', 46); G.fx.kivilcim(c, 5, '#ffc060');
+    G.vur(i, c, r, 1, s.peri.carpan, 'beceri');
+  }
+  if (--s.peri.tur <= 0) s.peri = null;
 };
 
 G.vur = function (i, c, r, gucCarpan, carpan, tur) {
@@ -254,6 +305,7 @@ G.otoBeceriSec = function (t) {
     if (e.tip === 'iyilesme' && o.hp > r.hpMax * 0.5) continue;
     if (e.tip === 'kalkan' && (s.kalkan || G.aktifler().length === 0)) continue;
     if (e.tip === 'guc' && s.guc) continue;
+    if (e.tip === 'peri' && (s.peri || G.aktifler().length === 0)) continue;
     if (e.tip === 'hasar') {
       var sayi = G.hucredekiler(G.sekilHucreleri(e.sekil, t)).length;
       if (!sayi) continue;

@@ -1153,3 +1153,18 @@ G.ZORLUK.altinCarpan = 1.3;       // canavardan düşen altın çarpanı
 G.BOLUM_ACMA = 0.75;              // sonraki bölüm, öncekinin bu oranı alınınca açılır
 G.MERIDYEN.hapCarpan = 2;         // meridyen hap bedeli = (kademe no) x bu
 G.DUSME.hap = 0.7;                // Meridyen Hapı düşme şansı (%), önce 1.2
+
+// ============================================================
+// v0.37 — TOTEM BECERİLERİ (Warriors and Adventure'daki [TOTEM]) — beceri.js, savas.js
+// Her sınıfa bir güçlü, uzun beklemeli beceri. Seviye 15'te kendiliğinden açılır,
+// sonra kitap + sayfa + altınla diğer beceriler gibi geliştirilir.
+//   sicrama: hedef bu kadar kare uzaktaysa yanına sıçrar (savaşçı)
+//   peri: 'sure' tur boyunca her tur 'adet' canavara 'carpan' hasar (büyücü)
+//   kalkan + patlama: oran 100 = bağışıklık (vuruş sayısı kadar), etraftaki 8 kareye patlama hasarı (okçu)
+// ============================================================
+G.BECERILER.acimasiz_darbe = { ad: 'Acımasız Darbe', sinif: 'savasci', tur: 'aktif', totem: true, simge: 'b_acimasiz_darbe', minLv: 15, mp: 30, bekleme: 20,
+  etki: { tip: 'hasar', sekil: 'alan', carpan: 2.2, vurus: 1, sersem: 1, sicrama: 4 }, artis: { carpan: 0.15 }, efekt: 'sicrama' };
+G.BECERILER.alevli_ates = { ad: 'Alevli Ateş', sinif: 'buyucu', tur: 'aktif', totem: true, simge: 'b_alevli_ates', minLv: 15, mp: 40, bekleme: 20,
+  etki: { tip: 'peri', adet: 3, carpan: 0.7, sure: 5 }, artis: { carpan: 0.06 }, efekt: 'peri' };
+G.BECERILER.anka_tuyu = { ad: 'Anka Kuşu Tüyü', sinif: 'okcu', tur: 'aktif', totem: true, simge: 'b_anka_tuyu', minLv: 15, mp: 30, bekleme: 20,
+  etki: { tip: 'kalkan', oran: 100, sure: 3, patlama: 0.8 }, artis: { patlama: 0.08 }, efekt: 'anka' };

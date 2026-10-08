@@ -23,8 +23,14 @@ G.beceriAciklama = function (id, lv) {
     p.push(sekil + '%' + Math.round(e.carpan * 100) + ' hasar' + (e.vurus > 1 ? ', ' + e.vurus + ' vuruş' : ''));
     if (e.sersem) p.push(e.sersem + ' tur sersemletir (bosslar dirençli)');
     if (e.dot) p.push(e.sure + ' tur boyunca her tur %' + Math.round(e.dot * 100) + ' ek hasar, savunmayı deler');
+    if (e.sicrama) p.push(e.sicrama + ' kareye kadar uzaktaki hedefin yanına sıçrar');
   } else if (e.tip === 'iyilesme') p.push('Canının %' + e.oran + ' kadarını yeniler');
+  else if (e.tip === 'kalkan' && e.oran >= 100) {
+    p.push((e.patlama ? 'Etrafındaki 8 kareye %' + Math.round(e.patlama * 100) + ' hasar' : '') +
+      (e.patlama ? ', ardından ' : '') + 'saldırıya uğradığın ' + e.sure + ' tur boyunca hasara karşı bağışık olursun');
+  }
   else if (e.tip === 'kalkan') p.push(e.sure + ' tur alınan hasar %' + e.oran + ' azalır');
+  else if (e.tip === 'peri') p.push(e.sure + ' tur boyunca her tur ' + e.adet + ' peri rastgele canavarlara %' + Math.round(e.carpan * 100) + ' hasar verir');
   else if (e.tip === 'guc') p.push(e.sure + ' tur saldırın %' + e.oran + ' artar');
   return p.join('. ') + '.';
 };
@@ -96,7 +102,10 @@ G.beceriGelistir = function (id) {
 
 // Canavar seviyesine uygun rastgele kitap
 G.kitapDus = function (canLv) {
-  var adaylar = G.sinifBecerileri(G.o.sinif).filter(function (id) { return G.BECERILER[id].minLv <= canLv + 2; });
+  var o = G.o, adaylar = G.sinifBecerileri(o.sinif).filter(function (id) {
+    var b = G.BECERILER[id];
+    return b.minLv <= canLv + 2 && (!b.totem || o.beceriler[id]);   // totem kitabı ancak açıldıktan sonra düşer
+  });
   if (!adaylar.length) return;
   G.kitapOgren(adaylar[Math.floor(Math.random() * adaylar.length)]);
 };
@@ -117,4 +126,18 @@ G.kitapOgren = function (id) {
   }
   G.kaydet();
   if (G.sekme === 'karakter' || G.sekme === 'savas') G.panelYenile();
+};
+
+// ---- v0.37: Totem becerileri — seviye yetince kendiliğinden açılır ----
+// sessiz: kayıt yüklenirken (G.gocEt) günlüğe yazmadan aç
+G.totemKontrol = function (o, sessiz) {
+  G.sinifBecerileri(o.sinif).forEach(function (id) {
+    var b = G.BECERILER[id];
+    if (!b.totem || o.beceriler[id] || o.lv < b.minLv) return;
+    o.beceriler[id] = 1;
+    if (sessiz) return;
+    G.log(b.ikon + ' Totem becerisi açıldı: <b>' + b.ad + '</b>!', 'sistem');
+    G.bildir('Totem açıldı: ' + b.ad);
+    G.sesCal('basari');
+  });
 };

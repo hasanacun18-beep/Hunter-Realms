@@ -158,6 +158,21 @@ G.FX = {
     setTimeout(function () { G.fx.halka(b.t, 'rgba(255,240,170,.95)', 110); G.fx.kivilcim(b.t, 12, '#fff2a0'); }, 330);
   },
   ruzgar: function (b) { G.FX.cizgi(b); b.hedefler.forEach(function (h) { G.fx.halka(h, 'rgba(200,255,220,.8)', 50); }); },
+  // v0.37 — totemler
+  sicrama: function (b) {
+    G.fx.halka(b.t, 'rgba(240,190,100,.95)', 140);
+    b.hedefler.forEach(function (h, i) { G.fx.kesik(h, true, i * 40); });
+    G.fx.kivilcim(b.t, 14, '#ffd890');
+  },
+  peri: function () {
+    G.fx.aura('guc');
+    for (var i = 0; i < 6; i++) G.fx.kivilcim(G.oyuncu, 3, '#ffb050');
+  },
+  anka: function (b) {
+    G.fx.aura('kalkan');
+    G.fx.halka(G.oyuncu, 'rgba(255,140,40,.95)', 150);
+    G.fx.alev(b.hucreler || [], 800);
+  },
   sifa: function () { G.fx.aura('sifa'); },
   kalkan: function () { G.fx.aura('kalkan'); },
   guc: function () { G.fx.aura('guc'); }

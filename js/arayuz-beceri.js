@@ -15,7 +15,7 @@ G.beceriKartHtml = function (id) {
 
   var sag;
   if (!ogrenildi) {
-    sag = '<span class="etkin-degil">Etkin değil</span><small class="soluk">Seviye ' + b.minLv + '+ canavarlardan kitabı düşer</small>';
+    sag = '<span class="etkin-degil">Etkin değil</span><small class="soluk">' + (b.totem ? 'Seviye ' + b.minLv + '\'te kendiliğinden açılır' : 'Seviye ' + b.minLv + '+ canavarlardan kitabı düşer') + '</small>';
   } else if (lv >= G.BECERI_MAKS) {
     sag = '<span class="en-ust">En üst seviye</span>';
   } else {
@@ -46,7 +46,7 @@ G.beceriKartHtml = function (id) {
     '<div class="beceri-ust">' +
       '<span class="beceri-simge ' + b.tur + '">' + b.ikon + '</span>' +
       '<div class="beceri-orta">' +
-        '<div class="beceri-baslik"><b>' + b.ad + '</b><span class="lv">Sv. ' + lv + '</span>' +
+        '<div class="beceri-baslik"><b>' + b.ad + '</b>' + (b.totem ? '<span class="totem-rozet">TOTEM</span>' : '') + '<span class="lv">Sv. ' + lv + '</span>' +
           '<button class="onizle-link" data-eylem="onizle" data-b="' + id + '">' + (G.onizleAcik === id ? 'Kapat' : 'Önizle') + '</button></div>' +
         '<div class="beceri-tur">' + G.TUR_ADI[b.tur] + (b.sinif ? '' : ', her sınıf') + '</div>' +
         '<div class="beceri-acik">' + G.beceriAciklama(id, gosterLv) + '</div>' +

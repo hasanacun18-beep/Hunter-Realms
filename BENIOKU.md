@@ -1,4 +1,4 @@
-# Hunter Realms — v0.36 (cila taşları)
+# Hunter Realms — v0.37 (totem becerileri)
 
 > Not: Oyun eskiden "Kara Diyar" adıyla geliştirildi, bu sürümde "Hunter Realms" olarak
 > yeniden adlandırıldı. Kayıt dosyalarının iç anahtar isimleri değişmedi (bkz. CLAUDE.md).
@@ -439,3 +439,14 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - KAYIT: eşyadaki e.su (stat değeri) → e.so (yüzde oran, daha hassas); o.sarf.cila1..cila5.
   G.gocEt eski e.su'yu orana çevirir, eldeki her Su Verme Taşı 1 Parlak Cila Taşı (+3) olur
 - Ayarlar: veri.js → G.SUVERME, G.CILA_TASLARI (ad, arti, renk, agirlikElit, agirlikBoss). Kod: demirci.js → G.cilala, G.cilaTasiSec
+
+## v0.37 değişiklikleri (Totem becerileri — Warriors and Adventure'daki [TOTEM])
+- Her sınıfa bir güçlü, uzun beklemeli beceri; becerilerde "TOTEM" rozetiyle görünür
+  - Savaşçı — Acımasız Darbe: 4 kareye kadar uzaktaki hedefin yanına sıçrar, hedef ve çevresindeki 9 kareye %220 hasar, 1 tur sersemletme
+  - Büyücü — Alevli Ateş: 5 tur boyunca her tur 3 peri rastgele canavarlara %70 hasar verir
+  - Okçu — Anka Kuşu Tüyü: etraftaki 8 kareye %80 hasar, ardından saldırıya uğradığın 3 tur hasara karşı bağışıklık
+- Seviye 15'te kendiliğinden açılır (seviyesi yeten eski karakterler ilk yüklemede alır); 30-40 mana, 20 tur bekleme
+- Sonra diğer beceriler gibi kitap + sayfa + altınla geliştirilir; totem kitabı ancak totem açıldıktan sonra düşer
+- Otomatik beceri açıkken kendiliğinden kullanılır
+- Ayarlar: veri.js → G.BECERILER.acimasiz_darbe / alevli_ates / anka_tuyu. Kod: beceri.js → G.totemKontrol,
+  savas.js → G.totemSicra, G.periTik. Yeni efektler (efekt.js): sicrama, peri, anka
