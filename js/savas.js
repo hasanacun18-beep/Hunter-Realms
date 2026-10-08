@@ -307,6 +307,9 @@ G.canavarOldu = function (i) {
   if (c.boss || Math.random() * 100 < G.DUSME.hpIksir) { var n = c.boss ? 5 : 1; o.sarf.hp += n; G.log('+' + n + ' Can İksiri'); }
   if (c.boss || Math.random() * 100 < G.DUSME.mpIksir) { var m = c.boss ? 5 : 1; o.sarf.mp += m; G.log('+' + m + ' Mana İksiri'); }
   if (c.boss || Math.random() * 100 < G.DUSME.tas) { var ts = c.boss ? 3 : 1; o.sarf.tas += ts; G.log('+' + ts + ' Arıtma Taşı'); }
+  // v0.35: Su Verme Taşı — elitten şansla, bosstan garanti
+  var su = c.boss ? G.rastgele(G.SUVERME.dusmeBoss[0], G.SUVERME.dusmeBoss[1]) : (c.elit && Math.random() * 100 < G.SUVERME.dusmeElit ? 1 : 0);
+  if (su) { o.sarf.suTasi += su; G.log('+' + su + ' ' + G.SARF.suTasi.ikon + ' Su Verme Taşı'); }
 
   G.expEkle(exp);
   G.kartYenile(i);

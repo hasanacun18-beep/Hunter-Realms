@@ -64,11 +64,18 @@ G.eylem = function (ad, d) {
     case 'karakterAlt': G.karakterAlt = d.s; G.cizKarakter(); window.scrollTo(0, 0); G.$('icerik').scrollTop = 0; break;
     case 'meridyenYukselt': G.meridyenYukselt(); break;
     case 'demirciAc': G.demirciAc(+d.id); break;
-    case 'demirciAlt': G.demirciAlt = d.s; G.aritma = null; G.cizDemirci(); break;
-    case 'demirciSec': G.demirciSecili = +d.id; G.aritma = null; G.cizDemirci(); break;
-    case 'demirciKaynak': G.demirciKaynak = d.k; G.demirciSecili = null; G.aritma = null; G.cizDemirci(); break;
+    case 'demirciAlt': G.demirciAlt = d.s; G.aritma = null; G.suSecimSifirla(); G.cizDemirci(); break;
+    case 'demirciSec': G.demirciSecili = +d.id; G.aritma = null; G.suSecimSifirla(); G.cizDemirci(); break;
+    case 'demirciKaynak': G.demirciKaynak = d.k; G.demirciSecili = null; G.aritma = null; G.suSecimSifirla(); G.cizDemirci(); break;
     case 'arit': G.aritOnizle(+d.id); break;
     case 'aritKaydet': G.aritKaydet(); break;
+    // su verme (v0.35)
+    case 'suTeklif':  G.suSecim.teklif = +d.id; G.suOnizleme = null; G.cizDemirci(); break;
+    case 'suKilit':   G.suKilitDegistir(d.k); break;
+    case 'suVer':     G.suVer(+d.id, false); break;
+    case 'suGelismis':G.suVer(+d.id, true); break;
+    case 'suKaydet':  G.suKaydet(); break;
+    case 'suSifirla': G.suSifirla(+d.id); break;
     case 'statArti': G.statDegis(d.k, 1); break;
     case 'statEksi': G.statDegis(d.k, -1); break;
     case 'statKaydet': G.statKaydet(); break;

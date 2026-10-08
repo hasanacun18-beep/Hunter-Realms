@@ -82,6 +82,11 @@ G.gocEt = function (o) {
   // v0.11: yeni yuvalar ve çanta kapasitesi
   G.YUVALAR.forEach(function (y) { if (!(y.id in o.kusanilan)) o.kusanilan[y.id] = null; });
   if (!o.cantaLimit) o.cantaLimit = G.CANTA.baslangic;
+  // v0.35: su verme — eski eşyalar da rastgele bir ilk cila alır
+  if (o.sarf.suTasi == null) o.sarf.suTasi = 0;
+  o.canta.concat(Object.keys(o.kusanilan).map(function (k) { return o.kusanilan[k]; })).forEach(function (e) {
+    if (e && !e.su) e.su = G.suUret(e);
+  });
   return o;
 };
 

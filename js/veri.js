@@ -1113,6 +1113,25 @@ G.UNVANLAR = [
   { id: 'efsane1',   ad: 'Efsane Taşıyıcı',        tur: 'mitik',      n: 5,     stat: { hpYuzde: 6 } },
   { id: 'efsane2',   ad: 'Efsanelerin Efendisi',   tur: 'mitik',      n: 10,    stat: { atkYuzde: 7, hpYuzde: 7 } }
 ];
+
+// ============================================================
+// v0.35 — SU VERME (Warriors and Adventure'daki "Quench") — demirci.js
+// Her eşyanın temel statlarına (şablondaki atk/def/hp/mp/hiz) "su verme" bonusu eklenir.
+// Cila değeri (%): bu bonusların en fazla değerlerine oranı (0 = hiç, 100 = tam).
+// Aynı ad + aynı nadirlikte, cilası DAHA YÜKSEK bir eşya kurban edilir; fark büyüdükçe artış büyür.
+// ============================================================
+G.SUVERME = {
+  oran: 0.3,          // tam cilada temel stat bu oranda artar (nadirlik dahil, güçlendirme çarpanından önce)
+  ilkUs: 2,           // yeni eşyanın ilk cilası: rastgele^ilkUs (2 = çoğu düşük, az yüksek)
+  normalAlt: -0.3,    // normal su vermede her stat: eski oran + fark x rastgele(normalAlt .. 1) — bazı statlar düşebilir
+  altin: 0.5,         // normal su verme altın bedeli = (eşya lv x 5 + 20) x (nadirlik + 1) x bu
+  tasGelismis: 1,     // gelişmiş su verme: Su Verme Taşı bedeli (+ altın)
+  tasSifirla: 1,      // sıfırlama: Su Verme Taşı bedeli
+  dusmeElit: 25,      // elit canavardan taş düşme şansı (%)
+  dusmeBoss: [1, 2]   // bosstan düşen taş adedi
+};
+G.SARF.suTasi = { ad: 'Su Verme Taşı', simge: 'su_tasi', renk: '#5ab8c8', aciklama: 'Gelişmiş su vermede ve cila sıfırlamada kullanılır. Elit canavarlardan ve bosslardan düşer.' };
+G.DUKKAN.push({ t: 'suTasi', ad: 'Su Verme Taşı', ikon: '💧', aciklama: 'Gelişmiş su verme ve cila sıfırlama', fiyat: 400 });
 G.NADIRLIK[1].sans = 20;          // İyi (önce 25)
 G.NADIRLIK[2].sans = 6;           // Nadir (önce 10)
 G.NADIRLIK[3].sans = 1.2;         // Destansı (önce 3)
