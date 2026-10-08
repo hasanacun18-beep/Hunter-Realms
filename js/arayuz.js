@@ -84,7 +84,8 @@ G.ustGuncelle = function () {
   if (!o) return;
   var r = G.hesapla(o), s = G.SINIFLAR[o.sinif], gerek = G.expGerekli(o.lv);
   G.$('uRozet').innerHTML = s.ikon;
-  G.$('uAd').textContent = o.ad;
+  var un = o.unvan && o.unvan.takili && G.unvanBul(o.unvan.takili);   // v0.34: takılı unvan adın yanında
+  G.$('uAd').innerHTML = G.kacis(o.ad) + (un ? ' <small class="ust-unvan">' + un.ad + '</small>' : '');
   G.$('uCp').textContent = 'GP ' + r.cp;
   G.$('uSinif').textContent = 'Sv. ' + o.lv;
   G.$('uPara').innerHTML = G.IK_PARA + ' ' + G.kisaSayi(o.para);
