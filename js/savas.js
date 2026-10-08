@@ -177,6 +177,7 @@ G.savasTik = function () {
       md *= G.ZORLUK.ofkeCarpan;
     }
     md -= r.def * 0.6;
+    md *= G.mitikLanet(c);   // v0.33: Muhafız Laneti
     if (s.kalkan) md *= 1 - s.kalkan.oran / 100;
     md = Math.max(1, Math.round(md));
     o.hp -= md;
@@ -237,6 +238,7 @@ G.vur = function (i, c, r, gucCarpan, carpan, tur) {
   h = Math.max(1, Math.round(h * carpan - c.def));
   c.hp -= h;
   G.hasarGoster(i, h, krit, tur);
+  G.mitikKanHirsi(h);   // v0.33
   return h;
 };
 
@@ -275,6 +277,7 @@ G.canavarOldu = function (i) {
   if (c.boss) G.gorevSay('boss');
   // v0.30: boss öldü, yeniden doğma sayacı başlar (veri.js → G.BOSS_SURE)
   if (c.boss && G.BOSS_SURE[c.id]) o.bossZaman[c.id] = Date.now() + G.BOSS_SURE[c.id] * 60000;
+  if (c.boss) G.mitikDusur(c);   // v0.33: efsanevi parça şansı
   if (c.boss) o.istatistik.bosslar[c.id] = (o.istatistik.bosslar[c.id] || 0) + 1;
   if (G.hedefI === i) G.hedefI = null;
 

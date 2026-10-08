@@ -1051,6 +1051,41 @@ G.GALERI = {
   bossKatsayi: { atk: 0.028, hp: 0.28 },
   altin: { normal: 15, boss: 1.5 }            // kademe altını = canavarın en yüksek altını x bu x kademe no
 };
+
+// ============================================================
+// v0.33 — EFSANEVİ SET (Warriors and Adventure'daki "Mythical")
+// Normal kuşanımdan ayrı 10 yuva. Her yuva kendi efsanevi parçasıyla bir kez etkinleştirilir.
+// Parça bosslardan düşer. Statlar oyuncu seviyesiyle büyür: değer = katsayı x (seviye + lvTaban).
+// Fazla parça sökülünce Efsane Özü verir; "takasOz" özle istenen yuvanın parçası alınır.
+// Kan Hırsı sayıları referans oyundaki "Bloodlust Blade Lv.1"den; Muhafız Laneti Hasan'ın onayladığı öneri.
+// ============================================================
+G.MITIK = {
+  lvTaban: 5,
+  dusme: 4,          // % — her boss ölümünde
+  dusmeLv: 0.05,     // bossun her seviyesi için +% (Kurt Kralı ~%4.3, Hiçlik Efendisi ~%6.1)
+  sokOz: 1,          // fazla parça sökülünce
+  takasOz: 3,        // bir parça almak için
+  yuvalar: [
+    { id: 'kilic',     ad: 'Efsanevi Kılıç',     simge: 'kilic',     stat: { atk: 0.5 } },
+    { id: 'zirh',      ad: 'Efsanevi Zırh',      simge: 'gogusluk',  stat: { hp: 3.3, def: 0.17 } },
+    { id: 'kask',      ad: 'Efsanevi Miğfer',    simge: 'kask',      stat: { def: 0.22, hp: 1.6 } },
+    { id: 'kolye',     ad: 'Efsanevi Kolye',     simge: 'muska',     stat: { atk: 0.22, mp: 1.1 } },
+    { id: 'bileklik1', ad: 'Efsanevi Bileklik',  simge: 'bileklik',  stat: { atk: 0.16, def: 0.11 } },
+    { id: 'bileklik2', ad: 'Efsanevi Bileklik',  simge: 'bileklik',  stat: { atk: 0.16, def: 0.11 } },
+    { id: 'yuzuk1',    ad: 'Efsanevi Yüzük',     simge: 'yuzuk',     stat: { atk: 0.22 } },
+    { id: 'yuzuk2',    ad: 'Efsanevi Yüzük',     simge: 'yuzuk',     stat: { atk: 0.22 } },
+    { id: 'kemer',     ad: 'Efsanevi Kemer',     simge: 'kemer',     stat: { hp: 3.3 } },
+    { id: 'cizme',     ad: 'Efsanevi Çizme',     simge: 'demir_cizme', stat: { def: 0.17, hp: 1.6 } }
+  ],
+  beceriler: {
+    // Kılıç açıkken: hasar verirken "sans"% ihtimalle hasarın "oran"%'i cana döner; "bekleme" sn'de bir
+    kilic: { ad: 'Kan Hırsı', simge: 'b_kan_emici', sans: 16, oran: 6, bekleme: 10,
+             aciklama: 'Hasar verirken %16 ihtimalle hasarın %6\'sı canına döner. 10 saniyede bir tetiklenir.' },
+    // Zırh açıkken: sana vuran canavar "sans"% ihtimalle "sure" tur boyunca "azalma"% zayıf vurur
+    zirh:  { ad: 'Muhafız Laneti', simge: 'iskelet', sans: 15, azalma: 20, sure: 3,
+             aciklama: 'Sana vuran canavar %15 ihtimalle lanetlenir: 3 tur boyunca %20 daha zayıf vurur.' }
+  }
+};
 G.NADIRLIK[1].sans = 20;          // İyi (önce 25)
 G.NADIRLIK[2].sans = 6;           // Nadir (önce 10)
 G.NADIRLIK[3].sans = 1.2;         // Destansı (önce 3)

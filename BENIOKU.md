@@ -1,4 +1,4 @@
-# Hunter Realms — v0.32 (galeri)
+# Hunter Realms — v0.33 (efsanevi set)
 
 > Not: Oyun eskiden "Kara Diyar" adıyla geliştirildi, bu sürümde "Hunter Realms" olarak
 > yeniden adlandırıldı. Kayıt dosyalarının iç anahtar isimleri değişmedi (bkz. CLAUDE.md).
@@ -31,6 +31,7 @@ Kayıt tarayıcının localStorage'ına otomatik yapılır (10 saniyede bir ve h
 | js/bolum.js            | Bölümler: aynı anda ilerleyen hedefler |
 | js/kule.js             | Kule (süreli bekçi savaşı) ve rünler |
 | js/galeri.js           | Galeri: canavar ansiklopedisi, öldürme kademeleri ve kalıcı statlar |
+| js/mitik.js            | Efsanevi set: 10 ayrı yuva, parça düşmesi, takas, Kan Hırsı ve Muhafız Laneti |
 | js/beceri.js           | Beceri etkileri, kitaplar, ustalık, geliştirme |
 | js/yedek.js            | Kayıt dışa/içe aktarma (.json dosyası) |
 | js/arayuz.js           | Ortak arayüz: üst bar, sekmeler, eşya kutusu, set detayı |
@@ -390,3 +391,14 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - Hazır ödül olan sekme ve kartlarda kırmızı nokta; Etkinlik listesinde bekleyen ödül sayısı
 - KAYIT: yeni alan o.galeri ({ canavarId: alınan kademe }) — G.gocEt eski kayıtlara boş olarak ekler
 - Ayarlar: veri.js → G.GALERI (hedef, sira, lvTaban, katsayi, bossKatsayi, altin). Yeni dosya: js/galeri.js
+
+## v0.33 değişiklikleri (Efsanevi set — Warriors and Adventure'daki "Mythical" gibi)
+- Karakter → Efsanevi: normal kuşanımdan ayrı 10 yuva (kılıç, zırh, miğfer, kolye, 2 bileklik, 2 yüzük, kemer, çizme)
+- Her yuva kendi efsanevi parçasıyla bir kez etkinleştirilir. Parçalar bosslardan düşer: %4 + bossun seviyesi x %0.05
+- Açık yuvalar kalıcı stat verir, oyuncu seviyesiyle büyür. 10 yuvanın hepsi açıkken GP yaklaşık %8-10 artar (lv 16/25/40 ölçüldü)
+- Beceriler:
+  - Kan Hırsı (kılıç; referanstaki "Bloodlust Blade"): hasar verirken %16 ihtimalle hasarın %6'sı cana döner, 10 sn'de bir
+  - Muhafız Laneti (zırh): sana vuran canavar %15 ihtimalle lanetlenir, 3 tur %20 zayıf vurur (kartı mor görünür)
+- Takas: açık yuvanın fazla parçası sökülünce 1 Efsane Özü; 3 özle istenen yuvanın parçası alınır
+- KAYIT: yeni alan o.mitik ({ acik, parca, oz }) — G.gocEt eski kayıtlara boş olarak ekler
+- Ayarlar: veri.js → G.MITIK (lvTaban, dusme, dusmeLv, sokOz, takasOz, yuvalar, beceriler). Yeni dosya: js/mitik.js

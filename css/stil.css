@@ -1286,3 +1286,40 @@ body,#uygulama{min-height:100vh;min-height:100dvh}
 .gl-al{width:100%;margin-top:4px}
 .gl-al:disabled{opacity:.4}
 .gl-al{padding:9px 12px}.gl-al span{font-size:17px}
+
+/* v0.33 — Efsanevi set */
+#karakterNav{grid-template-columns:.7fr repeat(6,1fr)}
+#karakterNav button{font-size:10.5px}
+#log .mitik{color:#ff9a5a}
+.mt-beceriler{display:flex;flex-direction:column;gap:6px;margin:6px 0 10px}
+.mt-beceri{display:flex;gap:8px;align-items:center;padding:6px 8px;border:1px solid #3d3224;border-radius:4px;opacity:.55}
+.mt-beceri.acik{opacity:1;border-color:#c0502a;background:linear-gradient(90deg,rgba(90,24,10,.6),transparent)}
+.mt-b-ikon{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#120c08;border:1px solid #6a4a30}
+.mt-b-ikon .ikon{width:22px;height:22px;color:#e8603a}
+.mt-beceri b{display:block;font-family:var(--serif);font-weight:normal;font-size:14px;color:#ffb070}
+.mt-beceri small{font-size:11.5px;color:var(--soluk);line-height:1.35}
+.mt-izgara{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.mt-yuva{display:flex;gap:8px;align-items:center;padding:7px;text-align:left;background:#1a1410;border:1px solid #4a3d2b;border-radius:4px}
+.mt-yuva b{display:block;font-family:var(--serif);font-weight:normal;font-size:13px;color:var(--soluk)}
+.mt-yuva small{font-size:11px;color:#6a5d48}
+.mt-yuva.acik{border-color:#c0502a;background:linear-gradient(135deg,#2e1a10,#1a1410)}
+.mt-yuva.acik b{color:#ff9a5a}
+.mt-yuva.acik small{color:#d08a5a}
+.mt-yuva.hazir{border-color:#e3b34a}
+.mt-yuva.hazir small{color:#e3b34a}
+.mt-yuva.secili{box-shadow:0 0 0 2px #f0c070}
+.mt-ikon{flex:none;width:34px;height:34px;border-radius:4px;display:grid;place-items:center;background:#0e0a07;border:1px solid #3d3224}
+.mt-ikon .ikon{width:24px;height:24px;color:#5a4a38;filter:none}
+.mt-yuva.acik .mt-ikon,.mt-ikon.acik{border-color:#e8603a;box-shadow:0 0 8px rgba(232,96,58,.6)}
+.mt-yuva.acik .mt-ikon .ikon,.mt-ikon.acik .ikon{color:#ff7a3a;filter:drop-shadow(0 0 4px rgba(255,120,60,.8))}
+.mt-d-baslik{display:flex;gap:10px;align-items:center}
+.mt-ikon.buyuk{width:52px;height:52px}
+.mt-ikon.buyuk .ikon{width:36px;height:36px}
+.mt-d-baslik b{display:block;font-family:var(--serif);font-weight:normal;font-size:18px;color:#ff9a5a}
+.mt-d-baslik small{font-size:12px;color:var(--soluk)}
+.mt-dugme{width:100%;margin:6px 0;padding:9px 12px}
+.mt-dugme span{font-size:17px}
+.mt-detay .genis-dugme{width:100%;margin:6px 0}
+.mt-detay .genis-dugme:disabled{opacity:.4}
+.saha-kart.lanetli{filter:hue-rotate(220deg) saturate(1.3)}
+.saha-kart.lanetli .kad::after{content:' ☠';color:#7a3ab8}

@@ -40,7 +40,7 @@ G.bebekHtml = function () {
 };
 
 // ---- Karakter bölümü (referans düzeni): alt menü Dön · Beceri · Meridyen · İlahi Silah · Statlar ----
-G.KARAKTER_ALT = [['beceri', G.ikon('kitap'), 'Beceri'], ['meridyen', G.ikon('meditasyon'), 'Meridyen'], ['ilahi', G.ikon('simsek'), 'İlahi'], ['runler', G.ikon('run'), 'Rünler'], ['statlar', G.ikon('grafik'), 'Statlar']];
+G.KARAKTER_ALT = [['beceri', G.ikon('kitap'), 'Beceri'], ['meridyen', G.ikon('meditasyon'), 'Meridyen'], ['ilahi', G.ikon('simsek'), 'İlahi'], ['runler', G.ikon('run'), 'Rünler'], ['efsanevi', G.ikon('tac'), 'Efsanevi'], ['statlar', G.ikon('grafik'), 'Statlar']];
 
 G.karakterNavCiz = function () {
   var o = G.o;
@@ -57,7 +57,7 @@ G.cizKarakter = function () {
   G.karakterNavCiz();
   if (G.karakterAlt === 'beceri') { G.cizBeceri(); return; }
   var govde = G.karakterAlt === 'meridyen' ? G.meridyenHtml() : G.karakterAlt === 'ilahi' ? G.ilahiSayfaHtml() :
-    G.karakterAlt === 'runler' ? G.runSayfaHtml() : G.statSayfaHtml();
+    G.karakterAlt === 'runler' ? G.runSayfaHtml() : G.karakterAlt === 'efsanevi' ? G.mitikSayfaHtml() : G.statSayfaHtml();
   G.$('icerik').innerHTML = '<div class="panel">' + govde + '</div>';
 };
 
@@ -257,4 +257,39 @@ G.runYuvaModal = function (tur) {
       : '<p class="bilgi">Bu tipte rünün yok. Kuleden kazanırsın.</p>') +
     '<div class="modal-dugmeler"><button data-eylem="modalKapat">Kapat</button></div>';
   G.$('modal').classList.remove('gizli');
+};
+
+// ============================================================
+// v0.33 — EFSANEVİ SET sayfası (mitik.js): beceriler, 10 yuva, seçili yuvanın detayı
+// ============================================================
+G.mitikSayfaHtml = function () {
+  var o = G.o, M = G.MITIK;
+  if (!G.mitikYuva(G.mitikSecili)) G.mitikSecili = 'kilic';
+  var beceriler = Object.keys(M.beceriler).map(function (yid) {
+    var b = M.beceriler[yid], acik = G.mitikAcik(yid);
+    return '<div class="mt-beceri' + (acik ? ' acik' : '') + '"><span class="mt-b-ikon">' + G.ikon(b.simge) + '</span>' +
+      '<div><b>' + b.ad + '</b><small>' + (acik ? b.aciklama : G.mitikYuva(yid).ad + ' ile açılır') + '</small></div></div>';
+  }).join('');
+  var yuvalar = M.yuvalar.map(function (y) {
+    var acik = G.mitikAcik(y.id), p = G.mitikParca(y.id);
+    var durum = acik ? 'Açık' : p ? 'Parça hazır' : 'Kilitli';
+    return '<button class="mt-yuva' + (acik ? ' acik' : '') + (p && !acik ? ' hazir' : '') + (y.id === G.mitikSecili ? ' secili' : '') + '" data-eylem="mitikSec" data-id="' + y.id + '">' +
+      '<span class="mt-ikon">' + G.ikon(y.simge) + '</span><div><b>' + y.ad + '</b><small>' + durum + (p ? ' · ' + p + ' parça' : '') + '</small></div></button>';
+  }).join('');
+  var y = G.mitikYuva(G.mitikSecili), acik = G.mitikAcik(y.id), p = G.mitikParca(y.id), st = G.mitikYuvaStat(y, o.lv);
+  var statYazi = Object.keys(st).map(function (k) { return G.STAT_ADLARI[k] + ' +' + st[k]; }).join(' · ');
+  var b = M.beceriler[y.id], dugmeler = '';
+  if (!acik && p) dugmeler += '<button class="sus-dugme mt-dugme" data-eylem="mitikAc" data-id="' + y.id + '"><span>Etkinleştir</span></button>';
+  if (!acik && !p) dugmeler += '<button class="genis-dugme" data-eylem="mitikTakas" data-id="' + y.id + '"' + (o.mitik.oz >= M.takasOz ? '' : ' disabled') + '>' + M.takasOz + ' Efsane Özü ile parça al</button>';
+  if (acik && p) dugmeler += '<button class="genis-dugme" data-eylem="mitikSok" data-id="' + y.id + '">Fazla parçayı sök (+' + M.sokOz + ' Efsane Özü)</button>';
+  return '<div class="kutu"><h2>' + G.ikon('tac') + ' Efsanevi Set <small class="soluk">Efsane Özü: ' + o.mitik.oz + '</small></h2>' +
+      '<div class="mt-beceriler">' + beceriler + '</div>' +
+      '<div class="mt-izgara">' + yuvalar + '</div></div>' +
+    '<div class="kutu mt-detay"><div class="mt-d-baslik"><span class="mt-ikon buyuk' + (acik ? ' acik' : '') + '">' + G.ikon(y.simge) + '</span>' +
+      '<div><b>' + y.ad + '</b><small>' + (acik ? 'Etkin' : 'Etkin değil') + ' · Parça: ' + p + '</small></div></div>' +
+      '<p class="bilgi">' + (acik ? 'Verdiği güç' : 'Etkinleşince verir') + ' (seviye ' + o.lv + '): <b class="fark-arti">' + statYazi + '</b><br><small class="soluk">Seviyen arttıkça güçlenir.</small></p>' +
+      (b ? '<p class="bilgi">Beceri: <b>' + b.ad + '</b> — ' + b.aciklama + '</p>' : '') +
+      dugmeler +
+      '<p class="bilgi soluk">Efsanevi parçalar bosslardan nadiren düşer. Açık yuvanın fazla parçası Efsane Özü\'ne dönüştürülebilir.</p>' +
+    '</div>';
 };
