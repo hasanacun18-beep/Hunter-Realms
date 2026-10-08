@@ -11,6 +11,7 @@ G.esyaOlustur = function (o, sablon, nadir) {
   if (s.set) nadir = Math.max(nadir, 2);   // set parçaları en az Nadir
   var e = { id: o.sonrakiId++, sablon: sablon, nadir: nadir, arti: 0, ek: G.ekStatUret(s, G.EK_SAYISI[nadir]) };
   e.so = G.suUret(e);   // v0.35: su verme oranları, rastgele ilk cila
+  if (e.nadir >= G.RUHDOKUM.nadir) e.ruh = G.ruhYeni();   // v0.42: Efsanevi eşyaya element
   return e;
 };
 

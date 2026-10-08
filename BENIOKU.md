@@ -1,4 +1,4 @@
-# Hunter Realms — v0.41 (kalan beceriler)
+# Hunter Realms — v0.42 (ruh dökümü)
 
 > Not: Oyun eskiden "Kara Diyar" adıyla geliştirildi, bu sürümde "Hunter Realms" olarak
 > yeniden adlandırıldı. Kayıt dosyalarının iç anahtar isimleri değişmedi (bkz. CLAUDE.md).
@@ -33,6 +33,7 @@ Kayıt tarayıcının localStorage'ına otomatik yapılır (10 saniyede bir ve h
 | js/galeri.js           | Galeri: canavar ansiklopedisi, öldürme kademeleri ve kalıcı statlar |
 | js/mitik.js            | Efsanevi set: 10 ayrı yuva, parça düşmesi, takas, Kan Hırsı ve Muhafız Laneti |
 | js/unvan.js            | Unvanlar: kazanma kontrolü, ilerleme, tak / çıkar |
+| js/ruhdokum.js         | Ruh Dökümü: element, stat havuzu, dökme / kaydetme, etkinlik kuralı |
 | js/beceri.js           | Beceri etkileri, kitaplar, ustalık, geliştirme |
 | js/yedek.js            | Kayıt dışa/içe aktarma (.json dosyası) |
 | js/arayuz.js           | Ortak arayüz: üst bar, sekmeler, eşya kutusu, set detayı |
@@ -497,3 +498,18 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - Okçu — Yıldırım Vektörü (sv. 14+): %180 hasar; 3 tur sonra hedefte patlar (%200, seviye başına +%10),
   ardından canavar 2 tur yarı hızda yürür
 - Kayıt yapısı değişmedi. Kod: savas.js (coklu şekil, bomba ve yavaşlama), saha.js (yavaş canavar)
+
+## v0.42 değişiklikleri (Ruh Dökümü — Warriors and Adventure'daki "Soulcasting")
+- Demirci → yeni "Ruh" sekmesi. Sadece Efsanevi eşyalarda
+- Her Efsanevi eşya Altı Element'ten biriyle gelir: Yeşil Ejderha, Beyaz Kaplan, Kızıl Kuş, Kara Kaplumbağa,
+  Sarı Ejderha, Luan Kuşu (eski Efsanevi eşyalar ilk yüklemede rastgele bir element alır)
+- 1 Beş Renk Taşı ile "Dök": 2 rastgele ruh statı gelir (önizleme), beğenirsen Kaydet. Değer, en fazlanın %30-100'ü
+- Ruh statları ancak aynı elementten en az 2 Efsanevi eşya kuşanılıyken işler (ekranda "Yeşil Ejderha kuşanılı: 2/2 — etkin")
+- Stat havuzları (her biri %20 şans):
+  - Kask / zırh / kemer / çizme: Direnç (boss ve elit hasarı -%3), Can %10, Hasar azaltma %5, Sabit savunma (eşya sv. x 0,8 + 5), Kaçınma %3
+  - Silah / kolye / yüzük / bileklik: Blitz %5 (beceri vuruşu x1,2 şansı), Saldırı %8, Hasar artırma %5,
+    Sabit hasar (eşya sv. x 0,8 + 5, savunmayı yok sayar), Kritik hasarı %15
+- Referanstaki Tenacity bizde canavarlar sersemletmediği için "boss ve elit hasarına direnç" olarak uyarlandı
+- Beş Renk Taşı: bosstan %50 şansla 1, Efsanevi eşya eritince 1
+- KAYIT: eşyada e.ruh ({ el, st }), o.sarf.besRenk — G.gocEt ikisini de ekler
+- Ayarlar: veri.js → G.RUHDOKUM (nadir, satir, esik, tas, dusmeBoss, eritme, elementler, havuz, slotHavuz). Yeni dosya: js/ruhdokum.js

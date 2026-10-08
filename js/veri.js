@@ -1222,3 +1222,56 @@ G.BECERILER.buz_kukremesi = { ad: 'Buz Kükremesi', sinif: 'buyucu', tur: 'aktif
   etki: { tip: 'hasar', sekil: 'coklu', adet: 5, carpan: 1.5, vurus: 1, anaEk: 50 }, artis: { carpan: 0.1, adet: 0.1 }, efekt: 'buz' };
 G.BECERILER.yildirim_vektoru = { ad: 'Yıldırım Vektörü', sinif: 'okcu', tur: 'aktif', simge: 'b_yildirim_vektoru', minLv: 14, mp: 22, bekleme: 7,
   etki: { tip: 'hasar', carpan: 1.8, vurus: 1, bomba: 2.0, bombaSure: 3, yavas: 2 }, artis: { carpan: 0.1, bomba: 0.1 }, efekt: 'yildirim' };
+
+// ============================================================
+// v0.42 — RUH DÖKÜMÜ (Warriors and Adventure'daki "Soulcasting") — ruhdokum.js
+// Sadece Efsanevi eşyalarda. Her Efsanevi eşya Altı Element'ten biriyle gelir.
+// Beş Renk Taşı harcanır, 'satir' kadar rastgele stat zarlanır (önce önizleme, sonra Kaydet).
+// Statlar ancak aynı elementten en az 'esik' Efsanevi eşya kuşanılıysa işler.
+//   maks: yüzde statlarda sabit; 'lvCarpan' olanlarda eşya seviyesi x lvCarpan + maks
+//   Değer, en fazlanın %30-100'ü arası rastgele. Her stat eşit şansla gelir (aynı stat en çok 2 kez).
+// Yeni statlar: direnc (boss/elit hasarı azaltma), hasarAzalt, kacinma, blitz (beceri x1.2 şansı),
+//   hasarArtir (son hasar %), sabitHasar (savunmayı yok sayan ek hasar), sabitDef (savunma)
+// ============================================================
+G.RUHDOKUM = {
+  nadir: 4, satir: 2, esik: 2, tas: 1,
+  dusmeBoss: 50,        // bosstan Beş Renk Taşı düşme şansı (%)
+  eritme: 1,            // Efsanevi eşya eritince çıkan taş
+  elementler: [
+    { id: 'yesil',  ad: 'Yeşil Ejderha', renk: '#5ac878' },
+    { id: 'beyaz',  ad: 'Beyaz Kaplan',  renk: '#e8e8f0' },
+    { id: 'kizil',  ad: 'Kızıl Kuş',     renk: '#e8603a' },
+    { id: 'kara',   ad: 'Kara Kaplumbağa', renk: '#6a8ad8' },
+    { id: 'sari',   ad: 'Sarı Ejderha',  renk: '#e8c040' },
+    { id: 'luan',   ad: 'Luan Kuşu',     renk: '#c870d8' }
+  ],
+  // Yuva türüne göre stat havuzu
+  havuz: {
+    savunma: [
+      { k: 'direnc',     maks: 3 },
+      { k: 'hpYuzde',    maks: 10 },
+      { k: 'hasarAzalt', maks: 5 },
+      { k: 'sabitDef',   maks: 5, lvCarpan: 0.8 },
+      { k: 'kacinma',    maks: 3 }
+    ],
+    saldiri: [
+      { k: 'blitz',      maks: 5 },
+      { k: 'atkYuzde',   maks: 8 },
+      { k: 'hasarArtir', maks: 5 },
+      { k: 'sabitHasar', maks: 5, lvCarpan: 0.8 },
+      { k: 'kritHasar',  maks: 15 }
+    ]
+  },
+  // Hangi eşya türü hangi havuzu kullanır
+  slotHavuz: { silah: 'saldiri', kolye: 'saldiri', yuzuk: 'saldiri', bileklik: 'saldiri',
+               kask: 'savunma', zirh: 'savunma', kemer: 'savunma', cizme: 'savunma' }
+};
+G.SARF.besRenk = { ad: 'Beş Renk Taşı', simge: 'bes_renk', renk: '#e88ad8', aciklama: 'Efsanevi eşyalara ruh dökmekte kullanılır (Demirci → Ruh). Bosslardan ve Efsanevi eşya eritmekten gelir.' };
+G.BONUS_ADLARI.direnc = 'Direnç (boss/elit hasarı)';
+G.BONUS_ADLARI.hasarAzalt = 'Hasar azaltma';
+G.BONUS_ADLARI.kacinma = 'Kaçınma';
+G.BONUS_ADLARI.blitz = 'Blitz (beceri x1,2 şansı)';
+G.BONUS_ADLARI.hasarArtir = 'Hasar artırma';
+G.BONUS_ADLARI.sabitHasar = 'Sabit hasar';
+G.BONUS_ADLARI.sabitDef = 'Sabit savunma';
+['direnc', 'hasarAzalt', 'kacinma', 'blitz', 'hasarArtir'].forEach(function (k) { G.YUZDE_STATLAR[k] = 1; });

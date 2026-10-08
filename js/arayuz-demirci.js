@@ -6,7 +6,7 @@
 G.demirciAlt = 'arit';
 G.demirciKaynak = 'kusanili';
 G.demirciSecili = null;
-G.DEMIRCI_ALT = [['arit', G.ikon('pirilti'), 'Arıtma'], ['guclendir', G.ikon('cekic'), 'Güçlendirme'], ['suverme', G.ikon('suverme'), 'Su Verme'], ['erit', G.ikon('alev'), 'Eritme']];
+G.DEMIRCI_ALT = [['arit', G.ikon('pirilti'), 'Arıtma'], ['guclendir', G.ikon('cekic'), 'Güçlendirme'], ['suverme', G.ikon('suverme'), 'Su Verme'], ['ruh', G.ikon('ruhdokum'), 'Ruh'], ['erit', G.ikon('alev'), 'Eritme']];
 
 // Eşya penceresinden "Arıt" ile gel
 G.demirciAc = function (id) {
@@ -31,6 +31,7 @@ G.demirciListe = function () {
     liste = G.YUVALAR.map(function (y) { return o.kusanilan[y.id]; }).filter(Boolean);
   } else liste = o.canta.slice();
   if (G.demirciAlt === 'arit') liste = liste.filter(function (e) { return e.ek && e.ek.length; });
+  if (G.demirciAlt === 'ruh') liste = liste.filter(function (e) { return e.ruh; });   // v0.42: sadece Efsanevi
   if (G.demirciAlt === 'erit') liste = G.demirciKaynak === 'canta' ? liste.filter(function (e) { return e.nadir >= 2; }) : [];
   return liste;
 };
@@ -43,7 +44,7 @@ G.cizDemirci = function () {
   var sol = liste.map(function (e) {
     return '<div class="dm-kutu' + (e.id === G.demirciSecili ? ' secili' : '') + '">' +
       G.esyaKutuHtml(e, 'demirciSec') + '</div>';
-  }).join('') || '<p class="soluk kucuk-not">' + (G.demirciAlt === 'erit' && G.demirciKaynak === 'kusanili' ? 'Kuşanılı eşya eritilmez.' : 'Uygun eşya yok.') + '</p>';
+  }).join('') || '<p class="soluk kucuk-not">' + (G.demirciAlt === 'erit' && G.demirciKaynak === 'kusanili' ? 'Kuşanılı eşya eritilmez.' : G.demirciAlt === 'ruh' ? 'Ruh dökümü sadece Efsanevi eşyalarda yapılır.' : 'Uygun eşya yok.') + '</p>';
   var kaynak = '<div class="dm-kaynak"><button' + (G.demirciKaynak === 'kusanili' ? ' class="aktif"' : '') + ' data-eylem="demirciKaynak" data-k="kusanili">Kuşanılı</button>' +
     '<button' + (G.demirciKaynak === 'canta' ? ' class="aktif"' : '') + ' data-eylem="demirciKaynak" data-k="canta">Çanta</button></div>';
 
@@ -52,6 +53,7 @@ G.cizDemirci = function () {
   else if (G.demirciAlt === 'arit') sag = G.aritHtml(f.e);
   else if (G.demirciAlt === 'guclendir') sag = G.guclendirHtml(f.e);
   else if (G.demirciAlt === 'suverme') sag = G.suvermeHtml(f.e);
+  else if (G.demirciAlt === 'ruh') sag = G.ruhHtml(f.e);
   else sag = G.eritHtml(f.e);
 
   G.$('icerik').innerHTML = '<div class="demirci">' +
@@ -256,4 +258,33 @@ G.suvermeHtml = function (e) {
     '<p class="soluk kucuk-not"><b>Su Ver:</b> cilası daha yüksek aynı eşya kurban edilir, bütün statlar yeniden zarlanır; cila farkı büyüdükçe artış büyür, bazen bir stat düşebilir. ' +
       '<b>Gelişmiş:</b> sadece ' + G.ikon('kilit') + ' kilitli 1-2 stat değişir ve yalnız artış kalır. ' +
       'Kurban edilen eşya her durumda gider; sonucu beğenirsen Kaydet. <b>Sıfırla:</b> cila %0 olur, böylece daha çok eşya kurban edilebilir.</p>';
+};
+
+// ---- v0.42: Ruh Dökümü (referanstaki Soulcasting) ----
+G.ruhSatirHtml = function (x, sinif) {
+  return '<div class="dm-stat ' + (sinif || '') + '">' + G.bonusYazi(x.k, x.v) + '</div>';
+};
+G.ruhHtml = function (e) {
+  var o = G.o, R = G.RUHDOKUM, el = G.ruhElement(e.ruh.el), say = G.ruhSayilari(o)[e.ruh.el] || 0;
+  var a = G.ruhOnizleme && G.ruhOnizleme.id === e.id ? G.ruhOnizleme : null;
+  var etkin = G.ruhEtkin(e);
+  var tablo = '<div class="ruh-baslik"><span>Stat</span><span>En fazla</span><span>En çok</span></div>' +
+    G.ruhHavuz(e).map(function (h) {
+      return '<div><span>' + G.BONUS_ADLARI[h.k] + '</span><b>' + (G.YUZDE_STATLAR[h.k] ? '%' : '') + h.maks + '</b><b class="fark-eksi">' + R.satir + '</b></div>';
+    }).join('');
+  var mevcut = '<div class="ruh-element" style="color:' + el.renk + '">' + el.ad + '</div>' +
+    (e.ruh.st.length ? e.ruh.st.map(function (x) { return G.ruhSatirHtml(x, etkin ? '' : 'soluk'); }).join('') : '<p class="soluk kucuk-not">Henüz ruh dökülmedi.</p>');
+  var onizleme = a ? a.st.map(function (x) { return G.ruhSatirHtml(x, 'yeni'); }).join('') : '<p class="soluk kucuk-not">Dök\'e bas, yeni statlar burada görünür.</p>';
+  return G.dmBaslikHtml(e) +
+    '<div class="dm-tablo ruh-tablo"><h4>Olası ruh statları <small>(her biri %' + Math.round(100 / G.ruhHavuz(e).length) + ' şans)</small></h4>' + tablo + '</div>' +
+    '<div class="dm-karsilastir">' +
+      '<div class="dm-kolon"><h4>Mevcut statlar</h4>' + mevcut + '</div><div class="dm-ok">➤</div>' +
+      '<div class="dm-kolon"><h4>Ruh statları</h4>' + onizleme + '</div>' +
+    '</div>' +
+    '<div class="dm-gpler"><span class="' + (etkin ? 'fark-arti' : 'fark-eksi') + '">' + el.ad + ' kuşanılı: ' + say + '/' + R.esik + (etkin ? ' — etkin' : ' — etkisiz') + '</span></div>' +
+    '<div class="dm-maliyet">Bedel: <span class="' + (o.sarf.besRenk >= R.tas ? 'fark-arti' : 'fark-eksi') + '">' + G.SARF.besRenk.ikon + ' ' + o.sarf.besRenk + '/' + R.tas + '</span></div>' +
+    '<div class="dm-dugmeler ruh-dugmeler"><button class="sus-dugme" data-eylem="ruhDok" data-id="' + e.id + '"><span>Dök</span></button>' +
+      '<button class="sus-dugme" data-eylem="ruhKaydet"' + (a ? '' : ' disabled') + '><span>Kaydet</span></button></div>' +
+    '<p class="soluk kucuk-not">Her dökümde ' + R.satir + ' stat rastgele gelir; beğenirsen Kaydet. Ruh statları ancak aynı elementten en az ' + R.esik +
+      ' Efsanevi eşya kuşanılıyken işler. Beş Renk Taşı bosslardan ve Efsanevi eşya eritmekten gelir.</p>';
 };

@@ -3,11 +3,13 @@
 // ============================================================
 
 // Eşyanın tek başına gücü (sıralama için). Ağırlıklar GP formülüyle aynı.
-G.GP_AGIRLIK = { atk: 2, def: 3, hp: 0.2, mp: 0.1, hiz: 2, krit: 4, kritHasar: 1, canCal: 6, altin: 0.5, tecrube: 0.5, tumBeceri: 20 };
+G.GP_AGIRLIK = { atk: 2, def: 3, hp: 0.2, mp: 0.1, hiz: 2, krit: 4, kritHasar: 1, canCal: 6, altin: 0.5, tecrube: 0.5, tumBeceri: 20,
+  hpYuzde: 6, atkYuzde: 8, direnc: 3, hasarAzalt: 8, kacinma: 4, blitz: 3, hasarArtir: 8, sabitHasar: 2, sabitDef: 3 };
 G.esyaGP = function (e) {
   var t = 0, st = G.esyaStat(e);
   for (var k in st) t += st[k] * (G.GP_AGIRLIK[k] || 0);
   (e.ek || []).forEach(function (x) { t += x.v * (G.GP_AGIRLIK[x.k] || 0); });
+  if (e.ruh) e.ruh.st.forEach(function (x) { t += x.v * (G.GP_AGIRLIK[x.k] || 0); });   // v0.42
   return Math.round(t);
 };
 
@@ -35,7 +37,8 @@ G.eritmeGetiri = function (e) {
   var s = G.ESYALAR[e.sablon];
   return {
     toz: Math.round((2 + s.lv * 0.3) * e.nadir * 1.5 * (s.set ? 2 : 1)) + e.arti * 2,
-    tas: (e.nadir >= 3 ? 1 : 0) + (e.nadir >= 4 ? 1 : 0) + Math.floor(e.arti / 3)
+    tas: (e.nadir >= 3 ? 1 : 0) + (e.nadir >= 4 ? 1 : 0) + Math.floor(e.arti / 3),
+    besRenk: e.nadir >= G.RUHDOKUM.nadir ? G.RUHDOKUM.eritme : 0   // v0.42
   };
 };
 
@@ -46,10 +49,10 @@ G.erit = function (id) {
   if (f.e.nadir < 2) { G.bildir('Sadece Nadir ve üstü eşyalar eritilir.'); return; }
   var g = G.eritmeGetiri(f.e);
   o.canta.splice(f.i, 1);
-  o.sarf.toz += g.toz; o.sarf.tas += g.tas;
+  o.sarf.toz += g.toz; o.sarf.tas += g.tas; o.sarf.besRenk += g.besRenk;
   G.gorevSay('geri');
   G.kaydet(); G.modalKapat(); G.panelYenile();
-  G.bildir(G.esyaAd(f.e) + ' eritildi: +' + g.toz + ' Ruh Tozu' + (g.tas ? ', +' + g.tas + ' Arıtma Taşı' : ''));
+  G.bildir(G.esyaAd(f.e) + ' eritildi: +' + g.toz + ' Ruh Tozu' + (g.tas ? ', +' + g.tas + ' Arıtma Taşı' : '') + (g.besRenk ? ', +' + g.besRenk + ' Beş Renk Taşı' : ''));
 };
 
 // Kilitsiz, güçlendirilmemiş, set olmayan Nadir eşyaları toplu erit
