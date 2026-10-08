@@ -1,4 +1,4 @@
-# Hunter Realms — v0.28 (güçlendirme ritüeli)
+# Hunter Realms — v0.30 (boss paneli ve süreleri)
 
 > Not: Oyun eskiden "Kara Diyar" adıyla geliştirildi, bu sürümde "Hunter Realms" olarak
 > yeniden adlandırıldı. Kayıt dosyalarının iç anahtar isimleri değişmedi (bkz. CLAUDE.md).
@@ -354,3 +354,20 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - KURALLAR DEĞİŞMEDİ: şans, bedel, +5 sonrası düşme aynı. Sonuç düğmeye basıldığı an hesaplanıp kaydedilir,
   sahne sadece gösterir (uygulamayı yarıda kapatmak sonucu değiştirmez)
 - Ayarlar: arayuz-demirci.js → G.RITUEL (vuruş sayısı, aralık, bekleyiş, "yüksek" eşiği); sesler ses.js → cekic, basari, bos, kirilma
+
+## v0.29 değişiklikleri (elit canavarlar — Warriors and Adventure'daki mavi kenarlı canavarlar)
+- Sahaya gelen her normal canavar %3 ihtimalle ELİT olur: mavi kenar ve parıltı, mavi isim, "ELİT" etiketi
+- Elit: 10x can (referans oyundaki oran), 1.5x saldırı
+- Ödül: 8x tecrübe ve altın, garanti bir eşya, nadirlik şansı 2.5 kat (normal 1, boss 4)
+- Elit belirince ve öldürülünce günlüğe yazılır. Boss ve kule bekçileri elit olmaz
+- Kayıt yapısı değişmedi (elitlik sadece sahadaki canavarda tutulur)
+- Ayarlar: veri.js → G.ELIT (sans, hpCarpan, atkCarpan, odulCarpan, nadirBonus)
+
+## v0.30 değişiklikleri (boss paneli ve yeniden doğma süreleri — Warriors and Adventure'daki BOSS listesi gibi)
+- BOSS düğmesi artık boss panelini açar: 8 bölge bossu, bölgesi, durumu ("Hazır" ya da geri sayım), önerilen GP
+  - Bulunduğun bölgenin bossu: "Çağır" · başka bölgedeki boss: "Işınlan" (bölgeye gider ve bossu çağırır) · seviye yetmiyorsa kilitli
+- Boss yenilince yeniden doğma süresi başlar: Kurt Kralı 10 dk → Hiçlik Efendisi 60 dk. Gerçek zamanlı, oyun kapalıyken de işler
+- Süre dolmadan boss çağrılamaz; sahadaki BOSS düğmesinde kırmızı geri sayım görünür
+- Kule bekçileri bu sürelerden etkilenmez
+- KAYIT: yeni alan o.bossZaman ({ bossId: doğacağı zaman }) — G.gocEt eski kayıtlara boş olarak ekler
+- Ayarlar: veri.js → G.BOSS_SURE (dakika)

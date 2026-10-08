@@ -36,6 +36,17 @@ G.rastgeleCanavar = function () {
   if (!h) return null;
   var c = G.canavarOlustur(b.canavarlar[Math.floor(Math.random() * b.canavarlar.length)]);
   c.kol = h.kol; c.sat = h.sat;
+  if (Math.random() * 100 < G.ELIT.sans) G.elitYap(c);
+  return c;
+};
+
+// v0.29: elit canavar — daha çok can ve saldırı, çok daha iyi ganimet (veri.js → G.ELIT)
+G.elitYap = function (c) {
+  var E = G.ELIT;
+  c.elit = true;
+  c.hp = c.hpMax = Math.round(c.hpMax * E.hpCarpan);
+  c.atk = [Math.round(c.atk[0] * E.atkCarpan), Math.round(c.atk[1] * E.atkCarpan)];
+  G.log('Elit ' + c.ad + ' belirdi!', 'tehlike');
   return c;
 };
 
@@ -262,18 +273,23 @@ G.canavarOldu = function (i) {
   G.gorevSay('oldur');
   o.istatistik.oldurId[c.id] = (o.istatistik.oldurId[c.id] || 0) + 1;
   if (c.boss) G.gorevSay('boss');
+  // v0.30: boss öldü, yeniden doğma sayacı başlar (veri.js → G.BOSS_SURE)
+  if (c.boss && G.BOSS_SURE[c.id]) o.bossZaman[c.id] = Date.now() + G.BOSS_SURE[c.id] * 60000;
   if (c.boss) o.istatistik.bosslar[c.id] = (o.istatistik.bosslar[c.id] || 0) + 1;
   if (G.hedefI === i) G.hedefI = null;
 
   var r = G.hesapla(o), b = G.bolgeBul(o.bolge);
   var para = Math.round(G.rastgele(cs.para[0], cs.para[1]) * (1 + r.altin / 100) * G.ZORLUK.altinCarpan);
   var exp = Math.round(cs.exp * (1 + r.tecrube / 100));
+  if (c.elit) { para *= G.ELIT.odulCarpan; exp *= G.ELIT.odulCarpan; }
   o.para += para;
-  G.log(c.ad + ' öldürüldü. +' + exp + ' tecrübe, +' + para + ' altın', 'kazanc');
+  G.log((c.elit ? 'Elit ' : '') + c.ad + ' öldürüldü. +' + exp + ' tecrübe, +' + para + ' altın', 'kazanc');
 
-  var adet = c.boss ? 2 : 1, sans = c.boss ? 100 : G.DUSME.esya;
+  // Eşya: boss 2 tane garanti, elit 1 tane garanti (daha yüksek nadirlik), normal şansla
+  var adet = c.boss ? 2 : 1, sans = c.boss || c.elit ? 100 : G.DUSME.esya;
+  var bonus = c.boss ? 4 : c.elit ? G.ELIT.nadirBonus : 1;
   for (var k = 0; k < adet; k++) {
-    if (Math.random() * 100 < sans) G.cantayaEkle(G.esyaUret(o, c.lv, c.boss ? 4 : 1));
+    if (Math.random() * 100 < sans) G.cantayaEkle(G.esyaUret(o, c.lv, bonus));
   }
   if (b.set && Math.random() * 100 < (c.boss ? G.SET_DUSME_BOSS : G.SET_DUSME_NORMAL)) {
     var sp = G.setParcaUret(o, b.set, c.boss ? 3 : 1);
@@ -331,10 +347,34 @@ G.kac = function () {
   if (G.sekme === 'savas') G.cizSavas();
 };
 
+// v0.30: bossun yeniden doğmasına kalan süre (ms); 0 = hazır
+G.bossKalan = function (id) {
+  return Math.max(0, (G.o.bossZaman[id] || 0) - Date.now());
+};
+G.sureYazi = function (ms) {
+  var sn = Math.ceil(ms / 1000), d = Math.floor(sn / 60);
+  return (d < 10 ? '0' : '') + d + ':' + (sn % 60 < 10 ? '0' : '') + (sn % 60);
+};
+// Bossun bulunduğu av bölgesi
+G.bossBolge = function (id) {
+  return G.BOLGELER.filter(function (b) { return b.boss === id; })[0];
+};
+// Boss panelinden: gerekirse bossun bölgesine git, sonra çağır
+G.bossIsinlan = function (id) {
+  var b = G.bossBolge(id);
+  if (!b) return;
+  if (G.o.lv < b.minLv) { G.bildir('Seviye ' + b.minLv + ' gerekiyor.'); return; }
+  if (G.bossKalan(id)) { G.bildir(G.CANAVARLAR[id].ad + ' ' + G.sureYazi(G.bossKalan(id)) + ' sonra doğacak.'); return; }
+  G.modalKapat();
+  if (G.o.bolge !== b.id) G.bolgeGit(b.id);
+  G.bossBaslat();
+};
+
 G.bossBaslat = function () {
   var b = G.bolgeBul(G.o.bolge);
   if (!b.boss) { G.bildir('Burada boss yok.'); return; }
   if (G.alan.some(function (c) { return c && c.boss && !c.olu; })) { G.bildir('Boss zaten sahada.'); return; }
+  if (G.bossKalan(b.boss)) { G.bildir(G.CANAVARLAR[b.boss].ad + ' ' + G.sureYazi(G.bossKalan(b.boss)) + ' sonra doğacak.'); return; }
   G.alan = G.alan.filter(function (c) { return c && !(c.boss && c.olu); });
   // Oyuncunun yanındaki boş kare (yoksa herhangi bir boş kare)
   var h = null, p = G.oyuncu;
