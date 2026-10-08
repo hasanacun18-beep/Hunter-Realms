@@ -8,6 +8,8 @@ G.beceriEtki = function (id, lv) {
   var b = G.BECERILER[id], e = {};
   for (var k in b.etki) e[k] = b.etki[k];
   for (var a in (b.artis || {})) e[a] = Math.round((e[a] + b.artis[a] * (lv - 1)) * 100) / 100;
+  // v0.43: seviye tablosu (totemler) — her seviyenin değeri ayrı
+  for (var tk in (b.tablo || {})) e[tk] = b.tablo[tk][Math.max(1, Math.min(lv, b.tablo[tk].length)) - 1];
   if (e.tip === 'hasar' && !e.sekil) e.sekil = 'tek';
   // v0.40: yüksek seviyelerde üst sınırlar (veri.js → G.BECERI_SINIR)
   var S = G.BECERI_SINIR;
@@ -24,7 +26,7 @@ G.beceriAciklama = function (id, lv) {
   }
   var e = G.beceriEtki(id, lv), p = [];
   if (e.tip === 'hasar') {
-    var sekil = { yarimay: 'öndeki 3 kareye ', kasirga: 'etrafındaki 8 kareye ', alan: 'hedef ve çevresindeki 9 kareye ', cizgi: 'bir yönde 4 kareyi delerek ', coklu: 'en fazla ' + Math.floor(e.adet || 5) + ' canavara ' }[e.sekil] || '';
+    var sekil = { yarimay: 'öndeki 3 kareye ', kasirga: 'etrafındaki 8 kareye ', alan: 'hedef ve çevresindeki 9 kareye ', cizgi: 'bir yönde 4 kareyi delerek ', coklu: (e.yaricap ? 'hedefin çevresindeki ' : '') + 'en fazla ' + Math.floor(e.adet || 5) + ' canavara ' }[e.sekil] || '';
     p.push(sekil + '%' + Math.round(e.carpan * 100) + ' hasar' + (e.vurus > 1 ? ', ' + e.vurus + ' vuruş' : ''));
     if (e.sersem) p.push(e.sersem + ' tur sersemletir (bosslar dirençli)');
     if (e.dot) p.push(e.sure + ' tur boyunca her tur %' + Math.round(e.dot * 100) + ' ek hasar (' + (e.sekil === 'yarimay' ? 'kanama' : 'süreli') + '), savunmayı deler');

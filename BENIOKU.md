@@ -1,4 +1,4 @@
-# Hunter Realms — v0.42 (ruh dökümü)
+# Hunter Realms — v0.43 (totem sayıları)
 
 > Not: Oyun eskiden "Kara Diyar" adıyla geliştirildi, bu sürümde "Hunter Realms" olarak
 > yeniden adlandırıldı. Kayıt dosyalarının iç anahtar isimleri değişmedi (bkz. CLAUDE.md).
@@ -513,3 +513,12 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - Beş Renk Taşı: bosstan %50 şansla 1, Efsanevi eşya eritince 1
 - KAYIT: eşyada e.ruh ({ el, st }), o.sarf.besRenk — G.gocEt ikisini de ekler
 - Ayarlar: veri.js → G.RUHDOKUM (nadir, satir, esik, tas, dusmeBoss, eritme, elementler, havuz, slotHavuz). Yeni dosya: js/ruhdokum.js
+
+## v0.43 değişiklikleri (Totem sayıları — Warriors and Adventure "Yetenekler" sayfası)
+- Totemler artık her seviyede wiki'deki tabloya göre değişir (6 seviye):
+  - Acımasız Darbe: sıçrama 2/2/3/3/3/4 kare; iniş yerinin çevresindeki 3/4/5/6/7/8 canavara %200/250/300/350/400/450 (wiki ile aynı).
+    Artık sadece hedefin bitişiğindeki canavarlar vurulur (önce 9 karelik alan)
+  - Alevli Ateş: 3/3/5/5/5/6 ruh, her tur her biri %50/65/80/95/110/125 (wiki %100-250 "her saldırı" diyor;
+    bizde ruhlar her tur vurduğu için yarısı alındı). 1. seviye eskisinden biraz zayıf (%70 → %50), üst seviyeler çok daha güçlü
+  - Anka Kuşu Tüyü: bağışıklık 2/2/3/3/3/4 tur, patlama %100/120/140/160/180/200 (wiki yalnız 1. seviyeyi veriyor; üstü tahmin)
+- Kayıt yapısı değişmedi. Ayarlar: veri.js → G.BECERILER.<totem>.tablo (beceri.js → G.beceriEtki tabloyu okur)

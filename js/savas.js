@@ -85,7 +85,7 @@ G.yonBul = function (p, t) {
   return 0;
 };
 
-G.sekilHucreleri = function (sekil, t) {
+G.sekilHucreleri = function (sekil, t, e) {
   var p = G.oyuncu, h = [];
   function ekle(k, s) { if (G.icinde(k, s)) h.push({ kol: k, sat: s }); }
   if (sekil === 'yarimay') {
@@ -97,8 +97,8 @@ G.sekilHucreleri = function (sekil, t) {
     for (var a = -1; a <= 1; a++) for (var b = -1; b <= 1; b++) ekle(t.kol + a, t.sat + b);
   } else if (sekil === 'coklu') {
     // v0.41: hedef + ona en yakın canlı canavarlar (Buz Kükremesi)
-    var adet = Math.floor(G.cokluAdet || 5);
-    G.alan.filter(function (c) { return c && !c.olu && c.hp > 0; })
+    var adet = Math.floor((e && e.adet) || 5), yc = e && e.yaricap;
+    G.alan.filter(function (c) { return c && !c.olu && c.hp > 0 && (!yc || G.cheb(t, c) <= yc); })   // v0.43: yarıçap sınırı
       .sort(function (a, b) { return G.cheb(t, a) - G.cheb(t, b) || (b === t) - (a === t); })
       .slice(0, adet).forEach(function (c) { ekle(c.kol, c.sat); });
     if (!h.length) ekle(t.kol, t.sat);
@@ -228,14 +228,13 @@ G.oyuncuSaldir = function (t, r) {
   var b = id ? G.BECERILER[id] : null;
   if (b && (o.mp < b.mp || (G.bekleme[id] || 0) > 0)) b = null;
   var e = b ? G.beceriEtki(id, G.beceriSeviye(id)) : { tip: 'hasar', carpan: 1, vurus: 1, sekil: 'tek' };
-  if (b && e.tip === 'hasar' && !G.hucredekiler(G.sekilHucreleri(e.sekil, t)).length) { b = null; e = { tip: 'hasar', carpan: 1, vurus: 1, sekil: 'tek' }; }
+  if (b && e.tip === 'hasar' && !G.hucredekiler(G.sekilHucreleri(e.sekil, t, e)).length) { b = null; e = { tip: 'hasar', carpan: 1, vurus: 1, sekil: 'tek' }; }
   var gucCarpan = 1 + (s.guc ? s.guc.oran / 100 : 0);
   var beceriCarpan = 1 + r.beceriBonus + r.beceri / 100;
   if (b) { o.mp -= b.mp; G.bekleme[id] = b.bekleme; G.ustalikEkle(id, 10); G.log(b.ikon + ' ' + b.ad, 'sistem'); }
 
   if (e.tip === 'hasar') {
-    G.cokluAdet = e.adet;   // v0.41: coklu şeklin hedef sayısı
-    var hucreler = G.sekilHucreleri(e.sekil, t);
+    var hucreler = G.sekilHucreleri(e.sekil, t, e);
     var hedefler = G.hucredekiler(hucreler), toplam = 0;
     G.fx.oynat(b ? (b.efekt || G.FX_NORMAL[o.sinif]) : G.FX_NORMAL[o.sinif], t, hucreler, !!b, b ? b.ad : null);
     hedefler.forEach(function (i) {
@@ -406,7 +405,7 @@ G.otoBeceriSec = function (t) {
     if (e.tip === 'cagir' && (G.yaratik || G.aktifler().length === 0)) continue;
     if (e.tip === 'mayin' && (G.mayinlar.length || G.aktifler().length === 0)) continue;
     if (e.tip === 'hasar') {
-      var sayi = G.hucredekiler(G.sekilHucreleri(e.sekil, t)).length;
+      var sayi = G.hucredekiler(G.sekilHucreleri(e.sekil, t, e)).length;
       if (!sayi) continue;
       // Alan becerilerini tek hedefe harcama (güçlü olanlar hariç)
       if (e.sekil !== 'tek' && sayi < 2 && e.carpan < 1.5) continue;
