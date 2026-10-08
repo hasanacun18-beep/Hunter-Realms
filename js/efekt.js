@@ -164,6 +164,11 @@ G.FX = {
     b.hedefler.forEach(function (h, i) { G.fx.kesik(h, true, i * 40); });
     G.fx.kivilcim(b.t, 14, '#ffd890');
   },
+  cagir: function () {   // v0.39
+    G.fx.aura('guc');
+    G.fx.halka(G.oyuncu, 'rgba(180,120,255,.9)', 110);
+    G.fx.kivilcim(G.oyuncu, 10, '#c8a0ff');
+  },
   peri: function () {
     G.fx.aura('guc');
     for (var i = 0; i < 6; i++) G.fx.kivilcim(G.oyuncu, 3, '#ffb050');

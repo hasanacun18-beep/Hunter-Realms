@@ -1,4 +1,4 @@
-# Hunter Realms — v0.38 (beceri uyumu)
+# Hunter Realms — v0.39 (yeni beceriler)
 
 > Not: Oyun eskiden "Kara Diyar" adıyla geliştirildi, bu sürümde "Hunter Realms" olarak
 > yeniden adlandırıldı. Kayıt dosyalarının iç anahtar isimleri değişmedi (bkz. CLAUDE.md).
@@ -463,3 +463,15 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
   - Gölge Adım: hasar azaltmanın yanında en yakın 4 canavarı işaretler, 4 tur savunmaları %25 düşer
     (seviye başına +%3); referanstaki Şeytanın İnişi gibi. İşaretli canavar kırmızı çerçeveli görünür
 - Ayarlar: veri.js → ilgili becerilerin etki/bonus alanları, G.TEKRAR_CARPAN. Kayıt yapısı değişmedi
+
+## v0.39 değişiklikleri (Yeni beceriler — Warriors and Adventure "Yetenekler" sayfası)
+- Savaşçı — Suikastçı Kılıcı (sv. 12+): mana harcamaz, 1 tur bekleme, %160 hasar, hedefin savunmasının %5'ini yok sayar
+  (beceri seviyesi başına +%8 hasar, +%1 delme)
+- Büyücü — Baştan Çıkarma (sv. 12+): yanında savaşan bir yaratık çağırır. Canı senin canının %35'i, her tur
+  senin hasarının %30'u kadar vurur (seviye başına +%5 / +%5), canavar vuruşlarının %40'ını üstlenir.
+  Beceri seviyesiyle yaratık değişir: Ork (1-3), Kurt (4-6), Kaplan Muhafızı (7-8). Oyuncu kartının köşesinde canıyla görünür
+- Okçu — Karanlık Gök Gürültüsü (sv. 12+): hedef ve çevresindeki 9 kareye 8 tur kalan mayın döşer. Basan canavar
+  %50 hasar alır ve 1 kusur kazanır; 3 kusurda 2 tur sersemler (bosslar hariç). Seviyeyle hasar artar, gereken kusur 2'ye iner
+- Kitapları diğer beceriler gibi seviye 12+ canavarlardan düşer. Yaratık ve mayınlar kaydedilmez, bölge değişince kaybolur
+- Ayarlar: veri.js → G.BECERILER.suikastci_kilici / bastan_cikarma / karanlik_gok, G.YARATIKLAR.
+  Kod: savas.js → G.yaratikTik, G.mayinTik (G.vur'a savunma delme eklendi)
