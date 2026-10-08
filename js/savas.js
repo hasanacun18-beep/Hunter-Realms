@@ -95,6 +95,13 @@ G.sekilHucreleri = function (sekil, t) {
     G.YONLER.forEach(function (d) { ekle(p.kol + d[0], p.sat + d[1]); });
   } else if (sekil === 'alan') {
     for (var a = -1; a <= 1; a++) for (var b = -1; b <= 1; b++) ekle(t.kol + a, t.sat + b);
+  } else if (sekil === 'coklu') {
+    // v0.41: hedef + ona en yakın canlı canavarlar (Buz Kükremesi)
+    var adet = Math.floor(G.cokluAdet || 5);
+    G.alan.filter(function (c) { return c && !c.olu && c.hp > 0; })
+      .sort(function (a, b) { return G.cheb(t, a) - G.cheb(t, b) || (b === t) - (a === t); })
+      .slice(0, adet).forEach(function (c) { ekle(c.kol, c.sat); });
+    if (!h.length) ekle(t.kol, t.sat);
   } else if (sekil === 'cizgi') {
     var yd = G.YONLER[G.yonBul(p, t)];
     for (var n = 1; n <= 4; n++) ekle(p.kol + yd[0] * n, p.sat + yd[1] * n);
@@ -167,6 +174,16 @@ G.savasTik = function () {
     if (--c.dot.tur <= 0) c.dot = null;
   });
   G.alan.forEach(function (c) { if (c && c.isaret && --c.isaret.tur <= 0) c.isaret = null; });   // v0.38
+  // v0.41: bombalar patlar, yavaşlama azalır
+  G.alan.forEach(function (c, i) {
+    if (!c || c.olu) return;
+    if (c.yavas > 0) c.yavas--;
+    if (!c.bomba || --c.bomba.tur > 0) return;
+    var bm = c.bomba; c.bomba = null;
+    G.fx.yildirim(c); G.fx.halka(c, 'rgba(150,190,255,.95)', 90);
+    G.vur(i, c, r, 1, bm.carpan, 'beceri');
+    c.yavas = bm.yavas;
+  });
   G.alan.forEach(function (c, i) { if (c && !c.olu && c.hp <= 0) G.canavarOldu(i); });
 
   // --- Yanımızdaki aktif canavarlar vurur ---
@@ -215,13 +232,17 @@ G.oyuncuSaldir = function (t, r) {
   if (b) { o.mp -= b.mp; G.bekleme[id] = b.bekleme; G.ustalikEkle(id, 10); G.log(b.ikon + ' ' + b.ad, 'sistem'); }
 
   if (e.tip === 'hasar') {
+    G.cokluAdet = e.adet;   // v0.41: coklu şeklin hedef sayısı
     var hucreler = G.sekilHucreleri(e.sekil, t);
     var hedefler = G.hucredekiler(hucreler), toplam = 0;
     G.fx.oynat(b ? (b.efekt || G.FX_NORMAL[o.sinif]) : G.FX_NORMAL[o.sinif], t, hucreler, !!b, b ? b.ad : null);
     hedefler.forEach(function (i) {
       var c = G.alan[i];
       c.aktif = true;
-      for (var v = 0; v < (e.vurus || 1) && c.hp > 0; v++) toplam += G.vur(i, c, r, gucCarpan, b ? e.carpan * beceriCarpan : 1, b ? 'beceri' : '', b ? e.deler : 0);
+      var anaCarpan = b && e.anaEk && c === t ? 1 + e.anaEk / 100 : 1;   // v0.41: ana hedef ek hasar
+      for (var v = 0; v < (e.vurus || 1) && c.hp > 0; v++) toplam += G.vur(i, c, r, gucCarpan, b ? e.carpan * beceriCarpan * anaCarpan : 1, b ? 'beceri' : '', b ? e.deler : 0);
+      // v0.41: Yıldırım Vektörü — gecikmeli bomba
+      if (b && e.bomba && c.hp > 0) c.bomba = { tur: e.bombaSure + 1, carpan: e.bomba * beceriCarpan, yavas: e.yavas };
       if (e.sersem && c.hp > 0 && !c.boss) c.sersem = e.sersem;
       if (e.dot && c.hp > 0) c.dot = { h: Math.round((r.atkMin + r.atkMax) / 2 * e.dot * beceriCarpan), tur: e.sure };
     });

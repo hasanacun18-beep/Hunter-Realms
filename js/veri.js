@@ -1210,3 +1210,15 @@ G.BONUS_ADLARI.tumBeceri = 'Tüm beceriler';
 // Yüksek seviyede değerler anlamsızlaşmasın diye üst sınırlar (beceri.js → G.beceriEtki)
 // kalkan: hasar azaltma % (totemler hariç — Anka Kuşu Tüyü bağışıklıktır) · iyilesme: anlık can yenileme %
 G.BECERI_SINIR = { kalkan: 75, iyilesme: 80, isaret: 50, deler: 30, can: 100, saldiri: 100 };
+
+// ============================================================
+// v0.41 — KALAN BECERİLER (Warriors and Adventure "Yetenekler" sayfası) — savas.js
+//   coklu: hedef + ona en yakın canavarlar, en fazla 'adet' tane; anaEk: ana hedef % fazla hasar alır
+//   bomba: vuruştan 'bombaSure' tur sonra hedefte patlar ('bomba' çarpanıyla), sonra 'yavas' tur yavaşlatır
+// ============================================================
+G.BECERILER.gok_firtina = { ad: 'Gök Gürültülü Fırtına', sinif: 'buyucu', tur: 'aktif', simge: 'b_gok_firtina', minLv: 14, mp: 0, bekleme: 1,
+  etki: { tip: 'hasar', carpan: 1.6, vurus: 1, deler: 5 }, artis: { carpan: 0.08, deler: 1 }, efekt: 'yildirim' };
+G.BECERILER.buz_kukremesi = { ad: 'Buz Kükremesi', sinif: 'buyucu', tur: 'aktif', simge: 'b_buz_kukremesi', minLv: 16, mp: 28, bekleme: 6,
+  etki: { tip: 'hasar', sekil: 'coklu', adet: 5, carpan: 1.5, vurus: 1, anaEk: 50 }, artis: { carpan: 0.1, adet: 0.1 }, efekt: 'buz' };
+G.BECERILER.yildirim_vektoru = { ad: 'Yıldırım Vektörü', sinif: 'okcu', tur: 'aktif', simge: 'b_yildirim_vektoru', minLv: 14, mp: 22, bekleme: 7,
+  etki: { tip: 'hasar', carpan: 1.8, vurus: 1, bomba: 2.0, bombaSure: 3, yavas: 2 }, artis: { carpan: 0.1, bomba: 0.1 }, efekt: 'yildirim' };
