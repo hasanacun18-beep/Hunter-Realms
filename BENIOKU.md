@@ -1,4 +1,4 @@
-# Hunter Realms — v0.37 (totem becerileri)
+# Hunter Realms — v0.38 (beceri uyumu)
 
 > Not: Oyun eskiden "Kara Diyar" adıyla geliştirildi, bu sürümde "Hunter Realms" olarak
 > yeniden adlandırıldı. Kayıt dosyalarının iç anahtar isimleri değişmedi (bkz. CLAUDE.md).
@@ -450,3 +450,16 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - Otomatik beceri açıkken kendiliğinden kullanılır
 - Ayarlar: veri.js → G.BECERILER.acimasiz_darbe / alevli_ates / anka_tuyu. Kod: beceri.js → G.totemKontrol,
   savas.js → G.totemSicra, G.periTik. Yeni efektler (efekt.js): sicrama, peri, anka
+
+## v0.38 değişiklikleri (Beceri uyumu — Warriors and Adventure sınıf sayfasına göre)
+- Savaşçı
+  - Hilal Kesiği: artık kanatır — 3 tur her tur %15 ek hasar (seviye başına +%3); referanstaki Hilal Bıçak gibi
+  - Demir İrade: hasar azaltmanın yanında anında canın %8'ini yeniler (seviye başına +%1); referanstaki Enerji İçerme gibi
+  - Öfke (pasif): seviye başına +%0,5 can çalma eklendi; referanstaki Temel Kılıç gibi
+- Büyücü
+  - Büyü Ustalığı (pasif): seviye başına +%5 beceri hasarı (önce %8) ve +%3 büyüyü tekrarlama şansı.
+    Tekrar eden büyü aynı hedeflere bedava, %70 hasarla bir kez daha çalışır; referanstaki Büyü Ustalığı gibi
+- Okçu
+  - Gölge Adım: hasar azaltmanın yanında en yakın 4 canavarı işaretler, 4 tur savunmaları %25 düşer
+    (seviye başına +%3); referanstaki Şeytanın İnişi gibi. İşaretli canavar kırmızı çerçeveli görünür
+- Ayarlar: veri.js → ilgili becerilerin etki/bonus alanları, G.TEKRAR_CARPAN. Kayıt yapısı değişmedi

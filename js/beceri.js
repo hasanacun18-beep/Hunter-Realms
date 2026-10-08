@@ -22,14 +22,18 @@ G.beceriAciklama = function (id, lv) {
     var sekil = { yarimay: 'öndeki 3 kareye ', kasirga: 'etrafındaki 8 kareye ', alan: 'hedef ve çevresindeki 9 kareye ', cizgi: 'bir yönde 4 kareyi delerek ' }[e.sekil] || '';
     p.push(sekil + '%' + Math.round(e.carpan * 100) + ' hasar' + (e.vurus > 1 ? ', ' + e.vurus + ' vuruş' : ''));
     if (e.sersem) p.push(e.sersem + ' tur sersemletir (bosslar dirençli)');
-    if (e.dot) p.push(e.sure + ' tur boyunca her tur %' + Math.round(e.dot * 100) + ' ek hasar, savunmayı deler');
+    if (e.dot) p.push(e.sure + ' tur boyunca her tur %' + Math.round(e.dot * 100) + ' ek hasar (' + (e.sekil === 'yarimay' ? 'kanama' : 'süreli') + '), savunmayı deler');
     if (e.sicrama) p.push(e.sicrama + ' kareye kadar uzaktaki hedefin yanına sıçrar');
   } else if (e.tip === 'iyilesme') p.push('Canının %' + e.oran + ' kadarını yeniler');
   else if (e.tip === 'kalkan' && e.oran >= 100) {
     p.push((e.patlama ? 'Etrafındaki 8 kareye %' + Math.round(e.patlama * 100) + ' hasar' : '') +
       (e.patlama ? ', ardından ' : '') + 'saldırıya uğradığın ' + e.sure + ' tur boyunca hasara karşı bağışık olursun');
   }
-  else if (e.tip === 'kalkan') p.push(e.sure + ' tur alınan hasar %' + e.oran + ' azalır');
+  else if (e.tip === 'kalkan') {
+    p.push(e.sure + ' tur alınan hasar %' + e.oran + ' azalır');
+    if (e.iyilesme) p.push('Anında canının %' + e.iyilesme + ' kadarını yeniler');
+    if (e.isaret) p.push('En yakın ' + e.isaretAdet + ' canavarı işaretler: ' + e.isaretSure + ' tur savunmaları %' + e.isaret + ' düşer');
+  }
   else if (e.tip === 'peri') p.push(e.sure + ' tur boyunca her tur ' + e.adet + ' peri rastgele canavarlara %' + Math.round(e.carpan * 100) + ' hasar verir');
   else if (e.tip === 'guc') p.push(e.sure + ' tur saldırın %' + e.oran + ' artar');
   return p.join('. ') + '.';
