@@ -9,13 +9,18 @@ G.beceriEtki = function (id, lv) {
   for (var k in b.etki) e[k] = b.etki[k];
   for (var a in (b.artis || {})) e[a] = Math.round((e[a] + b.artis[a] * (lv - 1)) * 100) / 100;
   if (e.tip === 'hasar' && !e.sekil) e.sekil = 'tek';
+  // v0.40: yüksek seviyelerde üst sınırlar (veri.js → G.BECERI_SINIR)
+  var S = G.BECERI_SINIR;
+  if (e.tip === 'kalkan' && !b.totem) e.oran = Math.min(e.oran, S.kalkan);
+  if (e.tip === 'iyilesme') e.oran = Math.min(e.oran, S.iyilesme);
+  ['isaret', 'deler', 'can', 'saldiri'].forEach(function (k) { if (e[k] != null) e[k] = Math.min(e[k], S[k]); });
   return e;
 };
 
 G.beceriAciklama = function (id, lv) {
   var b = G.BECERILER[id];
   if (b.tur === 'pasif') {
-    return Object.keys(b.bonus).map(function (k) { return G.bonusYazi(k, Math.round(b.bonus[k] * lv * 10) / 10); }).join(', ');
+    return Object.keys(b.bonus).map(function (k) { return G.bonusYazi(k, Math.round(b.bonus[k] * G.pasifSeviye(lv) * 10) / 10); }).join(', ');
   }
   var e = G.beceriEtki(id, lv), p = [];
   if (e.tip === 'hasar') {
@@ -84,7 +89,7 @@ G.altinGerek = function (lv) { return G.ALTIN_CARPAN * lv * lv; };
 
 G.ustalikEkle = function (id, n) {
   var o = G.o, lv = o.beceriler[id];
-  if (!lv || lv >= G.BECERI_MAKS) return;
+  if (!lv || lv >= G.beceriSayfaMaks(id)) return;
   o.ustalik[id] = Math.min(G.ustalikGerek(lv), (o.ustalik[id] || 0) + n);
 };
 
@@ -92,7 +97,7 @@ G.ustalikEkle = function (id, n) {
 G.gelistirEksik = function (id) {
   var o = G.o, lv = o.beceriler[id], eksik = [];
   if (!lv) return ['Önce kitabını bulmalısın'];
-  if (lv >= G.BECERI_MAKS) return ['En yüksek seviyede'];
+  if (lv >= G.beceriSayfaMaks(id)) return ['En yüksek seviyede'];
   if ((o.ustalik[id] || 0) < G.ustalikGerek(lv)) eksik.push('ustalık');
   if ((o.kitaplar[id] || 0) < G.kitapGerek(lv)) eksik.push('kitap');
   if (o.sarf.sayfa < G.sayfaGerek(lv)) eksik.push('sayfa');
@@ -131,7 +136,7 @@ G.kitapOgren = function (id) {
     o.beceriler[id] = 1;
     G.log(G.ikon('kitap') + ' Yeni beceri: ' + b.ad + '!', 'sistem');
     G.bildir('Yeni beceri: ' + b.ad);
-  } else if (mevcut >= G.BECERI_MAKS) {
+  } else if (mevcut >= G.beceriSayfaMaks(id)) {
     o.sarf.toz += G.KITAP_FAZLA_TOZ;
     G.log(G.ikon('kitap') + ' ' + b.ad + ' kitabı (en üst seviyede): +' + G.KITAP_FAZLA_TOZ + ' Ruh Tozu');
   } else {
@@ -154,4 +159,31 @@ G.totemKontrol = function (o, sessiz) {
     G.bildir('Totem açıldı: ' + b.ad);
     G.sesCal('basari');
   });
+};
+
+// ---- v0.40: Beceri seviye sınırı ve ekipmandan "+1 Tüm beceriler" ----
+// Beceri sayfasından çıkılabilecek en yüksek seviye
+G.beceriSayfaMaks = function (id) { return G.BECERILER[id].totem ? G.TOTEM_MAKS : G.BECERI_MAKS; };
+
+// Kuşanılan eşyalardaki "+Tüm beceriler" toplamı
+G.ekipmanBeceri = function (o) {
+  var t = 0;
+  for (var k in o.kusanilan) {
+    var e = o.kusanilan[k];
+    if (e) (e.ek || []).forEach(function (x) { if (x.k === 'tumBeceri') t += x.v; });
+  }
+  return t;
+};
+
+// Becerinin savaşta kullanılan (etkin) seviyesi: sayfa seviyesi + ekipman, en fazla BECERI_TOPLAM_MAKS
+G.beceriSeviye = function (id, o) {
+  o = o || G.o;
+  var lv = o.beceriler[id] || 0;
+  if (!lv || G.BECERILER[id].totem) return lv;
+  return Math.min(G.BECERI_TOPLAM_MAKS, lv + G.ekipmanBeceri(o));
+};
+
+// Pasif bonus çarpanı: sayfa sınırının üstündeki seviyeler yarım sayılır
+G.pasifSeviye = function (lv) {
+  return Math.min(lv, G.BECERI_MAKS) + Math.max(0, lv - G.BECERI_MAKS) * G.PASIF_UST_CARPAN;
 };

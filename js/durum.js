@@ -47,6 +47,8 @@ G.gocEt = function (o) {
   if (!o.mitik) o.mitik = { acik: {}, parca: {}, oz: 0 };   // v0.33: efsanevi set
   if (!o.unvan) o.unvan = { kazanilan: {}, takili: null };   // v0.34: unvanlar
   if (o.beceriler) G.totemKontrol(o, true);   // v0.37: seviyesi yeten eski karakterlere totem
+  // v0.40: totemler en fazla G.TOTEM_MAKS seviyede
+  for (var tid in o.beceriler || {}) if (G.BECERILER[tid] && G.BECERILER[tid].totem && o.beceriler[tid] > G.TOTEM_MAKS) o.beceriler[tid] = G.TOTEM_MAKS;
   if (!o.kitapSayfa) o.kitapSayfa = {};
   // v0.14 beceri geliştirme
   if (!o.kitaplar) o.kitaplar = JSON.parse(JSON.stringify(o.kitapSayfa));
@@ -146,10 +148,10 @@ G.hesapla = function (o) {
   // Pasif beceriler (sadece açık yuvalardakiler)
   // Öğrenilen bütün pasif beceriler etkin
   Object.keys(o.beceriler || {}).forEach(function (id) {
-    var bc = G.BECERILER[id], blv = o.beceriler[id] || 0;
+    var bc = G.BECERILER[id], blv = G.beceriSeviye(id, o);   // v0.40: ekipman dahil etkin seviye
     if (!bc || bc.tur !== 'pasif' || (bc.sinif && bc.sinif !== o.sinif)) return;
     if (!bc || !blv) return;
-    for (var bk in bc.bonus) ekle(bk, bc.bonus[bk] * blv);
+    for (var bk in bc.bonus) ekle(bk, bc.bonus[bk] * G.pasifSeviye(blv));
   });
   // Set bonusları
   var sayilar = G.setSayilari(o);
@@ -168,7 +170,7 @@ G.hesapla = function (o) {
   r.krit = Math.min(75, r.krit);
   r.canCal = Math.min(20, r.canCal);
   r.cp = Math.round(r.atkMin + r.atkMax + r.def * 3 + r.hpMax / 5 + r.mpMax / 10 + r.hiz * 2 +
-    r.krit * 4 + r.kritHasar + r.canCal * 6 + r.beceri + (r.tekrar || 0) * 2);
+    r.krit * 4 + r.kritHasar + r.canCal * 6 + r.beceri + (r.tekrar || 0) * 2 + (r.tumBeceri || 0) * 20);
   r.krit = Math.round(r.krit * 10) / 10;
   return r;
 };

@@ -208,7 +208,7 @@ G.oyuncuSaldir = function (t, r) {
   s.istek = null;
   var b = id ? G.BECERILER[id] : null;
   if (b && (o.mp < b.mp || (G.bekleme[id] || 0) > 0)) b = null;
-  var e = b ? G.beceriEtki(id, o.beceriler[id]) : { tip: 'hasar', carpan: 1, vurus: 1, sekil: 'tek' };
+  var e = b ? G.beceriEtki(id, G.beceriSeviye(id)) : { tip: 'hasar', carpan: 1, vurus: 1, sekil: 'tek' };
   if (b && e.tip === 'hasar' && !G.hucredekiler(G.sekilHucreleri(e.sekil, t)).length) { b = null; e = { tip: 'hasar', carpan: 1, vurus: 1, sekil: 'tek' }; }
   var gucCarpan = 1 + (s.guc ? s.guc.oran / 100 : 0);
   var beceriCarpan = 1 + r.beceriBonus + r.beceri / 100;
@@ -261,7 +261,7 @@ G.oyuncuSaldir = function (t, r) {
   } else if (e.tip === 'cagir') {
     // v0.39: Baştan Çıkarma — yaratık çağır
     G.fx.oynat(b.efekt || 'cagir', t, null, true, b.ad);
-    var bl = o.beceriler[id], tur = G.YARATIKLAR.filter(function (y) { return bl >= y.lv; }).pop();
+    var bl = G.beceriSeviye(id), tur = G.YARATIKLAR.filter(function (y) { return bl >= y.lv; }).pop();
     G.yaratik = { ad: tur.ad, simge: tur.simge, hpMax: Math.round(r.hpMax * e.can / 100), oran: e.saldiri, kalkanSans: e.kalkanSans };
     G.yaratik.hp = G.yaratik.hpMax;
     G.log(G.ikon(tur.simge) + ' ' + tur.ad + ' çağrıldı', 'sistem');
@@ -286,7 +286,7 @@ G.totemSicra = function (t) {
   var o = G.o, s = G.savas, p = G.oyuncu;
   var id = G.ogrenilenler('aktif').filter(function (x) { return G.BECERILER[x].etki.sicrama; })[0];
   if (!id) return false;
-  var b = G.BECERILER[id], e = G.beceriEtki(id, o.beceriler[id]);
+  var b = G.BECERILER[id], e = G.beceriEtki(id, G.beceriSeviye(id));
   if (o.mp < b.mp || (G.bekleme[id] || 0) > 0) return false;
   if (s.istek !== id && !(o.ayar.otoBeceri && G.otoAcikMi(id))) return false;
   if (G.cheb(p, t) > e.sicrama) return false;
@@ -370,7 +370,7 @@ G.otoBeceriSec = function (t) {
   for (var i = 0; i < liste.length; i++) {
     var id = liste[i];
     if (!G.otoAcikMi(id)) continue;
-    var b = G.BECERILER[id], e = G.beceriEtki(id, o.beceriler[id]);
+    var b = G.BECERILER[id], e = G.beceriEtki(id, G.beceriSeviye(id));
     if (o.mp < b.mp || (G.bekleme[id] || 0) > 0) continue;
     if (e.tip === 'iyilesme' && o.hp > r.hpMax * 0.5) continue;
     if (e.tip === 'kalkan' && (s.kalkan || G.aktifler().length === 0)) continue;
