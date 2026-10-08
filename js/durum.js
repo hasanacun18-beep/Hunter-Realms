@@ -46,6 +46,7 @@ G.gocEt = function (o) {
   if (!o.galeri) o.galeri = {};                // v0.32: { canavarId: alınan galeri kademesi }
   if (!o.mitik) o.mitik = { acik: {}, parca: {}, oz: 0 };   // v0.33: efsanevi set
   if (!o.unvan) o.unvan = { kazanilan: {}, takili: null };   // v0.34: unvanlar
+  if (o.beceriler) G.totemKontrol(o, true);   // v0.37: seviyesi yeten eski karakterlere totem
   if (!o.kitapSayfa) o.kitapSayfa = {};
   // v0.14 beceri geliştirme
   if (!o.kitaplar) o.kitaplar = JSON.parse(JSON.stringify(o.kitapSayfa));
@@ -198,6 +199,7 @@ G.expEkle = function (miktar) {
     G.log('Seviye atladın! Artık seviye ' + o.lv + '. 5 stat puanın var.', 'sistem');
     G.bildir('Seviye ' + o.lv + '!');
     G.sesCal('seviye');
+    G.totemKontrol(o);   // v0.37
     if (G.sekme === 'karakter') G.cizKarakter();
   }
 };

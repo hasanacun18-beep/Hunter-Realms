@@ -1369,3 +1369,6 @@ body,#uygulama{min-height:100vh;min-height:100dvh}
 .cila-tas b{font-size:13px;color:#f0d8a0}
 .cila-tas small{font-size:11px;color:var(--soluk)}
 .cila-tas:disabled{opacity:.35}
+
+/* v0.37 — Totem becerileri */
+.totem-rozet{font-size:10px;letter-spacing:.08em;color:#1a140e;background:linear-gradient(#f0c070,#c08a3a);border-radius:3px;padding:1px 5px;margin-left:6px;vertical-align:middle}
