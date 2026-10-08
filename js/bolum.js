@@ -69,7 +69,7 @@ G.bolumGit = function (kid) {
     if (!b) return;
     if (o.lv < b.minLv) { G.bildir(b.ad + ' için seviye ' + b.minLv + ' gerekiyor.'); return; }
     G.bolgeGit(b.id, true);
-    if (g.t === 'boss') G.bildir('BOSS düğmesiyle ' + G.CANAVARLAR[g.id].ad + '\'ı çağır');
+    if (g.t === 'boss') G.bildir(G.CANAVARLAR[g.id].ad + ' süresi dolunca bölgesinde kendiliğinden doğar (BOSS paneli)');
   } else if (g.t === 'toplamArti') { G.demirciAlt = 'guclendir'; G.demirciKaynak = 'kusanili'; G.sekmeAc('demirci'); }
   else if (g.t === 'arit') { G.demirciAlt = 'arit'; G.sekmeAc('demirci'); }
   else if (g.t === 'maden') { G.etkinlikGorunum = 'maden'; G.sekmeAc('etkinlik'); }

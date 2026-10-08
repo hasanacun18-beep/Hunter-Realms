@@ -1,4 +1,4 @@
-# Hunter Realms — v0.30 (boss paneli ve süreleri)
+# Hunter Realms — v0.32 (galeri)
 
 > Not: Oyun eskiden "Kara Diyar" adıyla geliştirildi, bu sürümde "Hunter Realms" olarak
 > yeniden adlandırıldı. Kayıt dosyalarının iç anahtar isimleri değişmedi (bkz. CLAUDE.md).
@@ -30,6 +30,7 @@ Kayıt tarayıcının localStorage'ına otomatik yapılır (10 saniyede bir ve h
 | js/gunluk.js           | Günlük/haftalık görevler, aktiflik sandıkları |
 | js/bolum.js            | Bölümler: aynı anda ilerleyen hedefler |
 | js/kule.js             | Kule (süreli bekçi savaşı) ve rünler |
+| js/galeri.js           | Galeri: canavar ansiklopedisi, öldürme kademeleri ve kalıcı statlar |
 | js/beceri.js           | Beceri etkileri, kitaplar, ustalık, geliştirme |
 | js/yedek.js            | Kayıt dışa/içe aktarma (.json dosyası) |
 | js/arayuz.js           | Ortak arayüz: üst bar, sekmeler, eşya kutusu, set detayı |
@@ -371,3 +372,21 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - Kule bekçileri bu sürelerden etkilenmez
 - KAYIT: yeni alan o.bossZaman ({ bossId: doğacağı zaman }) — G.gocEt eski kayıtlara boş olarak ekler
 - Ayarlar: veri.js → G.BOSS_SURE (dakika)
+
+## v0.31 değişiklikleri (bosslar sahada kendiliğinden doğar — Warriors and Adventure'daki turuncu "lord"lar gibi)
+- Süresi dolan boss, sen bölgesindeyken 4 saniye sonra sahada kendiliğinden belirir: oyuncudan uzakta, üst iki sırada değil
+  (oraları boss plakası ve sözü kapatır). Sen saldırana kadar seni beklemez, sahada durur
+- Görünüm: turuncu kenar ve nabız gibi atan alev parıltısı, turuncu isim; boss plakasında "Sahibi: <karakter adı>"
+- Boss panelinde "Çağır" kalktı: bulunduğun bölgede "Burada", başka bölgede "Işınlan" (bölgeye gider ve bossu hemen getirir)
+- Kasabada ve kulede boss doğmaz. Yenilince süre yeniden başlar (v0.30)
+- Kayıt yapısı değişmedi. Ayarlar: veri.js → G.BOSS_DOGMA_GECIKME (saniye)
+
+## v0.32 değişiklikleri (Galeri — Warriors and Adventure'daki "Gallery" gibi canavar ansiklopedisi)
+- Etkinlik → Galeri: bölge sekmeleri, canavar kartları (5 yıldız = 5 kademe), seçili canavarın açıklaması ve hedefi
+- Her canavarın 5 kademesi var: normal canavar 25 / 100 / 300 / 750 / 1500 öldürme, boss 1 / 3 / 8 / 15 / 30
+- Kademe tamamlanınca "Al": altın + kalıcı stat. Stat türü bölgedeki sıraya göre (1. saldırı, 2. can, 3. savunma, boss saldırı + can)
+- Güç "hafif": oyuncunun seviyesinde ulaşabildiği galerinin tamamı GP'yi yaklaşık %5-7 artırır (lv 16/25/40 için ölçüldü)
+- Eski öldürmeler de sayılır (o.istatistik.oldurId). Hiç öldürülmemiş canavar "???" görünür
+- Hazır ödül olan sekme ve kartlarda kırmızı nokta; Etkinlik listesinde bekleyen ödül sayısı
+- KAYIT: yeni alan o.galeri ({ canavarId: alınan kademe }) — G.gocEt eski kayıtlara boş olarak ekler
+- Ayarlar: veri.js → G.GALERI (hedef, sira, lvTaban, katsayi, bossKatsayi, altin). Yeni dosya: js/galeri.js

@@ -125,6 +125,7 @@ G.bossPlakaGuncelle = function () {
   if (!c) { el.classList.add('gizli'); return; }
   el.classList.remove('gizli');
   el.innerHTML = '<span class="bp-ikon">' + c.ikon + '</span><div class="bp-orta"><div class="bp-ust"><b>' + c.ad + ' (Sv. ' + c.lv + ')</b>' +
+    '<small class="bp-sahip">Sahibi: ' + G.kacis(G.o.ad) + '</small>' +
     (c.ofke ? '<span class="bp-ofke">ÖFKELİ</span>' : '') + '</div>' +
     '<div class="bp-cubuk"><i style="width:' + Math.max(0, c.hp / c.hpMax * 100) + '%"></i><span>' + Math.max(0, c.hp) + ' / ' + c.hpMax + '</span></div></div>';
 };
@@ -331,8 +332,10 @@ G.bossListeModal = function () {
   var o = G.o, cp = G.hesapla(o).cp;
   var satirlar = G.BOLGELER.filter(function (b) { return b.boss; }).map(function (b) {
     var c = G.CANAVARLAR[b.boss], kilit = o.lv < b.minLv, gp = G.onerilenGP(b), burada = o.bolge === b.id;
+    // v0.31: bulunduğun bölgenin bossu kendiliğinden doğar ("Burada"); başka bölgeye "Işınlan"
     var dugme = kilit ? '<button disabled>Sv. ' + b.minLv + '</button>'
-      : '<button data-eylem="bossIsinlan" data-id="' + b.boss + '" class="bl-dugme" data-boss="' + b.boss + '">' + (burada ? 'Çağır' : 'Işınlan') + '</button>';
+      : burada ? '<button disabled>Burada</button>'
+      : '<button data-eylem="bossIsinlan" data-id="' + b.boss + '" class="bl-dugme" data-boss="' + b.boss + '">Işınlan</button>';
     return '<div class="bl-satir' + (kilit ? ' kilitli' : '') + (burada ? ' burada' : '') + '">' +
       '<span class="bl-ikon">' + c.ikon + '</span>' +
       '<div class="bl-orta"><b>' + c.ad + ' <small>Sv. ' + c.lv + '</small></b><small>' + b.ad + '</small></div>' +
@@ -342,7 +345,7 @@ G.bossListeModal = function () {
   }).join('');
   G.$('modalIc').innerHTML = '<h3>' + G.ikon('kiliclar') + ' Bosslar</h3>' +
     '<div class="boss-liste" id="bossListe">' + satirlar + '</div>' +
-    '<p class="bilgi soluk">Yenilen boss bir süre sonra yeniden doğar. Süre, oyun kapalıyken de işler.</p>' +
+    '<p class="bilgi soluk">Süresi dolan boss, sen bölgesindeyken sahada kendiliğinden belirir. Yenilince süre yeniden başlar; oyun kapalıyken de işler.</p>' +
     '<div class="modal-dugmeler"><button data-eylem="modalKapat">Kapat</button></div>';
   G.$('modal').classList.remove('gizli');
   G.bossSayac();

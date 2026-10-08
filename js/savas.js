@@ -53,7 +53,7 @@ G.elitYap = function (c) {
 G.alanDoldur = function () {
   G.alan = [];
   G.oyuncu = { kol: 2, sat: 3, t: 0 };
-  G.savas = null; G.hedefI = null; G.hedefHucre = null;
+  G.savas = null; G.hedefI = null; G.hedefHucre = null; G.bossGecikme = 0;
   var bolge = G.bolgeBul(G.o.bolge);
   if (bolge.tur === 'kule') {
     // Kule: tek bekçi, oyuncunun karşısında
@@ -355,6 +355,28 @@ G.sureYazi = function (ms) {
   var sn = Math.ceil(ms / 1000), d = Math.floor(sn / 60);
   return (d < 10 ? '0' : '') + d + ':' + (sn % 60 < 10 ? '0' : '') + (sn % 60);
 };
+// v0.31: her saniye — süresi dolan boss, oyuncu kendi bölgesindeyken birkaç saniye sonra kendiliğinden belirir
+G.bossKendiliginden = function () {
+  var o = G.o, b = o && G.bolgeBul(o.bolge);
+  if (!b || b.tur !== 'av' || !b.boss || !G.alan || o.hp <= 0) { G.bossGecikme = 0; return; }
+  if (G.alan.some(function (c) { return c && c.boss && !c.olu; }) || G.bossKalan(b.boss)) { G.bossGecikme = 0; return; }
+  G.bossGecikme = (G.bossGecikme || 0) + 1;
+  if (G.bossGecikme < G.BOSS_DOGMA_GECIKME) return;
+  G.bossGecikme = 0;
+  G.bossBaslat(true);
+};
+
+// Kendiliğinden doğan bossun karesi: oyuncudan en az 2 kare uzak, üst iki sırada değil (oraları boss plakası ve sözü kapatır)
+G.bossDogmaHucresi = function () {
+  var adaylar = [[], []];   // [uzak ve alt sıralarda, sadece alt sıralarda]
+  for (var k = 0; k < G.IZGARA.sut; k++) for (var s = 2; s < G.IZGARA.sat; s++) {
+    if (G.doluMu(k, s)) continue;
+    adaylar[G.cheb({ kol: k, sat: s }, G.oyuncu) >= 2 ? 0 : 1].push({ kol: k, sat: s });
+  }
+  var liste = adaylar[0].length ? adaylar[0] : adaylar[1];
+  return liste.length ? liste[Math.floor(Math.random() * liste.length)] : null;
+};
+
 // Bossun bulunduğu av bölgesi
 G.bossBolge = function (id) {
   return G.BOLGELER.filter(function (b) { return b.boss === id; })[0];
@@ -370,22 +392,24 @@ G.bossIsinlan = function (id) {
   G.bossBaslat();
 };
 
-G.bossBaslat = function () {
-  var b = G.bolgeBul(G.o.bolge);
-  if (!b.boss) { G.bildir('Burada boss yok.'); return; }
-  if (G.alan.some(function (c) { return c && c.boss && !c.olu; })) { G.bildir('Boss zaten sahada.'); return; }
-  if (G.bossKalan(b.boss)) { G.bildir(G.CANAVARLAR[b.boss].ad + ' ' + G.sureYazi(G.bossKalan(b.boss)) + ' sonra doğacak.'); return; }
-  G.alan = G.alan.filter(function (c) { return c && !(c.boss && c.olu); });
-  // Oyuncunun yanındaki boş kare (yoksa herhangi bir boş kare)
+// kendiliginden = true: süre dolunca sahada kendisi belirir (v0.31), bildirim göstermez, oyuncuya saldırmaz
+G.bossBaslat = function (kendiliginden) {
+  var b = G.bolgeBul(G.o.bolge), bildir = kendiliginden ? function () {} : G.bildir;
+  if (!b.boss) { bildir('Burada boss yok.'); return; }
+  if (G.alan.some(function (c) { return c && c.boss && !c.olu; })) { bildir('Boss zaten sahada.'); return; }
+  if (G.bossKalan(b.boss)) { bildir(G.CANAVARLAR[b.boss].ad + ' ' + G.sureYazi(G.bossKalan(b.boss)) + ' sonra doğacak.'); return; }
+  // Işınlanınca oyuncunun yanına, kendiliğinden doğunca biraz uzağa
   var h = null, p = G.oyuncu;
-  G.YONLER.forEach(function (d) { var k = p.kol + d[0], s = p.sat + d[1]; if (!h && G.icinde(k, s) && !G.doluMu(k, s)) h = { kol: k, sat: s }; });
+  if (kendiliginden) h = G.bossDogmaHucresi();
+  else G.YONLER.forEach(function (d) { var k = p.kol + d[0], s = p.sat + d[1]; if (!h && G.icinde(k, s) && !G.doluMu(k, s)) h = { kol: k, sat: s }; });
   h = h || G.rastgeleBosHucre(0);
-  if (!h) { G.bildir('Sahada yer yok.'); return; }
+  if (!h) { bildir('Sahada yer yok.'); return; }
+  G.alan = G.alan.filter(function (c) { return c && !(c.boss && c.olu); });
   var c = G.canavarOlustur(b.boss);
-  c.kol = h.kol; c.sat = h.sat; c.aktif = true;
+  c.kol = h.kol; c.sat = h.sat; c.aktif = !kendiliginden;
   G.alan.push(c);
-  G.hedefI = G.alan.length - 1; G.hedefHucre = null;
-  G.log(c.ad + ' ortaya çıktı!', 'tehlike');
+  if (!kendiliginden) { G.hedefI = G.alan.length - 1; G.hedefHucre = null; }
+  G.log(c.ad + (kendiliginden ? ' sahada belirdi!' : ' ortaya çıktı!'), 'tehlike');
   G.sesCal('boss');
   if (G.sekme === 'savas') G.cizSavas();
   G.bossReplik(c, 'giris');   // çizimden sonra, yoksa sahadaki söz silinir

@@ -1242,3 +1242,47 @@ body,#uygulama{min-height:100vh;min-height:100dvh}
 .bl-satir button:disabled{opacity:.4}
 .yuvarlak.bekliyor small{color:#e8735a;font-variant-numeric:tabular-nums}
 .yuvarlak.bekliyor span{opacity:.45}
+
+/* v0.31 — Lord (saha bossu): turuncu kenar ve nabız gibi atan alev parıltısı, plakada sahibi */
+.saha-kart.boss{border-color:#f08a2a;box-shadow:0 0 0 1px #f08a2a,0 0 14px rgba(255,140,40,.8),inset 0 0 18px rgba(200,90,20,.3)}
+.saha-kart.boss .kad{color:#b8460e;text-shadow:0 0 3px #fff2e0,0 0 3px #fff2e0,0 0 6px rgba(255,235,210,.9)}
+.saha-kart.boss .kseviye{background:#8a3a10;color:#fff0e0}
+.saha-kart.boss:not(.olu){animation:lordNabiz 1.4s ease-in-out infinite}
+@keyframes lordNabiz{50%{box-shadow:0 0 0 2px #ffb050,0 0 24px rgba(255,150,40,1),inset 0 0 20px rgba(220,100,20,.4)}}
+.saha-kart.boss.hedef{border-color:#ff5a2a}
+.bp-sahip{display:block;font-size:10px;color:#f0b080;font-weight:normal;margin-top:-1px}
+@media (prefers-reduced-motion:reduce){.saha-kart.boss{animation:none}}
+
+/* v0.32 — Galeri */
+.gl-sekmeler{display:flex;gap:4px;overflow-x:auto;padding-bottom:4px;margin:6px 0;scrollbar-width:none}
+.gl-sekmeler::-webkit-scrollbar{display:none}
+.gl-sekme{position:relative;flex:none;padding:7px 10px;background:#1c1610;border:1px solid #4a3d2b;border-radius:3px;font-family:var(--serif);font-size:13px;color:var(--soluk)}
+.gl-sekme.secili{border-color:var(--bronz-acik);color:var(--bronz-acik);background:#2a2016}
+.gl-sekme:disabled{opacity:.45}
+.gl-sekme .nokta,.gl-kart .nokta{position:absolute;top:3px;right:3px;width:8px;height:8px;border-radius:50%;background:#e8473a;box-shadow:0 0 6px #e8473a}
+.gl-izgara{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.gl-kart{position:relative;aspect-ratio:1/1.15;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px 2px;
+  background:linear-gradient(#e6dac2,#c9b994);border:2px solid #6a5638;border-radius:4px;color:#2a1c10}
+.gl-kart .gl-ikon{font-size:34px;line-height:1}
+.gl-kart .gl-ikon .ikon{color:#2a1c10;opacity:.75;filter:none}
+.gl-kart b{font-family:var(--serif);font-size:11.5px;line-height:1.1;text-align:center}
+.gl-kart.boss{border-color:#c06a20}
+.gl-kart.boss .gl-ikon .ikon{color:#7a2a10}
+.gl-kart.secili{border-color:#f0c070;box-shadow:0 0 0 2px #f0c070,0 0 10px rgba(240,192,112,.6)}
+.gl-kart.bilinmiyor .gl-ikon .ikon{opacity:.25}
+.gl-yildiz{font-size:9px;letter-spacing:-1px;color:#8a7a5a}
+.gl-yildiz .dolu{color:#c88a10;text-shadow:0 0 3px rgba(255,200,80,.8)}
+.gl-yildiz i{font-style:normal}
+.gl-detay{margin-top:10px}
+.gl-baslik{display:flex;gap:10px;align-items:center}
+.gl-baslik .gl-ikon{font-size:36px;line-height:1;color:var(--bronz-acik)}
+.gl-baslik b{display:block;font-family:var(--serif);font-weight:normal;font-size:18px;color:var(--bronz-acik)}
+.gl-baslik small{font-size:12px;color:var(--soluk)}
+.gl-aciklama{font-family:var(--serif);font-style:italic;font-size:14px;line-height:1.45;color:var(--kemik);margin:8px 0}
+.gl-hedef{display:flex;justify-content:space-between;align-items:baseline;gap:8px;border-top:1px dashed #4a3d2b;padding-top:8px}
+.gl-hedef b{font-weight:normal;font-size:14px}
+.gl-odul{display:flex;gap:12px;align-items:center;margin:6px 0;font-size:14px}
+.gl-odul span{color:#7fd06a}
+.gl-al{width:100%;margin-top:4px}
+.gl-al:disabled{opacity:.4}
+.gl-al{padding:9px 12px}.gl-al span{font-size:17px}

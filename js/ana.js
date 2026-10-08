@@ -33,6 +33,9 @@ G.eylem = function (ad, d) {
     case 'kac':       G.kac(); break;
     case 'boss':      G.bossListeModal(); break;
     case 'bossIsinlan': G.bossIsinlan(d.id); break;
+    case 'galeriBolge': G.galeriBolge = d.b; G.galeriSecili = null; G.cizEtkinlik(); break;
+    case 'galeriSec':   G.galeriSecili = d.id; G.cizEtkinlik(); break;
+    case 'galeriAl':    G.galeriAl(d.id); break;
     // karakter
     case 'stat':      G.statArtir(d.k); break;
     case 'bosSlot':   G.bildir('Bu yuva boş. Çantadan eşya kuşanabilirsin.'); break;
@@ -136,7 +139,7 @@ G.oyunBaslat = function () {
   setInterval(function () { G.hareketTik(0.1); }, 100);
   setInterval(G.savasTik, G.TUR_MS);
   setInterval(G.madenSayac, 1000);
-  setInterval(G.bossSayac, 1000);   // v0.30: boss geri sayımları
+  setInterval(function () { G.bossKendiliginden(); G.bossSayac(); }, 1000);   // v0.30–31: boss doğması ve geri sayımlar
   setInterval(G.kaydet, 10000);
 };
 

@@ -11,6 +11,7 @@ G.cizEtkinlik = function () {
   if (G.etkinlikGorunum === 'gorevler') { G.cizGunluk(); return; }
   if (G.etkinlikGorunum === 'bolumler') { G.cizBolumler(); return; }
   if (G.etkinlikGorunum === 'kule') { G.cizKule(); return; }
+  if (G.etkinlikGorunum === 'galeri') { G.cizGaleri(); return; }
   var o = G.o, m = o.maden;
   G.madenIsle(); G.gunlukKontrol();
   var durum = m.kazi
@@ -37,6 +38,13 @@ G.cizEtkinlik = function () {
       return '<button class="etkinlik-kart" data-eylem="etkinlikAc" data-e="kule"><b>' + G.ikon('kule') + ' Kule</b>' +
         '<span>Kat kat tırman, bekçileri süre dolmadan yen. Rün ve Rün Özü kazan.</span>' +
         '<small class="soluk">' + (e ? 'En yüksek: Kademe ' + k.kademe + ' · Kat ' + k.kat : 'Henüz tırmanmadın') + '</small></button>';
+    })() +
+    (function () {   // v0.32: Galeri
+      var liste = G.galeriListe(), hazir = liste.filter(G.galeriHazir).length, tamam = 0, top = 0;
+      liste.forEach(function (g) { tamam += G.galeriKademe(g.id); top += G.galeriHedefler(g).length; });
+      return '<button class="etkinlik-kart" data-eylem="etkinlikAc" data-e="galeri"><b>' + G.ikon('galeri') + ' Galeri</b>' +
+        '<span>Canavarları tanı, avla. Her hedef altın ve kalıcı güç verir.</span>' +
+        '<small class="' + (hazir ? 'fark-arti' : 'soluk') + '">' + (hazir ? hazir + ' ödül alınmayı bekliyor' : 'Tamamlanan kademe ' + tamam + '/' + top) + '</small></button>';
     })() +
     '<div class="etkinlik-kart kapali"><b>' + G.ikon('kiliclar') + ' Arena</b><span>Diğer oyuncuların karakterleriyle dövüş.</span><small class="soluk">Yakında</small></div>' +
     '</div>';
@@ -226,4 +234,58 @@ G.cizKule = function () {
     '</div>' +
     '<p class="soluk kucuk-not">Toplam ' + K.katToplam + ' kat (' + K.bekciler.length + ' kademe x ' + K.katSayi + '). Her katın ödülü ilk geçişte verilir. Rünlerini Karakter → Rünler\'den takarsın.</p>' +
     '</div>';
+};
+
+// ============================================================
+// v0.32 — GALERİ ekranı: bölge sekmeleri, canavar ızgarası, seçili canavarın detayı (galeri.js)
+// ============================================================
+G.cizGaleri = function () {
+  var o = G.o, liste = G.galeriListe();
+  var bolgeler = [];
+  liste.forEach(function (g) { if (bolgeler.indexOf(g.bolge) < 0) bolgeler.push(g.bolge); });
+  if (!G.galeriBolge || !bolgeler.some(function (b) { return b.id === G.galeriBolge; })) G.galeriBolge = bolgeler[0].id;
+  var buradakiler = liste.filter(function (g) { return g.bolge.id === G.galeriBolge; });
+  if (!buradakiler.some(function (g) { return g.id === G.galeriSecili; })) G.galeriSecili = buradakiler[0].id;
+
+  var sekmeler = bolgeler.map(function (b) {
+    var kilit = o.lv < b.minLv, hazir = liste.some(function (g) { return g.bolge === b && G.galeriHazir(g); });
+    return '<button class="gl-sekme' + (b.id === G.galeriBolge ? ' secili' : '') + '" data-eylem="galeriBolge" data-b="' + b.id + '"' + (kilit ? ' disabled' : '') + '>' +
+      (kilit ? G.ikon('kilit') + ' Sv. ' + b.minLv : b.ad) + (hazir ? '<i class="nokta"></i>' : '') + '</button>';
+  }).join('');
+
+  var izgara = buradakiler.map(function (g) {
+    var c = G.CANAVARLAR[g.id], k = G.galeriKademe(g.id), bilinen = G.galeriSayi(g.id) > 0;
+    var yildiz = ''; for (var i = 0; i < G.galeriHedefler(g).length; i++) yildiz += '<i class="' + (i < k ? 'dolu' : '') + '">★</i>';
+    return '<button class="gl-kart' + (g.id === G.galeriSecili ? ' secili' : '') + (g.boss ? ' boss' : '') + (bilinen ? '' : ' bilinmiyor') + '" data-eylem="galeriSec" data-id="' + g.id + '">' +
+      (G.galeriHazir(g) ? '<i class="nokta"></i>' : '') +
+      '<span class="gl-ikon">' + c.ikon + '</span><b>' + (bilinen ? c.ad : '???') + '</b><span class="gl-yildiz">' + yildiz + '</span></button>';
+  }).join('');
+
+  var g = G.galeriBul(G.galeriSecili), c = G.CANAVARLAR[g.id], k = G.galeriKademe(g.id), h = G.galeriHedefler(g), sayi = G.galeriSayi(g.id);
+  var detay;
+  if (k >= h.length) {
+    detay = '<div class="gl-hedef"><b>Bütün kademeler tamam</b><small>' + sayi + ' öldürme</small></div>';
+  } else {
+    var od = G.galeriOdul(g, k + 1), statYazi = Object.keys(od.stat).map(function (s) { return G.STAT_ADLARI[s] + ' +' + G.galeriSayiYazi(od.stat[s]); }).join(' · ');
+    detay = '<div class="gl-hedef"><b>' + (k + 1) + '. kademe: ' + h[k] + ' ' + (sayi ? c.ad : '???') + ' öldür</b>' +
+      '<small class="' + (sayi >= h[k] ? 'fark-arti' : 'fark-eksi') + '">' + Math.min(sayi, h[k]) + ' / ' + h[k] + '</small></div>' +
+      '<div class="gl-odul">' + G.IK_PARA + ' ' + od.altin + '<span>' + statYazi + '</span></div>' +
+      '<button class="sus-dugme gl-al" data-eylem="galeriAl" data-id="' + g.id + '"' + (G.galeriHazir(g) ? '' : ' disabled') + '><span>Al</span></button>';
+  }
+  var tek = G.galeriOdul(g, 1).stat;
+  var buStat = k ? Object.keys(tek).map(function (s) { return G.STAT_ADLARI[s] + ' +' + G.galeriSayiYazi(tek[s] * k); }).join(' · ') : 'Henüz yok';
+
+  G.$('icerik').innerHTML =
+    '<div class="panel">' +
+    '<button class="geri-dugme" data-eylem="etkinlikGeri">← Etkinlikler</button>' +
+    '<h2 class="bolum-baslik" style="text-align:center">' + G.ikon('galeri') + ' Galeri</h2>' +
+    '<div class="gl-sekmeler">' + sekmeler + '</div>' +
+    '<div class="gl-izgara">' + izgara + '</div>' +
+    '<div class="kutu gl-detay">' +
+      '<div class="gl-baslik"><span class="gl-ikon">' + c.ikon + '</span><div><b>' + (sayi ? c.ad : '???') + '</b>' +
+        '<small>Seviye ' + c.lv + (g.boss ? ' · Boss' : '') + ' · ' + g.bolge.ad + '</small></div></div>' +
+      '<p class="gl-aciklama">' + (sayi ? c.aciklama || '' : 'Bu canavarla henüz karşılaşmadın.') + '</p>' +
+      detay +
+      '<p class="bilgi soluk">Bu canavardan kazandığın kalıcı güç: ' + buStat + '</p>' +
+    '</div></div>';
 };
