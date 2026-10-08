@@ -177,6 +177,7 @@ G.kartlariGuncelle = function () {
     el.classList.toggle('hedef', G.hedefI === i);
     el.classList.toggle('aktif', !!c.aktif && !c.olu);
     el.classList.toggle('yaniyor', !!c.dot && !c.olu);
+    el.classList.toggle('lanetli', c.lanet > 0 && !c.olu);   // v0.33
   });
 };
 

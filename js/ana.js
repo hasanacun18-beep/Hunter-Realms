@@ -36,6 +36,10 @@ G.eylem = function (ad, d) {
     case 'galeriBolge': G.galeriBolge = d.b; G.galeriSecili = null; G.cizEtkinlik(); break;
     case 'galeriSec':   G.galeriSecili = d.id; G.cizEtkinlik(); break;
     case 'galeriAl':    G.galeriAl(d.id); break;
+    case 'mitikSec':    G.mitikSecili = d.id; G.cizKarakter(); break;
+    case 'mitikAc':     G.mitikAc(d.id); break;
+    case 'mitikSok':    G.mitikSok(d.id); break;
+    case 'mitikTakas':  G.mitikTakas(d.id); break;
     // karakter
     case 'stat':      G.statArtir(d.k); break;
     case 'bosSlot':   G.bildir('Bu yuva boş. Çantadan eşya kuşanabilirsin.'); break;

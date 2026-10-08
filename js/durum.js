@@ -44,6 +44,7 @@ G.gocEt = function (o) {
   if (o.ayar.ses == null) o.ayar.ses = true;   // v0.24
   if (!o.bossZaman) o.bossZaman = {};          // v0.30: { bossId: yeniden doğacağı zaman (ms) }
   if (!o.galeri) o.galeri = {};                // v0.32: { canavarId: alınan galeri kademesi }
+  if (!o.mitik) o.mitik = { acik: {}, parca: {}, oz: 0 };   // v0.33: efsanevi set
   if (!o.kitapSayfa) o.kitapSayfa = {};
   // v0.14 beceri geliştirme
   if (!o.kitaplar) o.kitaplar = JSON.parse(JSON.stringify(o.kitapSayfa));
@@ -124,6 +125,7 @@ G.hesapla = function (o) {
   // İlahi silah
   if (o.ilahi) { var il = G.ilahiStat(o.ilahi); ekle('atk', il.atk); ekle('hp', il.hp); ekle('mp', il.mp); }
   if (o.galeri) { var gs = G.galeriStat(o.galeri); for (var gk in gs) ekle(gk, gs[gk]); }   // v0.32
+  if (o.mitik) { var ms2 = G.mitikStat(o); for (var mk2 in ms2) ekle(mk2, ms2[mk2]); }   // v0.33
   // Pasif beceriler (sadece açık yuvalardakiler)
   // Öğrenilen bütün pasif beceriler etkin
   Object.keys(o.beceriler || {}).forEach(function (id) {
