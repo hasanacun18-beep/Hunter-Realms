@@ -157,6 +157,8 @@ G.savasTik = function () {
   if (menzilde) G.oyuncuSaldir(t, r);
 
   if (s.peri) G.periTik(r);   // v0.37: Alevli Ateş perileri
+  if (G.yaratik) G.yaratikTik(t, r);   // v0.39
+  if (G.mayinlar.length) G.mayinTik(r);   // v0.39
   // Süreli hasar (zehir/yanma) tüm canavarlarda işler
   G.alan.forEach(function (c, i) {
     if (!c || c.olu || !c.dot) return;
@@ -176,6 +178,12 @@ G.savasTik = function () {
     var kacinma = Math.min(30, r.hiz * 0.6);
     if (Math.random() * 100 < kacinma) { G.oyuncuHasar('Kaçındın'); return; }
     if (s.kalkan && s.kalkan.oran >= 100) { G.oyuncuHasar('Bağışık'); return; }   // v0.37: Anka Kuşu Tüyü
+    // v0.39: çağrılan yaratık vuruşu üstlenebilir
+    if (G.yaratik && Math.random() * 100 < G.yaratik.kalkanSans) {
+      G.yaratik.hp -= G.rastgele(c.atk[0], c.atk[1]);
+      if (G.yaratik.hp <= 0) { G.log(G.ikon(G.yaratik.simge) + ' ' + G.yaratik.ad + ' yok oldu', 'tehlike'); G.yaratik = null; }
+      return;
+    }
     var md = G.rastgele(c.atk[0], c.atk[1]);
     if (c.boss && c.hp < c.hpMax * G.ZORLUK.ofkeEsik) {
       if (!c.ofke) { c.ofke = true; G.log(c.ad + ' öfkelendi!', 'tehlike'); G.bossReplik(c, 'ofke'); }
@@ -213,7 +221,7 @@ G.oyuncuSaldir = function (t, r) {
     hedefler.forEach(function (i) {
       var c = G.alan[i];
       c.aktif = true;
-      for (var v = 0; v < (e.vurus || 1) && c.hp > 0; v++) toplam += G.vur(i, c, r, gucCarpan, b ? e.carpan * beceriCarpan : 1, b ? 'beceri' : '');
+      for (var v = 0; v < (e.vurus || 1) && c.hp > 0; v++) toplam += G.vur(i, c, r, gucCarpan, b ? e.carpan * beceriCarpan : 1, b ? 'beceri' : '', b ? e.deler : 0);
       if (e.sersem && c.hp > 0 && !c.boss) c.sersem = e.sersem;
       if (e.dot && c.hp > 0) c.dot = { h: Math.round((r.atkMin + r.atkMax) / 2 * e.dot * beceriCarpan), tur: e.sure };
     });
@@ -250,6 +258,18 @@ G.oyuncuSaldir = function (t, r) {
       var c = G.alan[i]; c.aktif = true;
       G.vur(i, c, r, gucCarpan, e.patlama * beceriCarpan, 'beceri');
     });
+  } else if (e.tip === 'cagir') {
+    // v0.39: Baştan Çıkarma — yaratık çağır
+    G.fx.oynat(b.efekt || 'cagir', t, null, true, b.ad);
+    var bl = o.beceriler[id], tur = G.YARATIKLAR.filter(function (y) { return bl >= y.lv; }).pop();
+    G.yaratik = { ad: tur.ad, simge: tur.simge, hpMax: Math.round(r.hpMax * e.can / 100), oran: e.saldiri, kalkanSans: e.kalkanSans };
+    G.yaratik.hp = G.yaratik.hpMax;
+    G.log(G.ikon(tur.simge) + ' ' + tur.ad + ' çağrıldı', 'sistem');
+  } else if (e.tip === 'mayin') {
+    // v0.39: Karanlık Gök Gürültüsü — hedef ve çevresine mayın
+    var mh = G.sekilHucreleri('alan', t);
+    G.fx.oynat(b.efekt || 'yildirim', t, mh, true, b.ad);
+    G.mayinlar = mh.map(function (h) { return { kol: h.kol, sat: h.sat, tur: e.sure, carpan: e.carpan * beceriCarpan, kusur: Math.max(1, Math.round(e.kusur)) }; });
   } else if (e.tip === 'peri') {
     G.fx.oynat(b.efekt || 'peri', t, null, true, b.ad);
     s.peri = { tur: e.sure, adet: e.adet, carpan: e.carpan * beceriCarpan };
@@ -285,6 +305,38 @@ G.totemSicra = function (t) {
   return true;
 };
 
+// ---- v0.39: Yaratık ve mayınlar ----
+G.yaratik = null;    // { ad, simge, hp, hpMax, oran, kalkanSans } — kaydedilmez
+G.mayinlar = [];     // [{ kol, sat, tur, carpan, kusur }]
+
+// Yaratık hedefimize (yoksa en yakın aktif canavara) senin hasarının bir kısmıyla vurur
+G.yaratikTik = function (t, r) {
+  var y = G.yaratik, hedef = t && !t.olu && t.hp > 0 ? t : null;
+  if (!hedef) G.aktifler().forEach(function (c) { if (!hedef || G.cheb(G.oyuncu, c) < G.cheb(G.oyuncu, hedef)) hedef = c; });
+  if (!hedef) return;
+  var i = G.alan.indexOf(hedef);
+  hedef.aktif = true;
+  G.fx.kivilcim(hedef, 4, '#c8a0ff');
+  G.vur(i, hedef, r, 1, y.oran / 100, '');
+};
+
+// Mayına basan canavar: hasar + kusur; kusur dolunca sersemler. Kullanılan mayın yok olur.
+G.mayinTik = function (r) {
+  G.mayinlar = G.mayinlar.filter(function (m) {
+    var i = G.canavarAt(m.kol, m.sat);
+    if (i >= 0) {
+      var c = G.alan[i];
+      c.aktif = true;
+      G.fx.yildirim(m);
+      G.vur(i, c, r, 1, m.carpan, 'beceri');
+      c.kusur = (c.kusur || 0) + 1;
+      if (c.kusur >= m.kusur && c.hp > 0) { c.kusur = 0; if (!c.boss) { c.sersem = 2; G.log(c.ad + ' sersemledi', 'sistem'); } }
+      return false;
+    }
+    return --m.tur > 0;
+  });
+};
+
 // Büyücü: periler her tur rastgele canavarlara iner
 G.periTik = function (r) {
   var s = G.savas, adaylar = [];
@@ -298,11 +350,12 @@ G.periTik = function (r) {
   if (--s.peri.tur <= 0) s.peri = null;
 };
 
-G.vur = function (i, c, r, gucCarpan, carpan, tur) {
+G.vur = function (i, c, r, gucCarpan, carpan, tur, deler) {
   var h = G.rastgele(r.atkMin, r.atkMax) * gucCarpan;
   var krit = Math.random() * 100 < r.krit;
   if (krit) h *= 1.6 + r.kritHasar / 100;
   var def = c.isaret ? c.def * (1 - c.isaret.oran / 100) : c.def;   // v0.38: işaretli canavarın savunması düşük
+  if (deler) def *= 1 - deler / 100;   // v0.39: savunmayı deler
   h = Math.max(1, Math.round(h * carpan - def));
   c.hp -= h;
   G.hasarGoster(i, h, krit, tur);
@@ -323,6 +376,8 @@ G.otoBeceriSec = function (t) {
     if (e.tip === 'kalkan' && (s.kalkan || G.aktifler().length === 0)) continue;
     if (e.tip === 'guc' && s.guc) continue;
     if (e.tip === 'peri' && (s.peri || G.aktifler().length === 0)) continue;
+    if (e.tip === 'cagir' && (G.yaratik || G.aktifler().length === 0)) continue;
+    if (e.tip === 'mayin' && (G.mayinlar.length || G.aktifler().length === 0)) continue;
     if (e.tip === 'hasar') {
       var sayi = G.hucredekiler(G.sekilHucreleri(e.sekil, t)).length;
       if (!sayi) continue;
@@ -538,6 +593,7 @@ G.bolgeGit = function (id, zorla) {
   }
   o.bolge = id;
   o.gezilen[id] = 1;
+  G.yaratik = null; G.mayinlar = [];   // v0.39
   if (b.tur === 'kasaba') o.sonKasaba = id;
   G.alanDoldur(); G.kaydet(); G.modalKapat();
   if (G.sekme !== 'savas') G.sekmeAc('savas'); else G.cizSavas();

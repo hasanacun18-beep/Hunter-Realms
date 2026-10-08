@@ -1171,3 +1171,24 @@ G.BECERILER.anka_tuyu = { ad: 'Anka Kuşu Tüyü', sinif: 'okcu', tur: 'aktif', 
 
 // v0.38 — Beceri uyumu (Warriors and Adventure sınıf sayfası): Büyü Ustalığı tekrarı bu oranda hasar verir
 G.TEKRAR_CARPAN = 0.7;
+
+// ============================================================
+// v0.39 — YENİ BECERİLER (Warriors and Adventure "Yetenekler" sayfası) — savas.js
+//   deler: hedefin savunmasının yüzde kaçını yok sayar
+//   cagir: yanında savaşan yaratık — can/saldiri = senin canının / hasarının yüzdesi,
+//          kalkanSans = canavar vuruşlarının yüzde kaçını o üstlenir. Bölge değişince kaybolur.
+//   mayin: hedef ve çevresindeki 9 kareye mayın; üstüne basan canavar hasar alır ve 1 kusur kazanır,
+//          'kusur' kadar kusuru olan canavar 2 tur sersemler (bosslar hariç). Mayınlar 'sure' tur kalır.
+// ============================================================
+G.BECERILER.suikastci_kilici = { ad: 'Suikastçı Kılıcı', sinif: 'savasci', tur: 'aktif', simge: 'b_suikastci_kilici', minLv: 12, mp: 0, bekleme: 1,
+  etki: { tip: 'hasar', carpan: 1.6, vurus: 1, deler: 5 }, artis: { carpan: 0.08, deler: 1 }, efekt: 'kesik' };
+G.BECERILER.bastan_cikarma = { ad: 'Baştan Çıkarma', sinif: 'buyucu', tur: 'aktif', simge: 'b_bastan_cikarma', minLv: 12, mp: 30, bekleme: 15,
+  etki: { tip: 'cagir', can: 35, saldiri: 30, kalkanSans: 40 }, artis: { can: 5, saldiri: 5 }, efekt: 'cagir' };
+G.BECERILER.karanlik_gok = { ad: 'Karanlık Gök Gürültüsü', sinif: 'okcu', tur: 'aktif', simge: 'b_karanlik_gok', minLv: 12, mp: 25, bekleme: 8,
+  etki: { tip: 'mayin', carpan: 0.5, sure: 8, kusur: 3 }, artis: { carpan: 0.05, kusur: -0.2 }, efekt: 'yildirim' };
+// Baştan Çıkarma'nın çağırdığı yaratık, beceri seviyesine göre (referanstaki gibi seviyeyle değişir)
+G.YARATIKLAR = [
+  { lv: 1, ad: 'Ork',             simge: 'y_ork' },
+  { lv: 4, ad: 'Kurt',            simge: 'kurt' },
+  { lv: 7, ad: 'Kaplan Muhafızı', simge: 'y_kaplan' }
+];

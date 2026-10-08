@@ -24,6 +24,7 @@ G.beceriAciklama = function (id, lv) {
     if (e.sersem) p.push(e.sersem + ' tur sersemletir (bosslar dirençli)');
     if (e.dot) p.push(e.sure + ' tur boyunca her tur %' + Math.round(e.dot * 100) + ' ek hasar (' + (e.sekil === 'yarimay' ? 'kanama' : 'süreli') + '), savunmayı deler');
     if (e.sicrama) p.push(e.sicrama + ' kareye kadar uzaktaki hedefin yanına sıçrar');
+    if (e.deler) p.push('Hedefin savunmasının %' + e.deler + ' kadarını yok sayar');
   } else if (e.tip === 'iyilesme') p.push('Canının %' + e.oran + ' kadarını yeniler');
   else if (e.tip === 'kalkan' && e.oran >= 100) {
     p.push((e.patlama ? 'Etrafındaki 8 kareye %' + Math.round(e.patlama * 100) + ' hasar' : '') +
@@ -34,7 +35,16 @@ G.beceriAciklama = function (id, lv) {
     if (e.iyilesme) p.push('Anında canının %' + e.iyilesme + ' kadarını yeniler');
     if (e.isaret) p.push('En yakın ' + e.isaretAdet + ' canavarı işaretler: ' + e.isaretSure + ' tur savunmaları %' + e.isaret + ' düşer');
   }
-  else if (e.tip === 'peri') p.push(e.sure + ' tur boyunca her tur ' + e.adet + ' peri rastgele canavarlara %' + Math.round(e.carpan * 100) + ' hasar verir');
+  else if (e.tip === 'cagir') {
+    var yt = G.YARATIKLAR.filter(function (y) { return lv >= y.lv; }).pop();
+    p.push(yt.ad + ' çağırır: canı, senin canının %' + e.can + ' kadarı; her tur senin hasarının %' + e.saldiri + ' kadarıyla vurur');
+    p.push('Canavar vuruşlarının %' + e.kalkanSans + ' kadarını o üstlenir. Bölge değişince kaybolur');
+  }
+  else if (e.tip === 'mayin') {
+    p.push('Hedef ve çevresindeki 9 kareye ' + e.sure + ' tur kalan mayın döşer');
+    p.push('Basan canavar %' + Math.round(e.carpan * 100) + ' hasar alır ve kusur kazanır; ' + Math.max(1, Math.round(e.kusur)) + ' kusurda 2 tur sersemler (bosslar hariç)');
+  }
+    else if (e.tip === 'peri') p.push(e.sure + ' tur boyunca her tur ' + e.adet + ' peri rastgele canavarlara %' + Math.round(e.carpan * 100) + ' hasar verir');
   else if (e.tip === 'guc') p.push(e.sure + ' tur saldırın %' + e.oran + ' artar');
   return p.join('. ') + '.';
 };

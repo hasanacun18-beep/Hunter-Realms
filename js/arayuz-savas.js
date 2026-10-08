@@ -37,7 +37,8 @@ G.oyuncuKartHtml = function () {
   return '<div class="kart saha-kart oyuncu-kart" id="oyuncuKart" style="left:' + p.x + '%;top:' + p.y + '%">' +
     '<span class="kseviye">' + o.lv + '</span><span class="kikon">' + G.SINIFLAR[o.sinif].ikon + '</span>' +
     '<span class="kad' + (o.ad.length > 9 ? ' uzun' : '') + '">' + G.kacis(o.ad) + '</span>' +
-    '<span class="kcubuk yesil"><i id="okHp"></i><b id="okHpY"></b></span><span class="kcubuk mavi"><i id="okMp"></i><b id="okMpY"></b></span></div>';
+    '<span class="kcubuk yesil"><i id="okHp"></i><b id="okHpY"></b></span><span class="kcubuk mavi"><i id="okMp"></i><b id="okMpY"></b></span>' +
+    '<span class="ok-yaratik" id="okYaratik"></span></div>';
 };
 
 G.logHtml = function () {
@@ -90,6 +91,7 @@ G.cizSavas = function () {
     '<div class="saha" id="saha" style="--z1:' + z[0] + ';--z2:' + z[1] + '">' +
       '<div class="boss-plaka gizli" id="bossPlaka"></div>' +
       (kuleMi ? '<div class="kule-sure" id="kuleSure"></div>' : '') +
+      '<div id="mayinKatman"></div>' +
       '<span id="hedefIsaret" class="hedef-isaret gizli">✦</span>' +
       G.alan.map(function (c, i) { return c ? G.kartHtml(c, i) : ''; }).join('') +
       G.oyuncuKartHtml() +
@@ -153,6 +155,14 @@ G.sahaGuncelle = function () {
   G.$('okHpY').textContent = G.canYazi(o.hp, r.hpMax);
   G.$('okMpY').textContent = G.canYazi(o.mp, r.mpMax);
   G.$('saha').classList.toggle('kritik-can', o.hp > 0 && o.hp < r.hpMax * 0.3);  // v0.22: düşük can uyarısı
+  // v0.39: çağrılan yaratık ve mayınlar
+  var yk = G.$('okYaratik'), y = G.yaratik;
+  if (yk) yk.innerHTML = y ? G.ikon(y.simge) + '<i style="width:' + Math.max(0, y.hp / y.hpMax * 100) + '%"></i>' : '';
+  var mk = G.$('mayinKatman');
+  if (mk) mk.innerHTML = G.mayinlar.map(function (m) {
+    var p = G.hucreKonum(m.kol, m.sat);
+    return '<span class="mayin" style="left:' + p.x + '%;top:' + p.y + '%;width:' + (100 / G.IZGARA.sut) + '%;height:' + (100 / G.IZGARA.sat) + '%">' + G.ikon('mayin') + '</span>';
+  }).join('');
   G.alan.forEach(function (c, i) {
     var el = G.$('kart' + i);
     if (!el || !c) return;

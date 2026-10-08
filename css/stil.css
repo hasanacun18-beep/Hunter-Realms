@@ -1376,3 +1376,13 @@ body,#uygulama{min-height:100vh;min-height:100dvh}
 /* v0.38 — Gölge Adım işareti */
 .saha-kart.isaretli{box-shadow:0 0 0 2px #c0503a,0 0 10px rgba(220,80,50,.6)}
 .saha-kart.isaretli .kad::before{content:'◎ ';color:#e8735a}
+
+/* v0.39 — Çağrılan yaratık ve mayınlar */
+.ok-yaratik{position:absolute;right:3px;top:3px;width:26px;height:26px;display:flex;align-items:center;justify-content:center;
+  background:#1d1428;border:1px solid #9a70d8;border-radius:50%;color:#d8b8ff;pointer-events:none}
+.ok-yaratik:empty{display:none}
+.ok-yaratik .ikon{width:18px;height:18px}
+.ok-yaratik i{position:absolute;left:3px;bottom:-4px;height:3px;max-width:20px;background:#9a70d8;border-radius:2px}
+#mayinKatman{position:absolute;inset:0;pointer-events:none}
+.mayin{position:absolute;display:flex;align-items:flex-end;justify-content:flex-start;padding:4px;color:#8fb0ff;opacity:.75}
+.mayin .ikon{width:16px;height:16px;filter:drop-shadow(0 0 4px rgba(120,160,255,.8))}
