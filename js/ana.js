@@ -33,6 +33,9 @@ G.eylem = function (ad, d) {
     case 'kac':       G.kac(); break;
     case 'boss':      G.bossListeModal(); break;
     case 'bossIsinlan': G.bossIsinlan(d.id); break;
+    case 'galeriBolge': G.galeriBolge = d.b; G.galeriSecili = null; G.cizEtkinlik(); break;
+    case 'galeriSec':   G.galeriSecili = d.id; G.cizEtkinlik(); break;
+    case 'galeriAl':    G.galeriAl(d.id); break;
     // karakter
     case 'stat':      G.statArtir(d.k); break;
     case 'bosSlot':   G.bildir('Bu yuva boş. Çantadan eşya kuşanabilirsin.'); break;

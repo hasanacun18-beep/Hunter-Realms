@@ -1035,6 +1035,22 @@ G.BOSS_SURE = {
 };
 // v0.31: süresi dolan boss, oyuncu bölgedeyken bu kadar SANİYE sonra sahada kendiliğinden belirir
 G.BOSS_DOGMA_GECIKME = 4;
+
+// ============================================================
+// v0.32 — GALERİ (Warriors and Adventure'daki "Gallery": canavar ansiklopedisi)
+// Her canavarın 5 kademesi var; "X tane öldür" hedefi tamamlanınca altın + kalıcı stat alınır.
+// Öldürme sayısı o.istatistik.oldurId'den gelir (eski öldürmeler de sayılır). Alınan kademe: o.galeri[id]
+// Stat türü bölgedeki sıraya göre: 1. canavar saldırı, 2. can, 3. savunma; boss saldırı + can.
+// Miktar = katsayı x (canavar seviyesi + lvTaban), kesirli; toplamda yuvarlanır. "Hafif": ulaşılan galeri tam olunca GP ~%5-8 artar.
+// ============================================================
+G.GALERI = {
+  hedef: { normal: [25, 100, 300, 750, 1500], boss: [1, 3, 8, 15, 30] },
+  sira: ['atk', 'hp', 'def'],                // bölgedeki 1., 2., 3. canavar
+  lvTaban: 9,                                  // düşük seviyeli canavarlar da hissedilir bir şey versin
+  katsayi: { atk: 0.02, hp: 0.2, def: 0.014 }, // her kademede, (seviye + lvTaban) ile çarpılır
+  bossKatsayi: { atk: 0.028, hp: 0.28 },
+  altin: { normal: 15, boss: 1.5 }            // kademe altını = canavarın en yüksek altını x bu x kademe no
+};
 G.NADIRLIK[1].sans = 20;          // İyi (önce 25)
 G.NADIRLIK[2].sans = 6;           // Nadir (önce 10)
 G.NADIRLIK[3].sans = 1.2;         // Destansı (önce 3)
