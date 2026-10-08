@@ -1,4 +1,4 @@
-# Hunter Realms — v0.39 (yeni beceriler)
+# Hunter Realms — v0.40 (beceri seviye sınırı)
 
 > Not: Oyun eskiden "Kara Diyar" adıyla geliştirildi, bu sürümde "Hunter Realms" olarak
 > yeniden adlandırıldı. Kayıt dosyalarının iç anahtar isimleri değişmedi (bkz. CLAUDE.md).
@@ -475,3 +475,16 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - Kitapları diğer beceriler gibi seviye 12+ canavarlardan düşer. Yaratık ve mayınlar kaydedilmez, bölge değişince kaybolur
 - Ayarlar: veri.js → G.BECERILER.suikastci_kilici / bastan_cikarma / karanlik_gok, G.YARATIKLAR.
   Kod: savas.js → G.yaratikTik, G.mayinTik (G.vur'a savunma delme eklendi)
+
+## v0.40 değişiklikleri (Beceri seviye sınırı — Warriors and Adventure "Yetenekler" sayfası)
+- Beceri sayfasından en yüksek seviye 8 → 10 (totemler 6). 9 ve 10 için ustalık 6000 / 8000, sayfa ve altın aynı formülle
+- Yeni ek stat: "+1 Tüm beceriler" — eşyalarda ve arıtmada nadiren çıkar (diğer statlardan ~4 kat az).
+  Kuşanılı eşyalardaki toplamı bütün becerilerin etkin seviyesine eklenir, en fazla 20'ye kadar (wiki gibi)
+- Totemler ekipmandan etkilenmez. Beceri ekranında ekipmandan gelen seviye "Sv. 9 +3" gibi yeşil görünür
+- Pasif becerilerde 10'un üstündeki her seviye yarım sayılır (pasif sayılar patlamasın)
+- Yüksek seviyede üst sınırlar: hasar azaltan kalkanlar %75, anlık iyileşme %80, işaret %50, savunma delme %30,
+  yaratığın canı ve saldırısı %100
+- Baştan Çıkarma yaratıkları wiki'ye göre: Ork (1), Kurt (5), Dev Böcek (10), Kaplan Muhafızı (15), Kartal Muhafızı (20)
+- KAYIT: yapı değişmedi; G.gocEt 6'nın üstündeki totem seviyelerini 6'ya indirir
+- Ayarlar: veri.js → G.BECERI_MAKS, G.BECERI_TOPLAM_MAKS, G.TOTEM_MAKS, G.PASIF_UST_CARPAN, G.BECERI_SINIR,
+  G.EK_STATLAR.tumBeceri (agirlik: çıkma sıklığı). Kod: beceri.js → G.beceriSeviye, G.ekipmanBeceri, G.pasifSeviye

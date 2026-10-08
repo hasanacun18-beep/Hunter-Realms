@@ -3,7 +3,7 @@
 // ============================================================
 
 // Eşyanın tek başına gücü (sıralama için). Ağırlıklar GP formülüyle aynı.
-G.GP_AGIRLIK = { atk: 2, def: 3, hp: 0.2, mp: 0.1, hiz: 2, krit: 4, kritHasar: 1, canCal: 6, altin: 0.5, tecrube: 0.5 };
+G.GP_AGIRLIK = { atk: 2, def: 3, hp: 0.2, mp: 0.1, hiz: 2, krit: 4, kritHasar: 1, canCal: 6, altin: 0.5, tecrube: 0.5, tumBeceri: 20 };
 G.esyaGP = function (e) {
   var t = 0, st = G.esyaStat(e);
   for (var k in st) t += st[k] * (G.GP_AGIRLIK[k] || 0);

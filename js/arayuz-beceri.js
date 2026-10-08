@@ -7,16 +7,17 @@ G.onizleAcik = null;
 G.TUR_ADI = { aktif: 'Aktif', pasif: 'Pasif' };
 
 G.beceriKartHtml = function (id) {
-  var o = G.o, b = G.BECERILER[id], lv = o.beceriler[id] || 0, ogrenildi = lv > 0;
-  var gosterLv = Math.max(1, lv), aktif = b.tur === 'aktif';
+  var o = G.o, b = G.BECERILER[id], lv = o.beceriler[id] || 0, ogrenildi = lv > 0, maks = G.beceriSayfaMaks(id);
+  var etkin = G.beceriSeviye(id), ekLv = etkin - lv;   // v0.40: ekipmandan gelen ek seviye
+  var gosterLv = Math.max(1, etkin), aktif = b.tur === 'aktif';
   var meta = [];
   if (aktif) meta.push(b.mp ? b.mp + ' mana' : 'Mana harcamaz', b.bekleme + ' tur bekleme');
-  if (ogrenildi && lv < G.BECERI_MAKS) meta.push('Ustalık ' + (o.ustalik[id] || 0) + '/' + G.ustalikGerek(lv));
+  if (ogrenildi && lv < maks) meta.push('Ustalık ' + (o.ustalik[id] || 0) + '/' + G.ustalikGerek(lv));
 
   var sag;
   if (!ogrenildi) {
     sag = '<span class="etkin-degil">Etkin değil</span><small class="soluk">' + (b.totem ? 'Seviye ' + b.minLv + '\'te kendiliğinden açılır' : 'Seviye ' + b.minLv + '+ canavarlardan kitabı düşer') + '</small>';
-  } else if (lv >= G.BECERI_MAKS) {
+  } else if (lv >= maks) {
     sag = '<span class="en-ust">En üst seviye</span>';
   } else {
     var kitap = o.kitaplar[id] || 0, kg = G.kitapGerek(lv), sg = G.sayfaGerek(lv), ag = G.altinGerek(lv), ug = G.ustalikGerek(lv);
@@ -36,7 +37,7 @@ G.beceriKartHtml = function (id) {
   var onizle = '';
   if (G.onizleAcik === id) {
     onizle = '<div class="onizleme">';
-    for (var l = 1; l <= G.BECERI_MAKS; l++) {
+    for (var l = 1; l <= maks; l++) {
       onizle += '<div class="onizle-satir' + (l === lv ? ' simdiki' : '') + (l < lv ? ' gecti' : '') + '"><b>Sv. ' + l + '</b><span>' + G.beceriAciklama(id, l) + '</span></div>';
     }
     onizle += '</div>';
@@ -46,7 +47,7 @@ G.beceriKartHtml = function (id) {
     '<div class="beceri-ust">' +
       '<span class="beceri-simge ' + b.tur + '">' + b.ikon + '</span>' +
       '<div class="beceri-orta">' +
-        '<div class="beceri-baslik"><b>' + b.ad + '</b>' + (b.totem ? '<span class="totem-rozet">TOTEM</span>' : '') + '<span class="lv">Sv. ' + lv + '</span>' +
+        '<div class="beceri-baslik"><b>' + b.ad + '</b>' + (b.totem ? '<span class="totem-rozet">TOTEM</span>' : '') + '<span class="lv">Sv. ' + lv + (ekLv > 0 ? ' <small class="fark-arti" title="Ekipmandan">+' + ekLv + '</small>' : '') + '</span>' +
           '<button class="onizle-link" data-eylem="onizle" data-b="' + id + '">' + (G.onizleAcik === id ? 'Kapat' : 'Önizle') + '</button></div>' +
         '<div class="beceri-tur">' + G.TUR_ADI[b.tur] + (b.sinif ? '' : ', her sınıf') + '</div>' +
         '<div class="beceri-acik">' + G.beceriAciklama(id, gosterLv) + '</div>' +
@@ -68,7 +69,9 @@ G.cizBeceri = function () {
     '<div class="panel">' +
     '<div class="kutu beceri-ozet"><span>' + G.SARF.sayfa.ikon + ' Kitap Sayfası: <b>' + o.sarf.sayfa + '</b></span><span>Altın: <b>' + o.para + '</b></span></div>' +
     '<p class="soluk kucuk-not">Öğrendiğin her beceri etkindir. Aktif beceriler kullandıkça, pasifler canavar öldürdükçe ustalık kazanır. ' +
-      'Ustalık dolunca o becerinin kitabı, kitap sayfası ve altınla geliştirirsin (en fazla seviye ' + G.BECERI_MAKS + ').</p>' +
+      'Ustalık dolunca o becerinin kitabı, kitap sayfası ve altınla geliştirirsin (en fazla seviye ' + G.BECERI_MAKS + ', totemler ' + G.TOTEM_MAKS + '). ' +
+      'Ekipmandaki <b>+Tüm beceriler</b> ek statı seviyeyi ' + G.BECERI_TOPLAM_MAKS + '\'ye kadar yükseltir' +
+      (G.ekipmanBeceri(o) ? ' — şu an <b class="fark-arti">+' + G.ekipmanBeceri(o) + '</b>' : '') + '.</p>' +
     '<h2 class="bolum-baslik">Aktif beceriler</h2>' + aktifler.map(G.beceriKartHtml).join('') +
     '<h2 class="bolum-baslik">Pasif beceriler</h2>' + pasifler.map(G.beceriKartHtml).join('') +
     '</div>';

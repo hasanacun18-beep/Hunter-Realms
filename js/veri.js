@@ -637,8 +637,8 @@ G.DUSME.sayfa = 18;          // normal canavardan kitap sayfası düşme şansı
 G.DUSME.sayfaBoss = [8, 15]; // bosstan
 G.KITAP_DUSME_NORMAL = 1.5;
 // v0.14 denge: geliştirme pahalı olsun, hangi beceriyi yükselteceğini seçesin (simülasyonla ayarlandı)
-G.USTALIK_GEREK = [0, 150, 400, 800, 1400, 2200, 3200, 4500];
-G.SAYFA_CARPAN = 15;     // sayfa = 15 x seviye²  (1→2: 15, 4→5: 240, 7→8: 735)
+G.USTALIK_GEREK = [0, 150, 400, 800, 1400, 2200, 3200, 4500, 6000, 8000];   // v0.40: 10. seviyeye kadar
+G.SAYFA_CARPAN = 15;     // sayfa = 15 x seviye²  (1→2: 15, 4→5: 240, 7→8: 735, 9→10: 1215)
 G.ALTIN_CARPAN = 800;    // altın = 800 x seviye²
 G.BECERILER.bilge.bonus = { tecrube: 3 };
 G.BECERILER.hazine_avcisi.bonus = { altin: 4 };
@@ -1188,7 +1188,25 @@ G.BECERILER.karanlik_gok = { ad: 'Karanlık Gök Gürültüsü', sinif: 'okcu', 
   etki: { tip: 'mayin', carpan: 0.5, sure: 8, kusur: 3 }, artis: { carpan: 0.05, kusur: -0.2 }, efekt: 'yildirim' };
 // Baştan Çıkarma'nın çağırdığı yaratık, beceri seviyesine göre (referanstaki gibi seviyeyle değişir)
 G.YARATIKLAR = [
-  { lv: 1, ad: 'Ork',             simge: 'y_ork' },
-  { lv: 4, ad: 'Kurt',            simge: 'kurt' },
-  { lv: 7, ad: 'Kaplan Muhafızı', simge: 'y_kaplan' }
+  { lv: 1,  ad: 'Ork',             simge: 'y_ork' },
+  { lv: 5,  ad: 'Kurt',            simge: 'kurt' },
+  { lv: 10, ad: 'Dev Böcek',       simge: 'dev_bocek' },
+  { lv: 15, ad: 'Kaplan Muhafızı', simge: 'y_kaplan' },
+  { lv: 20, ad: 'Kartal Muhafızı', simge: 'sahin' }
 ];
+
+// ============================================================
+// v0.40 — BECERİ SEVİYE SINIRI (Warriors and Adventure "Yetenekler" sayfası) — beceri.js
+// Beceri sayfasından en fazla BECERI_MAKS'a çıkılır; ekipmandaki "+1 Tüm beceriler" ek statı
+// etkin seviyeyi BECERI_TOPLAM_MAKS'a kadar yükseltir. Totemler TOTEM_MAKS'ta kalır, ekipmandan etkilenmez.
+// Pasiflerde BECERI_MAKS'ın üstündeki her seviye PASIF_UST_CARPAN kadar sayılır (sayılar patlamasın).
+// ============================================================
+G.BECERI_MAKS = 10;
+G.BECERI_TOPLAM_MAKS = 20;
+G.TOTEM_MAKS = 6;
+G.PASIF_UST_CARPAN = 0.5;
+G.EK_STATLAR.tumBeceri = { min: 1, maks: 1, lvArtis: 0, agirlik: 0.25 };   // diğer statlardan ~4 kat az çıkar
+G.BONUS_ADLARI.tumBeceri = 'Tüm beceriler';
+// Yüksek seviyede değerler anlamsızlaşmasın diye üst sınırlar (beceri.js → G.beceriEtki)
+// kalkan: hasar azaltma % (totemler hariç — Anka Kuşu Tüyü bağışıklıktır) · iyilesme: anlık can yenileme %
+G.BECERI_SINIR = { kalkan: 75, iyilesme: 80, isaret: 50, deler: 30, can: 100, saldiri: 100 };

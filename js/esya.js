@@ -46,7 +46,12 @@ G.ekStatUret = function (s, adet, haric) {
   haric = haric || [];
   var anahtarlar = Object.keys(G.EK_STATLAR).filter(function (k) { return haric.indexOf(k) < 0; }), ek = [];
   while (ek.length < adet && anahtarlar.length) {
-    var k = anahtarlar.splice(Math.floor(Math.random() * anahtarlar.length), 1)[0];
+    // v0.40: ağırlıklı seçim (agirlik yoksa 1) — "+1 Tüm beceriler" nadir çıkar
+    var top = 0, r = 0, j = 0;
+    anahtarlar.forEach(function (a) { top += G.EK_STATLAR[a].agirlik || 1; });
+    r = Math.random() * top;
+    for (j = 0; j < anahtarlar.length - 1; j++) { r -= G.EK_STATLAR[anahtarlar[j]].agirlik || 1; if (r < 0) break; }
+    var k = anahtarlar.splice(j, 1)[0];
     var d = G.EK_STATLAR[k];
     var v = G.rastgele(d.min, d.maks) + s.lv * d.lvArtis * (0.6 + Math.random() * 0.4);
     ek.push({ k: k, v: Math.max(1, Math.round(v)) });
