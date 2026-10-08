@@ -1242,3 +1242,13 @@ body,#uygulama{min-height:100vh;min-height:100dvh}
 .bl-satir button:disabled{opacity:.4}
 .yuvarlak.bekliyor small{color:#e8735a;font-variant-numeric:tabular-nums}
 .yuvarlak.bekliyor span{opacity:.45}
+
+/* v0.31 — Lord (saha bossu): turuncu kenar ve nabız gibi atan alev parıltısı, plakada sahibi */
+.saha-kart.boss{border-color:#f08a2a;box-shadow:0 0 0 1px #f08a2a,0 0 14px rgba(255,140,40,.8),inset 0 0 18px rgba(200,90,20,.3)}
+.saha-kart.boss .kad{color:#b8460e;text-shadow:0 0 3px #fff2e0,0 0 3px #fff2e0,0 0 6px rgba(255,235,210,.9)}
+.saha-kart.boss .kseviye{background:#8a3a10;color:#fff0e0}
+.saha-kart.boss:not(.olu){animation:lordNabiz 1.4s ease-in-out infinite}
+@keyframes lordNabiz{50%{box-shadow:0 0 0 2px #ffb050,0 0 24px rgba(255,150,40,1),inset 0 0 20px rgba(220,100,20,.4)}}
+.saha-kart.boss.hedef{border-color:#ff5a2a}
+.bp-sahip{display:block;font-size:10px;color:#f0b080;font-weight:normal;margin-top:-1px}
+@media (prefers-reduced-motion:reduce){.saha-kart.boss{animation:none}}

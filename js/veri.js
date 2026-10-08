@@ -1033,6 +1033,8 @@ G.BOSS_SURE = {
   kurt_kral: 10, dev_bocek: 15, zincirli_iblis: 20, kara_ejder: 25,
   bataklik_timsahi: 30, ayaz_devi: 40, kor_titani: 50, hiclik_efendisi: 60
 };
+// v0.31: süresi dolan boss, oyuncu bölgedeyken bu kadar SANİYE sonra sahada kendiliğinden belirir
+G.BOSS_DOGMA_GECIKME = 4;
 G.NADIRLIK[1].sans = 20;          // İyi (önce 25)
 G.NADIRLIK[2].sans = 6;           // Nadir (önce 10)
 G.NADIRLIK[3].sans = 1.2;         // Destansı (önce 3)

@@ -136,7 +136,7 @@ G.oyunBaslat = function () {
   setInterval(function () { G.hareketTik(0.1); }, 100);
   setInterval(G.savasTik, G.TUR_MS);
   setInterval(G.madenSayac, 1000);
-  setInterval(G.bossSayac, 1000);   // v0.30: boss geri sayımları
+  setInterval(function () { G.bossKendiliginden(); G.bossSayac(); }, 1000);   // v0.30–31: boss doğması ve geri sayımlar
   setInterval(G.kaydet, 10000);
 };
 

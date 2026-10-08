@@ -1,4 +1,4 @@
-# Hunter Realms — v0.30 (boss paneli ve süreleri)
+# Hunter Realms — v0.31 (bosslar kendiliğinden doğar)
 
 > Not: Oyun eskiden "Kara Diyar" adıyla geliştirildi, bu sürümde "Hunter Realms" olarak
 > yeniden adlandırıldı. Kayıt dosyalarının iç anahtar isimleri değişmedi (bkz. CLAUDE.md).
@@ -371,3 +371,11 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - Kule bekçileri bu sürelerden etkilenmez
 - KAYIT: yeni alan o.bossZaman ({ bossId: doğacağı zaman }) — G.gocEt eski kayıtlara boş olarak ekler
 - Ayarlar: veri.js → G.BOSS_SURE (dakika)
+
+## v0.31 değişiklikleri (bosslar sahada kendiliğinden doğar — Warriors and Adventure'daki turuncu "lord"lar gibi)
+- Süresi dolan boss, sen bölgesindeyken 4 saniye sonra sahada kendiliğinden belirir: oyuncudan uzakta, üst iki sırada değil
+  (oraları boss plakası ve sözü kapatır). Sen saldırana kadar seni beklemez, sahada durur
+- Görünüm: turuncu kenar ve nabız gibi atan alev parıltısı, turuncu isim; boss plakasında "Sahibi: <karakter adı>"
+- Boss panelinde "Çağır" kalktı: bulunduğun bölgede "Burada", başka bölgede "Işınlan" (bölgeye gider ve bossu hemen getirir)
+- Kasabada ve kulede boss doğmaz. Yenilince süre yeniden başlar (v0.30)
+- Kayıt yapısı değişmedi. Ayarlar: veri.js → G.BOSS_DOGMA_GECIKME (saniye)
