@@ -892,7 +892,7 @@ body,#uygulama{min-height:100vh;min-height:100dvh}
    v0.17 — DEMİRCİ (referanstaki "Cast")
    ============================================================ */
 #altnav{grid-template-columns:repeat(3,1fr) 76px repeat(2,1fr)}
-#demirciNav{flex:none;height:64px;display:grid;grid-template-columns:.8fr repeat(3,1fr);
+#demirciNav{flex:none;height:64px;display:grid;grid-template-columns:.8fr repeat(4,1fr);
   background:linear-gradient(#2a2219,#120e0a);border-top:2px solid #6a5638;box-shadow:0 -2px 8px rgba(0,0,0,.5)}
 #demirciNav.gizli{display:none}
 #demirciNav button{background:none;border:none;border-right:1px solid rgba(106,86,56,.35);display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -1343,3 +1343,21 @@ body,#uygulama{min-height:100vh;min-height:100dvh}
 .unvan-satir .gl-al{flex:none;width:auto;margin-top:0;padding:6px 14px}
 .unvan-satir .gl-al span{font-size:15px}
 .unvan-satir .gl-al::before,.unvan-satir .gl-al::after{display:none}
+
+/* ============================================================
+   v0.35 — Su verme (Quench)
+   ============================================================ */
+.su-teklifler{display:flex;flex-wrap:wrap;gap:12px 14px;padding:6px 10px}
+.su-teklif{display:flex;flex-direction:column;align-items:center;gap:2px}
+.su-teklif small{font-size:11px;color:#e8a860}
+.dm-stat small{color:#7a705e}
+.dm-stat.dusuk{color:#e8735a}
+.su-sifirla{margin-top:8px}
+.su-sifirla:disabled{opacity:.4}
+.su-kurban .su-teklifler,.su-kurban > p{grid-column:1/-1}
+.dm-stat small{white-space:nowrap}
+.dm-dugmeler.su-dugmeler{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.dm-dugmeler.su-dugmeler .sus-dugme{padding:10px 4px}
+.dm-dugmeler.su-dugmeler .sus-dugme span{font-size:16px}
+.dm-dugmeler.su-dugmeler .sus-dugme::before,.dm-dugmeler.su-dugmeler .sus-dugme::after{display:none}
+.cila-yazi{color:#5ab8c8}

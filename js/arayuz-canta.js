@@ -116,6 +116,8 @@ G.esyaModal = function (id) {
     if (cantada && fark) fh = ' <span class="' + (fark > 0 ? 'fark-arti' : 'fark-eksi') + '">(' + (fark > 0 ? '+' : '') + fark + ')</span>';
     satirlar += '<div class="satir"><span>' + G.STAT_ADLARI[k] + '</span><span>' + (st[k] || 0) + fh + '</span></div>';
   }
+  // v0.35: su verme cilası
+  if (Object.keys(G.suMaks(e)).length) satirlar += '<div class="satir"><span>Cila (su verme)</span><span class="cila-yazi">%' + G.cila(e) + '</span></div>';
 
   // Ek statlar ve zar kilitleri
   var ek = e.ek || [], kilitli = G.kilitliStatlar(e), ekHtml = '';

@@ -6,13 +6,13 @@
 G.demirciAlt = 'arit';
 G.demirciKaynak = 'kusanili';
 G.demirciSecili = null;
-G.DEMIRCI_ALT = [['arit', G.ikon('pirilti'), 'Arıtma'], ['guclendir', G.ikon('cekic'), 'Güçlendirme'], ['erit', G.ikon('alev'), 'Eritme']];
+G.DEMIRCI_ALT = [['arit', G.ikon('pirilti'), 'Arıtma'], ['guclendir', G.ikon('cekic'), 'Güçlendirme'], ['suverme', G.ikon('suverme'), 'Su Verme'], ['erit', G.ikon('alev'), 'Eritme']];
 
 // Eşya penceresinden "Arıt" ile gel
 G.demirciAc = function (id) {
   var f = G.esyaBul(id);
   G.modalKapat();
-  G.demirciAlt = 'arit'; G.aritma = null;
+  G.demirciAlt = 'arit'; G.aritma = null; G.suSecimSifirla();
   if (f) { G.demirciKaynak = f.yer === 'canta' ? 'canta' : 'kusanili'; G.demirciSecili = id; }
   G.sekmeAc('demirci');
 };
@@ -51,6 +51,7 @@ G.cizDemirci = function () {
   if (!f) sag = '<p class="soluk dm-bos">Soldan bir eşya seç.</p>';
   else if (G.demirciAlt === 'arit') sag = G.aritHtml(f.e);
   else if (G.demirciAlt === 'guclendir') sag = G.guclendirHtml(f.e);
+  else if (G.demirciAlt === 'suverme') sag = G.suvermeHtml(f.e);
   else sag = G.eritHtml(f.e);
 
   G.$('icerik').innerHTML = '<div class="demirci">' +
@@ -84,7 +85,7 @@ G.aritHtml = function (e) {
   var a = G.aritma && G.aritma.id === e.id ? G.aritma : null, onizleme = '', gpSag = '';
   if (a) {
     onizleme = a.ek.map(function (x) { return '<div class="dm-stat yeni">' + G.bonusYazi(x.k, x.v) + '</div>'; }).join('');
-    var yeniGp = G.esyaGP({ sablon: e.sablon, nadir: e.nadir, arti: e.arti, ek: a.ek }), eskiGp = G.esyaGP(e);
+    var yeniGp = G.esyaGP({ sablon: e.sablon, nadir: e.nadir, arti: e.arti, ek: a.ek, su: e.su }), eskiGp = G.esyaGP(e);
     gpSag = 'Arıtma GP: <b class="' + (yeniGp >= eskiGp ? 'fark-arti' : 'fark-eksi') + '">' + yeniGp + '</b>';
   }
   return G.dmBaslikHtml(e) +
@@ -103,7 +104,7 @@ G.aritHtml = function (e) {
 
 // ---- Güçlendirme ----
 G.guclendirHtml = function (e) {
-  var o = G.o, st = G.esyaStat(e), sonraki = G.esyaStat({ sablon: e.sablon, nadir: e.nadir, arti: e.arti + 1 });
+  var o = G.o, st = G.esyaStat(e), sonraki = G.esyaStat({ sablon: e.sablon, nadir: e.nadir, arti: e.arti + 1, su: e.su });
   var satir = Object.keys(st).map(function (k) {
     return '<div class="dm-stat">' + G.STAT_ADLARI[k] + ': ' + st[k] + (e.arti < G.MAKS_ARTI ? ' <span class="fark-arti">→ ' + sonraki[k] + '</span>' : '') + '</div>';
   }).join('');
@@ -200,4 +201,51 @@ G.rituelDokun = function () {
   r.el.remove();
   G.rituel = null;
   if (r.bitince) r.bitince();
+};
+
+// ---- v0.35: Su verme (referanstaki Quench) ----
+G.suvermeHtml = function (e) {
+  var o = G.o, S = G.SUVERME, m = G.suMaks(e), c = G.cila(e), adaylar = G.suTeklifler(e), sec = G.suSecim;
+  var a = G.suOnizleme && G.suOnizleme.id === e.id ? G.suOnizleme : null;
+  var teklif = adaylar.map(function (x) {
+    return '<div class="dm-kutu su-teklif' + (x.id === sec.teklif ? ' secili' : '') + '">' + G.esyaKutuHtml(x, 'suTeklif') +
+      '<small>Cila %' + G.cila(x) + '</small></div>';
+  }).join('') || '<p class="soluk kucuk-not">Çantanda aynı ad ve nadirlikte, cilası %' + c + ' üstünde bir eşya yok.</p>';
+  function satir(su, k) {
+    var v = (su && su[k]) || 0;
+    return '<span>' + G.STAT_ADLARI[k] + ': <b>+' + v + '</b> <small>/ ' + m[k] + '</small></span>';
+  }
+  var mevcut = Object.keys(m).map(function (k) {
+    var kl = !!sec.kilit[k];
+    return '<div class="dm-stat"><button class="dm-kilit' + (kl ? ' kilitli' : '') + '" data-eylem="suKilit" data-k="' + k + '">' +
+      G.ikon(kl ? 'kilit' : 'kilit_acik') + '</button>' + satir(e.su, k) + '</div>';
+  }).join('');
+  var onizleme = '', gpSag = '';
+  if (a) {
+    onizleme = Object.keys(m).map(function (k) {
+      var fark = a.su[k] - ((e.su && e.su[k]) || 0);
+      return '<div class="dm-stat ' + (fark > 0 ? 'yeni' : fark < 0 ? 'dusuk' : '') + '">' + satir(a.su, k) + '</div>';
+    }).join('');
+    var kopya = { sablon: e.sablon, nadir: e.nadir, arti: e.arti, ek: e.ek, su: a.su }, yeniGp = G.esyaGP(kopya), eskiGp = G.esyaGP(e);
+    gpSag = 'Cila: <b class="' + (G.cila(kopya) >= c ? 'fark-arti' : 'fark-eksi') + '">%' + G.cila(kopya) + '</b> · GP <b class="' + (yeniGp >= eskiGp ? 'fark-arti' : 'fark-eksi') + '">' + yeniGp + '</b>';
+  }
+  var altin = G.suMaliyet(e), kilitSay = Object.keys(sec.kilit).length;
+  return G.dmBaslikHtml(e) +
+    '<div class="dm-tablo su-kurban"><h4>Kurban edilecek eşya <small>(aynı ad ve nadirlik, cilası daha yüksek)</small></h4><div class="su-teklifler">' + teklif + '</div></div>' +
+    '<div class="dm-karsilastir">' +
+      '<div class="dm-kolon"><h4>Mevcut su verme</h4>' + mevcut + '</div><div class="dm-ok">➤</div>' +
+      '<div class="dm-kolon"><h4>Sonuç</h4>' + (onizleme || '<p class="soluk kucuk-not">Kurban seç ve Su Ver\'e bas, sonuç burada görünür.</p>') + '</div>' +
+    '</div>' +
+    '<div class="dm-gpler"><span>Cila: <b>%' + c + '</b> · GP ' + G.esyaGP(e) + '</span><span>' + gpSag + '</span></div>' +
+    '<div class="dm-maliyet">Bedel: <span class="' + (o.para >= altin ? 'fark-arti' : 'fark-eksi') + '">' + G.IK_PARA + ' ' + altin + '</span> ' +
+      '<span class="' + (o.sarf.suTasi >= S.tasGelismis ? 'fark-arti' : 'fark-eksi') + '">' + G.SARF.suTasi.ikon + ' ' + o.sarf.suTasi + '</span></div>' +
+    '<div class="dm-dugmeler su-dugmeler">' +
+      '<button class="sus-dugme" data-eylem="suVer" data-id="' + e.id + '"' + (sec.teklif != null && !a ? '' : ' disabled') + '><span>Su Ver</span></button>' +
+      '<button class="sus-dugme" data-eylem="suGelismis" data-id="' + e.id + '"' + (sec.teklif != null && kilitSay && !a ? '' : ' disabled') + '><span>Gelişmiş</span></button>' +
+      '<button class="sus-dugme" data-eylem="suKaydet"' + (a ? '' : ' disabled') + '><span>Kaydet</span></button>' +
+    '</div>' +
+    '<button class="genis-dugme su-sifirla" data-eylem="suSifirla" data-id="' + e.id + '"' + (c > 0 ? '' : ' disabled') + '>' + G.SARF.suTasi.ikon + ' Cilayı sıfırla (' + S.tasSifirla + ' taş)</button>' +
+    '<p class="soluk kucuk-not"><b>Su Ver:</b> bütün statlar yeniden zarlanır; cila farkı büyüdükçe artış büyür, bazen bir stat düşebilir. ' +
+      '<b>Gelişmiş</b> (+' + S.tasGelismis + ' Su Verme Taşı): sadece ' + G.ikon('kilit') + ' kilitli 1-2 stat değişir ve yalnız artış kalır. ' +
+      'Kurban edilen eşya her durumda gider; sonucu beğenirsen Kaydet. <b>Sıfırla:</b> cila %0 olur, böylece daha çok eşya kurban edilebilir.</p>';
 };

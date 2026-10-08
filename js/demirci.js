@@ -142,3 +142,90 @@ G.aritKaydet = function () {
   G.statSinirla(); G.kaydet(); G.ustGuncelle(); G.cizDemirci();
   G.bildir('Yeni statlar kaydedildi');
 };
+
+// ---- v0.35: Su verme (referanstaki Quench) — ayarlar veri.js → G.SUVERME ----
+// Aynı ad + aynı nadirlikte, cilası daha yüksek bir çanta eşyası kurban edilir; ana eşyanın temel statları artar.
+// Önce önizleme, beğenirsen Kaydet. Kurban edilen eşya her durumda gider.
+G.suSecim = { teklif: null, kilit: {} };   // ekrandaki seçim (kayda girmez)
+G.suOnizleme = null;                       // { id, su } — kaydedilmemiş sonuç
+
+G.suSecimSifirla = function () { G.suSecim = { teklif: null, kilit: {} }; G.suOnizleme = null; };
+
+// Kurban edilebilecek eşyalar: çantada, aynı şablon ve nadirlik, kilitsiz, cilası ana eşyadan yüksek
+G.suTeklifler = function (e) {
+  var c = G.cila(e);
+  return G.o.canta.filter(function (x) {
+    return x.id !== e.id && x.sablon === e.sablon && x.nadir === e.nadir && !x.kilit && G.cila(x) > c;
+  });
+};
+
+G.suMaliyet = function (e) {
+  var s = G.ESYALAR[e.sablon];
+  return Math.round((s.lv * 5 + 20) * (e.nadir + 1) * G.SUVERME.altin);
+};
+
+G.suKilitDegistir = function (k) {
+  var kl = G.suSecim.kilit;
+  if (kl[k]) delete kl[k];
+  else if (Object.keys(kl).length >= 2) { G.bildir('En fazla 2 stat kilitlenir.'); return; }
+  else kl[k] = true;
+  G.suOnizleme = null;
+  G.cizDemirci();
+};
+
+G.suVer = function (id, gelismis) {
+  var o = G.o, S = G.SUVERME, f = G.esyaBul(id);
+  if (!f) return;
+  var e = f.e, adaylar = G.suTeklifler(e);
+  var t = adaylar.filter(function (x) { return x.id === G.suSecim.teklif; })[0];
+  if (!t) { G.bildir(adaylar.length ? 'Önce kurban edilecek eşyayı seç.' : 'Aynı ad ve nadirlikte, cilası daha yüksek bir eşya gerekiyor.'); return; }
+  var m = G.suMaks(e), kilitler = Object.keys(G.suSecim.kilit).filter(function (k) { return m[k]; });
+  if (gelismis && !kilitler.length) { G.bildir('Gelişmiş su verme için 1-2 stat kilitle.'); return; }
+  if (gelismis && o.sarf.suTasi < S.tasGelismis) { G.bildir(S.tasGelismis + ' Su Verme Taşı gerekiyor.'); return; }
+  var altin = G.suMaliyet(e);
+  if (o.para < altin) { G.bildir(altin + ' altın gerekiyor.'); return; }
+  o.para -= altin;
+  if (gelismis) o.sarf.suTasi -= S.tasGelismis;
+  var tc = G.cila(t), fark = (tc - G.cila(e)) / 100, su = {};
+  for (var k in m) {
+    var eski = (e.su && e.su[k]) || 0, oran = eski / m[k];
+    if (gelismis) {
+      // yalnız kilitli statlar değişir, sadece iyileşme kalır
+      su[k] = kilitler.indexOf(k) >= 0 ? Math.max(eski, Math.round(m[k] * Math.min(1, oran + fark * Math.random()))) : eski;
+    } else {
+      var r = S.normalAlt + Math.random() * (1 - S.normalAlt);
+      su[k] = Math.round(m[k] * Math.max(0, Math.min(1, oran + fark * r)));
+    }
+  }
+  o.canta.splice(o.canta.indexOf(t), 1);
+  G.suSecim.teklif = null;
+  G.suOnizleme = { id: id, su: su };
+  G.log(G.ikon('suverme') + ' Su verildi: ' + G.esyaRenkliAd(e) + ' (kurban: cila %' + tc + ')', 'sistem');
+  G.sesCal('cekic');
+  G.kaydet(); G.ustGuncelle(); G.cizDemirci();
+};
+
+G.suKaydet = function () {
+  var a = G.suOnizleme, f = a && G.esyaBul(a.id);
+  if (!f) return;
+  f.e.su = a.su;
+  G.suOnizleme = null;
+  G.sesCal('basari');
+  G.statSinirla(); G.kaydet(); G.ustGuncelle(); G.cizDemirci();
+  G.bildir('Su verme kaydedildi — cila %' + G.cila(f.e));
+};
+
+// Cilayı sıfırla: bütün su verme bonusu gider (daha çok eşya kurban edilebilir hale gelir)
+G.suSifirla = function (id) {
+  var o = G.o, f = G.esyaBul(id), S = G.SUVERME;
+  if (!f) return;
+  if (o.sarf.suTasi < S.tasSifirla) { G.bildir(S.tasSifirla + ' Su Verme Taşı gerekiyor.'); return; }
+  if (!confirm('Bu eşyanın su verme bonusu tamamen silinecek (cila %0). Emin misin?')) return;
+  o.sarf.suTasi -= S.tasSifirla;
+  var su = {};
+  for (var k in G.suMaks(f.e)) su[k] = 0;
+  f.e.su = su;
+  G.suSecimSifirla();
+  G.statSinirla(); G.kaydet(); G.ustGuncelle(); G.cizDemirci();
+  G.bildir('Cila sıfırlandı');
+};

@@ -1,4 +1,4 @@
-# Hunter Realms — v0.34 (unvanlar)
+# Hunter Realms — v0.35 (su verme)
 
 > Not: Oyun eskiden "Kara Diyar" adıyla geliştirildi, bu sürümde "Hunter Realms" olarak
 > yeniden adlandırıldı. Kayıt dosyalarının iç anahtar isimleri değişmedi (bkz. CLAUDE.md).
@@ -414,3 +414,18 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
   zaten tamamladıkları unvanları ilk kayıtta toplu kazanır)
 - KAYIT: yeni alan o.unvan ({ kazanilan, takili }) — G.gocEt eski kayıtlara boş olarak ekler
 - Ayarlar: veri.js → G.UNVANLAR (yeni unvan listenin SONUNA eklenir). Yeni dosya: js/unvan.js. Yeni ikon: unvan (defne)
+
+## v0.35 değişiklikleri (Su Verme — Warriors and Adventure'daki "Quench" gibi)
+- Demirci → yeni "Su Verme" sekmesi. Her eşyanın temel statlarına (saldırı, savunma, can, mana, hız) ayrı bir su verme bonusu var
+- Cila değeri (%): bu bonusların en fazla değerlerine oranı. Tam cila temel statı (nadirlik dahil) %30 artırır,
+  güçlendirme (+) çarpanı bunun da üstüne işler. Bütün kuşanım tam cilada GP yaklaşık %14-16 artar (lv 16/25/40 ölçüldü)
+- Yeni düşen her eşya rastgele bir ilk cilayla gelir (çoğu düşük). Eşya penceresinde "Cila (su verme)" satırı görünür
+- Su Ver: çantadaki aynı ad + aynı nadirlikte, cilası daha yüksek, kilitsiz bir eşya kurban edilir. Statlar yeniden
+  zarlanır: her stat = eski oran + cila farkı x rastgele(-0.3 .. 1) — fark büyüdükçe artış büyür, bazen bir stat düşebilir
+- Gelişmiş (+1 Su Verme Taşı): 1-2 stat kilitlenir, sadece kilitli statlar değişir ve yalnız artış kalır
+- Sonuç önce önizlenir, beğenirsen Kaydet. Kurban edilen eşya her durumda gider
+- Cilayı sıfırla (1 Su Verme Taşı): bonus %0 olur, böylece daha çok eşya kurban edilebilir hale gelir
+- Yeni sarf malzemesi Su Verme Taşı: elit canavardan %25 şansla 1, bosstan 1-2; kasaba dükkanında 400 altın
+- KAYIT: eşyalara yeni alan e.su, sarf'a o.sarf.suTasi — G.gocEt eski eşyalara da rastgele bir ilk cila verir
+- Ayarlar: veri.js → G.SUVERME. Kod: esya.js (G.suMaks, G.suUret, G.cila), demirci.js (G.suVer, G.suKaydet, G.suSifirla),
+  arayuz-demirci.js (G.suvermeHtml). Yeni ikonlar: suverme, su_tasi
