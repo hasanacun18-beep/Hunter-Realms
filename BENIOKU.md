@@ -1,4 +1,4 @@
-# Hunter Realms — v0.40 (beceri seviye sınırı)
+# Hunter Realms — v0.41 (kalan beceriler)
 
 > Not: Oyun eskiden "Kara Diyar" adıyla geliştirildi, bu sürümde "Hunter Realms" olarak
 > yeniden adlandırıldı. Kayıt dosyalarının iç anahtar isimleri değişmedi (bkz. CLAUDE.md).
@@ -488,3 +488,12 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - KAYIT: yapı değişmedi; G.gocEt 6'nın üstündeki totem seviyelerini 6'ya indirir
 - Ayarlar: veri.js → G.BECERI_MAKS, G.BECERI_TOPLAM_MAKS, G.TOTEM_MAKS, G.PASIF_UST_CARPAN, G.BECERI_SINIR,
   G.EK_STATLAR.tumBeceri (agirlik: çıkma sıklığı). Kod: beceri.js → G.beceriSeviye, G.ekipmanBeceri, G.pasifSeviye
+
+## v0.41 değişiklikleri (Kalan beceriler — Warriors and Adventure "Yetenekler" sayfası)
+- Büyücü — Gök Gürültülü Fırtına (sv. 14+): mana harcamaz, 1 tur bekleme, %160 hasar, savunmanın %5'ini deler
+  (seviye başına +%8 hasar, +%1 delme) — büyücünün Suikastçı Kılıcı karşılığı
+- Büyücü — Buz Kükremesi (sv. 16+): hedef ve ona en yakın canavarlar, en fazla 5 (11. seviyeden sonra 6) canavara %150 hasar,
+  ana hedef %50 fazla alır (seviye başına +%10)
+- Okçu — Yıldırım Vektörü (sv. 14+): %180 hasar; 3 tur sonra hedefte patlar (%200, seviye başına +%10),
+  ardından canavar 2 tur yarı hızda yürür
+- Kayıt yapısı değişmedi. Kod: savas.js (coklu şekil, bomba ve yavaşlama), saha.js (yavaş canavar)

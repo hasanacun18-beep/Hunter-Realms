@@ -145,7 +145,7 @@ G.hareketTik = function (dt) {
     if (!c.aktif && G.kacisSure <= 0 && (d <= 1 || (c.saldirgan && d <= S.agro))) { c.aktif = true; }
     c.t = (c.t || 0) + dt;
     if (c.aktif) {
-      if (d <= 1 || c.t < S.kovalaAdim) return;
+      if (d <= 1 || c.t < S.kovalaAdim * (c.yavas > 0 ? 2 : 1)) return;   // v0.41: yavaşlamış canavar yarı hızda
       c.t = 0;
       // Oyuncunun yanındaki boş bir kareye yürü. Yer yoksa bekler (duvara yaslanma taktiği)
       var a = G.ilkAdim(c, function (k, s) { return G.cheb({ kol: k, sat: s }, p) <= 1; });

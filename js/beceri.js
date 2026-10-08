@@ -24,11 +24,13 @@ G.beceriAciklama = function (id, lv) {
   }
   var e = G.beceriEtki(id, lv), p = [];
   if (e.tip === 'hasar') {
-    var sekil = { yarimay: 'öndeki 3 kareye ', kasirga: 'etrafındaki 8 kareye ', alan: 'hedef ve çevresindeki 9 kareye ', cizgi: 'bir yönde 4 kareyi delerek ' }[e.sekil] || '';
+    var sekil = { yarimay: 'öndeki 3 kareye ', kasirga: 'etrafındaki 8 kareye ', alan: 'hedef ve çevresindeki 9 kareye ', cizgi: 'bir yönde 4 kareyi delerek ', coklu: 'en fazla ' + Math.floor(e.adet || 5) + ' canavara ' }[e.sekil] || '';
     p.push(sekil + '%' + Math.round(e.carpan * 100) + ' hasar' + (e.vurus > 1 ? ', ' + e.vurus + ' vuruş' : ''));
     if (e.sersem) p.push(e.sersem + ' tur sersemletir (bosslar dirençli)');
     if (e.dot) p.push(e.sure + ' tur boyunca her tur %' + Math.round(e.dot * 100) + ' ek hasar (' + (e.sekil === 'yarimay' ? 'kanama' : 'süreli') + '), savunmayı deler');
     if (e.sicrama) p.push(e.sicrama + ' kareye kadar uzaktaki hedefin yanına sıçrar');
+    if (e.anaEk) p.push('Ana hedef %' + e.anaEk + ' fazla hasar alır');
+    if (e.bomba) p.push(e.bombaSure + ' tur sonra hedefte patlar: %' + Math.round(e.bomba * 100) + ' hasar, ardından ' + e.yavas + ' tur yavaşlatır');
     if (e.deler) p.push('Hedefin savunmasının %' + e.deler + ' kadarını yok sayar');
   } else if (e.tip === 'iyilesme') p.push('Canının %' + e.oran + ' kadarını yeniler');
   else if (e.tip === 'kalkan' && e.oran >= 100) {
