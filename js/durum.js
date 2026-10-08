@@ -168,7 +168,7 @@ G.hesapla = function (o) {
   r.krit = Math.min(75, r.krit);
   r.canCal = Math.min(20, r.canCal);
   r.cp = Math.round(r.atkMin + r.atkMax + r.def * 3 + r.hpMax / 5 + r.mpMax / 10 + r.hiz * 2 +
-    r.krit * 4 + r.kritHasar + r.canCal * 6 + r.beceri);
+    r.krit * 4 + r.kritHasar + r.canCal * 6 + r.beceri + (r.tekrar || 0) * 2);
   r.krit = Math.round(r.krit * 10) / 10;
   return r;
 };

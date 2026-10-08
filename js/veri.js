@@ -155,10 +155,10 @@ G.EK_SAYISI = [0, 1, 2, 3, 4];
 G.BONUS_ADLARI = {
   atk: 'Saldırı', def: 'Savunma', hp: 'Can', mp: 'Mana', hiz: 'Hız',
   krit: 'Kritik şansı', kritHasar: 'Kritik hasarı', canCal: 'Can çalma',
-  altin: 'Altın bulma', tecrube: 'Tecrübe kazancı',
+  altin: 'Altın bulma', tecrube: 'Tecrübe kazancı', tekrar: 'Büyüyü tekrarlama şansı',
   atkYuzde: 'Saldırı', hpYuzde: 'Can', defYuzde: 'Savunma'
 };
-G.YUZDE_STATLAR = { krit: 1, kritHasar: 1, canCal: 1, altin: 1, tecrube: 1, atkYuzde: 1, hpYuzde: 1, defYuzde: 1 };
+G.YUZDE_STATLAR = { tekrar: 1, krit: 1, kritHasar: 1, canCal: 1, altin: 1, tecrube: 1, atkYuzde: 1, hpYuzde: 1, defYuzde: 1 };
 
 // Setler: kaç parça giyilirse hangi bonus açılır
 G.SETLER = {
@@ -222,9 +222,9 @@ G.BECERILER = {
   yarma:          { ad: 'Yarma Darbesi',  sinif: 'savasci', tur: 'aktif', simge: 'b_yarma', minLv: 1,  mp: 10, bekleme: 1, etki: { tip: 'hasar', carpan: 1.9, vurus: 1 }, artis: { carpan: 0.15 } },
   kalkan_darbesi: { ad: 'Kalkan Darbesi', sinif: 'savasci', tur: 'aktif', simge: 'b_kalkan_darbesi', minLv: 3,  mp: 12, bekleme: 5, etki: { tip: 'hasar', carpan: 1.2, vurus: 1, sersem: 1 }, artis: { carpan: 0.1 } },
   savas_cigligi:  { ad: 'Savaş Çığlığı',  sinif: 'savasci', tur: 'aktif', simge: 'b_savas_cigligi', minLv: 6,  mp: 15, bekleme: 8, etki: { tip: 'guc', oran: 25, sure: 4 }, artis: { oran: 5 } },
-  demir_irade:    { ad: 'Demir İrade',    sinif: 'savasci', tur: 'aktif', simge: 'b_demir_irade', minLv: 10, mp: 14, bekleme: 7, etki: { tip: 'kalkan', oran: 40, sure: 3 }, artis: { oran: 5 } },
+  demir_irade:    { ad: 'Demir İrade',    sinif: 'savasci', tur: 'aktif', simge: 'b_demir_irade', minLv: 10, mp: 14, bekleme: 7, etki: { tip: 'kalkan', oran: 40, sure: 3, iyilesme: 8 }, artis: { oran: 5, iyilesme: 1 } },
   demir_deri:     { ad: 'Demir Deri',     sinif: 'savasci', tur: 'pasif', simge: 'b_demir_deri', minLv: 4,  bonus: { defYuzde: 6 } },
-  ofke:           { ad: 'Öfke',           sinif: 'savasci', tur: 'pasif', simge: 'b_ofke', minLv: 8,  bonus: { atkYuzde: 3, krit: 1 } },
+  ofke:           { ad: 'Öfke',           sinif: 'savasci', tur: 'pasif', simge: 'b_ofke', minLv: 8,  bonus: { atkYuzde: 3, krit: 1, canCal: 0.5 } },
 
   // ---- Büyücü ----
   ates_topu:      { ad: 'Ateş Topu',      sinif: 'buyucu', tur: 'aktif', simge: 'b_ates_topu', minLv: 1,  mp: 16, bekleme: 1, etki: { tip: 'hasar', carpan: 2.6, vurus: 1 }, artis: { carpan: 0.2 } },
@@ -232,13 +232,13 @@ G.BECERILER = {
   alev_dalgasi:   { ad: 'Alev Dalgası',   sinif: 'buyucu', tur: 'aktif', simge: 'b_alev_dalgasi', minLv: 6,  mp: 20, bekleme: 6, etki: { tip: 'hasar', carpan: 0.8, vurus: 1, dot: 0.6, sure: 4 }, artis: { dot: 0.1 } },
   mana_kalkani:   { ad: 'Mana Kalkanı',   sinif: 'buyucu', tur: 'aktif', simge: 'b_mana_kalkani', minLv: 10, mp: 22, bekleme: 7, etki: { tip: 'kalkan', oran: 45, sure: 3 }, artis: { oran: 5 } },
   bilgelik:       { ad: 'Bilgelik',       sinif: 'buyucu', tur: 'pasif', simge: 'b_bilgelik', minLv: 4,  bonus: { mp: 25, beceri: 3 } },
-  buyu_ustaligi:  { ad: 'Büyü Ustalığı',  sinif: 'buyucu', tur: 'pasif', simge: 'b_buyu_ustaligi', minLv: 8,  bonus: { beceri: 8 } },
+  buyu_ustaligi:  { ad: 'Büyü Ustalığı',  sinif: 'buyucu', tur: 'pasif', simge: 'b_buyu_ustaligi', minLv: 8,  bonus: { beceri: 5, tekrar: 3 } },
 
   // ---- Okçu ----
   cift_atis:      { ad: 'Çift Atış',      sinif: 'okcu', tur: 'aktif', simge: 'b_cift_atis', minLv: 1,  mp: 12, bekleme: 1, etki: { tip: 'hasar', carpan: 1.35, vurus: 2 }, artis: { carpan: 0.1 } },
   zehirli_ok:     { ad: 'Zehirli Ok',     sinif: 'okcu', tur: 'aktif', simge: 'b_zehirli_ok', minLv: 3,  mp: 14, bekleme: 5, etki: { tip: 'hasar', carpan: 1.0, vurus: 1, dot: 0.5, sure: 5 }, artis: { dot: 0.08 } },
   ok_yagmuru:     { ad: 'Ok Yağmuru',     sinif: 'okcu', tur: 'aktif', simge: 'b_ok_yagmuru', minLv: 6,  mp: 22, bekleme: 6, etki: { tip: 'hasar', carpan: 0.75, vurus: 4 }, artis: { carpan: 0.08 } },
-  golge_adim:     { ad: 'Gölge Adım',     sinif: 'okcu', tur: 'aktif', simge: 'b_golge_adim', minLv: 10, mp: 15, bekleme: 7, etki: { tip: 'kalkan', oran: 55, sure: 2 }, artis: { oran: 5 } },
+  golge_adim:     { ad: 'Gölge Adım',     sinif: 'okcu', tur: 'aktif', simge: 'b_golge_adim', minLv: 10, mp: 15, bekleme: 7, etki: { tip: 'kalkan', oran: 55, sure: 2, isaret: 25, isaretAdet: 4, isaretSure: 4 }, artis: { oran: 5, isaret: 3 } },
   keskin_goz:     { ad: 'Keskin Göz',     sinif: 'okcu', tur: 'pasif', simge: 'b_keskin_goz', minLv: 4,  bonus: { krit: 2 } },
   avci_icgudusu:  { ad: 'Avcı İçgüdüsü',  sinif: 'okcu', tur: 'pasif', simge: 'b_avci_icgudusu', minLv: 8,  bonus: { kritHasar: 10 } },
 
@@ -402,7 +402,7 @@ G.BECERILER.ok_yagmuru.artis = { carpan: 0.08 };
 
 Object.assign(G.BECERILER, {
   hilal_kesik:  { ad: 'Hilal Kesiği', sinif: 'savasci', tur: 'aktif', simge: 'b_hilal_kesik', minLv: 2, mp: 0, bekleme: 3,
-                  etki: { tip: 'hasar', sekil: 'yarimay', carpan: 1.1, vurus: 1 }, artis: { carpan: 0.1 } },
+                  etki: { tip: 'hasar', sekil: 'yarimay', carpan: 1.1, vurus: 1, dot: 0.15, sure: 3 }, artis: { carpan: 0.1, dot: 0.03 } },
   kasirga:      { ad: 'Kasırga', sinif: 'savasci', tur: 'aktif', simge: 'b_kasirga', minLv: 8, mp: 18, bekleme: 6,
                   etki: { tip: 'hasar', sekil: 'kasirga', carpan: 1.4, vurus: 1 }, artis: { carpan: 0.12 } },
   gokatasi:     { ad: 'Göktaşı', sinif: 'buyucu', tur: 'aktif', simge: 'b_gokatasi', minLv: 12, mp: 35, bekleme: 8,
@@ -1168,3 +1168,6 @@ G.BECERILER.alevli_ates = { ad: 'Alevli Ateş', sinif: 'buyucu', tur: 'aktif', t
   etki: { tip: 'peri', adet: 3, carpan: 0.7, sure: 5 }, artis: { carpan: 0.06 }, efekt: 'peri' };
 G.BECERILER.anka_tuyu = { ad: 'Anka Kuşu Tüyü', sinif: 'okcu', tur: 'aktif', totem: true, simge: 'b_anka_tuyu', minLv: 15, mp: 30, bekleme: 20,
   etki: { tip: 'kalkan', oran: 100, sure: 3, patlama: 0.8 }, artis: { patlama: 0.08 }, efekt: 'anka' };
+
+// v0.38 — Beceri uyumu (Warriors and Adventure sınıf sayfası): Büyü Ustalığı tekrarı bu oranda hasar verir
+G.TEKRAR_CARPAN = 0.7;

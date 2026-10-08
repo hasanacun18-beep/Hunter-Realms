@@ -1372,3 +1372,7 @@ body,#uygulama{min-height:100vh;min-height:100dvh}
 
 /* v0.37 — Totem becerileri */
 .totem-rozet{font-size:10px;letter-spacing:.08em;color:#1a140e;background:linear-gradient(#f0c070,#c08a3a);border-radius:3px;padding:1px 5px;margin-left:6px;vertical-align:middle}
+
+/* v0.38 — Gölge Adım işareti */
+.saha-kart.isaretli{box-shadow:0 0 0 2px #c0503a,0 0 10px rgba(220,80,50,.6)}
+.saha-kart.isaretli .kad::before{content:'◎ ';color:#e8735a}

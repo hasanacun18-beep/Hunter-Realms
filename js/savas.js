@@ -164,6 +164,7 @@ G.savasTik = function () {
     G.hasarGoster(i, c.dot.h, false, 'dot');
     if (--c.dot.tur <= 0) c.dot = null;
   });
+  G.alan.forEach(function (c) { if (c && c.isaret && --c.isaret.tur <= 0) c.isaret = null; });   // v0.38
   G.alan.forEach(function (c, i) { if (c && !c.olu && c.hp <= 0) G.canavarOldu(i); });
 
   // --- Yanımızdaki aktif canavarlar vurur ---
@@ -216,6 +217,15 @@ G.oyuncuSaldir = function (t, r) {
       if (e.sersem && c.hp > 0 && !c.boss) c.sersem = e.sersem;
       if (e.dot && c.hp > 0) c.dot = { h: Math.round((r.atkMin + r.atkMax) / 2 * e.dot * beceriCarpan), tur: e.sure };
     });
+    // v0.38: Büyü Ustalığı — büyü şansla bedavaya bir kez daha (daha zayıf) çalışır
+    if (b && r.tekrar && Math.random() * 100 < r.tekrar) {
+      var yasayan = hedefler.filter(function (i) { return G.alan[i] && G.alan[i].hp > 0; });
+      if (yasayan.length) {
+        G.log(G.ikon('b_buyu_ustaligi') + ' Büyü Ustalığı: ' + b.ad + ' tekrarlandı', 'sistem');
+        setTimeout(function () { G.fx.oynat(b.efekt || G.FX_NORMAL[o.sinif], t, hucreler, true, null); }, 250);
+        yasayan.forEach(function (i) { toplam += G.vur(i, G.alan[i], r, gucCarpan, e.carpan * beceriCarpan * G.TEKRAR_CARPAN, 'beceri'); });
+      }
+    }
     // Tetiklenen ek vuruş (pasif becerilerden)
     if (!b && r.ekVurus && t.hp > 0 && Math.random() * 100 < r.ekVurus) toplam += G.vur(G.alan.indexOf(t), t, r, gucCarpan, 0.6);
     if (!b) toplam += G.ilahiTetik(t, r);
@@ -229,6 +239,12 @@ G.oyuncuSaldir = function (t, r) {
     var pHucre = e.patlama ? G.sekilHucreleri('kasirga', t) : null;
     G.fx.oynat(b.efekt || 'kalkan', t, pHucre, true, b.ad);
     s.kalkan = { oran: e.oran, tur: e.sure };
+    // v0.38: Demir İrade — anında can yenileme
+    if (e.iyilesme) { var ki = Math.round(r.hpMax * e.iyilesme / 100); o.hp = Math.min(r.hpMax, o.hp + ki); G.oyuncuHasar('+' + ki); }
+    // v0.38: Gölge Adım — en yakın aktif canavarları işaretle, savunmaları düşer
+    if (e.isaret) G.aktifler().sort(function (a, c) { return G.cheb(G.oyuncu, a) - G.cheb(G.oyuncu, c); }).slice(0, e.isaretAdet).forEach(function (c) {
+      c.isaret = { oran: e.isaret, tur: e.isaretSure };
+    });
     // v0.37: etraftaki 8 kareye patlama
     if (e.patlama) G.hucredekiler(pHucre).forEach(function (i) {
       var c = G.alan[i]; c.aktif = true;
@@ -286,7 +302,8 @@ G.vur = function (i, c, r, gucCarpan, carpan, tur) {
   var h = G.rastgele(r.atkMin, r.atkMax) * gucCarpan;
   var krit = Math.random() * 100 < r.krit;
   if (krit) h *= 1.6 + r.kritHasar / 100;
-  h = Math.max(1, Math.round(h * carpan - c.def));
+  var def = c.isaret ? c.def * (1 - c.isaret.oran / 100) : c.def;   // v0.38: işaretli canavarın savunması düşük
+  h = Math.max(1, Math.round(h * carpan - def));
   c.hp -= h;
   G.hasarGoster(i, h, krit, tur);
   G.mitikKanHirsi(h);   // v0.33
