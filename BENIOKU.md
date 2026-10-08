@@ -1,4 +1,4 @@
-# Hunter Realms — v0.35 (su verme)
+# Hunter Realms — v0.36 (cila taşları)
 
 > Not: Oyun eskiden "Kara Diyar" adıyla geliştirildi, bu sürümde "Hunter Realms" olarak
 > yeniden adlandırıldı. Kayıt dosyalarının iç anahtar isimleri değişmedi (bkz. CLAUDE.md).
@@ -429,3 +429,13 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - KAYIT: eşyalara yeni alan e.su, sarf'a o.sarf.suTasi — G.gocEt eski eşyalara da rastgele bir ilk cila verir
 - Ayarlar: veri.js → G.SUVERME. Kod: esya.js (G.suMaks, G.suUret, G.cila), demirci.js (G.suVer, G.suKaydet, G.suSifirla),
   arayuz-demirci.js (G.suvermeHtml). Yeni ikonlar: suverme, su_tasi
+
+## v0.36 değişiklikleri (Cila taşları — referanstaki gibi su verme taş istemez)
+- Su verme artık hiç taş istemez: Su Ver ve Gelişmiş sadece altınla (Gelişmiş = normal bedelin 3 katı), Sıfırla da altınla
+- Su Verme Taşı kalktı; yerine 5 kademe cila taşı: Ham (+1), Cila Taşı (+2), Parlak (+3), Usta (+10), Kusursuz (+20)
+- Demirci → Su Verme → "Cilala": taş her statın oranını taşın gücü kadar artırır, cila da o kadar yükselir (en fazla %100)
+- Düşme: elit canavardan %25 şansla 1 taş (+1/+2/+3), bosstan 1-2 taş (+2/+3 sık, +10 ara sıra, +20 nadir)
+- Dükkan: Ham Cila Taşı 150, Cila Taşı 350 altın
+- KAYIT: eşyadaki e.su (stat değeri) → e.so (yüzde oran, daha hassas); o.sarf.cila1..cila5.
+  G.gocEt eski e.su'yu orana çevirir, eldeki her Su Verme Taşı 1 Parlak Cila Taşı (+3) olur
+- Ayarlar: veri.js → G.SUVERME, G.CILA_TASLARI (ad, arti, renk, agirlikElit, agirlikBoss). Kod: demirci.js → G.cilala, G.cilaTasiSec

@@ -76,6 +76,7 @@ G.eylem = function (ad, d) {
     case 'suGelismis':G.suVer(+d.id, true); break;
     case 'suKaydet':  G.suKaydet(); break;
     case 'suSifirla': G.suSifirla(+d.id); break;
+    case 'cilala':    G.cilala(+d.id, d.t); break;
     case 'statArti': G.statDegis(d.k, 1); break;
     case 'statEksi': G.statDegis(d.k, -1); break;
     case 'statKaydet': G.statKaydet(); break;
