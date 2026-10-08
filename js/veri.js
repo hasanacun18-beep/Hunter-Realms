@@ -1275,3 +1275,18 @@ G.BONUS_ADLARI.hasarArtir = 'Hasar artırma';
 G.BONUS_ADLARI.sabitHasar = 'Sabit hasar';
 G.BONUS_ADLARI.sabitDef = 'Sabit savunma';
 ['direnc', 'hasarAzalt', 'kacinma', 'blitz', 'hasarArtir'].forEach(function (k) { G.YUZDE_STATLAR[k] = 1; });
+
+// ============================================================
+// v0.43 — TOTEM SAYILARI (Warriors and Adventure "Yetenekler" sayfası, 6 seviye) — beceri.js
+// tablo: her seviyenin değeri ayrı (1..6). Artış (artis) yerine kullanılır.
+//   Acımasız Darbe: sıçrama 2-4 kare, iniş yerinin çevresinde (yaricap) 3-8 canavara %200-450 — wiki ile aynı
+//   Alevli Ateş: 3-6 ruh; wiki %100-250 "her saldırı" diyor, bizde ruhlar HER TUR vurduğu için yarısı alındı
+//   Anka Kuşu Tüyü: wiki yalnız 1. seviyeyi veriyor (2 sn bağışıklık, %100 hasar); üst seviyeler aynı artış hızıyla tahmin
+// ============================================================
+G.BECERILER.acimasiz_darbe.etki = { tip: 'hasar', sekil: 'coklu', yaricap: 1, carpan: 2.0, vurus: 1, sersem: 1, sicrama: 2, adet: 3 };
+G.BECERILER.acimasiz_darbe.artis = {};
+G.BECERILER.acimasiz_darbe.tablo = { sicrama: [2, 2, 3, 3, 3, 4], adet: [3, 4, 5, 6, 7, 8], carpan: [2.0, 2.5, 3.0, 3.5, 4.0, 4.5] };
+G.BECERILER.alevli_ates.artis = {};
+G.BECERILER.alevli_ates.tablo = { adet: [3, 3, 5, 5, 5, 6], carpan: [0.5, 0.65, 0.8, 0.95, 1.1, 1.25] };
+G.BECERILER.anka_tuyu.artis = {};
+G.BECERILER.anka_tuyu.tablo = { sure: [2, 2, 3, 3, 3, 4], patlama: [1.0, 1.2, 1.4, 1.6, 1.8, 2.0] };
