@@ -1086,6 +1086,33 @@ G.MITIK = {
              aciklama: 'Sana vuran canavar %15 ihtimalle lanetlenir: 3 tur boyunca %20 daha zayıf vurur.' }
   }
 };
+
+// ============================================================
+// v0.34 — UNVANLAR (Warriors and Adventure'daki "Title")
+// Koşul sağlanınca kazanılır ve kalıcıdır. Aynı anda BİR unvan takılır; sadece onun statı işler.
+// Statlar yüzdelik (G.YUZDE_STATLAR) — ileri seviyede de anlamını korur.
+// tur: oldurme (toplam öldürme), boss (belirli boss, id), bossToplam, kule (en yüksek kat),
+//      arti (eşyalardaki en yüksek +), galeri (alınan galeri kademesi toplamı), mitik (açık efsanevi yuva), seviye
+// Yeni unvan: listenin SONUNA ekle (id'ler kayıtta tutulur, değiştirme)
+// ============================================================
+G.UNVANLAR = [
+  { id: 'acemi',     ad: 'Acemi Avcı',             tur: 'oldurme',    n: 100,   stat: { tecrube: 3 } },
+  { id: 'usta',      ad: 'Usta Avcı',              tur: 'oldurme',    n: 2000,  stat: { atkYuzde: 3 } },
+  { id: 'kasap',     ad: 'Kan Dökücü',             tur: 'oldurme',    n: 10000, stat: { atkYuzde: 5, krit: 2 } },
+  { id: 'kurtbela',  ad: 'Kurt Kralı\'nın Belası',  tur: 'boss', id2: 'kurt_kral',      n: 1, stat: { hpYuzde: 2 } },
+  { id: 'iblis',     ad: 'İblis Avcısı',           tur: 'boss', id2: 'zincirli_iblis', n: 1, stat: { atkYuzde: 3 } },
+  { id: 'ejder',     ad: 'Ejder Katili',           tur: 'boss', id2: 'kara_ejder',     n: 1, stat: { krit: 3, kritHasar: 10 } },
+  { id: 'ayaz',      ad: 'Buzu Kıran',             tur: 'boss', id2: 'ayaz_devi',      n: 1, stat: { defYuzde: 5, hpYuzde: 3 } },
+  { id: 'hiclik',    ad: 'Hiçliği Yenen',          tur: 'boss', id2: 'hiclik_efendisi', n: 1, stat: { atkYuzde: 8, hpYuzde: 5 } },
+  { id: 'bossavci',  ad: 'Boss Avcısı',            tur: 'bossToplam', n: 50,    stat: { defYuzde: 4, altin: 5 } },
+  { id: 'kule1',     ad: 'Kule Tırmanıcısı',       tur: 'kule',       n: 12,    stat: { hpYuzde: 4 } },
+  { id: 'kule2',     ad: 'Kule Fatihi',            tur: 'kule',       n: 48,    stat: { atkYuzde: 5, defYuzde: 5 } },
+  { id: 'demirci1',  ad: 'Demirci Çırağı',         tur: 'arti',       n: 7,     stat: { defYuzde: 3 } },
+  { id: 'demirci2',  ad: 'Usta Demirci',           tur: 'arti',       n: 12,    stat: { atkYuzde: 4, defYuzde: 4 } },
+  { id: 'koleksiyon', ad: 'Koleksiyoncu',          tur: 'galeri',     n: 40,    stat: { altin: 10, tecrube: 5 } },
+  { id: 'efsane1',   ad: 'Efsane Taşıyıcı',        tur: 'mitik',      n: 5,     stat: { hpYuzde: 6 } },
+  { id: 'efsane2',   ad: 'Efsanelerin Efendisi',   tur: 'mitik',      n: 10,    stat: { atkYuzde: 7, hpYuzde: 7 } }
+];
 G.NADIRLIK[1].sans = 20;          // İyi (önce 25)
 G.NADIRLIK[2].sans = 6;           // Nadir (önce 10)
 G.NADIRLIK[3].sans = 1.2;         // Destansı (önce 3)

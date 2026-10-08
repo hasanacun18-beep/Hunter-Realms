@@ -164,8 +164,28 @@ G.statSayfaHtml = function () {
       '<div class="satir"><span>Tecrübe kazancı</span><span>+%' + r.tecrube + '</span></div>' +
     '</div>' +
     G.setKutusuHtml(r) +
+    G.unvanHtml() +
     '<div class="kutu soluk">Öldürülen canavar: ' + o.istatistik.oldurme + '<br>Yenilgi: ' + o.istatistik.olum + '</div>' +
     '<button class="genis-dugme" data-eylem="secimeDon">↩ Karakter seçimine dön</button>';
+};
+
+// v0.34 — Unvanlar: kazanılan / kilitli liste; takılı olan stat verir
+G.unvanHtml = function () {
+  var o = G.o, n = Object.keys(o.unvan.kazanilan).length;
+  var satirlar = G.UNVANLAR.map(function (u) {
+    var kaz = G.unvanKazanildi(u.id), tak = o.unvan.takili === u.id, p = G.unvanIlerleme(u);
+    var stat = Object.keys(u.stat).map(function (k) { return G.bonusYazi(k, u.stat[k]); }).join(', ');
+    var sag = tak ? '<button class="sus-dugme gl-al" data-eylem="unvanCikar"><span>Çıkar</span></button>' :
+      kaz ? '<button class="sus-dugme gl-al" data-eylem="unvanTak" data-id="' + u.id + '"><span>Tak</span></button>' :
+      '<span class="un-ilerleme">' + p.sayi + '/' + p.hedef + '</span>';
+    return '<div class="unvan-satir' + (tak ? ' takili' : kaz ? ' kazanildi' : ' kilitli') + '">' +
+      G.ikon(kaz ? 'unvan' : 'kilit', 'un-ikon') +
+      '<span class="un-ad"><b>' + u.ad + '</b><small>' + p.yazi + ' · <span class="un-stat">' + stat + '</span></small></span>' +
+      sag + '</div>';
+  }).join('');
+  return '<div class="kutu"><h2>' + G.ikon('unvan') + ' Unvanlar <small class="soluk">' + n + '/' + G.UNVANLAR.length + '</small></h2>' +
+    '<p class="bilgi soluk">Unvanlar başarılarla kazanılır. Aynı anda bir unvan takılır, yalnız takılı unvanın gücü işler.</p>' +
+    satirlar + '</div>';
 };
 
 G.setKutusuHtml = function (r) {

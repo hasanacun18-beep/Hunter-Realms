@@ -40,6 +40,8 @@ G.eylem = function (ad, d) {
     case 'mitikAc':     G.mitikAc(d.id); break;
     case 'mitikSok':    G.mitikSok(d.id); break;
     case 'mitikTakas':  G.mitikTakas(d.id); break;
+    case 'unvanTak':    G.unvanTak(d.id); break;
+    case 'unvanCikar':  G.unvanCikar(); break;
     // karakter
     case 'stat':      G.statArtir(d.k); break;
     case 'bosSlot':   G.bildir('Bu yuva boş. Çantadan eşya kuşanabilirsin.'); break;

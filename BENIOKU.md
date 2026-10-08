@@ -1,4 +1,4 @@
-# Hunter Realms — v0.33 (efsanevi set)
+# Hunter Realms — v0.34 (unvanlar)
 
 > Not: Oyun eskiden "Kara Diyar" adıyla geliştirildi, bu sürümde "Hunter Realms" olarak
 > yeniden adlandırıldı. Kayıt dosyalarının iç anahtar isimleri değişmedi (bkz. CLAUDE.md).
@@ -32,6 +32,7 @@ Kayıt tarayıcının localStorage'ına otomatik yapılır (10 saniyede bir ve h
 | js/kule.js             | Kule (süreli bekçi savaşı) ve rünler |
 | js/galeri.js           | Galeri: canavar ansiklopedisi, öldürme kademeleri ve kalıcı statlar |
 | js/mitik.js            | Efsanevi set: 10 ayrı yuva, parça düşmesi, takas, Kan Hırsı ve Muhafız Laneti |
+| js/unvan.js            | Unvanlar: kazanma kontrolü, ilerleme, tak / çıkar |
 | js/beceri.js           | Beceri etkileri, kitaplar, ustalık, geliştirme |
 | js/yedek.js            | Kayıt dışa/içe aktarma (.json dosyası) |
 | js/arayuz.js           | Ortak arayüz: üst bar, sekmeler, eşya kutusu, set detayı |
@@ -402,3 +403,14 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - Takas: açık yuvanın fazla parçası sökülünce 1 Efsane Özü; 3 özle istenen yuvanın parçası alınır
 - KAYIT: yeni alan o.mitik ({ acik, parca, oz }) — G.gocEt eski kayıtlara boş olarak ekler
 - Ayarlar: veri.js → G.MITIK (lvTaban, dusme, dusmeLv, sokOz, takasOz, yuvalar, beceriler). Yeni dosya: js/mitik.js
+
+## v0.34 değişiklikleri (Unvanlar — Warriors and Adventure'daki "Title" gibi)
+- Karakter → Statlar sayfasının altında yeni "Unvanlar" kutusu: 16 unvan, kazanılan / kilitli, ilerleme sayacı
+- Unvanlar başarılarla kazanılır: canavar öldürme (100 / 2000 / 10000), her ana bölge bossunu ilk kez yenmek,
+  toplam 50 boss, Sınav Kulesi 12. ve 48. kat, bir eşyayı +7 / +12 yapmak, 40 Galeri kademesi, 5 / 10 efsanevi yuva
+- Aynı anda tek unvan takılır, yalnız takılı unvanın statı işler (ör. Usta Avcı +%3 saldırı, Hiçliği Yenen +%8 saldırı +%5 can)
+- Takılı unvan üst çubukta karakter adının altında görünür
+- Yeni unvan kazanılınca günlükte ve bildirimde duyurulur (kontrol her kayıtta yapılır; eski karakterler
+  zaten tamamladıkları unvanları ilk kayıtta toplu kazanır)
+- KAYIT: yeni alan o.unvan ({ kazanilan, takili }) — G.gocEt eski kayıtlara boş olarak ekler
+- Ayarlar: veri.js → G.UNVANLAR (yeni unvan listenin SONUNA eklenir). Yeni dosya: js/unvan.js. Yeni ikon: unvan (defne)

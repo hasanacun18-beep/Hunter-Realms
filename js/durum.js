@@ -45,6 +45,7 @@ G.gocEt = function (o) {
   if (!o.bossZaman) o.bossZaman = {};          // v0.30: { bossId: yeniden doğacağı zaman (ms) }
   if (!o.galeri) o.galeri = {};                // v0.32: { canavarId: alınan galeri kademesi }
   if (!o.mitik) o.mitik = { acik: {}, parca: {}, oz: 0 };   // v0.33: efsanevi set
+  if (!o.unvan) o.unvan = { kazanilan: {}, takili: null };   // v0.34: unvanlar
   if (!o.kitapSayfa) o.kitapSayfa = {};
   // v0.14 beceri geliştirme
   if (!o.kitaplar) o.kitaplar = JSON.parse(JSON.stringify(o.kitapSayfa));
@@ -126,6 +127,8 @@ G.hesapla = function (o) {
   if (o.ilahi) { var il = G.ilahiStat(o.ilahi); ekle('atk', il.atk); ekle('hp', il.hp); ekle('mp', il.mp); }
   if (o.galeri) { var gs = G.galeriStat(o.galeri); for (var gk in gs) ekle(gk, gs[gk]); }   // v0.32
   if (o.mitik) { var ms2 = G.mitikStat(o); for (var mk2 in ms2) ekle(mk2, ms2[mk2]); }   // v0.33
+  var un = o.unvan && o.unvan.takili && G.unvanBul(o.unvan.takili);   // v0.34: takılı unvan
+  if (un) for (var uk in un.stat) ekle(uk, un.stat[uk]);
   // Pasif beceriler (sadece açık yuvalardakiler)
   // Öğrenilen bütün pasif beceriler etkin
   Object.keys(o.beceriler || {}).forEach(function (id) {
@@ -196,6 +199,7 @@ G.statArtir = function (k) {
 // ---- v0.13: 3 karakter yuvası ----
 G.kaydet = function () {
   if (!G.o) return;
+  if (G.unvanKontrol) G.unvanKontrol();   // v0.34: yeni kazanılan unvan var mı
   try { localStorage.setItem(G.slotAnahtar(G.aktifSlot), JSON.stringify(G.o)); }
   catch (e) { console.warn('Kayıt başarısız:', e); }
 };
