@@ -522,3 +522,13 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
     bizde ruhlar her tur vurduğu için yarısı alındı). 1. seviye eskisinden biraz zayıf (%70 → %50), üst seviyeler çok daha güçlü
   - Anka Kuşu Tüyü: bağışıklık 2/2/3/3/3/4 tur, patlama %100/120/140/160/180/200 (wiki yalnız 1. seviyeyi veriyor; üstü tahmin)
 - Kayıt yapısı değişmedi. Ayarlar: veri.js → G.BECERILER.<totem>.tablo (beceri.js → G.beceriEtki tabloyu okur)
+
+## v0.44 değişiklikleri (Sınıf uzmanlıkları — ilk temel)
+- Seviye 10 ve üstü karakterler sınıflarına özel iki uzmanlık yolundan birini seçebilir:
+  - Savaşçı: Muhafız / Cellat
+  - Büyücü: Elementçi / Ruh Çağırıcı
+  - Okçu: Keskin Nişancı / Tuzakçı
+- Seçim karakter ekranı → Statlar bölümünden yapılır ve bir kez seçildikten sonra değiştirilemez.
+- Uzmanlık bonusları merkezi stat hesabına bağlandı; eski kayıtlara `uzmanlik: null` alanı göçle eklenir.
+- Yeni modül: `js/uzmanlik.js`. Yeni script `index.html` içinde `durum.js` sonrasında yüklenir.
+- İlk aşamada becerilerin davranışı değiştirilmedi; sonraki aşama uzmanlık-beceri build seçimidir.

@@ -84,6 +84,8 @@ G.eylem = function (ad, d) {
     case 'statEksi': G.statDegis(d.k, -1); break;
     case 'statKaydet': G.statKaydet(); break;
     case 'statSifirla': G.statSifirla(); break;
+    case 'uzmanlikAc': G.uzmanlikAc(); break;
+    case 'uzmanlikSec': G.uzmanlikSec(d.id); break;
     case 'ilahiAc':   G.karakterAlt = 'ilahi'; G.sekmeAc('karakter'); break;
     case 'cantaSekme':G.cantaSekme = d.s; G.cizCanta(); break;
     case 'sarfAc':    G.sarfModal(d.t); break;

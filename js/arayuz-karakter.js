@@ -145,7 +145,8 @@ G.statSayfaHtml = function () {
       '<button data-eylem="statArti" data-k="' + k + '"' + (G.bekleyenToplam() < o.puan ? '' : ' disabled') + '>+</button></div>';
   }).join('');
   var kalan = o.puan - G.bekleyenToplam();
-  return '<div class="kutu"><h2>' + s.ikon + ' Karakter Statları</h2>' +
+  return G.uzmanlikHtml() +
+    '<div class="kutu"><h2>' + s.ikon + ' Karakter Statları</h2>' +
       '<div class="stat-ekran"><div class="stat-sol">' + satirlar +
         '<p class="' + (kalan ? 'fark-arti' : 'soluk') + ' kucuk-not">Dağıtılmamış puan: ' + kalan + '</p></div>' +
       '<div class="stat-sag">' +

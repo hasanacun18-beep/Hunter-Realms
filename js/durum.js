@@ -40,6 +40,7 @@ G.gocEt = function (o) {
     o.aktifYuva = [bas, null, null];
     o.pasifYuva = [null, null];
   }
+  if (o.uzmanlik == null) o.uzmanlik = null; // v0.44: seviye 10 sınıf uzmanlığı
   if (o.ayar.otoBeceri == null) o.ayar.otoBeceri = true;
   if (o.ayar.ses == null) o.ayar.ses = true;   // v0.24
   if (!o.bossZaman) o.bossZaman = {};          // v0.30: { bossId: yeniden doğacağı zaman (ms) }
@@ -149,6 +150,11 @@ G.hesapla = function (o) {
   if (un) for (var uk in un.stat) ekle(uk, un.stat[uk]);
   var ruh = G.ruhStat(o);   // v0.42: ruh dökümü (sabit savunma doğrudan savunmaya)
   for (var rk in ruh) ekle(rk === 'sabitDef' ? 'def' : rk, ruh[rk]);
+  // v0.44: seçilen sınıf uzmanlığının kalıcı bonusları
+  if (o.uzmanlik && G.uzmanlikBul) {
+    var uz = G.uzmanlikBul(o.sinif, o.uzmanlik);
+    if (uz) for (var uk2 in uz.bonus) ekle(uk2, uz.bonus[uk2]);
+  }
   // Pasif beceriler (sadece açık yuvalardakiler)
   // Öğrenilen bütün pasif beceriler etkin
   Object.keys(o.beceriler || {}).forEach(function (id) {

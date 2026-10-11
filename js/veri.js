@@ -609,6 +609,23 @@ G.SINIFLAR.savasci.hikaye = 'Hunter Realms\'ın surlarını bin yıl boyunca sav
 G.SINIFLAR.buyucu.hikaye = 'Kül Harabeleri\'nin kütüphanelerinden kaçırılan kitaplarla yetişen büyücüler, ateşi ve buzu aynı nefeste çağırır. Bedenleri kırılgandır ama bir dokunuşla dokuz kareyi alevlere boğarlar.';
 G.SINIFLAR.okcu.hikaye = 'Sisli Orman\'ın izcileri rüzgarı okur, düşmanı daha yaklaşmadan vurur. Kuşatılmadan önce geri çekilmeyi, uzaktan öldürmeyi bilirler.';
 
+// v0.44 — SINIF UZMANLIKLARI: Seviye 10'da bir yol seçilir.
+// Bonuslar durum.js → hesapla() üzerinden uygulanır; mevcut kayıtlar korunur.
+G.UZMANLIKLAR = {
+  savasci: [
+    { id: 'muhafiz', ad: 'Muhafız', ikon: '🛡️', aciklama: 'Dayanıklılık ve savunma odaklı savaşçı.', bonus: { defYuzde: 8, hpYuzde: 5 } },
+    { id: 'cellat', ad: 'Cellat', ikon: '⚔️', aciklama: 'Kritik ve tek hedef hasarı odaklı savaşçı.', bonus: { atkYuzde: 5, krit: 3 } }
+  ],
+  buyucu: [
+    { id: 'elementci', ad: 'Elementçi', ikon: '🔥', aciklama: 'Beceri hasarı ve saldırı büyüleri odaklı büyücü.', bonus: { beceri: 8, atkYuzde: 3 } },
+    { id: 'ruh_cagirici', ad: 'Ruh Çağırıcı', ikon: '🔮', aciklama: 'Mana ve dayanıklılık odaklı büyücü.', bonus: { hpYuzde: 6, mp: 18, beceri: 3 } }
+  ],
+  okcu: [
+    { id: 'keskin_nisanci', ad: 'Keskin Nişancı', ikon: '🎯', aciklama: 'Uzak mesafe ve kritik vuruş odaklı okçu.', bonus: { atkYuzde: 4, krit: 4 } },
+    { id: 'tuzakci', ad: 'Tuzakçı', ikon: '🪤', aciklama: 'Kontrol ve sürdürülebilir hasar odaklı okçu.', bonus: { defYuzde: 4, beceri: 5, hiz: 2 } }
+  ]
+};
+
 G.AD_PARCALARI = {
   bas: ['Kara', 'Ak', 'Demir', 'Kor', 'Ay', 'Gök', 'Tuğ', 'Bora', 'Alp', 'Yağız', 'Tolun', 'Arslan', 'Buz', 'Ateş', 'Kıl', 'Sis', 'Yıldız', 'Kurt'],
   son: ['han', 'tay', 'bey', 'doğan', 'kılıç', 'ay', 'er', 'can', 'tekin', 'bars', 'kaya', 'tuğ', 'yürek', 'pençe', 'göz']
