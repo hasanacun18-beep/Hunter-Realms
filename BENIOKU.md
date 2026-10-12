@@ -542,3 +542,10 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - Tuzakçı: süreli hasar ve işaret etkilerini güçlendirir; mayınlar +1 kusur verir.
 - Değişiklik `G.beceriEtki()` üzerinden uygulanır; temel beceri verisi ve kayıtlı beceri seviyeleri değişmez.
 - Kod: `js/uzmanlik.js` → `G.uzmanlikBeceriEtki`, `js/beceri.js` → etkin etki bağlantısı.
+
+## v0.46 değişiklikleri (Dallanan dünya haritası ve UI görsel ilk adım)
+- Dünya haritası artık listedeki tek bir çizgi değildir; iki yönlü komşu bölgelerden oluşan dallanan bir yol ağıdır.
+- Oyuncu haritada bulunduğu bölgeye bağlı komşu bölgelere ilerler. Görev, dönüş parşömeni ve zorunlu oyun geçişleri `zorla` akışıyla korunur.
+- Harita ekranına bölge ağı çizgileri, açık komşu yolu vurgusu, sisli kilitli bölgeler, pusula, başlık ve harita açıklaması eklendi.
+- Bölge modalı, doğrudan yol olmayan açık bölgelerde oyuncuyu bağlı bir komşu seçmesi için uyarır.
+- Kod: `veri.js` → `G.HARITA_YOLLARI`, `arayuz-harita.js` → komşuluk/çizim, `savas.js` → geçiş doğrulaması, `css/stil.css` → harita görsel kimliği.
