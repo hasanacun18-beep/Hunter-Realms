@@ -313,9 +313,9 @@ G.BOLGELER = [
     aciklama: 'Işığın bile geri dönmediği uçurum. Bütün karanlık buradan doğdu; ona Hiçlik derler. Buradan ötesi yok.', canavarlar: ['hiclik_gozcusu', 'golge_sovalye', 'bosluk_canavari'], boss: 'hiclik_efendisi' }
 ];
 
-// v0.46 — Dünya haritası artık tek sıra değil, dallanan komşuluk yollarından oluşur.
-// Her çift iki yönlüdür. Görev/parşömen gibi zorunlu geçişler bu kuralı zorla aşabilir.
-G.HARITA_YOLLARI = [
+// v0.46 — Ana savaş ekranının altındaki bölge ilerlemesi: dallanan yollar.
+// Bu veri, ana harita sekmesinden bağımsızdır; savaş ekranında keşif seçeneklerini gösterir.
+G.BOLGE_YOLLARI = [
   ['koy', 'orman'], ['koy', 'vadi'], ['orman', 'vadi'],
   ['vadi', 'kervansaray'], ['vadi', 'harabe'], ['kervansaray', 'harabe'],
   ['harabe', 'kale'], ['harabe', 'demirkapi'], ['kale', 'demirkapi'],

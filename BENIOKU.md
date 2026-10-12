@@ -543,9 +543,8 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - Değişiklik `G.beceriEtki()` üzerinden uygulanır; temel beceri verisi ve kayıtlı beceri seviyeleri değişmez.
 - Kod: `js/uzmanlik.js` → `G.uzmanlikBeceriEtki`, `js/beceri.js` → etkin etki bağlantısı.
 
-## v0.46 değişiklikleri (Dallanan dünya haritası ve UI görsel ilk adım)
-- Dünya haritası artık listedeki tek bir çizgi değildir; iki yönlü komşu bölgelerden oluşan dallanan bir yol ağıdır.
-- Oyuncu haritada bulunduğu bölgeye bağlı komşu bölgelere ilerler. Görev, dönüş parşömeni ve zorunlu oyun geçişleri `zorla` akışıyla korunur.
-- Harita ekranına bölge ağı çizgileri, açık komşu yolu vurgusu, sisli kilitli bölgeler, pusula, başlık ve harita açıklaması eklendi.
-- Bölge modalı, doğrudan yol olmayan açık bölgelerde oyuncuyu bağlı bir komşu seçmesi için uyarır.
-- Kod: `veri.js` → `G.HARITA_YOLLARI`, `arayuz-harita.js` → komşuluk/çizim, `savas.js` → geçiş doğrulaması, `css/stil.css` → harita görsel kimliği.
+## v0.46 değişiklikleri (Ana savaş ekranı bölge yolu)
+- Ana harita sekmesine dokunulmadan, savaş ekranının altındaki mini bölge yolu doğrusal üçlü gösterimden dallanan komşu rotalara çevrildi.
+- Oyuncunun bulunduğu bölgeden ayrılan iki veya daha fazla seçenek aynı panelde görüntülenir; seviye yetmeyen yollar kilitli gösterilir.
+- Mevcut bölge ayrı ve vurgulu bir düğüm olarak görünür; yol seçenekleri referans oyundaki alt ilerleme paneline benzer şekilde yatay dallanır.
+- Kod: `veri.js` → `G.BOLGE_YOLLARI`, `arayuz-savas.js` → mini yol çizimi, `css/stil.css` → dallanan yol paneli.

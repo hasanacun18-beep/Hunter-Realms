@@ -617,7 +617,6 @@ G.bolgeGit = function (id, zorla) {
   var o = G.o, b = G.bolgeBul(id);
   if (!zorla) {
     if (o.lv < b.minLv) { G.bildir('Seviye ' + b.minLv + ' gerekiyor.'); return; }
-    if (G.haritaBagliMi && !G.haritaBagliMi(o.bolge, id)) { G.bildir('Bu bölgeye doğrudan yol yok. Haritadan bağlı bir komşu seç.'); return; }
   }
   o.bolge = id;
   o.gezilen[id] = 1;
