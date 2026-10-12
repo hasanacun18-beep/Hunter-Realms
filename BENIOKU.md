@@ -551,3 +551,8 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - Boss plakası, iksir/aksiyon düğmeleri, savaş günlüğü, görev şeridi ve mini bölge paneli yeniden stillendirildi.
 - Mobil genişlik için küçük ekran düzenlemeleri eklendi.
 - Kod değişikliği yalnızca `css/stil.css` üzerindedir; oyun akışı ve kayıt yapısı değişmemiştir.
+
+## v0.48 değişiklikleri (Canavar data-canavar kimliği — ilk aşama)
+- Canavar kartlarına `data-canavar` kimliği eklendi; mevcut SVG ikonlar korunarak tür bazlı görsel stiller uygulanabilir hale geldi.
+- Yeni ikon CSS katmanında doğa, ölümsüz, bataklık, buz, ateş ve hiçlik grupları için farklı renk/aura kuralları hazırlandı.
+- Bu aşamada yeni dosya/asset kullanılmadı; kayıt yapısı ve savaş mantığı değişmedi.

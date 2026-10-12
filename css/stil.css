@@ -1460,3 +1460,78 @@ body,#uygulama{min-height:100vh;min-height:100dvh}
   .sarf-yuva{height:52px}
   .yuvarlak{width:47px;height:47px}
 }
+
+
+/* ============================================================
+   v0.48 — Canavar ikon kimliği
+   Mevcut SVG ikonları korur; türlere bölgesel renk ve aura verir.
+   ============================================================ */
+.saha-kart[data-canavar] .kikon .ikon{opacity:1;filter:drop-shadow(0 0 3px currentColor) drop-shadow(0 2px 2px rgba(0,0,0,.9))}
+.saha-kart[data-canavar] .kikon{filter:drop-shadow(0 0 8px rgba(255,210,120,.08))}
+
+/* Doğa ve av yaratıkları */
+.saha-kart[data-canavar="kurt"] .kikon .ikon,
+.saha-kart[data-canavar="kurt_kral"] .kikon .ikon,
+.saha-kart[data-canavar="domuz"] .kikon .ikon,
+.saha-kart[data-canavar="engerek"] .kikon .ikon,
+.saha-kart[data-canavar="sahin"] .kikon .ikon,
+.saha-kart[data-canavar="kaplan_yilan"] .kikon .ikon,
+.saha-kart[data-canavar="dev_bocek"] .kikon .ikon{color:#b8c58c}
+.saha-kart[data-canavar="kurt"] .kikon,
+.saha-kart[data-canavar="kurt_kral"] .kikon{background:radial-gradient(circle,rgba(150,185,210,.2),transparent 63%)}
+.saha-kart[data-canavar="domuz"] .kikon,
+.saha-kart[data-canavar="dev_bocek"] .kikon{background:radial-gradient(circle,rgba(170,120,70,.2),transparent 63%)}
+
+/* Örümcek ve zehir */
+.saha-kart[data-canavar="orumcek"] .kikon .ikon,
+.saha-kart[data-canavar="kurbaga"] .kikon .ikon,
+.saha-kart[data-canavar="suluk"] .kikon .ikon,
+.saha-kart[data-canavar="bataklik_timsahi"] .kikon .ikon{color:#82bd78}
+.saha-kart[data-canavar="orumcek"] .kikon,
+.saha-kart[data-canavar="kurbaga"] .kikon,
+.saha-kart[data-canavar="suluk"] .kikon{background:radial-gradient(circle,rgba(80,190,100,.25),transparent 62%)}
+
+/* Ölümsüzler ve karanlık */
+.saha-kart[data-canavar="iskelet"] .kikon .ikon,
+.saha-kart[data-canavar="yarasa"] .kikon .ikon,
+.saha-kart[data-canavar="zombi"] .kikon .ikon,
+.saha-kart[data-canavar="zincirli_iblis"] .kikon .ikon,
+.saha-kart[data-canavar="kan_buyucusu"] .kikon .ikon,
+.saha-kart[data-canavar="gargoyl"] .kikon .ikon{color:#c296b8}
+.saha-kart[data-canavar="iskelet"] .kikon,
+.saha-kart[data-canavar="yarasa"] .kikon,
+.saha-kart[data-canavar="zombi"] .kikon{background:radial-gradient(circle,rgba(150,80,160,.24),transparent 62%)}
+
+/* Buz */
+.saha-kart[data-canavar="buz_kurdu"] .kikon .ikon,
+.saha-kart[data-canavar="kar_trolu"] .kikon .ikon,
+.saha-kart[data-canavar="buz_ruhu"] .kikon .ikon,
+.saha-kart[data-canavar="ayaz_devi"] .kikon .ikon{color:#9cddf2}
+.saha-kart[data-canavar="buz_kurdu"] .kikon,
+.saha-kart[data-canavar="kar_trolu"] .kikon,
+.saha-kart[data-canavar="buz_ruhu"] .kikon{background:radial-gradient(circle,rgba(90,190,255,.25),transparent 62%)}
+
+/* Ateş ve magma */
+.saha-kart[data-canavar="cehennem_tazisi"] .kikon .ikon,
+.saha-kart[data-canavar="kara_ejder"] .kikon .ikon,
+.saha-kart[data-canavar="magma_bocegi"] .kikon .ikon,
+.saha-kart[data-canavar="kor_semender"] .kikon .ikon,
+.saha-kart[data-canavar="ates_elementali"] .kikon .ikon,
+.saha-kart[data-canavar="kor_titani"] .kikon .ikon{color:#ff9a4c}
+.saha-kart[data-canavar="cehennem_tazisi"] .kikon,
+.saha-kart[data-canavar="magma_bocegi"] .kikon,
+.saha-kart[data-canavar="kor_semender"] .kikon{background:radial-gradient(circle,rgba(255,90,30,.28),transparent 62%)}
+
+/* Hiçlik */
+.saha-kart[data-canavar="hiclik_gozcusu"] .kikon .ikon,
+.saha-kart[data-canavar="golge_sovalye"] .kikon .ikon,
+.saha-kart[data-canavar="bosluk_canavari"] .kikon .ikon,
+.saha-kart[data-canavar="hiclik_efendisi"] .kikon .ikon,
+.saha-kart[data-canavar="curuk_ent"] .kikon .ikon{color:#c38cff}
+.saha-kart[data-canavar="hiclik_gozcusu"] .kikon,
+.saha-kart[data-canavar="golge_sovalye"] .kikon,
+.saha-kart[data-canavar="bosluk_canavari"] .kikon{background:radial-gradient(circle,rgba(130,65,220,.3),transparent 62%)}
+
+/* Elit ve boss, tür renginin üstüne nadirlik vurgusu ekler */
+.saha-kart.elit[data-canavar] .kikon .ikon{filter:drop-shadow(0 0 4px currentColor) drop-shadow(0 0 7px rgba(70,150,255,.85))}
+.saha-kart.boss[data-canavar] .kikon .ikon{filter:drop-shadow(0 0 5px currentColor) drop-shadow(0 0 10px rgba(255,100,30,.8))}
