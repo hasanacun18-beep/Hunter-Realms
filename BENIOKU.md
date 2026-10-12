@@ -1,4 +1,4 @@
-# Hunter Realms — v0.43 (totem sayıları)
+# Hunter Realms — v0.49 (ilk portre prototipleri)
 
 > Not: Oyun eskiden "Kara Diyar" adıyla geliştirildi, bu sürümde "Hunter Realms" olarak
 > yeniden adlandırıldı. Kayıt dosyalarının iç anahtar isimleri değişmedi (bkz. CLAUDE.md).
@@ -543,6 +543,9 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - Değişiklik `G.beceriEtki()` üzerinden uygulanır; temel beceri verisi ve kayıtlı beceri seviyeleri değişmez.
 - Kod: `js/uzmanlik.js` → `G.uzmanlikBeceriEtki`, `js/beceri.js` → etkin etki bağlantısı.
 
+## v0.46 (atlandı)
+- Dallanan dünya haritası denemesi yapıldı, ancak arayüz kararı netleşmediği için geri alındı. Bu numara kullanılmadı.
+
 ## v0.47 değişiklikleri (Savaş ekranı UI yenilemesi — ilk dilim)
 - Oyun mantığına dokunmadan savaş ekranının görsel hiyerarşisi güçlendirildi.
 - Üst oyuncu paneli; deneyim çubuğu, CP, seviye ve karakter rozetinde daha belirgin bir MMORPG görünümü kazandı.
@@ -563,3 +566,4 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - Çanta/karakter görünümündeki sade silüet, seçilen sınıfın gerçek portresiyle değiştirildi.
 - Görsel yüklenemezse mevcut SVG silüet veya ikon otomatik geri dönüş olarak korunuyor.
 - Yeni assetler: `assets/karakter/` ve `assets/canavarlar/`.
+- Portre assetleri 1920x1920 PNG (~6 MB/adet) yerine 640x640 WebP (~100-150 KB/adet) olarak tutuluyor; yeni portreler de bu formatta eklenmeli.

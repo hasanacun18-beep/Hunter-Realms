@@ -12,19 +12,19 @@ G.MAKS_ARTI = 15;      // En yüksek güçlendirme seviyesi
 // taban: 1. seviyedeki değerler, artis: her seviyede eklenen
 G.SINIFLAR = {
   savasci: {
-    ad: 'Savaşçı', simge: 'kiliclar', portre: 'assets/karakter/savasci.png', aciklama: 'Yüksek can ve savunma. Yakın dövüşün ustası.',
+    ad: 'Savaşçı', simge: 'kiliclar', portre: 'assets/karakter/savasci.webp', aciklama: 'Yüksek can ve savunma. Yakın dövüşün ustası.',
     taban: { hp: 130, mp: 30, atkMin: 7, atkMax: 12, def: 6, hiz: 8, krit: 5 },
     artis: { hp: 20, mp: 3, atk: 3, def: 2 },
     beceri: { ad: 'Yarma Darbesi', mp: 10, carpan: 1.9, vurus: 1 }
   },
   buyucu: {
-    ad: 'Büyücü', simge: 'asa', portre: 'assets/karakter/buyucu.png', aciklama: 'Düşük can, çok yüksek büyü hasarı.',
+    ad: 'Büyücü', simge: 'asa', portre: 'assets/karakter/buyucu.webp', aciklama: 'Düşük can, çok yüksek büyü hasarı.',
     taban: { hp: 85, mp: 90, atkMin: 9, atkMax: 16, def: 3, hiz: 9, krit: 5 },
     artis: { hp: 12, mp: 9, atk: 4, def: 1 },
     beceri: { ad: 'Ateş Topu', mp: 16, carpan: 2.6, vurus: 1 }
   },
   okcu: {
-    ad: 'Okçu', simge: 'yay', portre: 'assets/karakter/okcu.png', aciklama: 'Hızlı ve sık kritik vurur. Dengeli sınıf.',
+    ad: 'Okçu', simge: 'yay', portre: 'assets/karakter/okcu.webp', aciklama: 'Hızlı ve sık kritik vurur. Dengeli sınıf.',
     taban: { hp: 100, mp: 50, atkMin: 8, atkMax: 14, def: 4, hiz: 14, krit: 12 },
     artis: { hp: 15, mp: 5, atk: 3, def: 1 },
     beceri: { ad: 'Çift Atış', mp: 12, carpan: 1.35, vurus: 2 }
@@ -45,7 +45,7 @@ G.CANAVARLAR = {
   kurt:        { ad: 'Kurt',          simge: 'kurt', lv: 1,  hp: 40,   atk: [4, 7],     def: 1,  exp: 12,   para: [2, 6] },
   domuz:       { ad: 'Yaban Domuzu',  simge: 'domuz', lv: 2,  hp: 60,   atk: [5, 9],     def: 2,  exp: 18,   para: [3, 8] },
   orumcek:     { ad: 'Dev Örümcek',   simge: 'orumcek', lv: 3,  hp: 55,   atk: [7, 11],    def: 1,  exp: 22,   para: [4, 9] },
-  kurt_kral:   { ad: 'Kurt Kralı',    simge: 'kurt_kral', portre: 'assets/canavarlar/kurt-kral.png', lv: 5,  hp: 450,  atk: [14, 20],   def: 5,  exp: 160,  para: [60, 100], boss: true },
+  kurt_kral:   { ad: 'Kurt Kralı',    simge: 'kurt_kral', portre: 'assets/canavarlar/kurt-kral.webp', lv: 5,  hp: 450,  atk: [14, 20],   def: 5,  exp: 160,  para: [60, 100], boss: true },
 
   engerek:     { ad: 'Engerek',       simge: 'engerek', lv: 5,  hp: 120,  atk: [12, 18],   def: 4,  exp: 40,   para: [8, 15] },
   sahin:       { ad: 'Kara Şahin',    simge: 'sahin', lv: 6,  hp: 110,  atk: [14, 20],   def: 3,  exp: 48,   para: [9, 16] },
