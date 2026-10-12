@@ -12,19 +12,19 @@ G.MAKS_ARTI = 15;      // En yüksek güçlendirme seviyesi
 // taban: 1. seviyedeki değerler, artis: her seviyede eklenen
 G.SINIFLAR = {
   savasci: {
-    ad: 'Savaşçı', simge: 'kiliclar', portre: 'assets/karakter/savasci.webp', aciklama: 'Yüksek can ve savunma. Yakın dövüşün ustası.',
+    ad: 'Savaşçı', simge: 'kiliclar', portre: 'assets/karakter/savasci.svg', aciklama: 'Yüksek can ve savunma. Yakın dövüşün ustası.',
     taban: { hp: 130, mp: 30, atkMin: 7, atkMax: 12, def: 6, hiz: 8, krit: 5 },
     artis: { hp: 20, mp: 3, atk: 3, def: 2 },
     beceri: { ad: 'Yarma Darbesi', mp: 10, carpan: 1.9, vurus: 1 }
   },
   buyucu: {
-    ad: 'Büyücü', simge: 'asa', portre: 'assets/karakter/buyucu.webp', aciklama: 'Düşük can, çok yüksek büyü hasarı.',
+    ad: 'Büyücü', simge: 'asa', portre: 'assets/karakter/buyucu.svg', aciklama: 'Düşük can, çok yüksek büyü hasarı.',
     taban: { hp: 85, mp: 90, atkMin: 9, atkMax: 16, def: 3, hiz: 9, krit: 5 },
     artis: { hp: 12, mp: 9, atk: 4, def: 1 },
     beceri: { ad: 'Ateş Topu', mp: 16, carpan: 2.6, vurus: 1 }
   },
   okcu: {
-    ad: 'Okçu', simge: 'yay', portre: 'assets/karakter/okcu.webp', aciklama: 'Hızlı ve sık kritik vurur. Dengeli sınıf.',
+    ad: 'Okçu', simge: 'yay', portre: 'assets/karakter/okcu.svg', aciklama: 'Hızlı ve sık kritik vurur. Dengeli sınıf.',
     taban: { hp: 100, mp: 50, atkMin: 8, atkMax: 14, def: 4, hiz: 14, krit: 12 },
     artis: { hp: 15, mp: 5, atk: 3, def: 1 },
     beceri: { ad: 'Çift Atış', mp: 12, carpan: 1.35, vurus: 2 }
@@ -42,25 +42,25 @@ G.STATLAR = {
 // ---- Canavarlar ----
 // atk: [min, maks], para: [min, maks]
 G.CANAVARLAR = {
-  kurt:        { ad: 'Kurt',          simge: 'kurt', lv: 1,  hp: 40,   atk: [4, 7],     def: 1,  exp: 12,   para: [2, 6] },
-  domuz:       { ad: 'Yaban Domuzu',  simge: 'domuz', lv: 2,  hp: 60,   atk: [5, 9],     def: 2,  exp: 18,   para: [3, 8] },
-  orumcek:     { ad: 'Dev Örümcek',   simge: 'orumcek', lv: 3,  hp: 55,   atk: [7, 11],    def: 1,  exp: 22,   para: [4, 9] },
-  kurt_kral:   { ad: 'Kurt Kralı',    simge: 'kurt_kral', portre: 'assets/canavarlar/kurt-kral.webp', lv: 5,  hp: 450,  atk: [14, 20],   def: 5,  exp: 160,  para: [60, 100], boss: true },
+  kurt:        { ad: 'Kurt',          simge: 'kurt', portre: 'assets/canavarlar/kurt.svg', lv: 1,  hp: 40,   atk: [4, 7],     def: 1,  exp: 12,   para: [2, 6] },
+  domuz:       { ad: 'Yaban Domuzu',  simge: 'domuz', portre: 'assets/canavarlar/domuz.svg', lv: 2,  hp: 60,   atk: [5, 9],     def: 2,  exp: 18,   para: [3, 8] },
+  orumcek:     { ad: 'Dev Örümcek',   simge: 'orumcek', portre: 'assets/canavarlar/orumcek.svg', lv: 3,  hp: 55,   atk: [7, 11],    def: 1,  exp: 22,   para: [4, 9] },
+  kurt_kral:   { ad: 'Kurt Kralı',    simge: 'kurt_kral', portre: 'assets/canavarlar/kurt-kral.svg', lv: 5,  hp: 450,  atk: [14, 20],   def: 5,  exp: 160,  para: [60, 100], boss: true },
 
-  engerek:     { ad: 'Engerek',       simge: 'engerek', lv: 5,  hp: 120,  atk: [12, 18],   def: 4,  exp: 40,   para: [8, 15] },
-  sahin:       { ad: 'Kara Şahin',    simge: 'sahin', lv: 6,  hp: 110,  atk: [14, 20],   def: 3,  exp: 48,   para: [9, 16] },
-  kaplan_yilan:{ ad: 'Kaplan Yılan',  simge: 'kaplan_yilan', lv: 8,  hp: 200,  atk: [18, 26],   def: 7,  exp: 70,   para: [12, 22] },
-  dev_bocek:   { ad: 'Kara Kınkanatlı', simge: 'dev_bocek', lv: 10, hp: 1600, atk: [34, 46],   def: 12, exp: 650,  para: [200, 320], boss: true },
+  engerek:     { ad: 'Engerek',       simge: 'engerek', portre: 'assets/canavarlar/engerek.svg', lv: 5,  hp: 120,  atk: [12, 18],   def: 4,  exp: 40,   para: [8, 15] },
+  sahin:       { ad: 'Kara Şahin',    simge: 'sahin', portre: 'assets/canavarlar/sahin.svg', lv: 6,  hp: 110,  atk: [14, 20],   def: 3,  exp: 48,   para: [9, 16] },
+  kaplan_yilan:{ ad: 'Kaplan Yılan',  simge: 'kaplan_yilan', portre: 'assets/canavarlar/kaplan-yilan.svg', lv: 8,  hp: 200,  atk: [18, 26],   def: 7,  exp: 70,   para: [12, 22] },
+  dev_bocek:   { ad: 'Kara Kınkanatlı', simge: 'dev_bocek', portre: 'assets/canavarlar/dev-bocek.svg', lv: 10, hp: 1600, atk: [34, 46],   def: 12, exp: 650,  para: [200, 320], boss: true },
 
-  iskelet:     { ad: 'İskelet',       simge: 'iskelet', lv: 10, hp: 300,  atk: [28, 38],   def: 10, exp: 110,  para: [18, 30] },
-  yarasa:      { ad: 'Vampir Yarasa', simge: 'yarasa', lv: 11, hp: 260,  atk: [30, 40],   def: 8,  exp: 120,  para: [20, 32] },
-  zombi:       { ad: 'Zombi',         simge: 'zombi', lv: 12, hp: 420,  atk: [32, 44],   def: 12, exp: 145,  para: [22, 36] },
-  zincirli_iblis:{ ad: 'Zincirli İblis', simge: 'zincirli_iblis', lv: 16, hp: 4200, atk: [70, 90], def: 25, exp: 1900, para: [600, 900], boss: true },
+  iskelet:     { ad: 'İskelet',       simge: 'iskelet', portre: 'assets/canavarlar/iskelet.svg', lv: 10, hp: 300,  atk: [28, 38],   def: 10, exp: 110,  para: [18, 30] },
+  yarasa:      { ad: 'Vampir Yarasa', simge: 'yarasa', portre: 'assets/canavarlar/yarasa.svg', lv: 11, hp: 260,  atk: [30, 40],   def: 8,  exp: 120,  para: [20, 32] },
+  zombi:       { ad: 'Zombi',         simge: 'zombi', portre: 'assets/canavarlar/zombi.svg', lv: 12, hp: 420,  atk: [32, 44],   def: 12, exp: 145,  para: [22, 36] },
+  zincirli_iblis:{ ad: 'Zincirli İblis', simge: 'zincirli_iblis', portre: 'assets/canavarlar/zincirli-iblis.svg', lv: 16, hp: 4200, atk: [70, 90], def: 25, exp: 1900, para: [600, 900], boss: true },
 
-  kan_buyucusu:{ ad: 'Kan Büyücüsü',  simge: 'kan_buyucusu', lv: 16, hp: 700,  atk: [55, 70],   def: 18, exp: 280,  para: [35, 55] },
-  gargoyl:     { ad: 'Gargoyl',       simge: 'gargoyl', lv: 18, hp: 900,  atk: [60, 80],   def: 24, exp: 340,  para: [40, 62] },
-  cehennem_tazisi:{ ad: 'Cehennem Tazısı', simge: 'cehennem_tazisi', lv: 20, hp: 1100, atk: [70, 95], def: 22, exp: 420, para: [48, 75] },
-  kara_ejder:  { ad: 'Kara Ejder',    simge: 'kara_ejder', lv: 22, hp: 12000, atk: [115, 145], def: 40, exp: 6000, para: [2000, 3000], boss: true }
+  kan_buyucusu:{ ad: 'Kan Büyücüsü',  simge: 'kan_buyucusu', portre: 'assets/canavarlar/kan-buyucusu.svg', lv: 16, hp: 700,  atk: [55, 70],   def: 18, exp: 280,  para: [35, 55] },
+  gargoyl:     { ad: 'Gargoyl',       simge: 'gargoyl', portre: 'assets/canavarlar/gargoyl.svg', lv: 18, hp: 900,  atk: [60, 80],   def: 24, exp: 340,  para: [40, 62] },
+  cehennem_tazisi:{ ad: 'Cehennem Tazısı', simge: 'cehennem_tazisi', portre: 'assets/canavarlar/cehennem-tazisi.svg', lv: 20, hp: 1100, atk: [70, 95], def: 22, exp: 420, para: [48, 75] },
+  kara_ejder:  { ad: 'Kara Ejder',    simge: 'kara_ejder', portre: 'assets/canavarlar/kara-ejder.svg', lv: 22, hp: 12000, atk: [115, 145], def: 40, exp: 6000, para: [2000, 3000], boss: true }
 };
 
 // ---- Bölgeler ----
@@ -315,25 +315,25 @@ G.BOLGELER = [
 
 // Yeni canavarlar (statlar ayrıca G.ZORLUK ile seviyeye göre büyür)
 Object.assign(G.CANAVARLAR, {
-  kurbaga:          { ad: 'Zehir Kurbağası',  simge: 'kurbaga', lv: 22, hp: 1250, atk: [78, 98],   def: 28, exp: 520,  para: [55, 85] },
-  suluk:            { ad: 'Sülük Yığını',     simge: 'suluk', lv: 23, hp: 1400, atk: [76, 96],   def: 30, exp: 560,  para: [58, 90] },
-  curuk_ent:        { ad: 'Çürük Ağaç',       simge: 'curuk_ent', lv: 25, hp: 1750, atk: [88, 112],  def: 36, exp: 650,  para: [65, 100] },
-  bataklik_timsahi: { ad: 'Bataklık Timsahı', simge: 'bataklik_timsahi', lv: 27, hp: 15000, atk: [150, 185], def: 50, exp: 9000, para: [3000, 4500], boss: true },
+  kurbaga:          { ad: 'Zehir Kurbağası',  simge: 'kurbaga', portre: 'assets/canavarlar/kurbaga.svg', lv: 22, hp: 1250, atk: [78, 98],   def: 28, exp: 520,  para: [55, 85] },
+  suluk:            { ad: 'Sülük Yığını',     simge: 'suluk', portre: 'assets/canavarlar/suluk.svg', lv: 23, hp: 1400, atk: [76, 96],   def: 30, exp: 560,  para: [58, 90] },
+  curuk_ent:        { ad: 'Çürük Ağaç',       simge: 'curuk_ent', portre: 'assets/canavarlar/curuk-ent.svg', lv: 25, hp: 1750, atk: [88, 112],  def: 36, exp: 650,  para: [65, 100] },
+  bataklik_timsahi: { ad: 'Bataklık Timsahı', simge: 'bataklik_timsahi', portre: 'assets/canavarlar/bataklik-timsahi.svg', lv: 27, hp: 15000, atk: [150, 185], def: 50, exp: 9000, para: [3000, 4500], boss: true },
 
-  buz_kurdu:        { ad: 'Buz Kurdu',        simge: 'kurt', lv: 27, hp: 1950, atk: [98, 122],  def: 40, exp: 780,  para: [75, 110] },
-  kar_trolu:        { ad: 'Kar Trolü',        simge: 'kar_trolu', lv: 28, hp: 2500, atk: [102, 130], def: 46, exp: 880,  para: [80, 120] },
-  buz_ruhu:         { ad: 'Buz Ruhu',         simge: 'buz_ruhu', lv: 30, hp: 2050, atk: [120, 150], def: 38, exp: 950,  para: [85, 125] },
-  ayaz_devi:        { ad: 'Ayaz Devi',        simge: 'ayaz_devi', lv: 32, hp: 21000, atk: [185, 225], def: 62, exp: 14000, para: [4500, 6500], boss: true },
+  buz_kurdu:        { ad: 'Buz Kurdu',        simge: 'kurt', portre: 'assets/canavarlar/buz-kurdu.svg', lv: 27, hp: 1950, atk: [98, 122],  def: 40, exp: 780,  para: [75, 110] },
+  kar_trolu:        { ad: 'Kar Trolü',        simge: 'kar_trolu', portre: 'assets/canavarlar/kar-trolu.svg', lv: 28, hp: 2500, atk: [102, 130], def: 46, exp: 880,  para: [80, 120] },
+  buz_ruhu:         { ad: 'Buz Ruhu',         simge: 'buz_ruhu', portre: 'assets/canavarlar/buz-ruhu.svg', lv: 30, hp: 2050, atk: [120, 150], def: 38, exp: 950,  para: [85, 125] },
+  ayaz_devi:        { ad: 'Ayaz Devi',        simge: 'ayaz_devi', portre: 'assets/canavarlar/ayaz-devi.svg', lv: 32, hp: 21000, atk: [185, 225], def: 62, exp: 14000, para: [4500, 6500], boss: true },
 
-  magma_bocegi:     { ad: 'Magma Böceği',     simge: 'magma_bocegi', lv: 32, hp: 2800, atk: [135, 165], def: 50, exp: 1150, para: [95, 140] },
-  kor_semender:     { ad: 'Kor Semenderi',    simge: 'kor_semender', lv: 33, hp: 3100, atk: [140, 175], def: 54, exp: 1250, para: [100, 150] },
-  ates_elementali:  { ad: 'Ateş Ruhu',        simge: 'ates_elementali', lv: 35, hp: 3500, atk: [160, 195], def: 58, exp: 1400, para: [110, 160] },
-  kor_titani:       { ad: 'Kor Titanı',       simge: 'kor_titani', lv: 37, hp: 29000, atk: [230, 280], def: 75, exp: 20000, para: [6500, 9000], boss: true },
+  magma_bocegi:     { ad: 'Magma Böceği',     simge: 'magma_bocegi', portre: 'assets/canavarlar/magma-bocegi.svg', lv: 32, hp: 2800, atk: [135, 165], def: 50, exp: 1150, para: [95, 140] },
+  kor_semender:     { ad: 'Kor Semenderi',    simge: 'kor_semender', portre: 'assets/canavarlar/kor-semender.svg', lv: 33, hp: 3100, atk: [140, 175], def: 54, exp: 1250, para: [100, 150] },
+  ates_elementali:  { ad: 'Ateş Ruhu',        simge: 'ates_elementali', portre: 'assets/canavarlar/ates-elementali.svg', lv: 35, hp: 3500, atk: [160, 195], def: 58, exp: 1400, para: [110, 160] },
+  kor_titani:       { ad: 'Kor Titanı',       simge: 'kor_titani', portre: 'assets/canavarlar/kor-titani.svg', lv: 37, hp: 29000, atk: [230, 280], def: 75, exp: 20000, para: [6500, 9000], boss: true },
 
-  hiclik_gozcusu:   { ad: 'Hiçlik Gözcüsü',   simge: 'hiclik_gozcusu', lv: 37, hp: 3900, atk: [175, 210], def: 64, exp: 1650, para: [120, 175] },
-  golge_sovalye:    { ad: 'Gölge Şövalyesi',  simge: 'golge_sovalye', lv: 38, hp: 4500, atk: [185, 225], def: 70, exp: 1800, para: [130, 185] },
-  bosluk_canavari:  { ad: 'Boşluk Canavarı',  simge: 'bosluk_canavari', lv: 40, hp: 5100, atk: [205, 250], def: 76, exp: 2050, para: [140, 200] },
-  hiclik_efendisi:  { ad: 'Hiçlik Efendisi',  simge: 'hiclik_efendisi', lv: 42, hp: 40000, atk: [280, 340], def: 90, exp: 30000, para: [9000, 13000], boss: true }
+  hiclik_gozcusu:   { ad: 'Hiçlik Gözcüsü',   simge: 'hiclik_gozcusu', portre: 'assets/canavarlar/hiclik-gozcusu.svg', lv: 37, hp: 3900, atk: [175, 210], def: 64, exp: 1650, para: [120, 175] },
+  golge_sovalye:    { ad: 'Gölge Şövalyesi',  simge: 'golge_sovalye', portre: 'assets/canavarlar/golge-sovalye.svg', lv: 38, hp: 4500, atk: [185, 225], def: 70, exp: 1800, para: [130, 185] },
+  bosluk_canavari:  { ad: 'Boşluk Canavarı',  simge: 'bosluk_canavari', portre: 'assets/canavarlar/bosluk-canavari.svg', lv: 40, hp: 5100, atk: [205, 250], def: 76, exp: 2050, para: [140, 200] },
+  hiclik_efendisi:  { ad: 'Hiçlik Efendisi',  simge: 'hiclik_efendisi', portre: 'assets/canavarlar/hiclik-efendisi.svg', lv: 42, hp: 40000, atk: [280, 340], def: 90, exp: 30000, para: [9000, 13000], boss: true }
 });
 
 // Yeni eşyalar (listenin SONUNA)

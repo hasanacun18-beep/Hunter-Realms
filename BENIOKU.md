@@ -1,4 +1,4 @@
-# Hunter Realms — v0.49 (ilk portre prototipleri)
+# Hunter Realms — v0.50 (SVG portreler)
 
 > Not: Oyun eskiden "Kara Diyar" adıyla geliştirildi, bu sürümde "Hunter Realms" olarak
 > yeniden adlandırıldı. Kayıt dosyalarının iç anahtar isimleri değişmedi (bkz. CLAUDE.md).
@@ -566,4 +566,10 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - Çanta/karakter görünümündeki sade silüet, seçilen sınıfın gerçek portresiyle değiştirildi.
 - Görsel yüklenemezse mevcut SVG silüet veya ikon otomatik geri dönüş olarak korunuyor.
 - Yeni assetler: `assets/karakter/` ve `assets/canavarlar/`.
-- Portre assetleri 1920x1920 PNG (~6 MB/adet) yerine 640x640 WebP (~100-150 KB/adet) olarak tutuluyor; yeni portreler de bu formatta eklenmeli.
+
+## v0.50 değişiklikleri (Tüm portreler yenilendi — SVG)
+- 3 sınıf (Savaşçı, Büyücü, Okçu) ve 32 canavarın tamamı için özgün, vektör (SVG) portre eklendi.
+- Önceki portre PNG'leri (~26 MB) kaldırıldı; yeni portrelerin tamamı toplam yaklaşık 300 KB.
+- Sınıf portreleri boydan karakter, canavar portreleri büst olarak çizildi; savaş kartı, boss plakası ve galeride mevcut `portre` alanı üzerinden otomatik kullanılıyor.
+- Dosyalar: `assets/karakter/<sinif>.svg` ve `assets/canavarlar/<canavar-id>.svg` (id'deki `_` yerine `-`).
+- `veri.js` içinde her canavar girdisine `portre` alanı eklendi. Yeni canavar eklerken aynı adlandırmayla bir SVG koyup `portre` alanını yazman yeterli. Dosya bulunamazsa eski ikon otomatik gösterilir.
