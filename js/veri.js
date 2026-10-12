@@ -313,17 +313,6 @@ G.BOLGELER = [
     aciklama: 'Işığın bile geri dönmediği uçurum. Bütün karanlık buradan doğdu; ona Hiçlik derler. Buradan ötesi yok.', canavarlar: ['hiclik_gozcusu', 'golge_sovalye', 'bosluk_canavari'], boss: 'hiclik_efendisi' }
 ];
 
-// v0.46 — Ana savaş ekranının altındaki bölge ilerlemesi: dallanan yollar.
-// Bu veri, ana harita sekmesinden bağımsızdır; savaş ekranında keşif seçeneklerini gösterir.
-G.BOLGE_YOLLARI = [
-  ['koy', 'orman'], ['koy', 'vadi'], ['orman', 'vadi'],
-  ['vadi', 'kervansaray'], ['vadi', 'harabe'], ['kervansaray', 'harabe'],
-  ['harabe', 'kale'], ['harabe', 'demirkapi'], ['kale', 'demirkapi'],
-  ['demirkapi', 'bataklik'], ['demirkapi', 'buzul'],
-  ['bataklik', 'karakol'], ['buzul', 'karakol'],
-  ['karakol', 'volkan'], ['karakol', 'ucurum'], ['volkan', 'ucurum']
-];
-
 // Yeni canavarlar (statlar ayrıca G.ZORLUK ile seviyeye göre büyür)
 Object.assign(G.CANAVARLAR, {
   kurbaga:          { ad: 'Zehir Kurbağası',  simge: 'kurbaga', lv: 22, hp: 1250, atk: [78, 98],   def: 28, exp: 520,  para: [55, 85] },

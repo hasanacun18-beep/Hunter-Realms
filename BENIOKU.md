@@ -542,9 +542,3 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - Tuzakçı: süreli hasar ve işaret etkilerini güçlendirir; mayınlar +1 kusur verir.
 - Değişiklik `G.beceriEtki()` üzerinden uygulanır; temel beceri verisi ve kayıtlı beceri seviyeleri değişmez.
 - Kod: `js/uzmanlik.js` → `G.uzmanlikBeceriEtki`, `js/beceri.js` → etkin etki bağlantısı.
-
-## v0.46 değişiklikleri (Ana savaş ekranı bölge yolu)
-- Ana harita sekmesine dokunulmadan, savaş ekranının altındaki mini bölge yolu doğrusal üçlü gösterimden dallanan komşu rotalara çevrildi.
-- Oyuncunun bulunduğu bölgeden ayrılan iki veya daha fazla seçenek aynı panelde görüntülenir; seviye yetmeyen yollar kilitli gösterilir.
-- Mevcut bölge ayrı ve vurgulu bir düğüm olarak görünür; yol seçenekleri referans oyundaki alt ilerleme paneline benzer şekilde yatay dallanır.
-- Kod: `veri.js` → `G.BOLGE_YOLLARI`, `arayuz-savas.js` → mini yol çizimi, `css/stil.css` → dallanan yol paneli.

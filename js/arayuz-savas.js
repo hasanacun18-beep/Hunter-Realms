@@ -48,26 +48,17 @@ G.logHtml = function () {
 // Bölge için önerilen güç (GP): canavar seviyesine göre kaba tahmin
 G.onerilenGP = function (b) { return b.tur === 'kasaba' ? 0 : Math.round(68 * Math.pow(b.minLv + 1, 1.12)); };
 
-// Ana savaş ekranındaki bölge yolu: mevcut bölgeden ayrılan komşu rotaları gösterir.
-G.bolgeKomsubul = function (id) {
-  var sonuc = [];
-  (G.BOLGE_YOLLARI || []).forEach(function (y) {
-    if (y[0] === id && sonuc.indexOf(y[1]) < 0) sonuc.push(y[1]);
-    if (y[1] === id && sonuc.indexOf(y[0]) < 0) sonuc.push(y[0]);
-  });
-  return sonuc.map(function (x) { return G.bolgeBul(x); });
-};
-
+// Zincir düğümleri: sonraki üstte, şu anki ortada, önceki altta
 G.zincirDugumHtml = function () {
-  var o = G.o, b = G.bolgeBul(o.bolge), komsular = G.bolgeKomsubul(o.bolge);
-  function dugum(x) {
+  var o = G.o, liste = G.BOLGELER, idx = 0;
+  liste.forEach(function (b, i) { if (b.id === o.bolge) idx = i; });
+  function dugum(x, aktif) {
+    if (!x) return '<div class="zincir-dugum bos"></div>';
     var kilit = o.lv < x.minLv;
-    return '<button class="zincir-dugum yol-dugum' + (kilit ? ' kilitli' : '') + '" data-eylem="git" data-b="' + x.id + '"' + (kilit ? ' disabled' : '') + '>' +
-      '<span>' + x.ad + '</span><small>' + (kilit ? 'Sv. ' + x.minLv + '+' : (x.tur === 'kasaba' ? 'Kasaba' : 'Sv. ' + x.minLv + '+')) + '</small></button>';
+    return '<button class="zincir-dugum' + (aktif ? ' aktif' : '') + '"' + (aktif ? '' : ' data-eylem="git" data-b="' + x.id + '"') + (kilit ? ' disabled' : '') + '>' +
+      x.ad + (kilit ? ' <small>seviye ' + x.minLv + '</small>' : '') + '</button>';
   }
-  return '<div class="zincir zincir-dallanma"><div class="zincir-etiket">BÖLGE YOLU <span>Seçilebilir rotalar</span></div>' +
-    '<div class="zincir-kavsak">' + (komsular.length ? komsular.map(dugum).join('<i class="zincir-dal"></i>') : '<span class="soluk kucuk-not">Buradan sonra keşfedilecek yol yok.</span>') + '</div>' +
-    '<i class="zincir-cizgi"></i><div class="zincir-dugum aktif mevcut-dugum"><span>' + b.ad + '</span><small>Buradasın</small></div></div>';
+  return '<div class="zincir">' + dugum(liste[idx + 1]) + '<i class="zincir-cizgi"></i>' + dugum(liste[idx], true) + '<i class="zincir-cizgi"></i>' + dugum(liste[idx - 1]) + '</div>';
 };
 
 // Alt panel: solda küçük bölge haritası, sağda zincir (referans düzeni)

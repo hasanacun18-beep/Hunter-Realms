@@ -223,17 +223,6 @@ h2{font-size:19px;margin-bottom:6px}
 .zincir-dugum.bos{visibility:hidden;padding:0;height:34px}
 .zincir-dugum:disabled{opacity:.45}
 .zincir-cizgi{display:block;width:2px;height:10px;margin:0 auto;background:repeating-linear-gradient(#b08a4a 0 3px,transparent 3px 6px)}
-.zincir-dallanma{gap:5px;padding:4px 2px;min-width:0}
-.zincir-etiket{font-size:9px;letter-spacing:.16em;color:#8a7040;text-align:center;border-bottom:1px solid #4a3d2b;padding-bottom:4px;white-space:nowrap}
-.zincir-etiket span{display:block;letter-spacing:0;font-size:10px;color:var(--soluk);margin-top:2px}
-.zincir-kavsak{display:flex;align-items:center;justify-content:center;gap:3px;min-height:61px;padding:4px 0 1px}
-.zincir-kavsak .yol-dugum{flex:1;min-width:0;padding:6px 2px;font-size:11px;line-height:1.1;background:linear-gradient(#302619,#1b1610);border-color:#6a5638}
-.zincir-kavsak .yol-dugum span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.zincir-kavsak .yol-dugum small,.mevcut-dugum small{display:block;font-family:var(--sans);font-size:9px;color:var(--soluk);margin-top:3px}
-.zincir-kavsak .yol-dugum:not(:disabled):hover{border-color:#f0c070;box-shadow:0 0 8px rgba(240,192,112,.35)}
-.zincir-kavsak .yol-dugum.kilitli{color:#8b8170;border-color:#3d3224}
-.zincir-dal{height:1px;flex:0 0 9px;background:repeating-linear-gradient(90deg,#8a7040 0 3px,transparent 3px 6px)}
-.mevcut-dugum{width:78%;align-self:center;background:linear-gradient(#3c301f,#241c12);box-shadow:0 0 0 1px #f0c070,0 0 10px rgba(240,192,112,.25)}
 
 /* ---- v0.6: kasaba ---- */
 .kasaba-sahne{text-align:center;padding:22px 16px 18px;border:1px solid #4a3d2b;border-radius:4px;
