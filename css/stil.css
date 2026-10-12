@@ -1400,3 +1400,63 @@ body,#uygulama{min-height:100vh;min-height:100dvh}
 .dm-dugmeler.ruh-dugmeler .sus-dugme{padding:10px 4px}
 .dm-dugmeler.ruh-dugmeler .sus-dugme span{font-size:17px}
 .dm-dugmeler.ruh-dugmeler .sus-dugme::before,.dm-dugmeler.ruh-dugmeler .sus-dugme::after{display:none}
+
+
+/* ============================================================
+   v0.47 — Savaş ekranı UI yenilemesi
+   Oyun mantığına dokunmadan; üst bar, saha, kartlar ve aksiyonlar.
+   ============================================================ */
+#ust{padding:7px 8px 8px 7px;background:linear-gradient(180deg,#302619 0%,#1a140f 72%);border-bottom:1px solid #8a7040;box-shadow:0 2px 10px rgba(0,0,0,.45)}
+.sinif-rozet{width:48px;height:48px;background:radial-gradient(circle at 35% 28%,#58452d,#17100b 70%);border-color:#d1a454;box-shadow:0 0 0 2px #18120d,0 0 13px rgba(240,192,112,.35)}
+.ust-satir1{gap:6px}
+.ust-ad{font-size:17px;color:#f0dfb4}
+.ust-para{font-variant-numeric:tabular-nums;color:#f4ce73}
+.ust-lv{font-weight:bold;color:#d7c49a}
+.ust-cp{color:#ffd477;text-shadow:0 0 8px rgba(240,192,112,.25)}
+.ust-exp{height:13px;margin-top:5px;border:1px solid #493d2b;border-radius:5px;overflow:hidden;background:#100d09}
+.ust-exp>i{background:linear-gradient(90deg,#72d75d,#2c8b35);box-shadow:inset 0 1px rgba(255,255,255,.25)}
+
+.savas-panel{padding:7px 7px 10px;border:1px solid #4e402c;border-radius:8px;background:linear-gradient(180deg,rgba(28,22,16,.98),rgba(13,11,9,.98));box-shadow:0 4px 18px rgba(0,0,0,.28)}
+.saha{border:1px solid #80643b;border-radius:9px;box-shadow:inset 0 0 40px rgba(0,0,0,.42),0 2px 8px rgba(0,0,0,.45)}
+.saha::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.28;background:linear-gradient(90deg,transparent 49.7%,rgba(224,190,120,.12) 50%,transparent 50.3%),linear-gradient(0deg,transparent 49.7%,rgba(224,190,120,.1) 50%,transparent 50.3%);background-size:20% 20%}
+.saha-kart{border-radius:10px;border:1px solid #8c7045;background:linear-gradient(160deg,rgba(57,46,33,.98),rgba(22,17,12,.98));box-shadow:0 2px 7px rgba(0,0,0,.6),inset 0 1px rgba(255,220,150,.16);overflow:visible}
+.saha-kart .kseviye{border-radius:6px;background:#2b2117;border:1px solid #b08a4a;color:#f6dfaa;font-weight:bold;box-shadow:0 1px 3px #000}
+.saha-kart .kad{color:#ead8ad;text-shadow:0 1px 2px #000}
+.saha-kart .kcubuk{border-radius:4px;border-color:#2e2419;box-shadow:0 1px 3px #000}
+.saha-kart .kcubuk b{font-size:9px;text-shadow:0 1px 2px #000}
+.saha-kart.hedef{box-shadow:0 0 0 2px #ff8b3d,0 0 18px rgba(255,100,35,.55),inset 0 0 18px rgba(90,45,15,.55)}
+.oyuncu-kart{border-color:#75c4ff;background:linear-gradient(160deg,rgba(34,67,92,.98),rgba(13,25,37,.98));box-shadow:0 0 0 2px #3d7fcf,0 0 18px 3px rgba(80,160,255,.5),inset 0 1px rgba(210,240,255,.22)}
+.oyuncu-kart .kad{color:#d9f0ff}
+.saha-kart.boss{border-color:#f29a3d;background:linear-gradient(160deg,rgba(90,40,17,.98),rgba(29,13,8,.98));box-shadow:0 0 0 2px #b84e1b,0 0 20px rgba(255,120,35,.65),inset 0 1px rgba(255,220,150,.22)}
+.saha-kart.boss .kseviye{background:#8a3a10;border-color:#f09a52}
+
+.boss-plaka{border-color:#d26932;border-radius:8px;background:linear-gradient(90deg,rgba(74,27,13,.98),rgba(28,14,9,.96));box-shadow:0 2px 8px rgba(0,0,0,.5)}
+.bp-ikon{border-color:#f0a052;box-shadow:0 0 9px rgba(240,120,40,.35)}
+.bp-cubuk{border-radius:4px;overflow:hidden}
+
+.sarf-cubugu{padding:3px 2px;background:linear-gradient(180deg,rgba(48,38,25,.45),rgba(15,12,9,.25));border-top:1px solid #4a3d2b;border-bottom:1px solid #3d3224}
+.sarf-yuva{height:56px;border-color:#765d38;border-radius:7px;background:linear-gradient(180deg,#35291c,#17120d);box-shadow:inset 0 1px rgba(255,220,150,.12),0 2px 4px rgba(0,0,0,.35);transition:transform .12s,border-color .12s}
+.sarf-yuva:active,.yuvarlak:active{transform:translateY(1px)}
+.sarf-yuva:hover{border-color:#d2a657}
+.yuvarlak{border-color:#9b7942;box-shadow:inset 0 1px rgba(255,220,150,.15),0 2px 6px rgba(0,0,0,.5);transition:transform .12s,border-color .12s}
+.yuvarlak#dBoss{border-color:#c55b37}
+.yuvarlak#dBoss .ikon{filter:drop-shadow(0 0 4px rgba(255,100,50,.45))}
+
+.savas-panel #log{height:104px;padding:7px 9px;border:1px solid #4a3d2b;border-radius:7px;background:linear-gradient(180deg,#17120d,#0e0c09);box-shadow:inset 0 0 12px rgba(0,0,0,.35);font-size:12px;line-height:1.42;scrollbar-color:#765d38 #17120d}
+.savas-panel #log > div{padding-left:4px;border-bottom:1px solid rgba(90,70,40,.18)}
+.savas-panel #log .sistem{color:#c9a66a}
+.savas-panel #log .kazanc{color:#86cf72}
+.savas-panel #log .tehlike{color:#ed8065}
+.gorev-serit{border-color:#765d38;border-radius:7px;background:linear-gradient(90deg,#302417,#18120d);box-shadow:0 2px 5px rgba(0,0,0,.3)}
+
+.bolge-alt{gap:7px}
+.mini-harita{border-color:#765d38;border-radius:7px;box-shadow:inset 0 0 18px rgba(0,0,0,.38)}
+.mh-dugmeler button{border-radius:5px;border-color:#80643b}
+
+@media (max-width:380px){
+  .sinif-rozet{width:43px;height:43px;font-size:21px}
+  .ust-ad{font-size:15px}
+  .ust-cp{font-size:14px}
+  .sarf-yuva{height:52px}
+  .yuvarlak{width:47px;height:47px}
+}

@@ -542,3 +542,12 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - Tuzakçı: süreli hasar ve işaret etkilerini güçlendirir; mayınlar +1 kusur verir.
 - Değişiklik `G.beceriEtki()` üzerinden uygulanır; temel beceri verisi ve kayıtlı beceri seviyeleri değişmez.
 - Kod: `js/uzmanlik.js` → `G.uzmanlikBeceriEtki`, `js/beceri.js` → etkin etki bağlantısı.
+
+## v0.47 değişiklikleri (Savaş ekranı UI yenilemesi — ilk dilim)
+- Oyun mantığına dokunmadan savaş ekranının görsel hiyerarşisi güçlendirildi.
+- Üst oyuncu paneli; deneyim çubuğu, CP, seviye ve karakter rozetinde daha belirgin bir MMORPG görünümü kazandı.
+- Savaş sahasına daha derin zemin, grid dokusu, kart gölgeleri ve renk hiyerarşisi eklendi.
+- Oyuncu, normal yaratık, elit ve boss kartları daha kolay ayırt edilir hale getirildi.
+- Boss plakası, iksir/aksiyon düğmeleri, savaş günlüğü, görev şeridi ve mini bölge paneli yeniden stillendirildi.
+- Mobil genişlik için küçük ekran düzenlemeleri eklendi.
+- Kod değişikliği yalnızca `css/stil.css` üzerindedir; oyun akışı ve kayıt yapısı değişmemiştir.
