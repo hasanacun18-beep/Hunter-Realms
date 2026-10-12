@@ -31,7 +31,35 @@ G.uzmanlikHtml = function () {
 
 G.uzmanlikBonusYazi = function (u) {
   var ad = { defYuzde: 'savunma', hpYuzde: 'can', atkYuzde: 'saldırı', krit: 'kritik', beceri: 'beceri hasarı', mp: 'mana', hiz: 'hız' };
-  return Object.keys(u.bonus).map(function (k) { return '+' + u.bonus[k] + (/Yuzde$/.test(k) || k === 'krit' ? '%' : '') + ' ' + (ad[k] || k); }).join(', ');
+  var metin = Object.keys(u.bonus).map(function (k) { return '+' + u.bonus[k] + (/Yuzde$/.test(k) || k === 'krit' ? '%' : '') + ' ' + (ad[k] || k); }).join(', ');
+  return metin + (u.beceri ? '; ' + u.beceri : '');
+};
+
+// Beceri etkisi, savaşta kullanılmadan önce burada uzmanlığa göre değiştirilir.
+// Böylece G.BECERILER temel verisi ve eski kayıtların beceri seviyeleri değişmez.
+G.uzmanlikBeceriEtki = function (id, e, lv) {
+  var o = G.o, u = o && o.uzmanlik && G.uzmanlikBul(o.sinif, o.uzmanlik);
+  if (!u || !e) return e;
+  function carp(k, oran) { if (e[k] != null) e[k] = Math.round(e[k] * oran * 100) / 100; }
+  if (u.id === 'muhafiz') {
+    if (e.tip === 'kalkan') { e.sure = (e.sure || 0) + 1; if (e.iyilesme) e.iyilesme += 2; }
+  } else if (u.id === 'cellat') {
+    if (e.tip === 'hasar' && e.sekil === 'tek') carp('carpan', 1.10);
+  } else if (u.id === 'elementci') {
+    if (e.tip === 'hasar') { carp('carpan', 1.08); if (e.dot) e.dot = Math.round((e.dot + 0.08) * 100) / 100; }
+    if (e.tip === 'guc') e.oran = (e.oran || 0) + 5;
+  } else if (u.id === 'ruh_cagirici') {
+    if (e.tip === 'kalkan') e.sure = (e.sure || 0) + 1;
+    if (e.tip === 'cagir') { e.can = (e.can || 0) + 10; e.kalkanSans = (e.kalkanSans || 0) + 10; }
+  } else if (u.id === 'keskin_nisanci') {
+    if (e.tip === 'hasar' && e.sekil === 'tek') carp('carpan', 1.10);
+    if (e.deler) e.deler += 3;
+  } else if (u.id === 'tuzakci') {
+    if (e.dot) e.dot = Math.round((e.dot + 0.12) * 100) / 100;
+    if (e.isaret) e.isaret += 5;
+    if (e.tip === 'mayin') e.kusur = (e.kusur || 0) + 1;
+  }
+  return e;
 };
 
 G.uzmanlikAc = function () {

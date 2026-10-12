@@ -16,6 +16,8 @@ G.beceriEtki = function (id, lv) {
   if (e.tip === 'kalkan' && !b.totem) e.oran = Math.min(e.oran, S.kalkan);
   if (e.tip === 'iyilesme') e.oran = Math.min(e.oran, S.iyilesme);
   ['isaret', 'deler', 'can', 'saldiri'].forEach(function (k) { if (e[k] != null) e[k] = Math.min(e[k], S[k]); });
+  // v0.45: seçilen sınıf uzmanlığı becerinin etkin etkisini değiştirir
+  if (G.uzmanlikBeceriEtki) G.uzmanlikBeceriEtki(id, e, lv);
   return e;
 };
 

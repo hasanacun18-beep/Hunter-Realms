@@ -613,16 +613,16 @@ G.SINIFLAR.okcu.hikaye = 'Sisli Orman\'ın izcileri rüzgarı okur, düşmanı d
 // Bonuslar durum.js → hesapla() üzerinden uygulanır; mevcut kayıtlar korunur.
 G.UZMANLIKLAR = {
   savasci: [
-    { id: 'muhafiz', ad: 'Muhafız', ikon: '🛡️', aciklama: 'Dayanıklılık ve savunma odaklı savaşçı.', bonus: { defYuzde: 8, hpYuzde: 5 } },
-    { id: 'cellat', ad: 'Cellat', ikon: '⚔️', aciklama: 'Kritik ve tek hedef hasarı odaklı savaşçı.', bonus: { atkYuzde: 5, krit: 3 } }
+    { id: 'muhafiz', ad: 'Muhafız', ikon: '🛡️', aciklama: 'Dayanıklılık ve savunma odaklı savaşçı.', bonus: { defYuzde: 8, hpYuzde: 5 }, beceri: 'Savunma becerileri +1 tur; anlık iyileştirmeler +2%' },
+    { id: 'cellat', ad: 'Cellat', ikon: '⚔️', aciklama: 'Kritik ve tek hedef hasarı odaklı savaşçı.', bonus: { atkYuzde: 5, krit: 3 }, beceri: 'Tek hedef becerileri +%10 hasar' }
   ],
   buyucu: [
-    { id: 'elementci', ad: 'Elementçi', ikon: '🔥', aciklama: 'Beceri hasarı ve saldırı büyüleri odaklı büyücü.', bonus: { beceri: 8, atkYuzde: 3 } },
-    { id: 'ruh_cagirici', ad: 'Ruh Çağırıcı', ikon: '🔮', aciklama: 'Mana ve dayanıklılık odaklı büyücü.', bonus: { hpYuzde: 6, mp: 18, beceri: 3 } }
+    { id: 'elementci', ad: 'Elementçi', ikon: '🔥', aciklama: 'Beceri hasarı ve saldırı büyüleri odaklı büyücü.', bonus: { beceri: 8, atkYuzde: 3 }, beceri: 'Beceri hasarı +%8; süreli hasar güçlenir' },
+    { id: 'ruh_cagirici', ad: 'Ruh Çağırıcı', ikon: '🔮', aciklama: 'Mana ve dayanıklılık odaklı büyücü.', bonus: { hpYuzde: 6, mp: 18, beceri: 3 }, beceri: 'Kalkan becerileri +1 tur; çağrılan ruhlar daha dayanıklı' }
   ],
   okcu: [
-    { id: 'keskin_nisanci', ad: 'Keskin Nişancı', ikon: '🎯', aciklama: 'Uzak mesafe ve kritik vuruş odaklı okçu.', bonus: { atkYuzde: 4, krit: 4 } },
-    { id: 'tuzakci', ad: 'Tuzakçı', ikon: '🪤', aciklama: 'Kontrol ve sürdürülebilir hasar odaklı okçu.', bonus: { defYuzde: 4, beceri: 5, hiz: 2 } }
+    { id: 'keskin_nisanci', ad: 'Keskin Nişancı', ikon: '🎯', aciklama: 'Uzak mesafe ve kritik vuruş odaklı okçu.', bonus: { atkYuzde: 4, krit: 4 }, beceri: 'Tek hedef becerileri +%10; savunma delme +3' },
+    { id: 'tuzakci', ad: 'Tuzakçı', ikon: '🪤', aciklama: 'Kontrol ve sürdürülebilir hasar odaklı okçu.', bonus: { defYuzde: 4, beceri: 5, hiz: 2 }, beceri: 'Süreli/işaretli beceriler güçlenir; mayınlar +1 kusur verir' }
   ]
 };
 

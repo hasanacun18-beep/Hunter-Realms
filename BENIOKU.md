@@ -532,3 +532,13 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - Uzmanlık bonusları merkezi stat hesabına bağlandı; eski kayıtlara `uzmanlik: null` alanı göçle eklenir.
 - Yeni modül: `js/uzmanlik.js`. Yeni script `index.html` içinde `durum.js` sonrasında yüklenir.
 - İlk aşamada becerilerin davranışı değiştirilmedi; sonraki aşama uzmanlık-beceri build seçimidir.
+
+## v0.45 değişiklikleri (Uzmanlık-beceri bağlantısı)
+- Uzmanlık artık yalnızca karakter statı vermiyor; becerilerin savaşta kullanılan etkin etkisini de değiştiriyor.
+- Muhafız: kalkan becerileri +1 tur, anlık iyileştirmeler +2 puan.
+- Cellat ve Keskin Nişancı: tek hedef becerileri +%10 hasar. Keskin Nişancı ayrıca savunma delmeye +3 puan ekler.
+- Elementçi: beceri hasarına +%8 çarpan, süreli hasara ek güç ve güçlendirme becerilerine +5 puan.
+- Ruh Çağırıcı: kalkan becerileri +1 tur; çağırma becerileri daha dayanıklı ruhlar üretir.
+- Tuzakçı: süreli hasar ve işaret etkilerini güçlendirir; mayınlar +1 kusur verir.
+- Değişiklik `G.beceriEtki()` üzerinden uygulanır; temel beceri verisi ve kayıtlı beceri seviyeleri değişmez.
+- Kod: `js/uzmanlik.js` → `G.uzmanlikBeceriEtki`, `js/beceri.js` → etkin etki bağlantısı.
