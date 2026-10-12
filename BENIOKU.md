@@ -556,3 +556,10 @@ HTML'e `data-eylem="benimEylem"` yaz, `ana.js` içindeki `switch`'e
 - Canavar kartlarına `data-canavar` kimliği eklendi; mevcut SVG ikonlar korunarak tür bazlı görsel stiller uygulanabilir hale geldi.
 - Yeni ikon CSS katmanında doğa, ölümsüz, bataklık, buz, ateş ve hiçlik grupları için farklı renk/aura kuralları hazırlandı.
 - Bu aşamada yeni dosya/asset kullanılmadı; kayıt yapısı ve savaş mantığı değişmedi.
+
+## v0.49 değişiklikleri (İlk portre prototipleri)
+- Savaşçı, Büyücü ve Okçu için özgün şeffaf portre assetleri eklendi.
+- Kurt Kralı için boss portresi eklendi; aktif boss plakası ve boss listesinde kullanılıyor.
+- Çanta/karakter görünümündeki sade silüet, seçilen sınıfın gerçek portresiyle değiştirildi.
+- Görsel yüklenemezse mevcut SVG silüet veya ikon otomatik geri dönüş olarak korunuyor.
+- Yeni assetler: `assets/karakter/` ve `assets/canavarlar/`.

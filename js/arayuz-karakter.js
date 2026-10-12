@@ -32,7 +32,7 @@ G.bebekHtml = function () {
     '<div class="bebek-sutun">' + sutun('sol') + '</div>' +
     '<div class="bebek-orta">' +
       '<div class="bebek-ust"><b>' + G.kacis(o.ad) + '</b><span>' + G.SINIFLAR[o.sinif].ad + ', seviye ' + o.lv + '</span><span class="bebek-gp">GP ' + r.cp + '</span></div>' +
-      G.siluetSvg(o.sinif) +
+      G.portreHtml(G.SINIFLAR[o.sinif].portre, 'karakter-portre', G.siluetSvg(o.sinif), G.SINIFLAR[o.sinif].ad) +
       '<button class="ilahi-rozet" data-eylem="ilahiAc">' + I.ikon + '<span>' + I.ad + '<br>Seviye ' + o.ilahi + '</span></button>' +
     '</div>' +
     '<div class="bebek-sutun">' + sutun('sag') + '</div>' +

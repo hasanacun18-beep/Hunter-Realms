@@ -2,6 +2,12 @@
 // arayuz-savas.js — Ana ekran: saha (av bölgesi) veya kasaba, bölge zinciri, savaş düğmeleri
 // ============================================================
 
+// Portre asseti yüklenemezse mevcut SVG/ikon görünümüne geri döner.
+G.portreHtml = function (src, cls, fallback, alt) {
+  if (!src) return fallback;
+  return '<span class="' + cls + '"><img src="' + src + '" alt="' + G.kacis(alt || '') + '" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="portre-fallback" hidden>' + fallback + '</span></span>';
+};
+
 // Bölgelere göre saha zemini (koyu, iki ton)
 G.ZEMIN = {
   orman: ['#1f261a', '#11140d'], vadi: ['#2a2419', '#15120c'], harabe: ['#26231f', '#121110'],
@@ -126,7 +132,7 @@ G.bossPlakaGuncelle = function () {
   var c = G.alan.filter(function (x) { return x && x.boss && !x.olu; })[0];
   if (!c) { el.classList.add('gizli'); return; }
   el.classList.remove('gizli');
-  el.innerHTML = '<span class="bp-ikon">' + c.ikon + '</span><div class="bp-orta"><div class="bp-ust"><b>' + c.ad + ' (Sv. ' + c.lv + ')</b>' +
+  el.innerHTML = G.portreHtml(c.portre, 'bp-portre', c.ikon, c.ad) + '<div class="bp-orta"><div class="bp-ust"><b>' + c.ad + ' (Sv. ' + c.lv + ')</b>' +
     '<small class="bp-sahip">Sahibi: ' + G.kacis(G.o.ad) + '</small>' +
     (c.ofke ? '<span class="bp-ofke">ÖFKELİ</span>' : '') + '</div>' +
     '<div class="bp-cubuk"><i style="width:' + Math.max(0, c.hp / c.hpMax * 100) + '%"></i><span>' + Math.max(0, c.hp) + ' / ' + c.hpMax + '</span></div></div>';
@@ -349,7 +355,7 @@ G.bossListeModal = function () {
       : burada ? '<button disabled>Burada</button>'
       : '<button data-eylem="bossIsinlan" data-id="' + b.boss + '" class="bl-dugme" data-boss="' + b.boss + '">Işınlan</button>';
     return '<div class="bl-satir' + (kilit ? ' kilitli' : '') + (burada ? ' burada' : '') + '">' +
-      '<span class="bl-ikon">' + c.ikon + '</span>' +
+      G.portreHtml(c.portre, 'bl-portre', c.ikon, c.ad) +
       '<div class="bl-orta"><b>' + c.ad + ' <small>Sv. ' + c.lv + '</small></b><small>' + b.ad + '</small></div>' +
       '<div class="bl-durum"><span class="bl-sure" data-boss="' + b.boss + '"></span>' +
         '<small>GP <em class="' + (cp >= gp ? 'fark-arti' : 'fark-eksi') + '">' + gp + '</em></small></div>' +

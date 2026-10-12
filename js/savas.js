@@ -21,7 +21,7 @@ G.canavarOlustur = function (id) {
   atkC *= Math.max(0.3, 1 - gec * (z.gecAtk || 0));
   var hp = Math.round(s.hp * hpC);
   return {
-    id: id, ad: s.ad, ikon: s.ikon, lv: s.lv, hp: hp, hpMax: hp,
+    id: id, ad: s.ad, ikon: s.ikon, portre: s.portre, lv: s.lv, hp: hp, hpMax: hp,
     atk: [Math.round(s.atk[0] * atkC), Math.round(s.atk[1] * atkC)],
     def: Math.round(s.def * (1 + L * z.defArtis)), boss: !!s.boss, olu: false,
     saldirgan: !s.boss && Math.random() * 100 < G.SAHA.saldirganSans,
